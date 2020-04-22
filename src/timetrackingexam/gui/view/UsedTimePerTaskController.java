@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timetrackingexam.gui.controller;
+package timetrackingexam.gui.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 
 /**
  * FXML Controller class
  *
  * @author tramm
  */
-public class TimeGrowthController implements Initializable
+public class UsedTimePerTaskController implements Initializable
 {
 
     @FXML
-    private LineChart<?, ?> lineChart;
+    private PieChart pieChart;
 
     /**
      * Initializes the controller class.
