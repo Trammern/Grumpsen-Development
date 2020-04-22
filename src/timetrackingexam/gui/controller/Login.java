@@ -21,7 +21,7 @@ import javafx.scene.image.ImageView;
  *
  * @author Rizvan
  */
-public class MainViewController implements Initializable
+public class Login implements Initializable
 {
 
     @FXML
