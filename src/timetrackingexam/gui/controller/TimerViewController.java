@@ -8,15 +8,11 @@ package timetrackingexam.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import timetrackingexam.bll.threads.TimerRunnable;
 
 /**
  * FXML Controller class
@@ -33,6 +29,8 @@ public class TimerViewController implements Initializable {
     private Text txtTaskText;
     @FXML
     private JFXButton btnTimeButton;
+    @FXML
+    private AnchorPane anchorPane;
 
     /**
      * Initializes the controller class.

@@ -64,7 +64,7 @@ public class Login implements Initializable
         if (txtName.getText().equals("user") 
           && txtPassword.getText().equals("123"))
           try {
-            Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/controller/TimeGrowth.fxml"));
+            Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/TimeGrowth.fxml"));
             Scene scene = new Scene(loader);
             Stage stage = new Stage();
             stage.setScene(scene);
