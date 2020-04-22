@@ -108,6 +108,7 @@ public class Login implements Initializable
             {
                 appModel.setCurrentUser(user);
                 return user;
+                
             }
         }
         

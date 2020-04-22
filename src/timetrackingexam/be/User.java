@@ -78,6 +78,11 @@ public class User
         this.role = role;
     }
     
+    /**
+     * LeadAdmin can make other users into admins
+     * Admin can create projects and see overview of users (who works on what, hours etc.)
+     * Default is just a normal user
+     */
     public enum Role
     {
         LeadAdmin, Admin, Default
