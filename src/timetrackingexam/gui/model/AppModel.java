@@ -17,7 +17,7 @@ import timetrackingexam.bll.UserManager;
 public class AppModel
 {
     
-    private User user;
+    private User currentUser;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final UserManager userManager;
 
@@ -33,6 +33,10 @@ public class AppModel
         return users;
     }
     
+    public void setCurrentUser(User user)
+    {
+        currentUser = user;
+    }
     
     
 }

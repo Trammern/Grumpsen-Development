@@ -40,6 +40,7 @@ public class Login implements Initializable
     private ImageView LoginImageView;
     
     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -50,6 +51,11 @@ public class Login implements Initializable
     @FXML
     private void handleLogin(ActionEvent event)
     {
+        login();
+    }
+    
+    public void login()
+    {
         String email = txtName.getText().trim();
         String password = txtPassword.getText();
         
@@ -57,13 +63,34 @@ public class Login implements Initializable
         {
             errorAlert("The input fields must be filled out");
         }
-         
+        else if(getVerifiedUser(email, password)!=null)
+        {
+            appModel.setCurrentUser(getVerifiedUser(email, password));
+            //Open new view
+            
+        }
+        
+        
+        else errorAlert("Email or password incorrect");
+        txtPassword.clear();
     }
     
     
-    private void getVerifiedUser(String email, String password)
+    private User getVerifiedUser(String email, String password)
     {
         List<User> users = appModel.getAllUsers();
+        
+        for (User user : users)
+        {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password))
+            {
+                appModel.setCurrentUser(user);
+                System.out.println("Successfully logged in as " + user.getFirstName() + ". Your role is " + user.getRole());
+                return user;
+            }
+        }
+        
+        return null;
     }
     
     private void errorAlert(String message)

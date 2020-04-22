@@ -28,9 +28,6 @@ public class User
         this.role = role;
     }
     
-    
-    
-
     public String getFirstName()
     {
         return firstName;
@@ -80,9 +77,6 @@ public class User
     {
         this.role = role;
     }
-
-  
-    
     
     public enum Role
     {
