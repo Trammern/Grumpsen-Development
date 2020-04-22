@@ -71,16 +71,19 @@ public class User
         this.password = password;
     }
 
-    public ObjectProperty<Role> getRole()
+    public Object getRole()
     {
         return role;
     }
 
-    public void setRole(ObjectProperty<Role> role)
+    public void setRole(Object role)
     {
         this.role = role;
     }
 
+  
+    
+    
     public enum Role
     {
         LeadAdmin, Admin, Default
