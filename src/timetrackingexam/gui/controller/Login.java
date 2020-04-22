@@ -7,19 +7,29 @@ package timetrackingexam.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
+import javafx.scene.control.Alert;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import timetrackingexam.be.User;
+import timetrackingexam.gui.model.AppModel;
+
 
 /**
  *
@@ -28,6 +38,8 @@ import javafx.stage.Stage;
 public class Login implements Initializable
 {
 
+    private AppModel appModel;
+    
     @FXML
     private TextField txtName;
     @FXML
@@ -48,6 +60,7 @@ public class Login implements Initializable
     @FXML
     private void handleLogin(ActionEvent event) throws IOException
     {
+
         {
        
       if (txtName.getText().equals("user") 
@@ -64,8 +77,33 @@ public class Login implements Initializable
         }
      
     }
+
+        String email = txtName.getText().trim();
+        String password = txtPassword.getText();
+        
+        if (email.isEmpty() || password.isEmpty())
+        {
+            errorAlert("The input fields must be filled out");
+        }
+         
+
     }
 
+    
+    
+    private void getVerifiedUser(String email, String password)
+    {
+        List<User> users = appModel.getAllUsers();
+    }
+    
+    private void errorAlert(String message)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);        
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText("ERROR");
+        alert.setContentText(String.format(message));
+        alert.showAndWait();
+    }
     
     
     
