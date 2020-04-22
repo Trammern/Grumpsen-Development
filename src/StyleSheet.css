@@ -13,3 +13,17 @@ AnchorPane
     -fx-background-color: #435A9A;
 }
 
+JFXButton
+{
+    -fx-background-color: #6ea3ff
+}
+
+JFXListView
+{
+    -fx-background-color: #6ea3ff
+}
+
+MenuBar
+{
+    -fx-background-color: #6ea3ff
+}
