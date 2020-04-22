@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="493.0" prefWidth="600.0" stylesheets="@../../../UsedTimePerTaskCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.AssigenedTimeController">
+   <children>
+      <Pane layoutX="-10.0" layoutY="79.0" prefHeight="385.0" prefWidth="614.0" stylesheets="@../../../UsedTimePerTaskCSS.css">
+         <children>
+            <PieChart layoutX="76.0" layoutY="5.0" prefHeight="375.0" prefWidth="456.0" />
+            <BarChart layoutX="57.0" layoutY="25.0" prefHeight="336.0" prefWidth="475.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </Pane>
+      <Label layoutX="257.0" layoutY="26.0" text="Assigned Time">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="48.0" fitWidth="84.0" layoutX="22.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/GDI.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

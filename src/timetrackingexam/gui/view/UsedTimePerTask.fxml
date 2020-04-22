@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="493.0" prefWidth="600.0" stylesheets="@../../../UsedTimePerTaskCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.view.UsedTimePerTaskController">
+   <children>
+      <Pane layoutX="-3.0" layoutY="69.0" prefHeight="385.0" prefWidth="607.0" stylesheets="@../../../UsedTimePerTaskCSS.css">
+         <children>
+            <PieChart layoutX="76.0" layoutY="5.0" prefHeight="375.0" prefWidth="456.0" />
+         </children>
+      </Pane>
+      <Label layoutX="240.0" layoutY="26.0" text="Used Time Per Task">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="48.0" fitWidth="84.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/GDI.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
