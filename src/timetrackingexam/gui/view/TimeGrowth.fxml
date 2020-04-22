@@ -14,7 +14,7 @@
    <children>
       <Pane layoutY="89.0" prefHeight="385.0" prefWidth="614.0" stylesheets="@../../../UsedTimePerTaskCSS.css">
          <children>
-            <LineChart layoutX="79.0" layoutY="25.0" prefHeight="336.0" prefWidth="456.0">
+            <LineChart fx:id="lineChart" layoutX="79.0" layoutY="5.0" prefHeight="375.0" prefWidth="456.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -24,7 +24,7 @@
             </LineChart>
          </children>
       </Pane>
-      <Label layoutX="262.0" layoutY="36.0" text="Assigned Time">
+      <Label layoutX="262.0" layoutY="36.0" text="Time Growth">
          <font>
             <Font size="14.0" />
          </font>
