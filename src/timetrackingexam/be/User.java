@@ -19,7 +19,7 @@ public class User
     private String password;
     private Object role;
 
-    public User(String firstName, String lastName, String email, String password, Object role)
+    public User(String firstName, String lastName, String email, String password, User.Role role)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -77,11 +77,13 @@ public class User
     {
         this.role = role;
     }
+
+    
     
     /**
      * LeadAdmin can make other users into admins
      * Admin can create projects and see overview of users (who works on what, hours etc.)
-     * Default is just a normal user
+     * Default is just a normal user who can time track and see his own work etc.
      */
     public enum Role
     {
