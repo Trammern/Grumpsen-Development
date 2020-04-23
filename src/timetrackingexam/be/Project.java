@@ -7,6 +7,8 @@ package timetrackingexam.be;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -18,20 +20,29 @@ public class Project {
     private String name;
     private double rate;
     private Client client;
-    private List<Task> tasks;
-    private List<User> users;
+    private ObservableList<Task> tasks;
+    private ObservableList<User> users;
     
     public Project(int id, String name, Client client) {
         this(id, name, client, client.getDefaultrate());
     }
+
+    public Project(int id, String name) {
+        this.id = id;
+        this.name = name;
+        users = FXCollections.observableArrayList();
+        tasks = FXCollections.observableArrayList();
+    }
+    
+    
 
     public Project(int id, String name, Client client, double rate) {
         this.id = id;
         this.name = name;
         this.client = client;
         this.rate = rate;
-        users = new ArrayList<>();
-        tasks = new ArrayList<>();
+        users = FXCollections.observableArrayList();
+        tasks = FXCollections.observableArrayList();
         client.getProjects().add(this);
     }    
     
@@ -67,20 +78,24 @@ public class Project {
         this.client = client;
     }
 
-    public List<Task> getTasks() {
+    public ObservableList<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(ObservableList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public List<User> getUsers() {
+    public ObservableList<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(ObservableList<User> users) {
         this.users = users;
+    }
+    
+    public boolean addTask(Task t){
+        return tasks.add(t);
     }
 
     @Override
@@ -99,6 +114,11 @@ public class Project {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
     
     

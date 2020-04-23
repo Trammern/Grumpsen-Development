@@ -26,7 +26,7 @@ import timetrackingexam.gui.model.AppModel;
  */
 public class ProjectsOverviewController implements Initializable {
     
-    private AppModel am = new AppModel();
+    private AppModel am = AppModel.getInstance();
     private Project selectedProject;
 
     @FXML
@@ -63,7 +63,7 @@ public class ProjectsOverviewController implements Initializable {
     }
     
     private ObservableList<Project> getAllProjects(){
-       return am.getProjects();
+        return am.getProjects();
     }
 
     

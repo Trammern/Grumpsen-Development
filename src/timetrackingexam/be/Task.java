@@ -25,6 +25,17 @@ public class Task {
         project.getTasks().add(this);
         user.getTasks().add(this);
     }
+    /**
+     * Temporary Constructor
+     * @param id
+     * @param name 
+     */
+    public Task(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
 
     public String getName() {
         return name;
@@ -74,6 +85,11 @@ public class Task {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
     
     
