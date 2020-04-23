@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="357.0" prefWidth="482.0" stylesheets="@../../../StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.AdminProjectOverviewController">
    <children>
-      <MenuBar layoutX="26.0" layoutY="33.0" prefHeight="25.0" prefWidth="482.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutX="26.0" layoutY="33.0" prefHeight="25.0" prefWidth="482.0" stylesheets="@../../../UsedTimePerTaskCSS.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Admin">
             <items>
@@ -36,9 +36,9 @@
             </Menu>
         </menus>
       </MenuBar>
-      <JFXButton layoutX="14.0" layoutY="318.0" onAction="#addEmployee" text="Add" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
-      <JFXButton layoutX="53.0" layoutY="322.0" onAction="#removeEmployee" text="Remove" AnchorPane.leftAnchor="70.0" />
-      <JFXButton layoutX="138.0" layoutY="322.0" onAction="#openTaskView" text="Go to tasks" AnchorPane.leftAnchor="140.0" />
+      <JFXButton layoutX="14.0" layoutY="318.0" onAction="#addEmployee" text="Add" textFill="#f4f4f4" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
+      <JFXButton layoutX="53.0" layoutY="322.0" onAction="#removeEmployee" text="Remove" textFill="#f4f4f4" AnchorPane.leftAnchor="70.0" />
+      <JFXButton layoutX="138.0" layoutY="322.0" onAction="#openTaskView" text="Go to tasks" textFill="#f4f4f4" AnchorPane.leftAnchor="140.0" />
       <TableView fx:id="tblEmployeeTable" layoutX="19.0" layoutY="116.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <columns>
           <TableColumn prefWidth="240.0" text="Name" />
@@ -46,17 +46,17 @@
             <TableColumn prefWidth="100.0" text="Total Hours" />
         </columns>
       </TableView>
-      <Text fx:id="txtCurrentProject" layoutX="10.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X Overview" AnchorPane.leftAnchor="20.0">
+      <Text fx:id="txtCurrentProject" fill="#f4f4f4" layoutX="10.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X Overview" AnchorPane.leftAnchor="20.0">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assigned Employees" AnchorPane.leftAnchor="20.0">
+      <Text fill="#f4f4f4" layoutX="14.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assigned Employees" AnchorPane.leftAnchor="20.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="txtSalary" layoutX="338.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hourly Salary: 125 kr." AnchorPane.rightAnchor="20.0">
+      <Text fx:id="txtSalary" fill="#f4f4f4" layoutX="338.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hourly Salary: 125 kr." AnchorPane.rightAnchor="20.0">
          <font>
             <Font size="15.0" />
          </font>
