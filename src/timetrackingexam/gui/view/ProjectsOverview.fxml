@@ -37,7 +37,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <JFXComboBox fx:id="cbbProjectSelect" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="153.0" promptText="Project X" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" />
+      <JFXComboBox fx:id="cbbProjectSelect" layoutX="14.0" layoutY="46.0" onAction="#setItemsOnList" prefHeight="25.0" prefWidth="153.0" promptText="Project X" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" />
       <JFXListView fx:id="lstTaskList" layoutX="10.0" layoutY="92.0" prefHeight="228.0" prefWidth="153.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" />
       <Text fx:id="txtSlectedTask" fill="#f4f4f4" layoutX="184.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Currently selected task: Task 1: Wireframing" AnchorPane.rightAnchor="26.41015625">
          <font>
