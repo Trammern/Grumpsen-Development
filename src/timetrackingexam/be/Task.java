@@ -22,6 +22,8 @@ public class Task {
         this.name = name;
         this.project = project;
         this.user = user;
+        project.getTasks().add(this);
+        user.getTasks().add(this);
     }
 
     public String getName() {
