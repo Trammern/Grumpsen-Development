@@ -56,7 +56,7 @@ public class Login implements Initializable
     @FXML
     private void handleLogin(ActionEvent event)
     {
-        login();
+        loginMock();
     }
     
     public void login()
@@ -89,7 +89,16 @@ public class Login implements Initializable
         {
             appModel.setCurrentUser(getVerifiedUser(email, password));
             //Open new view
-            
+            try {
+            Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/TimeGrowth.fxml"));
+            Scene scene = new Scene(loader);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+          }
+        catch(IOException e) 
+        {
+        }
         }
         
         
