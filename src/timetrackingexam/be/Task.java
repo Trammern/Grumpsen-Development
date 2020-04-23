@@ -5,31 +5,23 @@
  */
 package timetrackingexam.be;
 
-import java.time.LocalTime;
-
 /**
  *
- * @author math2
+ * @author fauxtistic
  */
 public class Task {
-    private LocalTime timeUsed;
+    
+    private int id;
     private String name;
-    private int employeeId;
-    private int taskId;
+    private Project project;
+    private User user;
+    private double spentTime;
 
-    public Task(LocalTime timeUsed, String name, int employeeId, int taskId) {
-        this.timeUsed = timeUsed;
+    public Task(int id, String name, Project project, User user) {
+        this.id = id;
         this.name = name;
-        this.employeeId = employeeId;
-        this.taskId = taskId;
-    }
-
-    public LocalTime getTimeUsed() {
-        return timeUsed;
-    }
-
-    public void setTimeUsed(LocalTime timeUsed) {
-        this.timeUsed = timeUsed;
+        this.project = project;
+        this.user = user;
     }
 
     public String getName() {
@@ -40,26 +32,48 @@ public class Task {
         this.name = name;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public User getUser() {
+        return user;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public double getSpentTime() {
+        return spentTime;
+    }
+
+    public void setSpentTime(double spentTime) {
+        this.spentTime = spentTime;
     }
 
     @Override
-    public String toString() {
-        return name;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Task other = (Task) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
+    
     
     
 }

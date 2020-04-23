@@ -24,15 +24,24 @@ public class AppModel
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final UserManager userManager;
     private final ProjectManager projectManager;
+    private static AppModel instance;
 
-    public AppModel()
+    private AppModel()
     {
         userManager = new UserManager();
         projectManager = new ProjectManager();
     }
+    
+    public static AppModel getInstance() {
+        if (instance == null) {
+            instance = new AppModel();
+        }
+        return instance;
+    }
 
     public ObservableList<User> getAllUsers()
     { 
+        users.clear();
         users.addAll(userManager.getUsers());
         return users;
     }

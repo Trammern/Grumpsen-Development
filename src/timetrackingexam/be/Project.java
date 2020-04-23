@@ -5,35 +5,36 @@
  */
 package timetrackingexam.be;
 
+import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  *
- * @author math2
+ * @author fauxtistic
  */
 public class Project {
-    private String projectName;
+    
     private int id;
-    private int clientId;
-    private ObservableList<Task> tasks = FXCollections.observableArrayList();
+    private String name;
+    private double rate;
+    private Client client;
+    private List<Task> tasks;
+    private List<User> users;
+    
+    public Project(int id, String name, Client client) {
+        this(id, name, client, client.getDefaultrate());
+    }
 
-    public Project(String projectName, int id, int clientId, ObservableList<Task> tasks) {
-        this.projectName = projectName;
+    public Project(int id, String name, Client client, double rate) {
         this.id = id;
-        this.clientId = clientId;
-        this.tasks = tasks;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
+        this.name = name;
+        this.client = client;
+        this.rate = rate;
+        users = new ArrayList<>();
+        tasks = new ArrayList<>();
+        client.getProjects().add(this);
+    }    
+    
     public int getId() {
         return id;
     }
@@ -42,27 +43,64 @@ public class Project {
         this.id = id;
     }
 
-    public int getClientId() {
-        return clientId;
+    public String getName() {
+        return name;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ObservableList<Task> getTasks() {
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<Task> getTasks() {
         return tasks;
     }
-    
-    private boolean addTaskToProject(Task task){
-        return tasks.add(task);
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override
-    public String toString() {
-        return projectName;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Project other = (Project) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
-
+    
     
     
     
