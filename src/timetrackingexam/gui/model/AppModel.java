@@ -7,7 +7,9 @@ package timetrackingexam.gui.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
+import timetrackingexam.bll.ProjectManager;
 import timetrackingexam.bll.UserManager;
 
 /**
@@ -19,16 +21,27 @@ public class AppModel
     
     private User currentUser;
     private final ObservableList<User> users = FXCollections.observableArrayList();
+    private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final UserManager userManager;
+    private final ProjectManager projectManager;
+    private static AppModel instance;
 
-    public AppModel()
+    private AppModel()
     {
         userManager = new UserManager();
+        projectManager = new ProjectManager();
+    }
+    
+    public static AppModel getInstance() {
+        if (instance == null) {
+            instance = new AppModel();
+        }
+        return instance;
     }
 
-    
     public ObservableList<User> getAllUsers()
     { 
+        users.clear();
         users.addAll(userManager.getUsers());
         return users;
     }
@@ -37,6 +50,15 @@ public class AppModel
     {
         currentUser = user;
     }
+    
+    public ObservableList<Project> getProjects(){
+        projects.addAll(projectManager.getAllProjects());
+        return projects;
+    }
+    
+    
+    
+    
     
     
 }
