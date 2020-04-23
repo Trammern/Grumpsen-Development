@@ -5,6 +5,9 @@
  */
 package timetrackingexam.be;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javafx.beans.property.ObjectProperty;
 
 /**
@@ -18,6 +21,8 @@ public class User
     private String email;
     private String password;
     private Role role;
+    private List<Project> projects;
+    private List<Task> tasks;
 
     public User(String firstName, String lastName, String email, String password, Role role)
     {
@@ -26,6 +31,8 @@ public class User
         this.email = email;
         this.password = password;
         this.role = role;
+        projects = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     
@@ -80,8 +87,42 @@ public class User
         this.role = role;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     
     
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        return true;
+    }
+        
     /**
      * LeadAdmin can make other users into admins
      * Admin can create projects and see overview of users (who works on what, hours etc.)

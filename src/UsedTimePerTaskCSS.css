@@ -15,11 +15,35 @@ AnchorPane
 Pane
 {
   -fx-background-color: #f4f4f4;  
+  JFXButton
+{
+    -fx-background-color: #ffffff;
+}
+}
+MenuBar
+{
+  -fx-background-color: #e7e7e7;  
+}
+JFXListView
+{
+  -fx-background-color: #e7e7e7;  
 }
 
+JFXComboBox
+{
+  -fx-background-color: #e7e7e7;  
+}
 Label
 {
   -fx-text-fill: #f4f4f4;
   -fx-font-family: "Caveat"; 
   
+}
+
+Pane
+{
+    -fx-background-color: #6ea3ff
+Text
+{
+  -fx-background-color: #e7e7e7;  
 }
