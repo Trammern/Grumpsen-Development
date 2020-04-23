@@ -85,6 +85,24 @@ public class User
         this.role = role;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
