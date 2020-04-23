@@ -5,7 +5,9 @@
  */
 package timetrackingexam.be;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -17,13 +19,15 @@ public class Client {
     private double defaultrate; //use BigDecimal instead? different opinions
     private List<Project> projects;
        
-    public Client(String name) {
+    public Client(String name) {        
         this.name = name;
+        projects = new ArrayList<>();
     }
     
     public Client(String name, double defaultrate) {
-        this.name = name;
+        this.name = name;        
         this.defaultrate = defaultrate;
+        projects = new ArrayList<>();
     }
 
     public String getName() {
@@ -48,6 +52,24 @@ public class Client {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Client other = (Client) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
     }
     
     

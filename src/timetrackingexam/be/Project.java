@@ -5,6 +5,7 @@
  */
 package timetrackingexam.be;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,11 @@ public class Project {
     public Project(int id, String name, Client client, double rate) {
         this.id = id;
         this.name = name;
+        this.client = client;
         this.rate = rate;
+        users = new ArrayList<>();
+        tasks = new ArrayList<>();
+        client.getProjects().add(this);
     }    
     
     public int getId() {
@@ -76,6 +81,24 @@ public class Project {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Project other = (Project) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
     
     

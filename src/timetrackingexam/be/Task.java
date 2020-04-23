@@ -11,12 +11,14 @@ package timetrackingexam.be;
  */
 public class Task {
     
+    private int id;
     private String name;
     private Project project;
     private User user;
     private double spentTime;
 
-    public Task(String name, Project project, User user) {
+    public Task(int id, String name, Project project, User user) {
+        this.id = id;
         this.name = name;
         this.project = project;
         this.user = user;
@@ -52,6 +54,24 @@ public class Task {
 
     public void setSpentTime(double spentTime) {
         this.spentTime = spentTime;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Task other = (Task) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
     
     
