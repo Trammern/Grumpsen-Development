@@ -36,16 +36,30 @@ public class AppModel
 
     
     public ObservableList<User> getAllUsers()
-    { 
-        users.clear();
-        users.addAll(userManager.getUsers());
+    {
+        users.addAll(userManager.getAllUsers());
         return users;
     }
-    
-    public void setCurrentUser(User user)
+
+    public User getCurrentUser()
     {
-        currentUser = user;
+        return currentUser;
     }
+
+    public void setCurrentUser(User currentUser)
+    {
+        this.currentUser = currentUser;
+        
+        if(getCurrentUser().getRole() == User.Role.Admin)
+        {
+            System.out.println("User Admin login");
+        }
+    }
+
+    
+    
+    
+    
     
     
 }

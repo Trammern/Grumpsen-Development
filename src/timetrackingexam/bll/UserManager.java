@@ -20,16 +20,10 @@ public class UserManager
 
     public UserManager()
     {
+        mockdata = new MockUserDAO();
     }
 
-    
-    
-    public UserManager(MockUserDAO mockdata)
-    {
-        this.mockdata = mockdata;
-    }
-    
-    public List<User> getUsers()
+    public List<User> getAllUsers()
     {
         return mockdata.getUsers();
     }

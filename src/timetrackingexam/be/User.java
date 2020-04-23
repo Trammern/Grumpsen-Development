@@ -19,7 +19,7 @@ public class User
     private String password;
     private Role role;
 
-    public User(String firstName, String lastName, String email, String password, User.Role role)
+    public User(String firstName, String lastName, String email, String password, Role role)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,6 +27,8 @@ public class User
         this.password = password;
         this.role = role;
     }
+
+    
     
     public String getFirstName()
     {
