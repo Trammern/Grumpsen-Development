@@ -23,3 +23,8 @@ Label
   -fx-font-family: "Caveat"; 
   
 }
+
+Pane
+{
+    -fx-background-color: #6ea3ff
+}

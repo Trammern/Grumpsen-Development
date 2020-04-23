@@ -2,17 +2,17 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="430.0" stylesheets="@../../../StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.ProjectManagementViewController">
    <children>
-      <MenuBar layoutX="99.0" layoutY="47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutX="99.0" layoutY="47.0" stylesheets="@../../../StyleSheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Navigate">
             <items>
@@ -37,14 +37,14 @@
         </menus>
       </MenuBar>
       <JFXListView fx:id="lstProjects" layoutX="14.0" layoutY="45.0" prefHeight="238.0" prefWidth="237.0" AnchorPane.leftAnchor="10.0" />
-      <JFXButton layoutX="14.0" layoutY="295.0" onAction="#newProject" text="New Project" AnchorPane.leftAnchor="10.0" />
-      <JFXButton layoutX="107.0" layoutY="295.0" onAction="#editProject" text="Edit Project" />
-      <Text fx:id="txtSelectedProject" layoutX="259.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X" wrappingWidth="137.546875">
+      <JFXButton layoutX="14.0" layoutY="295.0" onAction="#newProject" text="New Project" textFill="#f4f4f4" AnchorPane.leftAnchor="10.0" />
+      <JFXButton layoutX="107.0" layoutY="295.0" onAction="#editProject" text="Edit Project" textFill="#f4f4f4" />
+      <Text fx:id="txtSelectedProject" fill="#f4f4f4" layoutX="271.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X" wrappingWidth="137.546875">
          <font>
             <Font size="32.0" />
          </font>
       </Text>
-      <TextArea fx:id="txtProjectDescription" editable="false" layoutX="271.0" layoutY="95.0" prefHeight="193.0" prefWidth="161.0" text="Create a program that&#10;allows our client to &#10;administer&#10;the working hours of their&#10;employees" AnchorPane.rightAnchor="10.0" />
-      <JFXButton layoutX="259.0" layoutY="295.0" onAction="#openProject" text="Open Project" />
+      <JFXButton layoutX="259.0" layoutY="295.0" onAction="#openProject" text="Open Project" textFill="#f4f4f4" />
+      <JFXTextArea layoutX="266.0" layoutY="108.0" prefHeight="175.0" prefWidth="147.0" text="Create a program thatallows our client to administerthe working hours of theiremployees" />
    </children>
 </AnchorPane>
