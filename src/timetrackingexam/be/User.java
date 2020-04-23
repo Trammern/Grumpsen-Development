@@ -17,7 +17,7 @@ public class User
     private String lastName;
     private String email;
     private String password;
-    private Object role;
+    private Role role;
 
     public User(String firstName, String lastName, String email, String password, User.Role role)
     {
@@ -68,12 +68,12 @@ public class User
         this.password = password;
     }
 
-    public Object getRole()
+    public Role getRole()
     {
         return role;
     }
 
-    public void setRole(Object role)
+    public void setRole(Role role)
     {
         this.role = role;
     }
