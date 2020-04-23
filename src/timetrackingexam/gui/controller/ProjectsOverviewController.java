@@ -26,7 +26,7 @@ import timetrackingexam.gui.model.AppModel;
  */
 public class ProjectsOverviewController implements Initializable {
     
-    private AppModel am = new AppModel();
+    private AppModel am;
     private Project selectedProject;
 
     @FXML
@@ -43,7 +43,7 @@ public class ProjectsOverviewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        am = AppModel.getInstance();
         cbbProjectSelect.setItems(getAllProjects());
         
     }    
