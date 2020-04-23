@@ -13,6 +13,7 @@ public class Task {
     
     private int id;
     private String name;
+    private String description;
     private Project project;
     private User user;
     private double spentTime;
@@ -68,6 +69,18 @@ public class Task {
     public void setSpentTime(double spentTime) {
         this.spentTime = spentTime;
     }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {
