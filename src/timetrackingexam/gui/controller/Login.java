@@ -93,6 +93,7 @@ public class Login implements Initializable
                 case Admin:
                     openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");
                     System.out.println("Logged in as admin");
+                    break;
 
                 default:
                     AlertBox.errorAlert("No view defined for this role");
