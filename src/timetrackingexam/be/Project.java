@@ -36,14 +36,13 @@ public class Project {
     
     
 
-    public Project(int id, String name, Client client, double rate) {
+    protected Project(int id, String name, Client client, double rate) {
         this.id = id;
         this.name = name;
         this.client = client;
         this.rate = rate;
         users = FXCollections.observableArrayList();
-        tasks = FXCollections.observableArrayList();
-        client.getProjects().add(this);
+        tasks = FXCollections.observableArrayList();        
     }    
     
     public int getId() {
