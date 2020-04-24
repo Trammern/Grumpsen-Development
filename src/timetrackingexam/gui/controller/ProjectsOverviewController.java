@@ -63,7 +63,7 @@ public class ProjectsOverviewController implements Initializable {
     }
     
     private ObservableList<Project> getAllProjects(){
-       return am.getProjects();
+        return am.getProjects();
     }
 
     

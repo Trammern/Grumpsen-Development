@@ -5,7 +5,6 @@
  */
 package timetrackingexam.dal.mockdata;
 
-import java.time.LocalTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
@@ -17,31 +16,39 @@ import timetrackingexam.be.Task;
  */
 public class MockProjectManager {
 
-    private ObservableList<Task> tasks = FXCollections.observableArrayList();
-    private ObservableList<Project> projects = FXCollections.observableArrayList();
+    private final ObservableList<Project> projects = FXCollections.observableArrayList();
     
     public MockProjectManager() {
         initialize();
-        projects.add(new Project("Project X", 0, 0, tasks));
     }
     
     private void initialize(){
-        Task task1 = new Task(LocalTime.now(), "task1", 1, 1);
-        Task task2 = new Task(LocalTime.now(), "task2", 1, 2);
-        Task task3 = new Task(LocalTime.now(), "task3", 1, 3);
-        Task task4 = new Task(LocalTime.now(), "task4", 1, 4);
+        Project p1 = new Project(1, "Project X");
+        Project p2 = new Project(2, "Project Y");
         
-        tasks.add(task1);
-        tasks.add(task2);
-        tasks.add(task3);
-        tasks.add(task4);
+        projects.add(p1);
+        projects.add(p2);
+        
+        Task t1 = new Task(1, "Task1");
+        Task t2 = new Task(2, "Task2");
+        Task t3 = new Task(3, "Task3");
+        Task t4 = new Task(4, "Task4");
+        Task t5 = new Task(5, "Task5");
+        Task t6 = new Task(6, "Task6");
+        
+        p1.addTask(t1);
+        p1.addTask(t2);
+        p1.addTask(t3);
+        p2.addTask(t4);
+        p2.addTask(t5);
+        p2.addTask(t6);
+        
+        
+        
     }
 
     public ObservableList<Project> getProjects() {
         return projects;
     }
     
-    public ObservableList<Task> getAllTasks(){
-        return tasks;
-    }
 }

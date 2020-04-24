@@ -22,6 +22,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
@@ -50,50 +51,67 @@ public class Login implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
        appModel = AppModel.getInstance();
+       initKeys();
 
     }    
+    
+    private void initKeys() {
+        txtName.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                login();
+            }
+        });
+        txtPassword.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                login();
+            }
+        });
+    }
 
     @FXML
     private void handleLogin(ActionEvent event)
     {
         login();
-    }
-    
-    public void login()
-    {
-        if (txtName.getText().equals("user") 
-          && txtPassword.getText().equals("123"))
-          try {
-            Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/TimeGrowth.fxml"));
-            Scene scene = new Scene(loader);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-          }
-        catch(IOException e) 
-        {
-        }
-     
-    }
-    
-    public void loginMock()
-    {
+    }    
+        
+    public void login() {
         String email = txtName.getText().trim();
         String password = txtPassword.getText();
-        
-        if (email.isEmpty() || password.isEmpty())
-        {
+
+        if (email.isEmpty() || password.isEmpty()) {
             errorAlert("The input fields must be filled out");
-        }
-        else if(getVerifiedUser(email, password)!=null)
-        {
+        } else if (getVerifiedUser(email, password) != null) {
             appModel.setCurrentUser(getVerifiedUser(email, password));
-            //Open new view
-            
+
+            switch (appModel.getCurrentUser().getRole()) {
+                case Default:
+                    try {
+                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/TaskOverview.fxml"));
+                        Scene scene = new Scene(loader);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        errorAlert("Could not open new window");
+                    }
+                    break;
+                case Admin:
+                    try {
+                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/ProjectManagementView.fxml"));
+                        Scene scene = new Scene(loader);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        errorAlert("Could not open new window");
+                    }
+                    break;
+                default:
+                    errorAlert("No view defined for this role");
+            }
+        } else {
+            errorAlert("Email or password incorrect");
         }
-        
-        
-        else errorAlert("Email or password incorrect");
         txtPassword.clear();
     }
     

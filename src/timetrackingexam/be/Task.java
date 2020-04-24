@@ -13,6 +13,7 @@ public class Task {
     
     private int id;
     private String name;
+    private String description;
     private Project project;
     private User user;
     private double spentTime;
@@ -25,6 +26,17 @@ public class Task {
         project.getTasks().add(this);
         user.getTasks().add(this);
     }
+    /**
+     * Temporary Constructor
+     * @param id
+     * @param name 
+     */
+    public Task(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
 
     public String getName() {
         return name;
@@ -58,6 +70,18 @@ public class Task {
         this.spentTime = spentTime;
     }
 
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+    
+    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,6 +98,11 @@ public class Task {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
     
     

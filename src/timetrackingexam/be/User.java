@@ -24,7 +24,7 @@ public class User
     private List<Project> projects;
     private List<Task> tasks;
 
-    public User(String firstName, String lastName, String email, String password, User.Role role)
+    public User(String firstName, String lastName, String email, String password, Role role)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +34,8 @@ public class User
         projects = new ArrayList<>();
         tasks = new ArrayList<>();
     }
+
+    
     
     public String getFirstName()
     {
