@@ -40,7 +40,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Text fill="#f4f4f4" layoutX="14.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task:" />
+      <Text fx:id="txtCurrentTask" fill="#f4f4f4" layoutX="14.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task:" />
       <JFXButton layoutX="225.0" layoutY="194.0" onAction="#back" prefHeight="42.0" prefWidth="115.0" text="Back" AnchorPane.leftAnchor="225.0" />
       <JFXButton layoutX="371.0" layoutY="194.0" onAction="#goToTime" prefHeight="42.0" prefWidth="115.0" text="Go to time" />
       <Text fx:id="txtMinutesUsed" fill="#f4f4f4" layoutX="239.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You've spent: 76 minutes on this task" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="92.05078125" />
