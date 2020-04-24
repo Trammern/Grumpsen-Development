@@ -130,7 +130,7 @@ public class User
      */
     public enum Role
     {
-        LeadAdmin, Admin, Default
+        Admin, Default
     }
     
     

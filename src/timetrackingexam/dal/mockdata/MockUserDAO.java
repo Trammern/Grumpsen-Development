@@ -21,8 +21,8 @@ public class MockUserDAO
     {
         List<User> users = new ArrayList<User>();
         
-        User u1 = new User("John", "Doe", "johndoe@hotmail.com", "qwerty", Role.LeadAdmin);
-        User u2 = new User("Billy", "Joe", "billyboy@hotmail.com", "qaz123", Role.Admin);
+        User u1 = new User("John", "Doe", "johndoe@hotmail.com", "qwerty", Role.Admin);
+        User u2 = new User("Billy", "Joe", "billyboy@hotmail.com", "qaz123", Role.Default);
         User u3 = new User("Richard",  "Doe", "rdoe@gmail.com", "123456", Role.Default);
         
         users.add(u1);
