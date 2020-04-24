@@ -24,12 +24,16 @@ public class MockUserDAO
         User u1 = new User("John", "Doe", "johndoe@hotmail.com", "qwerty", Role.Admin);
         User u2 = new User("Billy", "Joe", "billyboy@hotmail.com", "qaz123", Role.Default);
         User u3 = new User("Richard",  "Doe", "rdoe@gmail.com", "123456", Role.Default);
-        User u4 = new User("Richard",  "Doe", "r", "1", Role.Default);
+        User u4 = new User("Admin", "Admin", "admin", "admin", Role.Admin);
+        User u5 = new User ("default", "default", "default", "default", Role.Default);
+        User u6 = new User("Richard",  "Doe", "r", "1", Role.Default);
         
         users.add(u1);
         users.add(u2);
         users.add(u3);
         users.add(u4);
+        users.add(u5);
+        users.add(u6);
         
         return users;
     }

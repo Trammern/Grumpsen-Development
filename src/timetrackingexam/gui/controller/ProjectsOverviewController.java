@@ -53,6 +53,7 @@ public class ProjectsOverviewController implements Initializable {
 
     @FXML
     private void addTask(ActionEvent event) {
+        
     }
 
     @FXML
