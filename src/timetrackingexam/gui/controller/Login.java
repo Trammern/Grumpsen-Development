@@ -110,11 +110,9 @@ public class Login implements Initializable
             if (user.getEmail().equals(email) && user.getPassword().equals(password))
             {
                 appModel.setCurrentUser(user);
-                return user;
-                
+                return user;                
             }
-        }
-        
+        }        
         return null;
     }
     
