@@ -86,34 +86,11 @@ public class Login implements Initializable
 
             switch (appModel.getCurrentUser().getRole()) {
                 case Default:
-
-                    try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/UsedTimePerTask.fxml"));
-                        Scene scene = new Scene(loader);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        AlertBox.errorAlert("Could not open new window");
-                    }
+                    openView("/timetrackingexam/gui/view/UsedTimePerTask.fxml", "Used Time Per Task");
                     break;
                 case Admin:
-                    try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/UsedTimePerTask.fxml"));
-                        Scene scene = new Scene(loader);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        AlertBox.errorAlert("Could not open new window");
-                    }
-
-                    openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");                    
+                    openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");
                     break;
-              
-                                       
-
-                  
                 default:
                     AlertBox.errorAlert("No view defined for this role");
             }
