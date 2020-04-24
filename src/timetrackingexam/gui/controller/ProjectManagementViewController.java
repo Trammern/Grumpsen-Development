@@ -33,6 +33,7 @@ public class ProjectManagementViewController implements Initializable {
 
     private final String ADD_EDIT_PATH = "/timetrackingexam/gui/view/AddEditProjectView.fxml";
     
+    private boolean editing;
     private AppModel am;
     private User currentUser;
     private Project selectedProject;
@@ -56,11 +57,14 @@ public class ProjectManagementViewController implements Initializable {
 
     @FXML
     private void newProject(ActionEvent event) {
+        editing = false;
         openAddEditWindow();
     }
 
     @FXML
     private void editProject(ActionEvent event) {
+        editing = true;
+        openAddEditWindow();
     }
 
     @FXML
@@ -91,7 +95,9 @@ public class ProjectManagementViewController implements Initializable {
         }
     }
 
-    
+    public boolean isEditing(){
+        return editing;
+    }
 
     
     

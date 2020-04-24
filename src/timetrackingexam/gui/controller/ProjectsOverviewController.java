@@ -62,9 +62,9 @@ public class ProjectsOverviewController implements Initializable {
     
     @FXML
     private void setItemsOnList(ActionEvent event) {
-        selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();
-        lstTaskList.setItems(selectedProject.getTasks());
+        selectedProject = am.getCurrentProject();
         am.setCurrentProject(selectedProject);
+        lstTaskList.setItems(selectedProject.getTasks());
     }
     
     private ObservableList<Project> getAllProjects(){

@@ -20,7 +20,7 @@ import timetrackingexam.gui.model.AppModel;
  *
  * @author math2
  */
-public class AddEditProjectViewController implements Initializable {
+public class AddEditProjectViewController extends ProjectManagementViewController implements Initializable {
 
     private AppModel am;
     
@@ -44,13 +44,20 @@ public class AddEditProjectViewController implements Initializable {
     @FXML
     private void CreateProject(ActionEvent event) {
         
-        Project newProject = new Project(0, fldName.getText());
-        
-        if(am.createNewProject(newProject)){
-            System.out.println("project added");
-            Stage primStage = (Stage) fldName.getScene().getWindow();
-            primStage.close();
+        if(isEditing()){
+            Project toBeEdited = am.getCurrentProject();
+            fldName.setText(toBeEdited.getName());
+            
+            Project edited = new Project(0, fldName.getText());
         }
+        
+        Project newProject = new Project(0, fldName.getText());
+            if(am.createNewProject(newProject)){
+                System.out.println("project added");
+                Stage primStage = (Stage) fldName.getScene().getWindow();
+                primStage.close();
+            }
+        
         
         
     }
