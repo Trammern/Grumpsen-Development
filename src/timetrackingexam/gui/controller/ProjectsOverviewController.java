@@ -54,9 +54,8 @@ public class ProjectsOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         am = AppModel.getInstance();
         currentUser = am.getCurrentUser();
-        cbbProjectSelect.setItems(getAllProjects());
-        
-    }    
+        cbbProjectSelect.setItems(am.getProjects());
+    } 
 
     @FXML
     private void addTask(ActionEvent event) {
@@ -80,15 +79,10 @@ public class ProjectsOverviewController implements Initializable {
     
     @FXML
     private void setItemsOnList(ActionEvent event) {
-        selectedProject = am.getCurrentProject();
+        selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();        
+        lstTaskList.setItems(selectedProject.getTasks());
         am.setCurrentProject(selectedProject);
         lstTaskList.setItems(selectedProject.getTasks());
     }
-    
-    private ObservableList<Project> getAllProjects(){
-        return am.getProjects();
-    }
-
-    
     
 }
