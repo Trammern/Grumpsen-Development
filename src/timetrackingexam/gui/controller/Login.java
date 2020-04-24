@@ -94,7 +94,7 @@ public class Login implements Initializable
                         stage.setScene(scene);
                         stage.show();
                     } catch (IOException e) {
-                        errorAlert("Could not open new window");
+                        AlertBox.errorAlert("Could not open new window");
                     }
                     break;
                 case Admin:
@@ -105,7 +105,7 @@ public class Login implements Initializable
                         stage.setScene(scene);
                         stage.show();
                     } catch (IOException e) {
-                        errorAlert("Could not open new window");
+                        AlertBox.errorAlert("Could not open new window");
                     }
 
                     openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");                    
