@@ -6,17 +6,23 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXListView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.AlertBox;
 
 /**
  * FXML Controller class
@@ -25,6 +31,8 @@ import timetrackingexam.gui.model.AppModel;
  */
 public class ProjectManagementViewController implements Initializable {
 
+    private final String ADD_EDIT_PATH = "/timetrackingexam/gui/view/AddEditProjectView.fxml";
+    
     private AppModel am;
     private User currentUser;
     private Project selectedProject;
@@ -48,8 +56,7 @@ public class ProjectManagementViewController implements Initializable {
 
     @FXML
     private void newProject(ActionEvent event) {
-        
-        am.createNewProject(null);
+        openAddEditWindow();
     }
 
     @FXML
@@ -71,7 +78,18 @@ public class ProjectManagementViewController implements Initializable {
         return am.getProjects();
     }
 
-    
+    private void openAddEditWindow(){
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource(ADD_EDIT_PATH));
+            Scene scene = new Scene(loader);
+            Stage stage = new Stage();
+            stage.setTitle("Create Project");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            AlertBox.errorAlert("Could not open new window");
+        }
+    }
 
     
 

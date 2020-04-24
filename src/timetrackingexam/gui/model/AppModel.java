@@ -71,6 +71,7 @@ public class AppModel
     }
     
     public boolean createNewProject(Project p){
+        projects.add(p);
         return projectManager.createNewProject(p);
     }
     
