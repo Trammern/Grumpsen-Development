@@ -82,6 +82,7 @@ public class ProjectsOverviewController implements Initializable {
         selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();        
         lstTaskList.setItems(selectedProject.getTasks());
         am.setCurrentProject(selectedProject);
+        lstTaskList.setItems(selectedProject.getTasks());
     }
     
 }
