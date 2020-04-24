@@ -18,13 +18,11 @@ public class Task {
     private User user;
     private double spentTime;
 
-    public Task(int id, String name, Project project, User user) {
+    protected Task(int id, String name, Project project, User user) {
         this.id = id;
         this.name = name;
         this.project = project;
-        this.user = user;
-        project.getTasks().add(this);
-        user.getTasks().add(this);
+        this.user = user;        
     }
     /**
      * Temporary Constructor
