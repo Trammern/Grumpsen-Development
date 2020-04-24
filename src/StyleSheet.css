@@ -39,7 +39,7 @@ JFXListView
 
 JFXComboBox
 {
-    -fx-text-fill: #f4f4f4;
+    -fx-prompt-text-fill: #f4f4f4;
 }
 MenuBar
 {
