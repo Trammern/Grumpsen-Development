@@ -12,12 +12,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import timetrackingexam.be.Project;
+import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 
 /**
@@ -41,15 +39,17 @@ public class ProjectManagementViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        am = AppModel.getInstance();
-        
-        lstProjects.setItems(getAllProjects());
+       
        am = AppModel.getInstance();
+       lstProjects.setItems(getAllProjects());
        currentUser = am.getCurrentUser();
+       
     }    
 
     @FXML
     private void newProject(ActionEvent event) {
+        
+        am.createNewProject(null);
     }
 
     @FXML
@@ -63,6 +63,7 @@ public class ProjectManagementViewController implements Initializable {
     @FXML
     private void setSelectedProject(MouseEvent event) {
         selectedProject = lstProjects.getSelectionModel().getSelectedItem();
+        am.setCurrentProject(selectedProject);
         txtSelectedProject.setText(selectedProject.toString());
     }
 
