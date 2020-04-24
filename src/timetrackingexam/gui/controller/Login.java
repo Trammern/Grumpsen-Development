@@ -86,7 +86,7 @@ public class Login implements Initializable
             switch (appModel.getCurrentUser().getRole()) {
                 case Default:
                     try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/TaskOverview.fxml"));
+                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/UsedTimePerTask.fxml"));
                         Scene scene = new Scene(loader);
                         Stage stage = new Stage();
                         stage.setScene(scene);
@@ -97,7 +97,7 @@ public class Login implements Initializable
                     break;
                 case Admin:
                     try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/ProjectManagementView.fxml"));
+                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/UsedTimePerTask.fxml"));
                         Scene scene = new Scene(loader);
                         Stage stage = new Stage();
                         stage.setScene(scene);

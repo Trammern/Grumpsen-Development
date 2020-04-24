@@ -16,8 +16,7 @@ AnchorPane
 JFXButton
 {
     -fx-background-color: #6ea3ff
-       
-        
+             
 }
 JFXButton
 {
@@ -33,6 +32,10 @@ JFXListView
 {
     -fx-background-color: #6ea3ff
 }
+JFXListView
+{
+    -fx-text-fill: #f4f4f4;
+}
 
 JFXComboBox
 {
@@ -45,12 +48,16 @@ MenuBar
 
 TextArea
 {
-    
     -fx-text-fill: #f4f4f4
-        
 }
 
 #TextArea1
 {
-   -fx-background-color: #435A9A; 
+   -fx-background-color: #6ea3ff;
+   
+}
+TableView
+{
+    -fx-background-color: #6ea3ff;
+    
 }
