@@ -85,26 +85,10 @@ public class Login implements Initializable
 
             switch (appModel.getCurrentUser().getRole()) {
                 case Default:
-                    try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/TaskOverview.fxml"));
-                        Scene scene = new Scene(loader);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        errorAlert("Could not open new window");
-                    }
+                    openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");                    
                     break;
                 case Admin:
-                    try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/ProjectManagementView.fxml"));
-                        Scene scene = new Scene(loader);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        errorAlert("Could not open new window");
-                    }
+                    openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");                    
                     break;
                 default:
                     errorAlert("No view defined for this role");
@@ -131,6 +115,21 @@ public class Login implements Initializable
         }
         
         return null;
+    }
+    
+    private void openView(String viewPath, String title) {
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource(viewPath));
+            Scene scene = new Scene(loader);
+            Stage primStage = (Stage) btnLogin.getScene().getWindow();
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.show();
+            primStage.close();
+        } catch (IOException e) {
+            errorAlert("Could not open new window");
+        }
     }
     
     private void errorAlert(String message)
