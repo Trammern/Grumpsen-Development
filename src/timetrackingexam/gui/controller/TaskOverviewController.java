@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
+import timetrackingexam.be.User;
+import timetrackingexam.gui.model.AppModel;
 
 /**
  * FXML Controller class
@@ -20,6 +22,9 @@ import javafx.scene.text.Text;
  */
 public class TaskOverviewController implements Initializable {
 
+    private AppModel am;
+    private User currentUser;
+    
     @FXML
     private JFXTextArea txtTaskDescription;
     @FXML
@@ -34,7 +39,8 @@ public class TaskOverviewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        am = AppModel.getInstance();
+        currentUser = am.getCurrentUser();
     }    
 
     @FXML

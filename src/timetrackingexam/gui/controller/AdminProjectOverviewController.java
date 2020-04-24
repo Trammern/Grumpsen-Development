@@ -26,7 +26,7 @@ public class AdminProjectOverviewController implements Initializable {
     private User currentUser;
     
     @FXML
-    private TableView<?> tblEmployeeTable;
+    private TableView<User> tblEmployeeTable;
     @FXML
     private Text txtCurrentProject;
     @FXML

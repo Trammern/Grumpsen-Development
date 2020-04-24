@@ -13,6 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import timetrackingexam.be.Project;
+import timetrackingexam.be.User;
+import timetrackingexam.gui.model.AppModel;
 
 /**
  * FXML Controller class
@@ -21,8 +24,11 @@ import javafx.scene.text.Text;
  */
 public class ProjectManagementViewController implements Initializable {
 
+    private AppModel am;
+    private User currentUser;
+    
     @FXML
-    private JFXListView<?> lstProjects;
+    private JFXListView<Project> lstProjects;
     @FXML
     private Text txtSelectedProject;
     @FXML
@@ -33,7 +39,8 @@ public class ProjectManagementViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       am = AppModel.getInstance();
+       currentUser = am.getCurrentUser();
     }    
 
     @FXML
