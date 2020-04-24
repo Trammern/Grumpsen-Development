@@ -42,7 +42,8 @@ Label
 
 Pane
 {
-    -fx-background-color: #6ea3ff
+    -fx-background-color: #6ea3ff;
+}
 Text
 {
   -fx-background-color: #e7e7e7;  
