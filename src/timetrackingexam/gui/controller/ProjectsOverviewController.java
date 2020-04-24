@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 
 /**
@@ -27,6 +28,7 @@ import timetrackingexam.gui.model.AppModel;
 public class ProjectsOverviewController implements Initializable {
     
     private AppModel am;
+    private User currentUser;
     private Project selectedProject;
 
     @FXML
@@ -44,6 +46,7 @@ public class ProjectsOverviewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         am = AppModel.getInstance();
+        currentUser = am.getCurrentUser();
         cbbProjectSelect.setItems(getAllProjects());
         
     }    
@@ -61,6 +64,7 @@ public class ProjectsOverviewController implements Initializable {
     private void setItemsOnList(ActionEvent event) {
         selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();
         lstTaskList.setItems(selectedProject.getTasks());
+        am.setCurrentProject(selectedProject);
     }
     
     private ObservableList<Project> getAllProjects(){

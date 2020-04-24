@@ -26,6 +26,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.AlertBox;
 
 /**
  *
@@ -79,24 +80,25 @@ public class Login implements Initializable
         String password = txtPassword.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
-            errorAlert("The input fields must be filled out");
+            AlertBox.errorAlert("The input fields must be filled out");
         } else if (getVerifiedUser(email, password) != null) {
             appModel.setCurrentUser(getVerifiedUser(email, password));
 
             switch (appModel.getCurrentUser().getRole()) {
                 case Default:
+
                     openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");  
                     System.out.println("Logged in as default user");
                     break;
                 case Admin:
                     openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");
                     System.out.println("Logged in as admin");
-                    break;
+
                 default:
-                    errorAlert("No view defined for this role");
+                    AlertBox.errorAlert("No view defined for this role");
             }
         } else {
-            errorAlert("Email or password incorrect");
+            AlertBox.errorAlert("Email or password incorrect");
         }
         txtPassword.clear();
     }
@@ -111,11 +113,9 @@ public class Login implements Initializable
             if (user.getEmail().equals(email) && user.getPassword().equals(password))
             {
                 appModel.setCurrentUser(user);
-                return user;
-                
+                return user;                
             }
-        }
-        
+        }        
         return null;
     }
     
@@ -130,20 +130,9 @@ public class Login implements Initializable
             stage.show();
             primStage.close();
         } catch (IOException e) {
-            errorAlert("Could not open new window");
+            AlertBox.errorAlert("Could not open new window");
         }
-    }
-    
-    private void errorAlert(String message)
-    {
-        Alert alert = new Alert(Alert.AlertType.ERROR);        
-        alert.setTitle("Error Dialog");
-        alert.setHeaderText("ERROR");
-        alert.setContentText(String.format(message));
-        alert.showAndWait();
-    }
-    
-    
-    
-    
+    }   
+       
+        
 }
