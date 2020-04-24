@@ -28,6 +28,7 @@ import timetrackingexam.gui.model.AppModel;
 public class ProjectManagementViewController implements Initializable {
 
     private AppModel am;
+    private User currentUser;
     private Project selectedProject;
     
     @FXML
@@ -43,6 +44,8 @@ public class ProjectManagementViewController implements Initializable {
         am = AppModel.getInstance();
         
         lstProjects.setItems(getAllProjects());
+       am = AppModel.getInstance();
+       currentUser = am.getCurrentUser();
     }    
 
     @FXML

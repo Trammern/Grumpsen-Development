@@ -26,6 +26,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.AlertBox;
 
 /**
  *
@@ -79,38 +80,22 @@ public class Login implements Initializable
         String password = txtPassword.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
-            errorAlert("The input fields must be filled out");
+            AlertBox.errorAlert("The input fields must be filled out");
         } else if (getVerifiedUser(email, password) != null) {
             appModel.setCurrentUser(getVerifiedUser(email, password));
 
             switch (appModel.getCurrentUser().getRole()) {
                 case Default:
-                    try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/TaskOverview.fxml"));
-                        Scene scene = new Scene(loader);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        errorAlert("Could not open new window");
-                    }
+                    openView("/timetrackingexam/gui/view/UsedTimePerTask.fxml", "Used Time Per Task");
                     break;
                 case Admin:
-                    try {
-                        Parent loader = FXMLLoader.load(getClass().getResource("/timetrackingexam/gui/view/ProjectManagementView.fxml"));
-                        Scene scene = new Scene(loader);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        errorAlert("Could not open new window");
-                    }
+                    openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");
                     break;
                 default:
-                    errorAlert("No view defined for this role");
+                    AlertBox.errorAlert("No view defined for this role");
             }
         } else {
-            errorAlert("Email or password incorrect");
+            AlertBox.errorAlert("Email or password incorrect");
         }
         txtPassword.clear();
     }
@@ -125,24 +110,26 @@ public class Login implements Initializable
             if (user.getEmail().equals(email) && user.getPassword().equals(password))
             {
                 appModel.setCurrentUser(user);
-                return user;
-                
+                return user;                
             }
-        }
-        
+        }        
         return null;
     }
     
-    private void errorAlert(String message)
-    {
-        Alert alert = new Alert(Alert.AlertType.ERROR);        
-        alert.setTitle("Error Dialog");
-        alert.setHeaderText("ERROR");
-        alert.setContentText(String.format(message));
-        alert.showAndWait();
-    }
-    
-    
-    
-    
+    private void openView(String viewPath, String title) {
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource(viewPath));
+            Scene scene = new Scene(loader);
+            Stage primStage = (Stage) btnLogin.getScene().getWindow();
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.show();
+            primStage.close();
+        } catch (IOException e) {
+            AlertBox.errorAlert("Could not open new window");
+        }
+    }   
+       
+        
 }

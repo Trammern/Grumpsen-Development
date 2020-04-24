@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
+import timetrackingexam.be.User;
+import timetrackingexam.gui.model.AppModel;
 
 /**
  * FXML Controller class
@@ -20,8 +22,11 @@ import javafx.scene.text.Text;
  */
 public class AdminProjectOverviewController implements Initializable {
 
+    private AppModel am;
+    private User currentUser;
+    
     @FXML
-    private TableView<?> tblEmployeeTable;
+    private TableView<User> tblEmployeeTable;
     @FXML
     private Text txtCurrentProject;
     @FXML
@@ -32,7 +37,8 @@ public class AdminProjectOverviewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       am = AppModel.getInstance();
+       currentUser = am.getCurrentUser();
     }    
 
     @FXML
