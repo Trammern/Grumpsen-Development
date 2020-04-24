@@ -18,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import timetrackingexam.be.Project;
+import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 
 /**
