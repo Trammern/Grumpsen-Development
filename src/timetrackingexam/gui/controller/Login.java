@@ -86,7 +86,6 @@ public class Login implements Initializable
 
             switch (appModel.getCurrentUser().getRole()) {
                 case Default:
-
                     openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");  
                     System.out.println("Logged in as default user");
                     break;
