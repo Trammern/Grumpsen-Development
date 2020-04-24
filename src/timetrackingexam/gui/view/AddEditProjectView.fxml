@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="timetrackingexam.gui.controller.AddEditProjectViewController">
+   <children>
+      <JFXTextField layoutX="14.0" layoutY="46.0" stylesheets="@../../../StyleSheet.css" />
+      <JFXTextField layoutX="14.0" layoutY="84.0" stylesheets="@../../../StyleSheet.css" />
+      <JFXTextField layoutX="14.0" layoutY="135.0" />
+      <JFXTextField layoutX="14.0" layoutY="175.0" />
+   </children>
+</AnchorPane>

@@ -25,4 +25,8 @@ public class ProjectManager {
         return mpm.getProjects();
     }
     
+    public boolean createNewProject(Project p){
+        return mpm.createNewProject(p);
+    }
+    
 }

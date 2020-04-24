@@ -20,6 +20,7 @@ public class AppModel
 {
     
     private User currentUser;
+    private Project currentProject;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final UserManager userManager;
@@ -55,16 +56,25 @@ public class AppModel
     {
         this.currentUser = currentUser;        
     }
-
-    
-    
-    
-    
     
     public ObservableList<Project> getProjects(){
         projects.addAll(projectManager.getAllProjects());
         return projects;
     }
+
+    public Project getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(Project currentProject) {
+        this.currentProject = currentProject;
+    }
+    
+    public boolean createNewProject(Project p){
+        return projectManager.createNewProject(p);
+    }
+    
+    
     
     
     

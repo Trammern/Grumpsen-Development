@@ -51,4 +51,8 @@ public class MockProjectManager {
         return projects;
     }
     
+    public boolean createNewProject(Project p){
+        return projects.add(p);
+    }
+    
 }
