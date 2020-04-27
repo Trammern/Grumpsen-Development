@@ -6,11 +6,13 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
+import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -24,14 +26,24 @@ public class TimerViewController implements Initializable {
     private boolean timeIsActive = true;
     
     @FXML
-    private Text txtTime;
-    @FXML
     private Text txtTaskText;
     @FXML
     private JFXButton btnTimeButton;
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private Label Ttime;
+    @FXML
+    private Label Tmin;
+    @FXML
+    private Label TSec;
 
+    
+    static int seconds = 0;
+    static int minutes = 0;
+    static int hours = 0;
+    
+   
     /**
      * Initializes the controller class.
      */
@@ -50,6 +62,56 @@ public class TimerViewController implements Initializable {
             btnTimeButton.setText("Pause");
             timeIsActive = true;
         }
+        timeIsActive = false;
+        
+        Thread t = new Thread()
+        {
+           
+            {
+               
+              for (;;)  
+              {
+                   if (timeIsActive==true)
+                    {
+                        try
+                        {
+                            sleep(1);
+                            
+                            if(seconds>60)
+                            {
+                                seconds=0;
+                                minutes++;
+                            }
+                             if(minutes>60)
+                            {
+                                seconds=0;
+                                minutes=0;
+                                hours++;
+                            }
+                             TSec.setText(""+seconds);
+                             Tmin.setText(" : "+minutes);
+                             Ttime.setText(" : "+hours);
+                             
+                             seconds++;
+                        }
+                        catch (Exception e)
+                        {
+                            
+                        }
+                    }
+                   
+                   else
+                   {
+                       break;
+                   }
+              }
+              
+            }
+        };
+         t.start();
     }
-    
 }
+   
+    
+    
+
