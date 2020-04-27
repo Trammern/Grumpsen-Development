@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import timetrackingexam.be.Project;
@@ -55,6 +56,9 @@ public class ProjectsOverviewController implements Initializable {
         am = AppModel.getInstance();
         currentUser = am.getCurrentUser();
         cbbProjectSelect.setItems(am.getProjects());
+        selectedProject = am.getProjects().get(0);
+        am.setCurrentProject(selectedProject);
+        lstTaskList.setItems(selectedProject.getTasks());
     } 
 
     @FXML
@@ -75,13 +79,43 @@ public class ProjectsOverviewController implements Initializable {
 
     @FXML
     private void OpenTask(ActionEvent event) {
+        if(am.getCurrentTask() != null){
+            try
+            {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/TaskOverview.fxml"));
+                Parent root1 = (Parent) fxml.load();
+                Stage primStage = (Stage) txtSlectedTask.getScene().getWindow();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root1));
+                primStage.close();
+                stage.showAndWait();
+                stage.setTitle("Task Overview");
+            
+            
+            } catch (IOException ex)
+            {   
+                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     @FXML
     private void setItemsOnList(ActionEvent event) {
         selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();        
         lstTaskList.setItems(selectedProject.getTasks());
-        am.setCurrentProject(selectedProject);        
+        am.setCurrentProject(selectedProject);      
     }
+
+    @FXML
+    private void setCurrentTask(MouseEvent event) {
+        if (lstTaskList.getSelectionModel().getSelectedItem() != null) {
+            am.setCurrentProject(lstTaskList.getSelectionModel().getSelectedItem());
+            txtSlectedTask.setText(am.getCurrentTask().getName());
+        }
+        
+        
+    }
+    
+    
     
 }
