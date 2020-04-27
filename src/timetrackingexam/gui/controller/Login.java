@@ -52,6 +52,9 @@ public class Login implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
        appModel = AppModel.getInstance();
+       appModel.setCurrentUser(null);
+       appModel.setCurrentProject(null);
+       appModel.setCurrentTask(null);
        initKeys();
 
     }    

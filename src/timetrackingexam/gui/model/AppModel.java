@@ -78,7 +78,7 @@ public class AppModel
         return projectManager.createNewProject(p);
     }
     
-    public void setCurrentProject(Task currentTask){
+    public void setCurrentTask(Task currentTask){
         this.currentTask = currentTask;
     }
 
