@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,6 +67,20 @@ public class ProjectManagementViewController implements Initializable {
 
     @FXML
     private void openProject(ActionEvent event) {
+        try
+        {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AdminProjectOverview.fxml"));
+            Parent root1 = (Parent) fxml.load();
+            Stage stage = new Stage();
+            Stage primStage = (Stage) txtSelectedProject.getScene().getWindow();
+            stage.setScene(new Scene(root1));
+            primStage.close();
+            stage.showAndWait();
+            stage.setTitle("Timer");
+        } catch (IOException ex)
+        {
+            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML

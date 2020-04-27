@@ -22,6 +22,7 @@ public class AppModel
     
     private User currentUser;
     private Project currentProject;
+    private Task currentTask;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final UserManager userManager;
@@ -76,6 +77,15 @@ public class AppModel
         projects.add(p);
         return projectManager.createNewProject(p);
     }
+    
+    public void setCurrentProject(Task currentTask){
+        this.currentTask = currentTask;
+    }
+
+    public Task getCurrentTask() {
+        return currentTask;
+    }
+    
     
     
     
