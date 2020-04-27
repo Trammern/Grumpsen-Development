@@ -17,17 +17,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.ICommonMenuActions;
 
 /**
  * FXML Controller class
  *
  * @author math2
  */
-public class TaskOverviewController implements Initializable {
+public class TaskOverviewController implements Initializable, ICommonMenuActions {
 
     private AppModel am;
     private User currentUser;
@@ -42,6 +45,12 @@ public class TaskOverviewController implements Initializable {
     private Text txtStartDate;
     @FXML
     private Text txtCurrentTask;
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private MenuItem menuItemClose;
+    @FXML
+    private MenuItem menuItemLogout;
 
     /**
      * Initializes the controller class.
@@ -86,6 +95,18 @@ public class TaskOverviewController implements Initializable {
         {
             Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void closeProgram(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        primStage.close();
+    }
+
+    @FXML
+    private void logoutToLoginView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        logout(primStage);
     }
     
 }
