@@ -43,6 +43,7 @@ public class TimerViewController implements Initializable {
     private Label tSec;
     @FXML
     private JFXButton btnSubmit;
+
    
 
   
@@ -71,6 +72,7 @@ public class TimerViewController implements Initializable {
             toggleBtnProperties();
             scheduler.pause();
         }
+
     }
 
     /**
