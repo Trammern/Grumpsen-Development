@@ -9,66 +9,62 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 
 /**
- *
+ * This class handles all the threads used by the program
+ * It will probably have more threads to manage in the future
  * @author math2
  */
-public class Scheduler implements Runnable{
-    
+public class Scheduler implements Runnable {
+
+    private final BlockingQueue<TimerRunnable> QUEUE = new LinkedBlockingQueue<>();
+
     private TimerRunnable currentTimer = null;
-    private BlockingQueue<TimerRunnable> queue = new LinkedBlockingQueue<>();
     private ExecutorService executor = null;
 
+    
     @Override
     public void run() {
-        while (true) {
-            if (!queue.isEmpty()) {
-                System.out.println(queue.toString());
-            }
-        }
     }
-     
-        public synchronized void startTimer(TimerRunnable timer){
-            if (executor == null || executor.isShutdown()) {
+
+    /**
+     * Starts the current timer
+     * @param timer the timer to be startet
+     */
+    public synchronized void startTimer(TimerRunnable timer) {
+        if (executor == null || executor.isShutdown()) {
             executor = Executors.newSingleThreadExecutor();
             executor.submit(this);
             System.out.println("Executor was created");
         }
-        
-        if(currentTimer == null && queue.isEmpty()){
+
+        if (currentTimer == null && QUEUE.isEmpty()) {
             currentTimer = timer;
             currentTimer.start();
-        }
-        
-        else{
-            try{
-                queue.put(currentTimer);
+        } else {
+            try {
+                QUEUE.put(currentTimer);
                 System.out.println("Executor was used");
-            }
-            catch(InterruptedException iEx){
+            } catch (InterruptedException iEx) {
                 System.out.println("Slideshow was stopped");
             }
         }
-        }
-        
-        public synchronized void pause(){
-        
-            Platform.runLater(()->{
-                
-                try {
-                    this.wait();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        } 
     }
-    
-    
-    
 
+    /**
+     * pauses the Thread
+     */
+    public synchronized void pause() {
+
+        currentTimer.stop();
+    }
+
+    /**
+     * Clears the queue and stops the thread
+     */
+    public synchronized void stop() {
+        QUEUE.clear();
+        currentTimer.stop();
+        executor.shutdownNow();
+    }
+}

@@ -6,34 +6,26 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
-import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import timetrackingexam.bll.threads.Scheduler;
 import timetrackingexam.bll.threads.TimerRunnable;
-import timetrackingexam.gui.util.AlertBox;
 
 
 /**
  * FXML Controller class
- *
+ * 
  * @author math2
  */
 public class TimerViewController implements Initializable {
 
     private boolean timeIsActive = true;
-    private ExecutorService executor;
     private TimerRunnable task1;
     private Scheduler scheduler;
     
@@ -49,14 +41,10 @@ public class TimerViewController implements Initializable {
     private Label tMin;
     @FXML
     private Label tSec;
-   
+    @FXML
+    private JFXButton btnSubmit;
    
 
-    static int millisek = 0;
-    static int seconds = 0;
-    static int minutes = 0;
-    static int hours = 0;
-    private boolean timerstart = true;
   
     
    
@@ -67,18 +55,49 @@ public class TimerViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
          
     }    
-
+    /**
+     * Starts the timer on the gui whilst also swithing button text
+     * @param event the event which triggers the timer
+     */
     @FXML
-    private void btnStopStart(ActionEvent event) throws InterruptedException {
+    private void btnStopStart(ActionEvent event){
         if(timeIsActive){
-        task1 = new TimerRunnable(tHour, tMin, tSec);
-        scheduler = new Scheduler();
-        scheduler.startTimer(task1);
-        btnTimeButton.setText("Pause");
-        timeIsActive = false;
+            toggleBtnProperties();
+            task1 = new TimerRunnable(tHour, tMin, tSec);
+            scheduler = new Scheduler();
+            scheduler.startTimer(task1);
         }
         else{
+            toggleBtnProperties();
             scheduler.pause();
+        }
+    }
+
+    /**
+     * Shuts down the timer and creates a new task that updates or replaces
+     * previous task
+     * @param event the event which triggers a submition
+     */
+    @FXML
+    private void handleSubmit(ActionEvent event) {
+        if(scheduler!=null&&timeIsActive){
+            scheduler.stop();
+            System.exit(0);
+        }
+        
+    }
+    
+    /**
+     * Toggles all the buttons' properties and setting the active time
+     */
+    private void toggleBtnProperties(){
+        if(timeIsActive){
+            btnSubmit.setDisable(timeIsActive);
+            btnTimeButton.setText("Pause");
+            timeIsActive = false;
+        }
+        else{
+            btnSubmit.setDisable(timeIsActive);
             btnTimeButton.setText("Start");
             timeIsActive = true;
         }
