@@ -9,12 +9,14 @@ import com.jfoenix.controls.JFXButton;
 import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
 
 /**
  * FXML Controller class
@@ -38,10 +40,11 @@ public class TimerViewController implements Initializable {
     @FXML
     private Label TSec;
 
-    
+    static int millisek = 1;
     static int seconds = 0;
     static int minutes = 0;
     static int hours = 0;
+    private boolean timerstart = true;
     
    
     /**
@@ -57,11 +60,11 @@ public class TimerViewController implements Initializable {
         if(timeIsActive){
             btnTimeButton.setText("Start");
             timeIsActive = false;
-        }
+       }
         else{
             btnTimeButton.setText("Pause");
-            timeIsActive = true;
-        }
+           timeIsActive = true;
+       }
         timeIsActive = false;
         
         Thread t = new Thread()
@@ -69,30 +72,40 @@ public class TimerViewController implements Initializable {
            
             {
                
-              for (;;)  
+             for (;;)  
+                 
               {
-                   if (timeIsActive==true)
+                   if (timerstart==true)
                     {
+                       System.out.println(seconds);
                         try
                         {
                             sleep(1);
                             
-                            if(seconds>60)
+                            if(millisek>1000)
                             {
+                                millisek=0;
+                                seconds++;
+                           }
+                           if(seconds>60)
+                           {
+                                millisek=0;
                                 seconds=0;
                                 minutes++;
-                            }
-                             if(minutes>60)
-                            {
-                                seconds=0;
-                                minutes=0;
-                                hours++;
-                            }
-                             TSec.setText(""+seconds);
+                           }
+                            if(minutes>60)
+                           {
+                                 millisek=0;
+                                 seconds=0;
+                                 minutes=0;
+                                 hours++;
+                           }
+                            TSec.setText(" : "+seconds);
+                            millisek++;
                              Tmin.setText(" : "+minutes);
                              Ttime.setText(" : "+hours);
                              
-                             seconds++;
+                             
                         }
                         catch (Exception e)
                         {
@@ -102,15 +115,38 @@ public class TimerViewController implements Initializable {
                    
                    else
                    {
+                      
                        break;
                    }
               }
               
             }
+           
+            
         };
-         t.start();
+       
+          t.start();
     }
+
 }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      
    
     
     
