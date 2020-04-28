@@ -7,11 +7,13 @@ package timetrackingexam.gui.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.ProjectManager;
 import timetrackingexam.bll.TaskManager;
+import timetrackingexam.bll.ThreadManager;
 import timetrackingexam.bll.UserManager;
 
 /**
@@ -24,13 +26,13 @@ public class AppModel
     private User currentUser;
     private Project currentProject;
     private Task currentTask;
-    private Task task;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
     private final TaskManager taskManager;
     private final UserManager userManager;
     private final ProjectManager projectManager;
+    private final ThreadManager tm;
     private static AppModel instance;
 
     private AppModel()
@@ -38,6 +40,7 @@ public class AppModel
         userManager = new UserManager();
         projectManager = new ProjectManager();
         taskManager = new TaskManager();
+        tm = new ThreadManager();
     }
     
     public static AppModel getInstance() {
@@ -95,6 +98,18 @@ public class AppModel
     {
         tasks.add(t);
         return taskManager.createTask(t,p);
+    }
+    
+    public void startTimer(Label sec, Label min, Label hours){
+        tm.startTimer(sec, min, hours);
+    }
+    
+    public void pauseTimer(){
+        tm.pauseTimer();
+    }
+    
+    public void stopTimer(){
+        tm.stopTimer();
     }
     
 

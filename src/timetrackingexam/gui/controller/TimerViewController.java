@@ -12,10 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import timetrackingexam.bll.threads.Scheduler;
-import timetrackingexam.bll.threads.TimerRunnable;
+import timetrackingexam.gui.model.AppModel;
 
 
 /**
@@ -26,15 +24,12 @@ import timetrackingexam.bll.threads.TimerRunnable;
 public class TimerViewController implements Initializable {
 
     private boolean timeIsActive = true;
-    private TimerRunnable task1;
-    private Scheduler scheduler;
+    private AppModel am;
     
     @FXML
     private Text txtTaskText;
     @FXML
     private JFXButton btnTimeButton;
-    @FXML
-    private AnchorPane anchorPane;
     @FXML
     private Label tHour;
     @FXML
@@ -51,10 +46,13 @@ public class TimerViewController implements Initializable {
    
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         
+         am = AppModel.getInstance();
+         txtTaskText.setText(am.getCurrentTask().getName());
     }    
     /**
      * Starts the timer on the gui whilst also swithing button text
@@ -64,13 +62,11 @@ public class TimerViewController implements Initializable {
     private void btnStopStart(ActionEvent event){
         if(timeIsActive){
             toggleBtnProperties();
-            task1 = new TimerRunnable(tHour, tMin, tSec);
-            scheduler = new Scheduler();
-            scheduler.startTimer(task1);
+            am.startTimer(tSec, tMin, tHour);
         }
         else{
             toggleBtnProperties();
-            scheduler.pause();
+            am.pauseTimer();
         }
 
     }
@@ -82,8 +78,8 @@ public class TimerViewController implements Initializable {
      */
     @FXML
     private void handleSubmit(ActionEvent event) {
-        if(scheduler!=null&&timeIsActive){
-            scheduler.stop();
+        if(timeIsActive){
+            am.stopTimer();
             System.exit(0);
         }
         

@@ -55,7 +55,6 @@ public class Scheduler implements Runnable {
      * pauses the Thread
      */
     public synchronized void pause() {
-
         currentTimer.stop();
     }
 
@@ -63,8 +62,10 @@ public class Scheduler implements Runnable {
      * Clears the queue and stops the thread
      */
     public synchronized void stop() {
-        QUEUE.clear();
-        currentTimer.stop();
-        executor.shutdownNow();
+        if(executor.isShutdown()){
+            QUEUE.clear();
+            currentTimer.stop();
+            executor.shutdownNow();
+        }
     }
 }
