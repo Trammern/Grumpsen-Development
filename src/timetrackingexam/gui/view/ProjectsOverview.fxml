@@ -4,11 +4,12 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="460.0" stylesheets="@../../../StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.ProjectsOverviewController">
    <children>
@@ -41,16 +42,16 @@
       <JFXComboBox fx:id="cbbProjectSelect" focusColor="#405aa8" layoutX="14.0" layoutY="46.0" onAction="#setItemsOnList" prefHeight="25.0" prefWidth="153.0" promptText="Project X" stylesheets="@../../../StyleSheet.css" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" />
       <JFXListView fx:id="lstTaskList" layoutX="10.0" layoutY="92.0" onMouseClicked="#setCurrentTask" prefHeight="228.0" prefWidth="153.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" />
 
-    
-
-      <Text fx:id="txtSlectedTask" fill="#f4f4f4" layoutX="184.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Currently selected task: Task 1: Wireframing" AnchorPane.rightAnchor="26.41015625">
-         <font>
-         
-         </font></Text>
-
-      <JFXTextArea fx:id="txtTaskDescription" editable="false" layoutX="180.0" layoutY="102.0" prefHeight="182.0" prefWidth="266.0" stylesheets="@../../../StyleSheet.css" text="Create a Wireframe prototype, for the project.&#10;Here is some more text so that I can get a feel for this fxml element&#10;" AnchorPane.rightAnchor="10.0" />
+      <JFXTextArea fx:id="txtTaskDescription" editable="false" layoutX="178.0" layoutY="130.0" prefHeight="153.0" prefWidth="266.0" stylesheets="@../../../StyleSheet.css" AnchorPane.rightAnchor="16.0" />
       <JFXButton layoutX="178.0" layoutY="294.0" onAction="#addTask" prefHeight="36.0" prefWidth="68.0" stylesheets="@../../../StyleSheet.css" text="Add Task" />
       <JFXButton layoutX="263.0" layoutY="294.0" onAction="#OpenTask" prefHeight="36.0" text="Open Task" />
+      <Label fx:id="txtSlectedTask" layoutX="315.0" layoutY="54.0" prefHeight="36.0" prefWidth="139.0" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="270.0" AnchorPane.topAnchor="63.0" />
+      <Label layoutX="178.0" layoutY="113.0" text="Description:" textFill="WHITE" />
+      <Label layoutX="178.0" layoutY="63.0" text="Currently selected task:" textFill="WHITE" AnchorPane.bottomAnchor="270.0" AnchorPane.topAnchor="63.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
 
      
 

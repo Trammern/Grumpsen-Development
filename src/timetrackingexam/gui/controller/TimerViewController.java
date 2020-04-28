@@ -9,18 +9,17 @@ import com.jfoenix.controls.JFXButton;
 import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import timetrackingexam.bll.threads.Scheduler;
-import timetrackingexam.bll.threads.TimerRunnable;
+import timetrackingexam.gui.util.AlertBox;
 
 
 /**
@@ -41,18 +40,18 @@ public class TimerViewController implements Initializable {
     private JFXButton btnTimeButton;
     @FXML
     private AnchorPane anchorPane;
-    @FXML
     private Label Ttime;
-    @FXML
     private Label Tmin;
-    @FXML
-    private Label TSec;
+     @FXML
+    private TextField TSek;
 
-    static int millisek = 1;
+    static int millisek = 0;
     static int seconds = 0;
     static int minutes = 0;
     static int hours = 0;
     private boolean timerstart = true;
+   
+   
     
    
     /**
@@ -60,9 +59,7 @@ public class TimerViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        executor = Executors.newSingleThreadExecutor();
-        
-        task1 = new TimerRunnable(TSec, Tmin, Ttime);
+         
     }    
 
     @FXML
@@ -73,11 +70,80 @@ public class TimerViewController implements Initializable {
             scheduler.startTimer(task1);
             
             timeIsActive = false;
-        } else {
+            timerstart = true;
+            
+       }
+        else{
             btnTimeButton.setText("Pause");
-            timeIsActive = true;
-        }
-        timeIsActive = false;
+           timeIsActive = true;
+           timerstart = false;
+       }
+  //      timeIsActive = false;
+        
+        Thread t = new Thread()
+        {
+           public void run()
+            {
+               
+             for (;;)  
+                 
+              {
+                   if (timerstart==true)
+                    {
+                      
+                        try
+                        {
+                            sleep(1);
+                            
+                            if(millisek>1000)
+                            {
+                                millisek=0;
+                                seconds++;
+                           }
+                            else if(seconds>60)
+                           {
+                                millisek=0;
+                                seconds=0;
+                                minutes++;
+                           }
+                            else if(minutes>60)
+                           {
+                                 millisek=0;
+                                 seconds=0;
+                                 minutes=0;
+                                 hours++;
+                           }
+                            millisek++;
+                            TSek.setText(" : " + seconds);
+                            
+//                             Tmin.setText(" : " + minutes);
+  //                           Ttime.setText(" : " + hours);
+                         
+                             System.out.println(seconds);
+                             
+                             
+                        }
+                        catch (InterruptedException e)
+                        {
+                            AlertBox.errorAlert("Error");
+                        }
+                    }
+                   
+                   else
+                   {
+                      
+                       break;
+                   }
+              }
+              
+            }
+           
+            
+        };
+       
+          t.start();
+           
+    }
 
     }
 }

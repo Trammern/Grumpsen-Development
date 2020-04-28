@@ -6,6 +6,7 @@
 package timetrackingexam.bll.facade;
 
 import java.util.List;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 
 /**
@@ -14,9 +15,14 @@ import timetrackingexam.be.Task;
  */
 public interface ITaskManager
 {
-    public Task createTask();
+    
+    //void for mockdata
+    public boolean createTask(Task t, Project p);
+    
     public boolean deleteTask();
+    
     public boolean updateTask();
+    
     public List<Task> readTask();
      
 }

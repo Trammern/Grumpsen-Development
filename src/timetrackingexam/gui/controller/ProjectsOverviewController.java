@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
@@ -47,7 +48,7 @@ public class ProjectsOverviewController implements Initializable, ICommonMenuAct
     @FXML
     private JFXListView<Task> lstTaskList;
     @FXML
-    private Text txtSlectedTask;
+    private Label txtSlectedTask;
     @FXML
     private JFXTextArea txtTaskDescription;
     @FXML
@@ -122,6 +123,16 @@ public class ProjectsOverviewController implements Initializable, ICommonMenuAct
             txtSlectedTask.setText(am.getCurrentTask().getName());
         }
         
+        if (am.getCurrentTask().getDescription() == null)
+        {
+            txtTaskDescription.setStyle("-fx-font-style: italic;");
+            txtTaskDescription.setText("No available description found for this task");
+        }
+        else
+        {
+            txtTaskDescription.setStyle("-fx-font-style: normal;");
+            txtTaskDescription.setText(am.getCurrentTask().getDescription());
+        }
         
     }
 

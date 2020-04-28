@@ -5,6 +5,7 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -12,6 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import timetrackingexam.be.Project;
+import timetrackingexam.be.Task;
+import timetrackingexam.gui.model.AppModel;
 
 /**
  * FXML Controller class
@@ -20,11 +25,16 @@ import javafx.scene.control.TextField;
  */
 public class AddTaskController implements Initializable
 {
+   private AppModel am;
 
     @FXML
     private TextField txtAddTaskName;
     @FXML
     private TextArea txtAddTaskDescription;
+    @FXML
+    private JFXButton btnSave;
+    @FXML
+    private JFXButton btnCancel;
 
     /**
      * Initializes the controller class.
@@ -32,17 +42,28 @@ public class AddTaskController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        am = AppModel.getInstance();
     }    
 
     @FXML
     private void handleSaveAddTask(ActionEvent event)
     {
+        String name = txtAddTaskName.getText().trim();
+        String description = txtAddTaskDescription.getText().trim();
+        Project p = am.getCurrentProject();
+        Task t = new Task(name, description);
+        am.addTask(t,p);
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
+        
+        
     }
 
     @FXML
     private void handleCancelTask(ActionEvent event)
     {
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
     }
     
 }
