@@ -6,8 +6,10 @@
 package timetrackingexam.bll;
 
 import java.util.List;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.bll.facade.ITaskManager;
+import timetrackingexam.dal.mockdata.MockProjectManager;
 
 /**
  *
@@ -15,13 +17,16 @@ import timetrackingexam.bll.facade.ITaskManager;
  */
 public class TaskManager implements ITaskManager
 {
+    private Task task;
+    private MockProjectManager mockProjectManager;
 
-    @Override
-    public Task createTask()
+    public TaskManager()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mockProjectManager = new MockProjectManager();
     }
 
+    
+    
     @Override
     public boolean deleteTask()
     {
@@ -38,6 +43,12 @@ public class TaskManager implements ITaskManager
     public List<Task> readTask()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean createTask(Task t, Project p)
+    {
+        return mockProjectManager.createTask(t,p);
     }
     
 }

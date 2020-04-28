@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -44,7 +45,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private JFXListView<Task> lstTaskList;
     @FXML
-    private Text txtSlectedTask;
+    private Label txtSlectedTask;
     @FXML
     private JFXTextArea txtTaskDescription;
 
@@ -113,6 +114,16 @@ public class ProjectsOverviewController implements Initializable {
             txtSlectedTask.setText(am.getCurrentTask().getName());
         }
         
+        if (am.getCurrentTask().getDescription() == null)
+        {
+            txtTaskDescription.setStyle("-fx-font-style: italic;");
+            txtTaskDescription.setText("No available description found for this task");
+        }
+        else
+        {
+            txtTaskDescription.setStyle("-fx-font-style: normal;");
+            txtTaskDescription.setText(am.getCurrentTask().getDescription());
+        }
         
     }
     

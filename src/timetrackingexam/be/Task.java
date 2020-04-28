@@ -33,6 +33,14 @@ public class Task {
         this.id = id;
         this.name = name;
     }
+
+    public Task(String name, String description)
+    {
+        this.name = name;
+        this.description = description;
+    }
+    
+    
     
     
 

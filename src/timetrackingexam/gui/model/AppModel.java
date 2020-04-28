@@ -11,6 +11,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.ProjectManager;
+import timetrackingexam.bll.TaskManager;
 import timetrackingexam.bll.UserManager;
 
 /**
@@ -23,8 +24,11 @@ public class AppModel
     private User currentUser;
     private Project currentProject;
     private Task currentTask;
+    private Task task;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
+    private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+    private final TaskManager taskManager;
     private final UserManager userManager;
     private final ProjectManager projectManager;
     private static AppModel instance;
@@ -33,6 +37,7 @@ public class AppModel
     {
         userManager = new UserManager();
         projectManager = new ProjectManager();
+        taskManager = new TaskManager();
     }
     
     public static AppModel getInstance() {
@@ -86,7 +91,13 @@ public class AppModel
         return currentTask;
     }
     
+    public boolean addTask(Task t, Project p)
+    {
+        tasks.add(t);
+        return taskManager.createTask(t,p);
+    }
     
+
     
     
     
