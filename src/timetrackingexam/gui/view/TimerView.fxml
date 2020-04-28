@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="380.0" stylesheets="@../../../StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.TimerViewController">
    <children>
-      <JFXButton fx:id="btnTimeButton" layoutX="145.0" layoutY="126.0" onAction="#btnStopStart" prefHeight="40.0" prefWidth="90.0" text="Pause">
+      <JFXButton fx:id="btnTimeButton" layoutX="96.0" layoutY="127.0" onAction="#btnStopStart" prefHeight="40.0" prefWidth="90.0" text="Start">
          <font>
             <Font size="18.0" />
          </font>
@@ -21,8 +21,22 @@
          <font>
             <Font size="13.0" />
          </font></Text>
-      <JFXTextField fx:id="TSek" alignment="CENTER" layoutX="235.0" layoutY="88.0" prefHeight="25.0" prefWidth="28.0" promptText="0" />
-      <JFXTextField fx:id="TMin" alignment="CENTER" layoutX="176.0" layoutY="88.0" prefHeight="25.0" prefWidth="28.0" promptText="0" />
-      <JFXTextField fx:id="TTime" alignment="CENTER" layoutX="117.0" layoutY="88.0" prefHeight="25.0" prefWidth="28.0" promptText="0" />
+      <Label fx:id="tHour" layoutX="91.0" layoutY="77.0" text="Sec: " textFill="#c6c6c6" AnchorPane.leftAnchor="80.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="tMin" layoutX="168.0" layoutY="77.0" text="Min: " textFill="#c6c6c6">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="tSec" layoutX="235.0" layoutY="77.0" text="Hours:" textFill="#c6c6c6" AnchorPane.rightAnchor="70.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <JFXButton fx:id="btnSubmit" layoutX="194.0" layoutY="127.0" onAction="#handleSubmit" prefHeight="40.0" prefWidth="90.0" text="Submit">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
