@@ -31,6 +31,9 @@ import timetrackingexam.gui.util.AlertBox;
 public class TimerViewController implements Initializable {
 
     private boolean timeIsActive = true;
+    private ExecutorService executor;
+    private TimerRunnable task1;
+    private Scheduler scheduler;
     
     @FXML
     private Text txtTaskText;
@@ -66,8 +69,11 @@ public class TimerViewController implements Initializable {
 
     @FXML
     private void btnStopStart(ActionEvent event) throws InterruptedException {
-        if(timeIsActive){
+        if (timeIsActive) {
             btnTimeButton.setText("Start");
+            
+            scheduler.startTimer(task1);
+            
             timeIsActive = false;
             timerstart = true;
             
@@ -147,6 +153,7 @@ public class TimerViewController implements Initializable {
            
     }
 
+    }
 }
 
     
