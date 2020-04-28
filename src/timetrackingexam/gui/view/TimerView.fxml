@@ -23,6 +23,6 @@
          </font></Text>
       <Label fx:id="Ttime" layoutX="131.0" layoutY="83.0" text="Label" />
       <Label fx:id="Tmin" layoutX="176.0" layoutY="83.0" text="Label" />
-      <Label fx:id="TSec" layoutX="221.0" layoutY="83.0" text="Label" />
+      <Label fx:id="TSek" layoutX="221.0" layoutY="83.0" text="Label" />
    </children>
 </AnchorPane>
