@@ -13,19 +13,23 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.ICommonMenuActions;
 
 /**
  * FXML Controller class
  *
  * @author math2
  */
-public class AdminProjectOverviewController implements Initializable {
+public class AdminProjectOverviewController implements Initializable, ICommonMenuActions {
 
     private AppModel am;
     private User currentUser;
@@ -40,6 +44,12 @@ public class AdminProjectOverviewController implements Initializable {
     private Text txtSalary;
     @FXML
     private TableColumn<User, String> columnName;
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private MenuItem menuItemClose;
+    @FXML
+    private MenuItem menuItemLogout;
 
     /**
      * Initializes the controller class.
@@ -82,6 +92,18 @@ public class AdminProjectOverviewController implements Initializable {
         selectedProject = project;
         txtCurrentProject.setText(selectedProject.getName());
         txtSalary.setText("Hourly Salary: " + selectedProject.getRate());
+    }
+
+    @FXML
+    private void closeProgram(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        primStage.close();
+    }
+
+    @FXML
+    private void logoutToLoginView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        logout(primStage);
     }
     
 }

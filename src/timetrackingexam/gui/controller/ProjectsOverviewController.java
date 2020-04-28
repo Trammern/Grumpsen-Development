@@ -21,6 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -28,13 +30,14 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.ICommonMenuActions;
 
 /**
  * FXML Controller class
  *
  * @author math2
  */
-public class ProjectsOverviewController implements Initializable {
+public class ProjectsOverviewController implements Initializable, ICommonMenuActions {
     
     private AppModel am;
     private User currentUser;
@@ -48,6 +51,12 @@ public class ProjectsOverviewController implements Initializable {
     private Label txtSlectedTask;
     @FXML
     private JFXTextArea txtTaskDescription;
+    @FXML
+    private MenuItem menuItemClose;
+    @FXML
+    private MenuItem menuItemLogout;
+    @FXML
+    private MenuBar menuBar;
 
     /**
      * Initializes the controller class.
@@ -110,7 +119,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void setCurrentTask(MouseEvent event) {
         if (lstTaskList.getSelectionModel().getSelectedItem() != null) {
-            am.setCurrentProject(lstTaskList.getSelectionModel().getSelectedItem());
+            am.setCurrentTask(lstTaskList.getSelectionModel().getSelectedItem());
             txtSlectedTask.setText(am.getCurrentTask().getName());
         }
         
@@ -125,6 +134,18 @@ public class ProjectsOverviewController implements Initializable {
             txtTaskDescription.setText(am.getCurrentTask().getDescription());
         }
         
+    }
+
+    @FXML
+    private void closeProgram(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        primStage.close();
+    }
+
+    @FXML
+    private void logoutToLoginView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        logout(primStage);
     }
     
     

@@ -18,6 +18,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,13 +27,14 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.ICommonMenuActions;
 
 /**
  * FXML Controller class
  *
  * @author math2
  */
-public class ProjectManagementViewController implements Initializable {
+public class ProjectManagementViewController implements Initializable, ICommonMenuActions {
 
     private final String ADD_EDIT_PATH = "/timetrackingexam/gui/view/AddEditProjectView.fxml";
     
@@ -43,6 +46,12 @@ public class ProjectManagementViewController implements Initializable {
     private JFXListView<Project> lstProjects;
     @FXML
     private Text txtSelectedProject;
+    @FXML
+    private MenuItem menuItemClose;
+    @FXML
+    private MenuItem menuItemLogout;
+    @FXML
+    private MenuBar menuBar;
 
     /**
      * Initializes the controller class.
@@ -105,6 +114,18 @@ public class ProjectManagementViewController implements Initializable {
         } catch (IOException e) {
             AlertBox.errorAlert("Could not open new window");
         }
+    }
+
+    @FXML
+    private void closeProgram(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        primStage.close();
+    }
+
+    @FXML
+    private void logoutToLoginView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        logout(primStage);
     }
 
     

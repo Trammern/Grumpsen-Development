@@ -25,6 +25,7 @@ public class MainApp extends Application
         
         Scene scene = new Scene(root);
         
+        stage.setTitle("Login as user");
         stage.setScene(scene);
         stage.show();
     }
