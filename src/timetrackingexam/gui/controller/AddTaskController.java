@@ -53,6 +53,8 @@ public class AddTaskController implements Initializable
         Project p = am.getCurrentProject();
         Task t = new Task(name, description);
         am.addTask(t,p);
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
         
         
     }

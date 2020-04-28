@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,12 +37,10 @@ public class TimerViewController implements Initializable {
     private JFXButton btnTimeButton;
     @FXML
     private AnchorPane anchorPane;
-    @FXML
     private Label Ttime;
-    @FXML
     private Label Tmin;
      @FXML
-    private Label TSek;
+    private TextField TSek;
 
     static int millisek = 0;
     static int seconds = 0;
@@ -48,7 +48,7 @@ public class TimerViewController implements Initializable {
     static int hours = 0;
     private boolean timerstart = true;
    
-    
+   
     
    
     /**
@@ -56,7 +56,7 @@ public class TimerViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+         
     }    
 
     @FXML
@@ -107,16 +107,19 @@ public class TimerViewController implements Initializable {
                                  minutes=0;
                                  hours++;
                            }
-                            TSek.setText(" : " + seconds);
                             millisek++;
-                             Tmin.setText(" : " + minutes);
-                             Ttime.setText(" : " + hours);
-                             System.out.println(millisek);
+                            TSek.setText(" : " + seconds);
+                            
+//                             Tmin.setText(" : " + minutes);
+  //                           Ttime.setText(" : " + hours);
+                         
+                             System.out.println(seconds);
+                             
                              
                         }
                         catch (InterruptedException e)
                         {
-                            AlertBox.errorAlert("Could not open new window");
+                            AlertBox.errorAlert("Error");
                         }
                     }
                    
