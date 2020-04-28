@@ -10,6 +10,9 @@ import java.time.LocalTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 
 /**
@@ -20,13 +23,11 @@ public class TimerRunnable implements Runnable{
 
     private final int DELAY = 1;
     private boolean active;
-    private int timeStamp;
-    private LocalTime elapsedTime;
     private ExecutorService executor;
     
-    private Label lSec;
-    private Label lMin;
-    private Label lHour;
+    private final Label lSec;
+    private final Label lMin;
+    private final Label lHour;
     
     static int millisek = 1;
     static int seconds = 0;
@@ -39,49 +40,40 @@ public class TimerRunnable implements Runnable{
         this.lHour = lHour;
     }
     
-    
-    
-    /**
-     *
-     */
     @Override
     public void run() {
-        try {
-            while (active) {
-
-                for (;;) {
-                    System.out.println(seconds);
-
-                    sleep(1);
-
-                    if (millisek > 1000) {
-                        millisek = 0;
-                        seconds++;
-                    } else if (seconds > 60) {
-                        millisek = 0;
-                        seconds = 0;
-                        minutes++;
-                    } else if (minutes > 60) {
-                        millisek = 0;
-                        seconds = 0;
-                        minutes = 0;
-                        hours++;
-                    }
-                            lSec.setText(" : "+seconds);
-                            millisek++;
-                            lMin.setText(" : "+minutes);
-                            lHour.setText(" : "+hours);
-
+   
+        while (true) {
+            Platform.runLater(() -> {
+                seconds++;
+                lSec.setText("Sec: " +seconds);
+                lMin.setText("Min: " +minutes);
+                lHour.setText("Hours: " +hours);
+                });
+            
+                try {
+                    TimeUnit.SECONDS.sleep(DELAY);
+                } 
+                catch (InterruptedException ex) {
                 }
-            }
-        } catch (InterruptedException ex) {
-        }   
-    
+
+                if (seconds == 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+
+                if (minutes == 60) {
+                    seconds = 0;
+                    minutes = 0;
+                    hours++;
+                }
+        }
     }
     
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+    
+
+    
+    
     
     void start() {
         executor = Executors.newSingleThreadExecutor();
@@ -93,4 +85,6 @@ public class TimerRunnable implements Runnable{
         executor.shutdownNow();
         System.out.println("Thread stopped");
     }
+    
+    
 }

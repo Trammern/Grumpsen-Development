@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -21,6 +21,17 @@
          <font>
             <Font size="13.0" />
          </font></Text>
-      <TextField fx:id="TSek" layoutX="217.0" layoutY="79.0" onAction="#btnStopStart" />
+      <Label fx:id="tHour" layoutX="91.0" layoutY="77.0" text="Sec: " textFill="#c6c6c6" AnchorPane.leftAnchor="80.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="tMin" layoutX="168.0" layoutY="77.0" text="Min: " textFill="#c6c6c6">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="tSec" layoutX="235.0" layoutY="77.0" text="Hours:" textFill="#c6c6c6" AnchorPane.rightAnchor="70.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
    </children>
 </AnchorPane>

@@ -10,6 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 
 /**
  *
@@ -30,7 +33,7 @@ public class Scheduler implements Runnable{
         }
     }
      
-        public void startTimer(TimerRunnable timer){
+        public synchronized void startTimer(TimerRunnable timer){
             if (executor == null || executor.isShutdown()) {
             executor = Executors.newSingleThreadExecutor();
             executor.submit(this);
@@ -52,7 +55,20 @@ public class Scheduler implements Runnable{
             }
         }
         }
+        
+        public synchronized void pause(){
+        
+            Platform.runLater(()->{
+                
+                try {
+                    this.wait();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        } 
     }
+    
     
     
 

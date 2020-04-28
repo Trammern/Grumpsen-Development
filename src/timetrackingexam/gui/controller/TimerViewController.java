@@ -10,6 +10,7 @@ import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -42,18 +43,21 @@ public class TimerViewController implements Initializable {
     private JFXButton btnTimeButton;
     @FXML
     private AnchorPane anchorPane;
-    private Label Ttime;
-    private Label Tmin;
-     @FXML
-    private TextField TSek;
+    @FXML
+    private Label tHour;
+    @FXML
+    private Label tMin;
+    @FXML
+    private Label tSec;
+   
+   
 
     static int millisek = 0;
     static int seconds = 0;
     static int minutes = 0;
     static int hours = 0;
     private boolean timerstart = true;
-   
-   
+  
     
    
     /**
@@ -66,11 +70,18 @@ public class TimerViewController implements Initializable {
 
     @FXML
     private void btnStopStart(ActionEvent event) throws InterruptedException {
-        
-        task1 = new TimerRunnable(Tmin, Tmin, Ttime);
+        if(timeIsActive){
+        task1 = new TimerRunnable(tHour, tMin, tSec);
         scheduler = new Scheduler();
-        
         scheduler.startTimer(task1);
+        btnTimeButton.setText("Pause");
+        timeIsActive = false;
+        }
+        else{
+            scheduler.pause();
+            btnTimeButton.setText("Start");
+            timeIsActive = true;
+        }
     }
     
     }
