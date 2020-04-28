@@ -9,9 +9,9 @@ import com.jfoenix.controls.JFXButton;
 import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import timetrackingexam.bll.threads.Scheduler;
+import timetrackingexam.bll.threads.TimerRunnable;
 import timetrackingexam.gui.util.AlertBox;
 
 
@@ -64,89 +66,15 @@ public class TimerViewController implements Initializable {
 
     @FXML
     private void btnStopStart(ActionEvent event) throws InterruptedException {
-        if (timeIsActive) {
-            btnTimeButton.setText("Start");
-            
-            scheduler.startTimer(task1);
-            
-            timeIsActive = false;
-            timerstart = true;
-            
-       }
-        else{
-            btnTimeButton.setText("Pause");
-           timeIsActive = true;
-           timerstart = false;
-       }
-  //      timeIsActive = false;
         
-        Thread t = new Thread()
-        {
-           public void run()
-            {
-               
-             for (;;)  
-                 
-              {
-                   if (timerstart==true)
-                    {
-                      
-                        try
-                        {
-                            sleep(1);
-                            
-                            if(millisek>1000)
-                            {
-                                millisek=0;
-                                seconds++;
-                           }
-                            else if(seconds>60)
-                           {
-                                millisek=0;
-                                seconds=0;
-                                minutes++;
-                           }
-                            else if(minutes>60)
-                           {
-                                 millisek=0;
-                                 seconds=0;
-                                 minutes=0;
-                                 hours++;
-                           }
-                            millisek++;
-                            TSek.setText(" : " + seconds);
-                            
-//                             Tmin.setText(" : " + minutes);
-  //                           Ttime.setText(" : " + hours);
-                         
-                             System.out.println(seconds);
-                             
-                             
-                        }
-                        catch (InterruptedException e)
-                        {
-                            AlertBox.errorAlert("Error");
-                        }
-                    }
-                   
-                   else
-                   {
-                      
-                       break;
-                   }
-              }
-              
-            }
-           
-            
-        };
-       
-          t.start();
-           
+        task1 = new TimerRunnable(Tmin, Tmin, Ttime);
+        scheduler = new Scheduler();
+        
+        scheduler.startTimer(task1);
+    }
+    
     }
 
-    }
-}
 
     
 
