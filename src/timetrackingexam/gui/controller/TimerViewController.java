@@ -6,6 +6,7 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,13 +41,17 @@ public class TimerViewController implements Initializable {
     private Label Ttime;
     private Label Tmin;
      @FXML
-    private TextField TSek;
+    private JFXTextField TSek;
 
     static int millisek = 0;
-    static int seconds = 0;
+    static int seconds = 55;
     static int minutes = 0;
     static int hours = 0;
     private boolean timerstart = true;
+    @FXML
+    private JFXTextField TMin;
+    @FXML
+    private JFXTextField TTime;
    
    
     
@@ -93,25 +98,28 @@ public class TimerViewController implements Initializable {
                             {
                                 millisek=0;
                                 seconds++;
+                                TSek.setText(" : " + seconds);
                            }
-                            else if(seconds>60)
+                            if(seconds==60)
                            {
                                 millisek=0;
                                 seconds=0;
                                 minutes++;
+                                TMin.setText(" : " + minutes);
                            }
-                            else if(minutes>60)
+                             if(minutes==60)
                            {
                                  millisek=0;
                                  seconds=0;
                                  minutes=0;
                                  hours++;
+                                 TTime.setText(" : " + hours);
                            }
                             millisek++;
-                            TSek.setText(" : " + seconds);
                             
-//                             Tmin.setText(" : " + minutes);
-  //                           Ttime.setText(" : " + hours);
+                            
+                            
+
                          
                              System.out.println(seconds);
                              
