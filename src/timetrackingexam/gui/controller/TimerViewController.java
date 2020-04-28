@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import timetrackingexam.gui.util.AlertBox;
 
 
 /**
@@ -63,12 +64,15 @@ public class TimerViewController implements Initializable {
         if(timeIsActive){
             btnTimeButton.setText("Start");
             timeIsActive = false;
+            timerstart = true;
+            
        }
         else{
             btnTimeButton.setText("Pause");
            timeIsActive = true;
+           timerstart = false;
        }
-        timeIsActive = false;
+  //      timeIsActive = false;
         
         Thread t = new Thread()
         {
@@ -105,14 +109,14 @@ public class TimerViewController implements Initializable {
                            }
                             TSek.setText(" : " + seconds);
                             millisek++;
-                             Tmin.setText(" : "+minutes);
-                             Ttime.setText(" : "+hours);
+                             Tmin.setText(" : " + minutes);
+                             Ttime.setText(" : " + hours);
                              System.out.println(millisek);
                              
                         }
                         catch (InterruptedException e)
                         {
-                            
+                            AlertBox.errorAlert("Could not open new window");
                         }
                     }
                    
