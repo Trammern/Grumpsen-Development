@@ -28,4 +28,13 @@ public class LoginTools {
         }        
         return verifiedUser;
     }
+    
+    public static String getVerifiedNewPassword(User user, String oldPassword, String newPassword) {
+        String password = null;
+        if (user.getPassword().equals(oldPassword)) {
+            password = newPassword;
+        }
+        
+        return password;
+    }
 }

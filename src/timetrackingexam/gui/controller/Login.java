@@ -80,7 +80,7 @@ public class Login implements Initializable
     }    
         
     public void login() {
-        String email = txtName.getText().trim();
+        String email = txtName.getText();
         String password = txtPassword.getText();
 
         if (email.isEmpty() || password.isEmpty()) {

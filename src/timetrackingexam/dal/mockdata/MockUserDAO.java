@@ -42,7 +42,7 @@ public class MockUserDAO implements IUserDal
         return users;
     }
     
-    public void changePassword() {
+    public void changePassword(User user) {
         //todo
     }
     

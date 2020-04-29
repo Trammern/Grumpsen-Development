@@ -15,6 +15,6 @@ import timetrackingexam.be.User;
 public interface IUserDal {
     
     public List<User> getAllUsers();
-    public void changePassword();
+    public void changePassword(User user);
     
 }
