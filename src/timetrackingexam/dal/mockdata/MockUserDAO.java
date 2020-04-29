@@ -9,17 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 import timetrackingexam.be.User;
 import timetrackingexam.be.User.Role;
+import timetrackingexam.dal.facade.IUserDal;
 
 /**
  *
  * @author Rizvan
  */
-public class MockUserDAO
+public class MockUserDAO implements IUserDal
 {
     
-    public List<User> getUsers()
-    {
-        List<User> users = new ArrayList<User>();
+    private List<User> users;
+
+    public MockUserDAO() {
+        users = new ArrayList<>();
         
         User u1 = new User("John", "Doe", "johndoe@hotmail.com", "qwerty", Role.Admin);
         User u2 = new User("Billy", "Joe", "billyboy@hotmail.com", "qaz123", Role.Default);
@@ -34,8 +36,14 @@ public class MockUserDAO
         users.add(u4);
         users.add(u5);
         users.add(u6);
-        
+    }    
+    
+    public List<User> getAllUsers() {
         return users;
+    }
+    
+    public void changePassword() {
+        //todo
     }
     
 }

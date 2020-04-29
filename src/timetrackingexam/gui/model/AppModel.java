@@ -120,6 +120,10 @@ public class AppModel
         tm.stopTimer();
     }
     
+    public void changePassword() {
+        userManager.changePassword();
+    }
+    
 
     
     
