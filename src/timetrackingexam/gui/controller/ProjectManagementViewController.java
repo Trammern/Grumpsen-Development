@@ -27,14 +27,14 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
-import timetrackingexam.gui.util.ICommonMenuActions;
+import timetrackingexam.gui.util.ViewGuide;
 
 /**
  * FXML Controller class
  *
  * @author math2
  */
-public class ProjectManagementViewController implements Initializable, ICommonMenuActions {
+public class ProjectManagementViewController implements Initializable {
 
     private final String ADD_EDIT_PATH = "/timetrackingexam/gui/view/AddEditProjectView.fxml";
     
@@ -131,7 +131,7 @@ public class ProjectManagementViewController implements Initializable, ICommonMe
     @FXML
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
-        logout(primStage);
+        ViewGuide.logout(primStage);
     }
 
     

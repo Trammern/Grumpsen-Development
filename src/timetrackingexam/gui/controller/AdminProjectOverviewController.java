@@ -22,14 +22,14 @@ import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
-import timetrackingexam.gui.util.ICommonMenuActions;
+import timetrackingexam.gui.util.ViewGuide;
 
 /**
  * FXML Controller class
  *
  * @author math2
  */
-public class AdminProjectOverviewController implements Initializable, ICommonMenuActions {
+public class AdminProjectOverviewController implements Initializable {
 
     private AppModel am;
     private User currentUser;
@@ -103,7 +103,7 @@ public class AdminProjectOverviewController implements Initializable, ICommonMen
     @FXML
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
-        logout(primStage);
+        ViewGuide.logout(primStage);
     }
     
 }

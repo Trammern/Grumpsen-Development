@@ -16,11 +16,14 @@ import javafx.stage.Stage;
  *
  * @author fauxtistic
  */
-public interface ICommonMenuActions {
+public class ViewGuide {
     
-    default void openView(String viewPath, String title, Stage primStage, boolean closeCurrentView, boolean disableInputToOtherViews) {
+    public static final String LOGIN_VIEW_PATH = "/timetrackingexam/gui/view/Login.fxml";
+    public static final String LOGIN_VIEW_TITLE = "Login as user";
+    
+    public static void openView(String viewPath, String title, Stage primStage, boolean closeCurrentView, boolean disableInputToOtherViews) {
         try {
-            Parent loader = FXMLLoader.load(getClass().getResource(viewPath));
+            Parent loader = FXMLLoader.load(ViewGuide.class.getResource(viewPath));
             Scene scene = new Scene(loader);            
             Stage stage = new Stage();
             stage.setTitle(title);
@@ -42,9 +45,8 @@ public interface ICommonMenuActions {
         }
     }
     
-    default void logout(Stage primStage) {
-        openView("/timetrackingexam/gui/view/Login.fxml", "Login as user", primStage, true, true);
+    public static void logout(Stage primStage) {
+        openView(LOGIN_VIEW_PATH, LOGIN_VIEW_TITLE, primStage, true, true);
     }
-            
     
 }
