@@ -30,14 +30,14 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
-import timetrackingexam.gui.util.ICommonMenuActions;
+import timetrackingexam.gui.util.ViewGuide;
 
 /**
  * FXML Controller class
  *
  * @author math2
  */
-public class ProjectsOverviewController implements Initializable, ICommonMenuActions {
+public class ProjectsOverviewController implements Initializable {
     
     private AppModel am;
     private User currentUser;
@@ -145,7 +145,7 @@ public class ProjectsOverviewController implements Initializable, ICommonMenuAct
     @FXML
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
-        logout(primStage);
+        ViewGuide.logout(primStage);
     }
     
     
