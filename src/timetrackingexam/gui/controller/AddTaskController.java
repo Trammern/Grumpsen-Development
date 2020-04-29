@@ -48,14 +48,14 @@ public class AddTaskController implements Initializable
     @FXML
     private void handleSaveAddTask(ActionEvent event)
     {
-        String name = txtAddTaskName.getText().trim();
-        String description = txtAddTaskDescription.getText().trim();
-        Project p = am.getCurrentProject();
-        Task t = new Task(name, description);
-        am.addTask(t,p);
-        Stage stage = (Stage) btnSave.getScene().getWindow();
-        stage.close();
-        
+        if (am.getCurrentTask() != null)
+        {
+            editTask();
+        }
+        else
+        {
+            newTask();
+        }
         
     }
 
@@ -64,6 +64,23 @@ public class AddTaskController implements Initializable
     {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
+    }
+    
+    
+    private void newTask()
+    {
+        String name = txtAddTaskName.getText().trim();
+        String description = txtAddTaskDescription.getText().trim();
+        Project p = am.getCurrentProject();
+        Task t = new Task(name, description);
+        am.addTask(t,p);
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
+    }
+    
+    private void editTask()
+    {
+        
     }
     
 }

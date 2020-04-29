@@ -108,6 +108,12 @@ public class AppModel
         return taskManager.createTask(t,p);
     }
     
+    public boolean removeTask(Task selectedTask, Project currentProject)
+    {
+        tasks.remove(selectedTask);
+        return taskManager.deleteTask(selectedTask, currentProject);
+    }
+    
     public void startTimer(Label sec, Label min, Label hours){
         tm.startTimer(sec, min, hours);
     }

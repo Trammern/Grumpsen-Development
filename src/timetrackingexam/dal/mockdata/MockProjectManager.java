@@ -51,6 +51,8 @@ public class MockProjectManager {
         p3.addTask(t7);
         
         
+        
+        
     }
 
     public ObservableList<Project> getProjects() {
@@ -74,6 +76,13 @@ public class MockProjectManager {
             }
         }
         return false;
+    }
+
+  
+
+    public boolean deleteTask(Task selectedTask, Project currentProject)
+    {
+        return currentProject.removeTask(selectedTask);
     }
     
 }

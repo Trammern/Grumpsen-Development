@@ -19,7 +19,7 @@ public interface ITaskManager
     //void for mockdata
     public boolean createTask(Task t, Project p);
     
-    public boolean deleteTask();
+    public boolean deleteTask(Task selectedTask, Project currentProject);
     
     public boolean updateTask();
     
