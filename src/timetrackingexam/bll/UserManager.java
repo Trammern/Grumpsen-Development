@@ -29,8 +29,8 @@ public class UserManager
         return userDal.getAllUsers();
     }
     
-    public void changePassword() {
-        userDal.changePassword();
+    public void changePassword(User user) {
+        userDal.changePassword(user);
     }
     
 }

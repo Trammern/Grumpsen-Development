@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
+import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
 
@@ -79,47 +80,32 @@ public class Login implements Initializable
     }    
         
     public void login() {
-        String email = txtName.getText().trim();
+        String email = txtName.getText();
         String password = txtPassword.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
             AlertBox.errorAlert("The input fields must be filled out");
-        } else if (getVerifiedUser(email, password) != null) {
-            appModel.setCurrentUser(getVerifiedUser(email, password));
-
-            switch (appModel.getCurrentUser().getRole()) {
-                case Default:
-                    openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");  
-                    System.out.println("Logged in as default user");
-                    break;
-                case Admin:
-                    openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");
-                    System.out.println("Logged in as admin");
-                    break;
-
-                default:
-                    AlertBox.errorAlert("No view defined for this role");
-            }
         } else {
-            AlertBox.errorAlert("Email or password incorrect");
+            User user = LoginTools.getVerifiedUser(email, password, appModel.getAllUsers());
+
+            if (user != null) {
+                appModel.setCurrentUser(user);
+
+                switch (appModel.getCurrentUser().getRole()) {
+                    case Default:
+                        openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");
+                        break;
+                    case Admin:
+                        openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");
+                        break;
+                    default:
+                        AlertBox.errorAlert("No view defined for this role");
+                }
+            } else {
+                AlertBox.errorAlert("Email or password incorrect");
+            }
         }
         txtPassword.clear();
-    }
-    
-    
-    private User getVerifiedUser(String email, String password)
-    {
-        List<User> users = appModel.getAllUsers();
-        
-        for (User user : users)
-        {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password))
-            {
-                appModel.setCurrentUser(user);
-                return user;                
-            }
-        }        
-        return null;
     }
     
     private void openView(String viewPath, String title) {

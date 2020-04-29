@@ -126,8 +126,8 @@ public class AppModel
         tm.stopTimer();
     }
     
-    public void changePassword() {
-        userManager.changePassword();
+    public void changePassword(User user) {
+        userManager.changePassword(user);
     }
     
 
