@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
@@ -48,10 +49,35 @@ public class ChangePasswordViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         am = AppModel.getInstance();
         user = am.getCurrentUser();
+        initKeys();
     }    
+    
+    private void initKeys() {
+        txtOldPass.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                changePassword();
+            }
+        });
+        txtNewPass.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                changePassword();
+            }
+        });
+        txtNewPass2.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                changePassword();
+            }
+        });
+        
+    }
 
     @FXML
     private void savePassword(ActionEvent event) {
+         changePassword();        
+                        
+    }
+    
+    private void changePassword() {
         String oldPassword = txtOldPass.getText();
         String newPassword = txtNewPass.getText();
         String repeatedNewPassword = txtNewPass2.getText();
@@ -62,6 +88,8 @@ public class ChangePasswordViewController implements Initializable {
         }
         if (!newPassword.equals(repeatedNewPassword)) {
             AlertBox.errorAlert("The text in the two fields where you have entered the new password do not match");
+            txtNewPass.clear();
+            txtNewPass2.clear();
             return;
         }
         String verifiedNewPassword = LoginTools.getVerifiedNewPassword(user, oldPassword, newPassword);
@@ -73,8 +101,8 @@ public class ChangePasswordViewController implements Initializable {
         }
         else {
             AlertBox.errorAlert("The password you have entered in the first field is incorrect");
-        }
-                
+            txtOldPass.clear();            
+        }      
     }
 
     @FXML
