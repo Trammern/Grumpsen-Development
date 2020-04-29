@@ -11,7 +11,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.ViewGuide;
@@ -75,6 +78,9 @@ public class TaskOverviewController implements Initializable {
                 primStage.close();
                 stage.showAndWait();
                 stage.setTitle("Timer");
+
+                
+    
             } catch (IOException ex)
             {
                 Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);

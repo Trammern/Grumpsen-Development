@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import timetrackingexam.gui.model.AppModel;
 
 
@@ -40,10 +42,6 @@ public class TimerViewController implements Initializable {
     private JFXButton btnSubmit;
 
    
-
-  
-    
-   
     /**
      * Initializes the controller class.
      * @param url
@@ -51,8 +49,10 @@ public class TimerViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         am = AppModel.getInstance();
-         txtTaskText.setText(am.getCurrentTask().getName());
+        am = AppModel.getInstance();
+        txtTaskText.setText(am.getCurrentTask().getName());
+        
+        
     }    
     /**
      * Starts the timer on the gui whilst also swithing button text
@@ -89,6 +89,12 @@ public class TimerViewController implements Initializable {
      * Toggles all the buttons' properties and setting the active time
      */
     private void toggleBtnProperties(){
+        
+        Stage stage = (Stage) txtTaskText.getScene().getWindow();
+        stage.setOnHiding((WindowEvent event) -> {
+            am.stopTimer();
+        });
+        
         if(timeIsActive){
             btnSubmit.setDisable(timeIsActive);
             btnTimeButton.setText("Pause");
@@ -101,7 +107,8 @@ public class TimerViewController implements Initializable {
         }
     }
     
-    }
+    
+}
 
 
     

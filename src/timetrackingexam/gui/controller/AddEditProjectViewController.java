@@ -8,10 +8,12 @@ package timetrackingexam.gui.controller;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import timetrackingexam.be.Project;
 import timetrackingexam.gui.model.AppModel;
 
@@ -48,6 +50,8 @@ public class AddEditProjectViewController implements Initializable {
            fldRate.setText("NOT IMPLEMENTED");
            fldDescription.setText("NOT IMPLEMENTED");
        }
+       
+        
         
     }    
 
