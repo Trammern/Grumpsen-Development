@@ -7,6 +7,7 @@ package timetrackingexam.bll;
 
 import java.util.List;
 import timetrackingexam.be.User;
+import timetrackingexam.dal.facade.IUserDal;
 import timetrackingexam.dal.mockdata.MockUserDAO;
 
 /**
@@ -16,16 +17,20 @@ import timetrackingexam.dal.mockdata.MockUserDAO;
 public class UserManager
 {
     
-    private MockUserDAO mockdata;
+    private IUserDal userDal;
 
     public UserManager()
     {
-        mockdata = new MockUserDAO();
+        userDal = new MockUserDAO();
     }
 
     public List<User> getAllUsers()
     {
-        return mockdata.getUsers();
+        return userDal.getAllUsers();
+    }
+    
+    public void changePassword() {
+        userDal.changePassword();
     }
     
 }
