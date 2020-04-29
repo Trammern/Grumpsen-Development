@@ -7,7 +7,6 @@ package timetrackingexam.bll;
 
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
-import timetrackingexam.be.Task;
 import timetrackingexam.dal.mockdata.MockProjectManager;
 
 /**
@@ -15,7 +14,7 @@ import timetrackingexam.dal.mockdata.MockProjectManager;
  * @author math2
  */
 public class ProjectManager {
-    private MockProjectManager mpm;
+    private final MockProjectManager mpm;
 
     public ProjectManager() {
         mpm = new MockProjectManager();
