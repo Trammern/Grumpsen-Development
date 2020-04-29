@@ -94,7 +94,7 @@ public class ChangePasswordViewController implements Initializable {
         }
         String verifiedNewPassword = LoginTools.getVerifiedNewPassword(user, oldPassword, newPassword);
         if (verifiedNewPassword != null) {
-            user.setPassword(newPassword);
+            user.setPassword(verifiedNewPassword);
             //am.getAllUsers(); //necessary?
             Stage stage = (Stage) btnCancel.getScene().getWindow();
             stage.close();
