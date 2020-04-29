@@ -75,7 +75,8 @@ public class AddEditProjectViewController implements Initializable {
     }
     
     private void updateProject(){
-        am.getCurrentProject().setName(fldName.getText());
+        updatedProject.setName(fldName.getText());
+        am.updateProject(updatedProject);
         Stage primStage = (Stage) fldName.getScene().getWindow();
         primStage.close();
     }

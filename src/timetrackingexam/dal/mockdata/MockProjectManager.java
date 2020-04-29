@@ -65,5 +65,15 @@ public class MockProjectManager {
     {
         return p.addTask(t);
     }
+
+    public boolean updateProject(Project p) {
+        for (Project project : projects) {
+            if(p.getId() == project.getId()){
+                project = p;
+                return true;
+            }
+        }
+        return false;
+    }
     
 }

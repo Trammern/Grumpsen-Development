@@ -86,6 +86,14 @@ public class AppModel
         return projectManager.createNewProject(p);
     }
     
+    public boolean updateProject(Project p) {
+        if (projectManager.updateProject(p)) {
+            getProjects();
+            return true;
+        }
+        return false;
+    }
+    
     public void setCurrentTask(Task currentTask){
         this.currentTask = currentTask;
     }
