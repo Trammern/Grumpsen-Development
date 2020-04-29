@@ -95,7 +95,7 @@ public class TaskOverviewController implements Initializable {
             Parent root1 = (Parent) fxml.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
-            stage.initOwner((Stage) event.getSource());
+            stage.initOwner((Stage) menuBar.getScene().getWindow());
             stage.showAndWait();
             stage.setTitle("Timer");
         } catch (IOException ex)
