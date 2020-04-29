@@ -108,22 +108,6 @@ public class Login implements Initializable
         txtPassword.clear();
     }
     
-    
-    private User getVerifiedUser(String email, String password)
-    {
-        List<User> users = appModel.getAllUsers();
-        
-        for (User user : users)
-        {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password))
-            {
-                appModel.setCurrentUser(user);
-                return user;                
-            }
-        }        
-        return null;
-    }
-    
     private void openView(String viewPath, String title) {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource(viewPath));
