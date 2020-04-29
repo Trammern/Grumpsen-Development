@@ -17,11 +17,21 @@ public class ThreadManager {
     
     private Scheduler scheduler;
     
-    
     public void startTimer(Label sec, Label min, Label hours){
         
         scheduler = new Scheduler();
-        scheduler.startTimer(new TimerRunnable(sec, min, hours));
+        TimerRunnable tr = new TimerRunnable(sec, min, hours);
+        scheduler.startTimer(tr);
+        
+    }
+    
+    public boolean isRunning(){
+        if (scheduler==null){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
     
     public void pauseTimer(){

@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskTime;
 import timetrackingexam.gui.model.AppModel;
 
 
@@ -27,6 +29,10 @@ public class TimerViewController implements Initializable {
 
     private boolean timeIsActive = true;
     private AppModel am;
+    private Task currentTask;
+    private int seconds;
+    private int minutes;
+    private int hours;
     
     @FXML
     private Text txtTaskText;
@@ -51,6 +57,7 @@ public class TimerViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         am = AppModel.getInstance();
         txtTaskText.setText(am.getCurrentTask().getName());
+        setCurrentTask();
         
         
     }    
@@ -80,7 +87,10 @@ public class TimerViewController implements Initializable {
     private void handleSubmit(ActionEvent event) {
         if(timeIsActive){
             am.stopTimer();
-            System.exit(0);
+            convertLabelsToInteger();
+            am.getCurrentTask().setTimeUsed(new TaskTime(seconds, minutes, hours));
+            Stage primStage = (Stage) tHour.getScene().getWindow();
+            primStage.close();
         }
         
     }
@@ -107,7 +117,31 @@ public class TimerViewController implements Initializable {
         }
     }
     
+    private void setCurrentTask(){
+        currentTask=am.getCurrentTask();
+        
+        if(currentTask.getTimeUsed()!=null){
+            TaskTime tt = currentTask.getTimeUsed();
+            
+            tSec.setText("sec: " + tt.getSec());
+            tMin.setText("min: " + tt.getMin());
+            tHour.setText("hours: " + tt.getHours());
+        }
+    }
     
+    private void convertLabelsToInteger(){
+        String sec = tSec.getText();
+            sec = sec.replaceAll("[^0-9\\s+]", "");
+            seconds = Integer.parseInt(sec.trim());
+            
+            String min = tMin.getText();
+            min = min.replaceAll("[^0-9\\s+]", "");
+            minutes = Integer.parseInt(min.trim());
+            
+            String hour = tHour.getText();
+            hour = hour.replaceAll("[^0-9\\s+]", "");
+            hours = Integer.parseInt(hour.trim());
+    }
 }
 
 

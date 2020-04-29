@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import timetrackingexam.gui.model.AppModel;
 
 /**
  *
@@ -18,9 +19,13 @@ import javafx.stage.Stage;
 public class MainApp extends Application
 {
     
+    public AppModel am; 
+    
     @Override
     public void start(Stage stage) throws Exception
     {
+        am = AppModel.getInstance();
+        
         Parent root = FXMLLoader.load(getClass().getResource("gui/view/Login.fxml"));
         
         Scene scene = new Scene(root);
@@ -36,6 +41,20 @@ public class MainApp extends Application
     public static void main(String[] args)
     {
         launch(args);
+        
+    }
+
+    /**
+     * Testing stop timer methods
+     * @throws Exception 
+     */
+    
+    @Override
+    public void stop() throws Exception {
+        /*if(am.timerIsRunning()){
+            am.stopTimer();
+        }*/
+        super.stop();
     }
     
 }

@@ -18,10 +18,10 @@ import javafx.scene.control.Label;
 public class TimerRunnable implements Runnable{
 
     private final int DELAY = 1;    
-    private final Label T_SEC;
-    private final Label T_MIN;
-    private final Label T_HOUR;
-    
+    private Label tSec;
+    private Label tMin;
+    private Label tHours
+;    
     private boolean active;
     private ExecutorService executor;
     private static int seconds = 0;
@@ -29,9 +29,9 @@ public class TimerRunnable implements Runnable{
     private static int hours = 0;
 
     public TimerRunnable(Label lSec, Label lMin, Label lHour) {
-        this.T_SEC = lSec;
-        this.T_MIN = lMin;
-        this.T_HOUR = lHour;
+        this.tSec = lSec;
+        this.tMin = lMin;
+        this.tHours = lHour;
     }
     
     /**
@@ -43,9 +43,9 @@ public class TimerRunnable implements Runnable{
         while (active) {
             Platform.runLater(() -> {
                 seconds++;
-                T_SEC.setText("Sec: " +seconds);
-                T_MIN.setText("Min: " +minutes);
-                T_HOUR.setText("Hours: " +hours);
+                tSec.setText("Sec: " +seconds);
+                tMin.setText("Min: " +minutes);
+                tHours.setText("Hours: " +hours);
                 });
             
                 try {
@@ -75,6 +75,11 @@ public class TimerRunnable implements Runnable{
      * submits the thread to be executed
      */
     public void start() {
+        
+        if(true){
+            convertLabelsToInt();
+        }
+        
         executor = Executors.newSingleThreadExecutor();
         executor.submit(this);
         active = true;
@@ -89,11 +94,27 @@ public class TimerRunnable implements Runnable{
         active = false;
         System.out.println("Thread stopped");
         
-        T_SEC.setText("Sec: " +seconds);
-        T_MIN.setText("Min: " +minutes);
-        T_HOUR.setText("Hours: " +hours);
+        tSec.setText("Sec: " +seconds);
+        tMin.setText("Min: " +minutes);
+        tHours.setText("Hours: " +hours);
         
     }
+    
+    private void convertLabelsToInt(){
+            String sec = tSec.getText();
+            sec = sec.replaceAll("[^0-9\\s+]", "");
+            seconds = Integer.parseInt(sec.trim());
+            
+            String min = tMin.getText();
+            min = min.replaceAll("[^0-9\\s+]", "");
+            minutes = Integer.parseInt(min.trim());
+            
+            String hour = tHours.getText();
+            hour = hour.replaceAll("[^0-9\\s+]", "");
+            hours = Integer.parseInt(hour.trim());
+    }
+
+    
     
     
     

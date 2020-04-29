@@ -126,6 +126,10 @@ public class AppModel
         tm.stopTimer();
     }
     
+    public boolean timerIsRunning(){
+        return tm.isRunning();
+    }
+    
     public void changePassword(User user) {
         userManager.changePassword(user);
     }

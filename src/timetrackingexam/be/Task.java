@@ -16,6 +16,7 @@ public class Task {
     private String description;
     private Project project;
     private User user;
+    private TaskTime timeUsed;
     private int quartersUsed;
 
     protected Task(int id, String name, Project project, User user) {
@@ -80,6 +81,16 @@ public class Task {
         
         return totalQuarters;
     }
+
+    public TaskTime getTimeUsed() {
+        return timeUsed;
+    }
+
+    public void setTimeUsed(TaskTime timeUsed) {
+        this.timeUsed = timeUsed;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

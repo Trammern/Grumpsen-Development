@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskTime;
 import timetrackingexam.gui.model.AppModel;
 
 /**
@@ -41,6 +42,8 @@ public class MockProjectManager {
         Task t6 = new Task(6, "Task6");
         
         Task t7 = new Task("Create something", "Description of something");
+        
+        t1.setTimeUsed(new TaskTime(45, 4, 1));
         
         p1.addTask(t1);
         p1.addTask(t2);
