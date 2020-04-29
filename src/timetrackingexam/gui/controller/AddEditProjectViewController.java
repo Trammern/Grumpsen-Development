@@ -23,6 +23,7 @@ import timetrackingexam.gui.model.AppModel;
 public class AddEditProjectViewController implements Initializable {
 
     private AppModel am;
+    private Project updatedProject;
     
     @FXML
     private JFXTextField fldName;
@@ -39,21 +40,44 @@ public class AddEditProjectViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         am = AppModel.getInstance();
+        
+       if(am.getCurrentProject()!=null){
+           updatedProject = am.getCurrentProject();
+           fldName.setText(updatedProject.getName()); 
+           fldClient.setText("NOT IMPLEMENTED");
+           fldRate.setText("NOT IMPLEMENTED");
+           fldDescription.setText("NOT IMPLEMENTED");
+       }
+        
     }    
 
     @FXML
     private void CreateProject(ActionEvent event) {
 
+        if(am.getCurrentProject()!=null){
+            updateProject();
+        }
+        else{
+            createProject();
+        }
+            
+    }
+    
+    private void createProject(){
         
         Project newProject = new Project(0, fldName.getText());
-            if(am.createNewProject(newProject)){
+        
+        if(am.createNewProject(newProject)){
                 System.out.println("project added");
                 Stage primStage = (Stage) fldName.getScene().getWindow();
                 primStage.close();
             }
-        
-        
-        
+    }
+    
+    private void updateProject(){
+        am.getCurrentProject().setName(fldName.getText());
+        Stage primStage = (Stage) fldName.getScene().getWindow();
+        primStage.close();
     }
     
 }

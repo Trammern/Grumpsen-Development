@@ -18,6 +18,7 @@ public class Project {
     
     private int id;
     private String name;
+    private String description;
     private double rate;
     private Client client;
     private ObservableList<Task> tasks;
@@ -118,6 +119,10 @@ public class Project {
     @Override
     public String toString() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
     
     

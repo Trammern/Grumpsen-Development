@@ -63,15 +63,21 @@ public class ProjectManagementViewController implements Initializable, ICommonMe
        lstProjects.setItems(getAllProjects());
        currentUser = am.getCurrentUser();
        
+       
+       
     }    
 
     @FXML
     private void newProject(ActionEvent event) {
+        am.setCurrentProject(null);
         openAddEditWindow();
     }
 
     @FXML
     private void editProject(ActionEvent event) {
+        if(am.getCurrentProject()!=null){
+            openAddEditWindow();
+        }
     }
 
     @FXML

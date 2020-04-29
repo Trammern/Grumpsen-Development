@@ -16,7 +16,7 @@ public class Task {
     private String description;
     private Project project;
     private User user;
-    private double spentTime;
+    private int quartersUsed;
 
     protected Task(int id, String name, Project project, User user) {
         this.id = id;
@@ -25,7 +25,7 @@ public class Task {
         this.user = user;        
     }
     /**
-     * Temporary Constructor
+     * Temporary Constructor for testing purposes
      * @param id
      * @param name 
      */
@@ -39,10 +39,6 @@ public class Task {
         this.name = name;
         this.description = description;
     }
-    
-    
-    
-    
 
     public String getName() {
         return name;
@@ -68,14 +64,6 @@ public class Task {
         this.user = user;
     }
 
-    public double getSpentTime() {
-        return spentTime;
-    }
-
-    public void setSpentTime(double spentTime) {
-        this.spentTime = spentTime;
-    }
-
     public String getDescription()
     {
         return description;
@@ -86,7 +74,12 @@ public class Task {
         this.description = description;
     }
     
-    
+    public int ConvertToQuarters(int min, int hours){
+        int totalQuarters;
+        totalQuarters = min/15 + hours * 4;
+        
+        return totalQuarters;
+    }
 
     @Override
     public boolean equals(Object obj) {

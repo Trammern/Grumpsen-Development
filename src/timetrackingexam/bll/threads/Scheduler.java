@@ -46,7 +46,7 @@ public class Scheduler implements Runnable {
                 QUEUE.put(currentTimer);
                 System.out.println("Executor was used");
             } catch (InterruptedException iEx) {
-                System.out.println("Slideshow was stopped");
+                System.out.println("Timer was stopped");
             }
         }
     }
