@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -50,6 +51,10 @@ public class AdminProjectOverviewController implements Initializable {
     private MenuItem menuItemClose;
     @FXML
     private MenuItem menuItemLogout;
+    @FXML
+    private Menu menuUser;
+    @FXML
+    private MenuItem menuItemPassword;
 
     /**
      * Initializes the controller class.
@@ -58,6 +63,7 @@ public class AdminProjectOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
+       menuUser.setText(currentUser.getEmail());
        projectUsers = selectedProject.getUsers();
        tblEmployeeTable.setItems(projectUsers);
        initColumns();
@@ -104,6 +110,12 @@ public class AdminProjectOverviewController implements Initializable {
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.logout(primStage);
+    }
+
+    @FXML
+    private void openPasswordView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.changePasswordView(primStage);
     }
     
 }

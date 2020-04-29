@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
@@ -64,6 +65,10 @@ public class ProjectsOverviewController implements Initializable {
     private JFXButton btnEditTask;
     @FXML
     private JFXButton btnDeleteTask;
+    @FXML
+    private Menu menuUser;
+    @FXML
+    private MenuItem menuItemPassword;
 
     /**
      * Initializes the controller class.
@@ -72,6 +77,7 @@ public class ProjectsOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         am = AppModel.getInstance();
         currentUser = am.getCurrentUser();
+        menuUser.setText(currentUser.getEmail());
         cbbProjectSelect.setItems(am.getProjects());
         selectedProject = am.getProjects().get(0);
         am.setCurrentProject(selectedProject);
@@ -183,6 +189,12 @@ public class ProjectsOverviewController implements Initializable {
         {
             System.out.println("Please choose the task you want to delete");
         }
+    }
+
+    @FXML
+    private void openPasswordView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.changePasswordView(primStage);
     }
     
     

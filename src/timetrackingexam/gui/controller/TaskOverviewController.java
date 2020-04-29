@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
@@ -54,6 +55,10 @@ public class TaskOverviewController implements Initializable {
     private MenuItem menuItemClose;
     @FXML
     private MenuItem menuItemLogout;
+    @FXML
+    private Menu menuUser;
+    @FXML
+    private MenuItem menuItemPassword;
 
     /**
      * Initializes the controller class.
@@ -62,6 +67,7 @@ public class TaskOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         am = AppModel.getInstance();
         currentUser = am.getCurrentUser();
+        menuUser.setText(currentUser.getEmail());
         txtCurrentProject.setText(am.getCurrentProject().getName());
         txtCurrentTask.setText(txtCurrentTask.getText() + " " + am.getCurrentTask());
     }    
@@ -114,6 +120,12 @@ public class TaskOverviewController implements Initializable {
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.logout(primStage);
+    }
+
+    @FXML
+    private void openPasswordView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.changePasswordView(primStage);
     }
     
 }
