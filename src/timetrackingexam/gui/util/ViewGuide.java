@@ -20,6 +20,8 @@ public class ViewGuide {
     
     public static final String LOGIN_VIEW_PATH = "/timetrackingexam/gui/view/Login.fxml";
     public static final String LOGIN_VIEW_TITLE = "Login as user";
+    public static final String PASSWORD_VIEW_PATH = "/timetrackingexam/gui/view/ChangePasswordView.fxml";
+    public static final String PASSWORD_VIEW_TITLE = "Change your password";
     
     public static void openView(String viewPath, String title, Stage primStage, boolean closeCurrentView, boolean disableInputToOtherViews) {
         try {
@@ -47,6 +49,10 @@ public class ViewGuide {
     
     public static void logout(Stage primStage) {
         openView(LOGIN_VIEW_PATH, LOGIN_VIEW_TITLE, primStage, true, true);
+    }
+    
+    public static void changePasswordView(Stage primStage) {
+        openView(PASSWORD_VIEW_PATH, PASSWORD_VIEW_TITLE, primStage, false, true);
     }
     
 }

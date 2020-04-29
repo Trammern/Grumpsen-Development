@@ -66,8 +66,10 @@ public class ChangePasswordViewController implements Initializable {
         }
         String verifiedNewPassword = LoginTools.getVerifiedNewPassword(user, oldPassword, newPassword);
         if (verifiedNewPassword != null) {
-            am.changePassword(user);
-            am.getAllUsers(); //necessary?
+            user.setPassword(newPassword);
+            //am.getAllUsers(); //necessary?
+            Stage stage = (Stage) btnCancel.getScene().getWindow();
+            stage.close();
         }
         else {
             AlertBox.errorAlert("The password you have entered in the first field is incorrect");

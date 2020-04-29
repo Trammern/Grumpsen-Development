@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
@@ -52,6 +53,10 @@ public class ProjectManagementViewController implements Initializable {
     private MenuItem menuItemLogout;
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private MenuItem menuItemPassword;
+    @FXML
+    private Menu menuUser;
 
     /**
      * Initializes the controller class.
@@ -62,9 +67,8 @@ public class ProjectManagementViewController implements Initializable {
        am = AppModel.getInstance();
        lstProjects.setItems(getAllProjects());
        currentUser = am.getCurrentUser();
-       
-       
-       
+       menuUser.setText(currentUser.getEmail());       
+              
     }    
 
     @FXML
@@ -132,6 +136,12 @@ public class ProjectManagementViewController implements Initializable {
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.logout(primStage);
+    }
+
+    @FXML
+    private void openPasswordView(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.changePasswordView(primStage);
     }
 
     
