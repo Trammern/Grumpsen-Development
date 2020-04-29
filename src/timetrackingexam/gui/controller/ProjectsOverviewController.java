@@ -5,6 +5,7 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
@@ -57,6 +58,12 @@ public class ProjectsOverviewController implements Initializable {
     private MenuItem menuItemLogout;
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private JFXButton btnAddTask;
+    @FXML
+    private JFXButton btnEditTask;
+    @FXML
+    private JFXButton btnDeleteTask;
 
     /**
      * Initializes the controller class.
@@ -73,19 +80,8 @@ public class ProjectsOverviewController implements Initializable {
 
     @FXML
     private void addTask(ActionEvent event) {
-        try
-        {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AddTask.fxml"));
-            Parent root1 = (Parent) fxml.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.initOwner((Stage) menuBar.getScene().getWindow());
-            stage.showAndWait();
-            stage.setTitle("New Task");
-        } catch (IOException ex)
-        {
-            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        am.setCurrentTask(null);
+        openAddEdit();
     }
 
     @FXML
@@ -147,6 +143,46 @@ public class ProjectsOverviewController implements Initializable {
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.logout(primStage);
+    }
+    
+    private void openAddEdit()
+    {
+        try
+        {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AddTask.fxml"));
+            Parent root1 = (Parent) fxml.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.showAndWait();
+            stage.setTitle("New Task");
+        } catch (IOException ex)
+        {
+            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void handleEditTask(ActionEvent event)
+    {
+        if (am.getCurrentTask() != null)
+        {
+            openAddEdit();
+        }
+    }
+
+    @FXML
+    private void handleDeleteTask(ActionEvent event)
+    {
+        Task selectedTask = lstTaskList.getSelectionModel().getSelectedItem();
+        Project currentProject = am.getCurrentProject();
+        if (selectedTask != null)
+        {
+            am.removeTask(selectedTask, currentProject);
+        }
+        else
+        {
+            System.out.println("Please choose the task you want to delete");
+        }
     }
     
     

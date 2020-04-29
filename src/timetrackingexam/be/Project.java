@@ -97,6 +97,11 @@ public class Project {
     public boolean addTask(Task t){
         return tasks.add(t);
     }
+    
+    public boolean removeTask(Task selectedTask)
+    {
+        return tasks.remove(selectedTask);
+    }
 
     @Override
     public boolean equals(Object obj) {

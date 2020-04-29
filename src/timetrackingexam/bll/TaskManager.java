@@ -28,9 +28,9 @@ public class TaskManager implements ITaskManager
     
     
     @Override
-    public boolean deleteTask()
+    public boolean deleteTask(Task selectedTask, Project currentProject)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return mockProjectManager.deleteTask(selectedTask, currentProject);
     }
 
     @Override
