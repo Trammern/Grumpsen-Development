@@ -28,6 +28,7 @@ public class AppModel
     private User currentUser;
     private Project currentProject;
     private Task currentTask;
+    private User selectedUser;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
@@ -135,6 +136,28 @@ public class AppModel
     public void changePassword(User user) {
         userManager.changePassword(user);
     }
+
+    public User getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(User selectedUser) {
+        this.selectedUser = selectedUser;
+    }
+    
+    public boolean checkIfEmailIsUsed(String email) {
+        return userManager.checkIfEmailIsUsed(email);
+    }
+    
+    public void addUser(User user) {
+        userManager.addUser(user);
+    }
+    
+    public void updateUser(User user) {
+        userManager.addUser(user);
+    }
+    
+    
     
 
     

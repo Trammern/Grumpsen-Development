@@ -46,4 +46,12 @@ public class MockUserDAO implements IUserDal
         //todo
     }
     
+    public void addUser(User user) {
+        users.add(user);
+    }
+    
+    public void updateUser(User user) {
+        
+    }
+    
 }

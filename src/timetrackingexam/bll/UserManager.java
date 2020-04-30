@@ -33,4 +33,25 @@ public class UserManager
         userDal.changePassword(user);
     }
     
+    public boolean checkIfEmailIsUsed(String email) {
+        
+        boolean used = false;
+        
+        for (User user : getAllUsers()) {
+            if (user.getEmail().equals(email)) {
+                used = true;
+            }
+        }
+        
+        return used;
+    }
+    
+    public void addUser(User user) {
+        userDal.addUser(user);
+    }
+    
+    public void updateUser(User user) {
+        userDal.updateUser(user);
+    }
+    
 }

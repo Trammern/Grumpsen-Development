@@ -16,5 +16,7 @@ public interface IUserDal {
     
     public List<User> getAllUsers();
     public void changePassword(User user);
+    public void addUser(User user);
+    public void updateUser(User user);
     
 }
