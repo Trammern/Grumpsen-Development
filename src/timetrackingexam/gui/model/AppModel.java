@@ -151,10 +151,12 @@ public class AppModel
     
     public void addUser(User user) {
         userManager.addUser(user);
+        getAllUsers();
     }
     
     public void updateUser(User user) {
         userManager.addUser(user);
+        getAllUsers();
     }
     
     

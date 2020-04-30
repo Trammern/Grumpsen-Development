@@ -51,7 +51,11 @@ public class MockUserDAO implements IUserDal
     }
     
     public void updateUser(User user) {
-        
+        for (User currentUser : users) {
+            if (currentUser.equals(user)) {
+                currentUser = user;
+            }
+        }
     }
     
 }
