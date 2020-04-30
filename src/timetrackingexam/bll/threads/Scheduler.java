@@ -62,10 +62,9 @@ public class Scheduler implements Runnable {
      * Clears the queue and stops the thread
      */
     public synchronized void stop() {
-        if(executor.isShutdown()){
             QUEUE.clear();
             currentTimer.stop();
             executor.shutdownNow();
-        }
+        
     }
 }
