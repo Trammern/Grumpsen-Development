@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.gui.model.AppModel;
 
@@ -46,9 +47,9 @@ public class AddEditProjectViewController implements Initializable {
        if(am.getCurrentProject()!=null){
            updatedProject = am.getCurrentProject();
            fldName.setText(updatedProject.getName()); 
-           fldClient.setText("NOT IMPLEMENTED");
-           fldRate.setText("NOT IMPLEMENTED");
-           fldDescription.setText("NOT IMPLEMENTED");
+           fldClient.setText("Not Implemented");
+           fldRate.setText(updatedProject.getRate()+"");
+           fldDescription.setText(updatedProject.getDescription());
        }
        
         
@@ -60,16 +61,26 @@ public class AddEditProjectViewController implements Initializable {
 
         if(am.getCurrentProject()!=null){
             updateProject();
+            am.getProjects();
         }
         else{
             createProject();
+            am.getProjects();
         }
             
     }
     
     private void createProject(){
         
-        Project newProject = new Project(0, fldName.getText());
+        Project newProject = new Project(4, fldName.getText());
+        
+        Double rate = Double.parseDouble(fldRate.getText());
+        Client c = null;
+        String description = fldDescription.getText();
+        
+        newProject.setRate(rate);
+        newProject.setClient(c);
+        newProject.setDescription(description);
         
         if(am.createNewProject(newProject)){
                 System.out.println("project added");
@@ -80,6 +91,9 @@ public class AddEditProjectViewController implements Initializable {
     
     private void updateProject(){
         updatedProject.setName(fldName.getText());
+        updatedProject.setRate(Double.parseDouble(fldRate.getText()));
+        updatedProject.setClient(null);
+        updatedProject.setDescription(fldDescription.getText());
         am.updateProject(updatedProject);
         Stage primStage = (Stage) fldName.getScene().getWindow();
         primStage.close();

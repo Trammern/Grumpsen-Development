@@ -5,7 +5,7 @@
  */
 package timetrackingexam.bll;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import timetrackingexam.bll.threads.Scheduler;
 import timetrackingexam.bll.threads.TimerRunnable;
 
@@ -17,7 +17,7 @@ public class ThreadManager {
     
     private Scheduler scheduler;
     
-    public void startTimer(Label sec, Label min, Label hours){
+    public void startTimer(TextField sec, TextField min, TextField hours){
         
         scheduler = new Scheduler();
         TimerRunnable tr = new TimerRunnable(sec, min, hours);

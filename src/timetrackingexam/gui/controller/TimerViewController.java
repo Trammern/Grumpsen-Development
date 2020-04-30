@@ -6,12 +6,14 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -39,13 +41,17 @@ public class TimerViewController implements Initializable {
     @FXML
     private JFXButton btnTimeButton;
     @FXML
-    private Label tHour;
-    @FXML
-    private Label tMin;
-    @FXML
-    private Label tSec;
-    @FXML
     private JFXButton btnSubmit;
+    @FXML
+    private Label txtSec;
+    @FXML
+    private Label txtMin;
+    @FXML
+    private TextField fldSec;
+    @FXML
+    private TextField fldMin;
+    @FXML
+    private TextField fldHour;
 
    
     /**
@@ -69,7 +75,7 @@ public class TimerViewController implements Initializable {
     private void btnStopStart(ActionEvent event){
         if(timeIsActive){
             toggleBtnProperties();
-            am.startTimer(tSec, tMin, tHour);
+            am.startTimer(fldSec, fldMin, fldHour);
         }
         else{
             toggleBtnProperties();
@@ -89,7 +95,7 @@ public class TimerViewController implements Initializable {
             am.stopTimer();
             convertLabelsToInteger();
             am.getCurrentTask().setTimeUsed(new TaskTime(seconds, minutes, hours));
-            Stage primStage = (Stage) tHour.getScene().getWindow();
+            Stage primStage = (Stage) fldHour.getScene().getWindow();
             primStage.close();
         }
         
@@ -123,22 +129,22 @@ public class TimerViewController implements Initializable {
         if(currentTask.getTimeUsed()!=null){
             TaskTime tt = currentTask.getTimeUsed();
             
-            tSec.setText("sec: " + tt.getSec());
-            tMin.setText("min: " + tt.getMin());
-            tHour.setText("hours: " + tt.getHours());
+            fldSec.setText("" + tt.getSec());
+            fldMin.setText("" + tt.getMin());
+            fldHour.setText("" + tt.getHours());
         }
     }
     
     private void convertLabelsToInteger(){
-        String sec = tSec.getText();
+        String sec = fldSec.getText();
             sec = sec.replaceAll("[^0-9\\s+]", "");
             seconds = Integer.parseInt(sec.trim());
             
-            String min = tMin.getText();
+            String min = fldMin.getText();
             min = min.replaceAll("[^0-9\\s+]", "");
             minutes = Integer.parseInt(min.trim());
             
-            String hour = tHour.getText();
+            String hour = fldHour.getText();
             hour = hour.replaceAll("[^0-9\\s+]", "");
             hours = Integer.parseInt(hour.trim());
     }

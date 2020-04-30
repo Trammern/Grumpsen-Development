@@ -64,8 +64,12 @@ public class AdminProjectOverviewController implements Initializable {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
        menuUser.setText(currentUser.getEmail());
-       projectUsers = selectedProject.getUsers();
+       
+       //DER ER ET ELLER ANDET GALT MED DENNE HER LINJE
+       //projectUsers = selectedProject.getUsers();
+       
        tblEmployeeTable.setItems(projectUsers);
+       
        initColumns();
     }    
     

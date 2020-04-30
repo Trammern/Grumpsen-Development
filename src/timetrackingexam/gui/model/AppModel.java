@@ -5,9 +5,11 @@
  */
 package timetrackingexam.gui.model;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
@@ -114,7 +116,7 @@ public class AppModel
         return taskManager.deleteTask(selectedTask, currentProject);
     }
     
-    public void startTimer(Label sec, Label min, Label hours){
+    public void startTimer(TextField sec, TextField min, TextField hours){
         tm.startTimer(sec, min, hours);
     }
     
