@@ -174,7 +174,7 @@ public class AppModel
     }
     
     public void updateUser(User user) {
-        userManager.addUser(user);
+        userManager.updateUser(user);
         getAllUsers();
     }
 
