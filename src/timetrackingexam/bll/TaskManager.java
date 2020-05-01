@@ -33,22 +33,23 @@ public class TaskManager implements ITaskManager
         return mockProjectManager.deleteTask(selectedTask, currentProject);
     }
 
-    @Override
-    public boolean updateTask()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List<Task> readTask()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return mockProjectManager.getTasks();
     }
 
     @Override
     public boolean createTask(Task t, Project p)
     {
         return mockProjectManager.createTask(t,p);
+    }
+
+    @Override
+    public boolean updateTask(Task updateTask, Project p)
+    {
+        return mockProjectManager.updateTask(updateTask,p);
     }
     
     

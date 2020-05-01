@@ -72,6 +72,14 @@ public class AppModel
         projects.addAll(projectManager.getAllProjects());        
         return projects;
     }
+    
+    public ObservableList<Task> getTasks()
+    {
+        tasks.clear();
+        tasks.addAll(taskManager.readTask());
+        return tasks;
+        
+    }
 
     public Project getCurrentProject() {
         return currentProject;
@@ -108,6 +116,16 @@ public class AppModel
         return taskManager.createTask(t,p);
     }
     
+    public boolean updateTask(Task updateTask, Project p)
+    {
+        if(taskManager.updateTask(updateTask, p))
+        {
+            getTasks();
+            return true;
+        }
+        return false;  
+    }
+    
     public boolean removeTask(Task selectedTask, Project currentProject)
     {
         tasks.remove(selectedTask);
@@ -133,6 +151,8 @@ public class AppModel
     public void changePassword(User user) {
         userManager.changePassword(user);
     }
+
+    
     
 
     
