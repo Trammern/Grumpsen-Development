@@ -69,6 +69,7 @@ public class Scheduler implements Runnable {
             QUEUE.remove(runnable);
         });
             executor.shutdownNow();
+            currentTimer.stop();
         
     }
 }
