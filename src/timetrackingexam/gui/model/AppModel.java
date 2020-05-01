@@ -5,9 +5,11 @@
  */
 package timetrackingexam.gui.model;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
@@ -26,6 +28,7 @@ public class AppModel
     private User currentUser;
     private Project currentProject;
     private Task currentTask;
+    private User selectedUser;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
@@ -132,7 +135,7 @@ public class AppModel
         return taskManager.deleteTask(selectedTask, currentProject);
     }
     
-    public void startTimer(Label sec, Label min, Label hours){
+    public void startTimer(TextField sec, TextField min, TextField hours){
         tm.startTimer(sec, min, hours);
     }
     
@@ -152,6 +155,33 @@ public class AppModel
         userManager.changePassword(user);
     }
 
+
+    public User getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(User selectedUser) {
+        this.selectedUser = selectedUser;
+    }
+    
+    public boolean checkIfEmailIsUsed(String email) {
+        return userManager.checkIfEmailIsUsed(email);
+    }
+    
+    public void addUser(User user) {
+        userManager.addUser(user);
+        getAllUsers();
+    }
+    
+    public void updateUser(User user) {
+        userManager.addUser(user);
+        getAllUsers();
+    }
+
+    public ObservableList<User> GetProjectEmployees(Project p) {
+        return userManager.getProjectEmployees(p);
+    }
+    
     
     
 

@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * This is the class responsible for counting the time
@@ -18,9 +18,9 @@ import javafx.scene.control.Label;
 public class TimerRunnable implements Runnable{
 
     private final int DELAY = 1;    
-    private Label tSec;
-    private Label tMin;
-    private Label tHours
+    private TextField tSec;
+    private TextField tMin;
+    private TextField tHours
 ;    
     private boolean active;
     private ExecutorService executor;
@@ -28,7 +28,7 @@ public class TimerRunnable implements Runnable{
     private static int minutes = 0;
     private static int hours = 0;
 
-    public TimerRunnable(Label lSec, Label lMin, Label lHour) {
+    public TimerRunnable(TextField lSec, TextField lMin, TextField lHour) {
         this.tSec = lSec;
         this.tMin = lMin;
         this.tHours = lHour;
@@ -43,9 +43,14 @@ public class TimerRunnable implements Runnable{
         while (active) {
             Platform.runLater(() -> {
                 seconds++;
-                tSec.setText("Sec: " +seconds);
-                tMin.setText("Min: " +minutes);
-                tHours.setText("Hours: " +hours);
+                
+                tSec.setEditable(false);
+                tMin.setEditable(false);
+                tHours.setEditable(false);
+                
+                tSec.setText(seconds+"");
+                tMin.setText(minutes+"");
+                tHours.setText(hours+"");
                 });
             
                 try {
@@ -54,20 +59,22 @@ public class TimerRunnable implements Runnable{
                 catch (InterruptedException ex) {
                 }
 
-                if (seconds == 60) {
-                    seconds = 0;
+                if (seconds >= 60) {
+                    seconds = seconds - 60;
                     minutes++;
                 }
 
-                if (minutes == 60) {
-                    seconds = 0;
-                    minutes = 0;
+                if (minutes >= 60) {
+                    seconds = seconds - 60;
+                    minutes = minutes - 60;
                     hours++;
                 }
         }
     }
     
-    
+    public boolean isActive(){
+        return active;
+    }
 
     
     
@@ -94,9 +101,13 @@ public class TimerRunnable implements Runnable{
         active = false;
         System.out.println("Thread stopped");
         
-        tSec.setText("Sec: " +seconds);
-        tMin.setText("Min: " +minutes);
-        tHours.setText("Hours: " +hours);
+        tSec.setEditable(true);
+        tMin.setEditable(true);
+        tHours.setEditable(true);
+        
+        tSec.setText("" +seconds);
+        tMin.setText("" +minutes);
+        tHours.setText("" +hours);
         
     }
     

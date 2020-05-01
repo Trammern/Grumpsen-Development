@@ -6,6 +6,8 @@
 package timetrackingexam.dal.facade;
 
 import java.util.List;
+import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 
 /**
@@ -16,5 +18,8 @@ public interface IUserDal {
     
     public List<User> getAllUsers();
     public void changePassword(User user);
+    public void addUser(User user);
+    public void updateUser(User user);
+    public ObservableList<User> getProjectEmployees(Project p);
     
 }

@@ -6,6 +6,7 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,6 +58,8 @@ public class ProjectManagementViewController implements Initializable {
     private MenuItem menuItemPassword;
     @FXML
     private Menu menuUser;
+    @FXML
+    private JFXTextArea fldDescription;
 
     /**
      * Initializes the controller class.
@@ -107,6 +110,7 @@ public class ProjectManagementViewController implements Initializable {
         selectedProject = lstProjects.getSelectionModel().getSelectedItem();
         am.setCurrentProject(selectedProject);
         txtSelectedProject.setText(selectedProject.toString());
+        fldDescription.setText(selectedProject.getDescription());
     }
 
     private ObservableList<Project> getAllProjects(){

@@ -47,6 +47,9 @@ public class Scheduler implements Runnable {
                 System.out.println("Executor was used");
             } catch (InterruptedException iEx) {
                 System.out.println("Timer was stopped");
+                if(!timer.isActive()){
+                    executor.shutdownNow();
+                }
             }
         }
     }
@@ -62,10 +65,10 @@ public class Scheduler implements Runnable {
      * Clears the queue and stops the thread
      */
     public synchronized void stop() {
-        if(executor.isShutdown()){
-            QUEUE.clear();
-            currentTimer.stop();
+        QUEUE.forEach((runnable) -> {
+            QUEUE.remove(runnable);
+        });
             executor.shutdownNow();
-        }
+        
     }
 }

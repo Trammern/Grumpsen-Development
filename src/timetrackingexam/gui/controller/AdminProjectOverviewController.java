@@ -5,6 +5,7 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.AlertBox;
 import timetrackingexam.gui.util.ViewGuide;
 
 /**
@@ -36,6 +38,7 @@ public class AdminProjectOverviewController implements Initializable {
     private User currentUser;
     private Project selectedProject;
     private ObservableList<User> projectUsers;
+    private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/AddEditUserView.fxml";    
     
     @FXML
     private TableView<User> tblEmployeeTable;
@@ -55,6 +58,10 @@ public class AdminProjectOverviewController implements Initializable {
     private Menu menuUser;
     @FXML
     private MenuItem menuItemPassword;
+    @FXML
+    private JFXButton btnNewUser;
+    @FXML
+    private JFXButton btnEditUser;
 
     /**
      * Initializes the controller class.
@@ -64,8 +71,11 @@ public class AdminProjectOverviewController implements Initializable {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
        menuUser.setText(currentUser.getEmail());
-       projectUsers = selectedProject.getUsers();
-       tblEmployeeTable.setItems(projectUsers);
+       setUserTable();
+       //DER ER ET ELLER ANDET GALT MED DENNE HER LINJE
+       //projectUsers = selectedProject.getUsers();
+       
+       
        initColumns();
     }    
     
@@ -116,6 +126,30 @@ public class AdminProjectOverviewController implements Initializable {
     private void openPasswordView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.changePasswordView(primStage);
+    }
+    
+    private void setUserTable(){
+        tblEmployeeTable.setItems(am.GetProjectEmployees(am.getCurrentProject()));
+    }
+
+    @FXML
+    private void newUser(ActionEvent event) {
+        am.setSelectedUser(null); 
+        Stage primStage = (Stage) btnEditUser.getScene().getWindow();
+        ViewGuide.openView(ADD_EDIT_USER_VIEW_PATH, "New user", primStage, false, true);
+        am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    private void editUser(ActionEvent event) {
+        am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem());
+        Stage primStage = (Stage) btnEditUser.getScene().getWindow();
+        if (am.getSelectedUser()!=null) {
+            ViewGuide.openView(ADD_EDIT_USER_VIEW_PATH, "Edit user", primStage, false, true);
+        }
+        else {
+            AlertBox.errorAlert("Select a user to edit");
+        }
     }
     
 }
