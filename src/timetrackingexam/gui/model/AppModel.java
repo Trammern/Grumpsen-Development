@@ -53,6 +53,12 @@ public class AppModel
         return instance;
     }
 
+    public void fetch(){
+        getAllUsers();
+        getProjects();
+        getTasks();
+    }
+    
     public ObservableList<User> getAllUsers()
     {
         users.clear();
@@ -174,7 +180,7 @@ public class AppModel
     }
     
     public void updateUser(User user) {
-        userManager.addUser(user);
+        userManager.updateUser(user);
         getAllUsers();
     }
 

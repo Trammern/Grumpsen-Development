@@ -18,7 +18,7 @@ public class User
 {
     private String firstName;
     private String lastName;
-    private String email;
+    private final String email;
     private String password;
     private Role role;
     private List<Project> projects;
@@ -60,11 +60,6 @@ public class User
     public String getEmail()
     {
         return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
     }
 
     public String getPassword()

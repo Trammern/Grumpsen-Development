@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
@@ -33,9 +34,7 @@ public class AddEditUserViewController implements Initializable {
     private User selectedUser;
     
     @FXML
-    private TextField txtEmail;
-    @FXML
-    private TextField txtPassword;
+    private TextField txtEmail;    
     @FXML
     private TextField txtFirstName;
     @FXML
@@ -46,6 +45,8 @@ public class AddEditUserViewController implements Initializable {
     private JFXButton btnSaveUser;
     @FXML
     private JFXButton btnCancel;
+    @FXML
+    private PasswordField txtPassword;
 
     /**
      * Initializes the controller class.
@@ -63,7 +64,10 @@ public class AddEditUserViewController implements Initializable {
 
     private void setUserInformation(User user) {
         txtEmail.setText(user.getEmail());
-        txtPassword.setText(user.getPassword());
+        txtEmail.setDisable(true);
+        txtEmail.setStyle("-fx-background-color: gray");
+        txtPassword.setDisable(true);
+        txtPassword.setStyle("-fx-background-color: gray");
         txtFirstName.setText(user.getFirstName());
         txtLastName.setText(user.getLastName());
         cbbRole.getSelectionModel().select(user.getRole());
@@ -72,7 +76,7 @@ public class AddEditUserViewController implements Initializable {
     @FXML
     private void saveUser(ActionEvent event) {
         String email = txtEmail.getText();
-        String password = txtPassword.getText();
+        String password = (selectedUser!=null ) ? selectedUser.getPassword() : txtPassword.getText();
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         User.Role role = cbbRole.getSelectionModel().getSelectedItem();
