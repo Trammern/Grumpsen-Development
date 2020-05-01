@@ -43,7 +43,12 @@ public class MockProjectManager {
         
         Task t7 = new Task("Create something", "Description of something");
         
-        t1.setTimeUsed(new TaskTime(45, 4, 1));
+        TaskTime tt1 = new TaskTime(45, 4, 1);
+        TaskTime tt2 = new TaskTime(5, 55, 5);
+        TaskTime tt3 = new TaskTime(14, 1, 12);
+        t1.setTimeUsed(tt1);
+        t2.setTimeUsed(tt2);
+        t3.setTimeUsed(tt3);
         
         p1.addTask(t1);
         p1.addTask(t2);
