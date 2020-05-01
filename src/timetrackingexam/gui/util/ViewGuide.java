@@ -39,7 +39,7 @@ public class ViewGuide {
                 if (disableInputToOtherViews) {
                     stage.initModality(Modality.WINDOW_MODAL);
                 }
-                stage.show();
+                stage.showAndWait();                
             }
             
         } catch (IOException e) {
