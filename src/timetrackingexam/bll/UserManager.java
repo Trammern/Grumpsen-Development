@@ -6,6 +6,8 @@
 package timetrackingexam.bll;
 
 import java.util.List;
+import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.facade.IUserDal;
 import timetrackingexam.dal.mockdata.MockUserDAO;
@@ -52,6 +54,10 @@ public class UserManager
     
     public void updateUser(User user) {
         userDal.updateUser(user);
+    }
+
+    public ObservableList<User> getProjectEmployees(Project p) {
+        return userDal.getProjectEmployees(p);
     }
     
 }

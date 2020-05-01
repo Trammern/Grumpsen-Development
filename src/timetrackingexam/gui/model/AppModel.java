@@ -158,6 +158,10 @@ public class AppModel
         userManager.addUser(user);
         getAllUsers();
     }
+
+    public ObservableList<User> GetProjectEmployees(Project p) {
+        return userManager.getProjectEmployees(p);
+    }
     
     
     

@@ -64,11 +64,10 @@ public class AdminProjectOverviewController implements Initializable {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
        menuUser.setText(currentUser.getEmail());
-       
+       setUserTable();
        //DER ER ET ELLER ANDET GALT MED DENNE HER LINJE
        //projectUsers = selectedProject.getUsers();
        
-       tblEmployeeTable.setItems(projectUsers);
        
        initColumns();
     }    
@@ -120,6 +119,10 @@ public class AdminProjectOverviewController implements Initializable {
     private void openPasswordView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.changePasswordView(primStage);
+    }
+    
+    private void setUserTable(){
+        tblEmployeeTable.setItems(am.GetProjectEmployees(am.getCurrentProject()));
     }
     
 }

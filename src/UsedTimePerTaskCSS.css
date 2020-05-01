@@ -15,10 +15,10 @@ AnchorPane
 Pane
 {
   -fx-background-color: #f4f4f4;  
+}  
   JFXButton
 {
     -fx-background-color: #ffffff;
-}
 }
 MenuBar
 {

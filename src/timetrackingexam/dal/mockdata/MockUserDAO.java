@@ -7,6 +7,9 @@ package timetrackingexam.dal.mockdata;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.be.User.Role;
 import timetrackingexam.dal.facade.IUserDal;
@@ -19,6 +22,7 @@ public class MockUserDAO implements IUserDal
 {
     
     private List<User> users;
+    private final ObservableList<User> projectEmployees = FXCollections.observableArrayList();
 
     public MockUserDAO() {
         users = new ArrayList<>();
@@ -29,6 +33,10 @@ public class MockUserDAO implements IUserDal
         User u4 = new User("Admin", "Admin", "admin", "admin", Role.Admin);
         User u5 = new User ("default", "default", "default", "default", Role.Default);
         User u6 = new User("Richard",  "Doe", "r", "1", Role.Default);
+                
+        u1.assignUser(new Project(1, "Project X"));
+        u2.assignUser(new Project(1, "Project X"));
+        u3.assignUser(new Project(1, "Project X"));
         
         users.add(u1);
         users.add(u2);
@@ -36,6 +44,7 @@ public class MockUserDAO implements IUserDal
         users.add(u4);
         users.add(u5);
         users.add(u6);
+        
     }    
     
     public List<User> getAllUsers() {
@@ -56,6 +65,24 @@ public class MockUserDAO implements IUserDal
                 currentUser = user;
             }
         }
+    }
+
+    @Override
+    public ObservableList<User> getProjectEmployees(Project p) {
+        
+        
+        for (User user : users) {
+            for (Project project : user.getProjects()) {
+                if(project.getId() == p.getId()){
+                    projectEmployees.add(user);
+                }
+            }
+        }
+        
+        for (User user : projectEmployees) {
+            System.out.println("Hey");
+        }
+        return projectEmployees;
     }
     
 }

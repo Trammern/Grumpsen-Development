@@ -102,6 +102,10 @@ public class User
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+    
+    public boolean assignUser(Project p){
+        return projects.add(p);
+    }
 
     
     
