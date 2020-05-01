@@ -119,9 +119,9 @@ public class AppModel
         return taskManager.createTask(t,p);
     }
     
-    public boolean updateTask(Task updateTask, Project p)
+    public boolean updateTask(Task updateTask)
     {
-        if(taskManager.updateTask(updateTask, p))
+        if(taskManager.updateTask(updateTask))
         {
             getTasks();
             return true;

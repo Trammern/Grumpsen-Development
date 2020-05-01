@@ -91,7 +91,7 @@ public class MockProjectManager {
         return currentProject.removeTask(selectedTask);
     }
 
-    public boolean updateTask(Task updateTask, Project p)
+    public boolean updateTask(Task updateTask)
     {
         throw new UnsupportedOperationException();
     }

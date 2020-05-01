@@ -47,9 +47,9 @@ public class TaskManager implements ITaskManager
     }
 
     @Override
-    public boolean updateTask(Task updateTask, Project p)
+    public boolean updateTask(Task updateTask)
     {
-        return mockProjectManager.updateTask(updateTask,p);
+        return mockProjectManager.updateTask(updateTask);
     }
     
     
