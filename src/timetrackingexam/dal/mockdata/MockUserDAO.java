@@ -74,6 +74,7 @@ public class MockUserDAO implements IUserDal
     @Override
     public ObservableList<User> getProjectEmployees(Project p) {
         
+        projectEmployees.clear();
         
         for (User user : users) {
             for (Project project : user.getProjects()) {
