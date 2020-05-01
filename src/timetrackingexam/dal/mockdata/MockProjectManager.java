@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
-import timetrackingexam.gui.model.AppModel;
 
 /**
  *
@@ -67,6 +66,11 @@ public class MockProjectManager {
         return projects;
     }
     
+    public ObservableList<Task> getTasks()
+    {
+        return tasks;
+    }
+    
     public boolean createNewProject(Project p){
         return projects.add(p);
     }
@@ -86,11 +90,14 @@ public class MockProjectManager {
         return false;
     }
 
-  
 
     public boolean deleteTask(Task selectedTask, Project currentProject)
     {
         return currentProject.removeTask(selectedTask);
     }
-    
+
+    public boolean updateTask(Task updateTask)
+    {
+        throw new UnsupportedOperationException();
+    }
 }

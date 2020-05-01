@@ -26,6 +26,7 @@ import timetrackingexam.gui.model.AppModel;
 public class AddTaskController implements Initializable
 {
    private AppModel am;
+   private Task updateTask;
 
     @FXML
     private TextField txtAddTaskName;
@@ -43,7 +44,14 @@ public class AddTaskController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         am = AppModel.getInstance();
+        if (am.getCurrentTask() != null)
+        {
+            txtAddTaskName.setText(am.getCurrentTask().getName());
+            txtAddTaskDescription.setText(am.getCurrentTask().getDescription());
+        }
     }    
+
+
 
     @FXML
     private void handleSaveAddTask(ActionEvent event)
@@ -80,6 +88,12 @@ public class AddTaskController implements Initializable
     
     private void editTask()
     {
+        updateTask.setName(txtAddTaskName.getText());
+        updateTask.setDescription(txtAddTaskDescription.getText());
+        am.updateTask(updateTask);
+        
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
         
     }
     

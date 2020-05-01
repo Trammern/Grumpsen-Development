@@ -62,7 +62,11 @@ public class MockUserDAO implements IUserDal
     public void updateUser(User user) {
         for (User currentUser : users) {
             if (currentUser.equals(user)) {
-                currentUser = user;
+                currentUser.setFirstName(user.getFirstName());
+                currentUser.setLastName(user.getLastName());
+                currentUser.setPassword(user.getPassword());
+                currentUser.setRole(user.getRole());
+                
             }
         }
     }
@@ -70,6 +74,7 @@ public class MockUserDAO implements IUserDal
     @Override
     public ObservableList<User> getProjectEmployees(Project p) {
         
+        projectEmployees.clear();
         
         for (User user : users) {
             for (Project project : user.getProjects()) {
