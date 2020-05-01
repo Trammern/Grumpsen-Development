@@ -53,6 +53,12 @@ public class AppModel
         return instance;
     }
 
+    public void fetch(){
+        getAllUsers();
+        getProjects();
+        getTasks();
+    }
+    
     public ObservableList<User> getAllUsers()
     {
         users.clear();
