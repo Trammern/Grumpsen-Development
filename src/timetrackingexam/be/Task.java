@@ -89,6 +89,12 @@ public class Task {
     public void setTimeUsed(TaskTime timeUsed) {
         this.timeUsed = timeUsed;
     }
+
+    public int getId()
+    {
+        return id;
+    }
+    
     
     
 

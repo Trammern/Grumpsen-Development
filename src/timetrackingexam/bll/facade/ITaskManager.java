@@ -21,7 +21,7 @@ public interface ITaskManager
     
     public boolean deleteTask(Task selectedTask, Project currentProject);
     
-    public boolean updateTask();
+    public boolean updateTask(Task updateTask, Project p);
     
     public List<Task> readTask();
      
