@@ -5,6 +5,9 @@
  */
 package timetrackingexam.be;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author fauxtistic
@@ -16,14 +19,14 @@ public class Task {
     private String description;
     private Project project;
     private User user;
-    private TaskTime timeUsed;
+    private List<TaskTime> timeUsed = new ArrayList<>();;
     private int quartersUsed;
 
     protected Task(int id, String name, Project project, User user) {
         this.id = id;
         this.name = name;
         this.project = project;
-        this.user = user;        
+        this.user = user; 
     }
     /**
      * Temporary Constructor for testing purposes
@@ -82,22 +85,36 @@ public class Task {
         return totalQuarters;
     }
 
-    public TaskTime getTimeUsed() {
-        return timeUsed;
+    public boolean addTaskTime(TaskTime tt) {
+        
+                System.out.println("date added");
+                return timeUsed.add(tt);
     }
 
-    public void setTimeUsed(TaskTime timeUsed) {
-        this.timeUsed = timeUsed;
+    public List<TaskTime> getTimeUsed() {
+        return timeUsed;
     }
+    
 
     public int getId()
     {
         return id;
     }
     
+    public TaskTime getTotalTimeUsed() {
+        int sec = 0;
+        int min = 0;
+        int hour = 0;
+        
+        for (TaskTime taskTime : timeUsed) {
+            sec = sec + taskTime.getSec();
+            min = min + taskTime.getMin();
+            hour = hour + taskTime.getHours();
+        }
+        
+        return new TaskTime(sec, min, hour);
+    }
     
-    
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -120,6 +137,8 @@ public class Task {
     public String toString() {
         return name;
     }
+
+    
     
     
     

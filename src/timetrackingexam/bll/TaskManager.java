@@ -6,6 +6,7 @@
 package timetrackingexam.bll;
 
 import java.util.List;
+import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.bll.facade.ITaskManager;
@@ -50,6 +51,10 @@ public class TaskManager implements ITaskManager
     public boolean updateTask(Task updateTask)
     {
         return mockProjectManager.updateTask(updateTask);
+    }
+
+    public ObservableList<Task> getTimeUsed(Task t) {
+        return mockProjectManager.getTimeUsed(t);
     }
     
     

@@ -5,6 +5,7 @@
  */
 package timetrackingexam.dal.mockdata;
 
+import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
@@ -42,12 +43,22 @@ public class MockProjectManager {
         
         Task t7 = new Task("Create something", "Description of something");
         
-        TaskTime tt1 = new TaskTime(45, 4, 1);
-        TaskTime tt2 = new TaskTime(5, 55, 5);
-        TaskTime tt3 = new TaskTime(14, 1, 12);
-        t1.setTimeUsed(tt1);
-        t2.setTimeUsed(tt2);
-        t3.setTimeUsed(tt3);
+        TaskTime tt1 = new TaskTime(45, 4, 1, LocalDate.parse("2020-04-30"));
+        TaskTime tt2 = new TaskTime(5, 55, 5, LocalDate.parse("2020-05-01"));
+        TaskTime tt3 = new TaskTime(14, 1, 12, LocalDate.parse("2020-05-02"));
+        TaskTime tt4 = new TaskTime(24, 1, 12, LocalDate.parse("2020-05-03"));
+        TaskTime tt5 = new TaskTime(2, 5, 4, LocalDate.parse("2020-05-04"));
+        TaskTime tt6 = new TaskTime(59, 7, 1, LocalDate.parse("2020-05-05"));
+        
+        
+        t1.addTaskTime(tt1);
+        t2.addTaskTime(tt2);
+        t3.addTaskTime(tt3);
+        t1.addTaskTime(tt4);
+        t1.addTaskTime(tt5);
+        t1.addTaskTime(tt6);
+        
+        
         
         p1.addTask(t1);
         p1.addTask(t2);
@@ -99,5 +110,9 @@ public class MockProjectManager {
     public boolean updateTask(Task updateTask)
     {
         throw new UnsupportedOperationException();
+    }
+
+    public ObservableList<Task> getTimeUsed(Task t) {
+        return tasks;
     }
 }

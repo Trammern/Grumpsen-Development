@@ -23,16 +23,25 @@ public class TaskTime {
         this.hours = hours;
         dateOfWeek = LocalDate.now();
     }
+    /*
+     * For Testing
+     */
+    public TaskTime(int sec, int min, int hours, LocalDate dateOfWeek) {
+        this.sec = sec;
+        this.min = min;
+        this.hours = hours;
+        this.dateOfWeek = dateOfWeek;
+    }
     
-    public LocalDate getDateOfWeek() {
-        return dateOfWeek;
+    
+    
+    public String getDateOfWeek() {
+        return dateOfWeek.toString();
     }
 
     public void setDateOfWeek(LocalDate dateOfWeek) {
         this.dateOfWeek = dateOfWeek;
     }
-    
-    
 
     public int getSec() {
         return sec;
@@ -58,10 +67,10 @@ public class TaskTime {
         this.hours = hours;
     }
     
-    public long getTotalSeconds(){
+    public long getTotalMinutes(){
         long totalSeconds = 0;
         
-        totalSeconds = Math.round(sec + min * 60 + hours * Math.pow(60, 2));
+        totalSeconds = Math.round(min + hours*60);
         
         return totalSeconds;
     }

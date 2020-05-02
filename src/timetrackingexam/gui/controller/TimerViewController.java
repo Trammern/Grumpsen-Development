@@ -94,7 +94,7 @@ public class TimerViewController implements Initializable {
         if(timeIsActive){
             am.stopTimer();
             convertLabelsToInteger();
-            am.getCurrentTask().setTimeUsed(new TaskTime(seconds, minutes, hours));
+            am.getCurrentTask().addTaskTime(new TaskTime(seconds, minutes, hours));
             Stage primStage = (Stage) fldHour.getScene().getWindow();
             primStage.close();
         }
@@ -126,8 +126,8 @@ public class TimerViewController implements Initializable {
     private void setCurrentTask(){
         currentTask=am.getCurrentTask();
         
-        if(currentTask.getTimeUsed()!=null){
-            TaskTime tt = currentTask.getTimeUsed();
+        if(currentTask.getTotalTimeUsed()!=null){
+            TaskTime tt = currentTask.getTotalTimeUsed();
             
             fldSec.setText("" + tt.getSec());
             fldMin.setText("" + tt.getMin());

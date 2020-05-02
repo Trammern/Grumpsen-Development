@@ -127,5 +127,22 @@ public class TaskOverviewController implements Initializable {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.changePasswordView(primStage);
     }
+
+    @FXML
+    private void HandleLineChart(ActionEvent event) {
+        try
+        {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/TimeGrowth.fxml"));
+            Parent root1 = (Parent) fxml.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initOwner((Stage) menuBar.getScene().getWindow());
+            stage.showAndWait();
+            stage.setTitle("Task Growth");
+        } catch (IOException ex)
+        {
+            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

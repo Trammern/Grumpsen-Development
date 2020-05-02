@@ -187,16 +187,10 @@ public class AppModel
     public ObservableList<User> GetProjectEmployees(Project p) {
         return userManager.getProjectEmployees(p);
     }
-    
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
+    public ObservableList<Task> getTimeUsed(Task t) {
+        return taskManager.getTimeUsed(t);
+    }
+
     
 }
