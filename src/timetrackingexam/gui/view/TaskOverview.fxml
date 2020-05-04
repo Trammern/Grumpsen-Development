@@ -22,6 +22,7 @@
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
                   <MenuItem mnemonicParsing="false" onAction="#HandleLineChart" text="Open Linechart" />
+                  <MenuItem mnemonicParsing="false" text="Open Piechart" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -37,16 +38,16 @@
             </Menu>
         </menus>
       </MenuBar>
-      <JFXTextArea fx:id="txtTaskDescription" editable="false" layoutX="14.0" layoutY="115.0" prefHeight="121.0" prefWidth="200.0" text="Create Wireframes for the gui.&#10;Please remeber the Gestalt&#10;principles." AnchorPane.topAnchor="115.0" />
-      <Text fx:id="txtCurrentProject" fill="#f4f4f4" layoutX="215.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X">
+      <JFXTextArea fx:id="txtTaskDescription" editable="false" layoutX="14.0" layoutY="80.0" prefHeight="152.0" prefWidth="188.0" text="Create Wireframes for the gui.&#10;Please remeber the Gestalt&#10;principles." AnchorPane.topAnchor="80.0" />
+      <Text fx:id="txtCurrentProject" fill="#f4f4f4" layoutX="225.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Text fx:id="txtCurrentTask" fill="#f4f4f4" layoutX="14.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task:" />
+      <Text fx:id="txtCurrentTask" fill="#f4f4f4" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task:" />
       <JFXButton layoutX="225.0" layoutY="194.0" onAction="#back" prefHeight="42.0" prefWidth="115.0" text="Back" AnchorPane.leftAnchor="225.0" />
       <JFXButton layoutX="371.0" layoutY="194.0" onAction="#goToTime" prefHeight="42.0" prefWidth="115.0" text="Go to time" />
-      <Text fx:id="txtMinutesUsed" fill="#f4f4f4" layoutX="239.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You've spent: 76 minutes on this task" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="92.05078125" />
-      <Text fx:id="txtStartDate" fill="#f4f4f4" layoutX="239.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Session Started: 20-04-2020" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="112.0" />
-      <Text fill="#f4f4f4" layoutX="228.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Would you like to continue?" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="132.0" />
+      <Text fx:id="txtMinutesUsed" fill="#f4f4f4" layoutX="225.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You've spent: 76 minutes on this task" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="80.0" />
+      <Text fx:id="txtStartDate" fill="#f4f4f4" layoutX="225.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Session Started: 20-04-2020" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="100.0" />
+      <Text fill="#f4f4f4" layoutX="225.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Would you like to continue?" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="120.0" />
    </children>
 </AnchorPane>

@@ -70,6 +70,15 @@ public class TaskOverviewController implements Initializable {
         menuUser.setText(currentUser.getEmail());
         txtCurrentProject.setText(am.getCurrentProject().getName());
         txtCurrentTask.setText(txtCurrentTask.getText() + " " + am.getCurrentTask());
+        if (am.getCurrentTask().getDescription() == null)
+        {
+            txtTaskDescription.setText("No available description found for this task");
+        } 
+        else
+        {
+            txtTaskDescription.setText(am.getCurrentTask().getDescription());
+        }
+        
     }    
 
     @FXML
