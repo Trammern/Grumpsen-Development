@@ -38,8 +38,12 @@ public class ViewGuide {
                 stage.initOwner(primStage);
                 if (disableInputToOtherViews) {
                     stage.initModality(Modality.WINDOW_MODAL);
+                    stage.showAndWait();
                 }
-                stage.showAndWait();                
+                else {
+                    stage.show();
+                }
+                                
             }
             
         } catch (IOException e) {
