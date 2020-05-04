@@ -5,8 +5,10 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -15,6 +17,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.gui.model.AppModel;
 
@@ -30,6 +33,8 @@ public class TimeGrowthController implements Initializable
     
     @FXML
     private BorderPane chartPane;
+    @FXML
+    private JFXButton btnNavigateBack;
 
     /**
      * Initializes the controller class.
@@ -57,5 +62,12 @@ public class TimeGrowthController implements Initializable
     lc.getData().add(series);
     chartPane.setCenter(lc);
     }    
+
+    @FXML
+    private void handleNavigateBack(ActionEvent event)
+    {
+        Stage stage = (Stage) btnNavigateBack.getScene().getWindow();
+        stage.close();
+    }
     
 }
