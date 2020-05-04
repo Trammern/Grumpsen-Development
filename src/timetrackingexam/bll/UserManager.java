@@ -26,7 +26,7 @@ public class UserManager
         userDal = new MockUserDAO();
     }
 
-    public List<User> getAllUsers()
+    public ObservableList<User> getAllUsers()
     {
         return userDal.getAllUsers();
     }
@@ -58,6 +58,27 @@ public class UserManager
 
     public ObservableList<User> getProjectEmployees(Project p) {
         return userDal.getProjectEmployees(p);
+    }
+    
+    public ObservableList<User> getProjectNonEmployees(Project project) {
+        ObservableList<User> nonEmployees = getAllUsers();
+        nonEmployees.removeAll(getProjectEmployees(project));
+        return nonEmployees;
+        
+    }
+    
+    public void addUsersToProject(Project project, List<User> users) {
+        for (User user : users) {
+            userDal.addUserToProject(project, user);
+        }
+        
+    }
+
+    public void removeUsersFromProject(Project project, List<User> users) {
+        for (User user : users) {
+            userDal.removeUserFromProject(project, user);
+        }
+        
     }
     
 }

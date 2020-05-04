@@ -21,11 +21,11 @@ import timetrackingexam.dal.facade.IUserDal;
 public class MockUserDAO implements IUserDal
 {
     
-    private List<User> users;
+    private ObservableList<User> users;
     private final ObservableList<User> projectEmployees = FXCollections.observableArrayList();
 
     public MockUserDAO() {
-        users = new ArrayList<>();
+        users = FXCollections.observableArrayList();
         
         User u1 = new User("John", "Doe", "johndoe@hotmail.com", "qwerty", Role.Admin);
         User u2 = new User("Billy", "Joe", "billyboy@hotmail.com", "qaz123", Role.Default);
@@ -47,7 +47,7 @@ public class MockUserDAO implements IUserDal
         
     }    
     
-    public List<User> getAllUsers() {
+    public ObservableList<User> getAllUsers() {
         return users;
     }
     
@@ -89,5 +89,17 @@ public class MockUserDAO implements IUserDal
         }
         return projectEmployees;
     }
+
+    @Override
+    public void addUserToProject(Project project, User user) {
+        user.assignUser(project);
+    }
+
+    @Override
+    public void removeUserFromProject(Project project, User user) {
+        user.removeUser(project);
+    }
+    
+    
     
 }

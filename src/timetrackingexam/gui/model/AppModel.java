@@ -6,6 +6,7 @@
 package timetrackingexam.gui.model;
 
 import com.jfoenix.controls.JFXTextField;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -194,6 +195,17 @@ public class AppModel
     public ObservableList<Task> getTimeUsed(Task t) {
         return taskManager.getTimeUsed(t);
     }
+    
+    public ObservableList<User> getProjectNonEmployees(Project project) {
+        return userManager.getProjectNonEmployees(project);
+    }
+    
+    public void addUsersToProject(Project project, List<User> users) {
+        userManager.addUsersToProject(project, users);
+    }
 
+    public void removeUsersFromProject(Project project, List<User> users) {
+        userManager.removeUsersFromProject(project, users);
+    }
     
 }

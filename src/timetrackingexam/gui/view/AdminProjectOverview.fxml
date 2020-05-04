@@ -37,8 +37,8 @@
           </Menu>
         </menus>
       </MenuBar>
-      <JFXButton layoutX="14.0" layoutY="318.0" onAction="#addEmployee" text="Add" textFill="#f4f4f4" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
-      <JFXButton layoutX="53.0" layoutY="322.0" onAction="#removeEmployee" text="Remove" textFill="#f4f4f4" AnchorPane.leftAnchor="70.0" />
+      <JFXButton fx:id="btnAdd" layoutX="14.0" layoutY="318.0" onAction="#addEmployee" text="Add" textFill="#f4f4f4" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
+      <JFXButton fx:id="btnRemove" layoutX="53.0" layoutY="322.0" onAction="#removeEmployee" text="Remove" textFill="#f4f4f4" AnchorPane.leftAnchor="70.0" />
       <JFXButton layoutX="138.0" layoutY="322.0" onAction="#openTaskView" text="Go to tasks" textFill="#f4f4f4" AnchorPane.leftAnchor="140.0" />
       <TableView fx:id="tblEmployeeTable" layoutX="19.0" layoutY="116.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <columns>

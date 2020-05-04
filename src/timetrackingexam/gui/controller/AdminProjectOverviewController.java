@@ -7,6 +7,7 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
@@ -39,6 +41,7 @@ public class AdminProjectOverviewController implements Initializable {
     private Project selectedProject;
     private ObservableList<User> projectUsers;
     private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/AddEditUserView.fxml";    
+    private static final String ADD_PROJECT_USERS_VIEW_PATH = "/timetrackingexam/gui/view/AddProjectUsersView.fxml";    
     
     @FXML
     private TableView<User> tblEmployeeTable;
@@ -62,6 +65,10 @@ public class AdminProjectOverviewController implements Initializable {
     private JFXButton btnNewUser;
     @FXML
     private JFXButton btnEditUser;
+    @FXML
+    private JFXButton btnAdd;
+    @FXML
+    private JFXButton btnRemove;
 
     /**
      * Initializes the controller class.
@@ -70,13 +77,12 @@ public class AdminProjectOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
-       menuUser.setText(currentUser.getEmail());       
+       menuUser.setText(currentUser.getEmail());             
        setProject(am.getCurrentProject());
        projectUsers = am.GetProjectEmployees(selectedProject);
-       tblEmployeeTable.setItems(projectUsers);
-       
-       
-       
+       tblEmployeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); 
+       tblEmployeeTable.setItems(projectUsers);       
+              
        initColumns();
     }    
     
@@ -89,15 +95,18 @@ public class AdminProjectOverviewController implements Initializable {
 
     @FXML
     private void addEmployee(ActionEvent event) {
-        User user = tblEmployeeTable.getSelectionModel().getSelectedItem();
-        selectedProject.getUsers().add(user);  
-        //selectedProject.getUsers();
+        Stage primStage = (Stage) btnAdd.getScene().getWindow();
+        ViewGuide.openView(ADD_PROJECT_USERS_VIEW_PATH, "Add users to project", primStage, false, true);
+        am.fetch();
+        
     }
 
     @FXML
     private void removeEmployee(ActionEvent event) {
-        User user = tblEmployeeTable.getSelectionModel().getSelectedItem();
-        user.removeUser(selectedProject);
+        List<User> users = tblEmployeeTable.getSelectionModel().getSelectedItems();
+        for (User user : users) {
+            user.removeUser(selectedProject);
+        }        
         am.fetch();
     }
 

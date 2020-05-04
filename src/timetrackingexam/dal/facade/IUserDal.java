@@ -16,10 +16,12 @@ import timetrackingexam.be.User;
  */
 public interface IUserDal {
     
-    public List<User> getAllUsers();
+    public ObservableList<User> getAllUsers();
     public void changePassword(User user);
     public void addUser(User user);
     public void updateUser(User user);
     public ObservableList<User> getProjectEmployees(Project p);
+    public void addUserToProject(Project project, User user);
+    public void removeUserFromProject(Project project, User user);
     
 }
