@@ -57,6 +57,9 @@ public class AppModel
         getAllUsers();
         getProjects();
         getTasks();
+        if (currentProject!=null) {
+            GetProjectEmployees(currentProject);
+        }
     }
     
     public ObservableList<User> getAllUsers()

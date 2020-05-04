@@ -109,6 +109,7 @@ public class AddEditUserViewController implements Initializable {
         }
         else am.updateUser(user);
         
+        am.fetch();
         Stage stage = (Stage) btnSaveUser.getScene().getWindow();
         stage.close();
         

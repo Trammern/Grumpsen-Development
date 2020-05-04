@@ -70,10 +70,11 @@ public class AdminProjectOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
-       menuUser.setText(currentUser.getEmail());
-       setUserTable();
-       //DER ER ET ELLER ANDET GALT MED DENNE HER LINJE
-       //projectUsers = selectedProject.getUsers();
+       menuUser.setText(currentUser.getEmail());       
+       setProject(am.getCurrentProject());
+       projectUsers = am.GetProjectEmployees(selectedProject);
+       tblEmployeeTable.setItems(projectUsers);
+       
        
        
        initColumns();
@@ -97,8 +98,7 @@ public class AdminProjectOverviewController implements Initializable {
     private void removeEmployee(ActionEvent event) {
         User user = tblEmployeeTable.getSelectionModel().getSelectedItem();
         user.removeUser(selectedProject);
-        //am.fetch(); //add more
-        //selectedProject.getUsers();
+        am.fetch();
     }
 
     @FXML
@@ -129,10 +129,6 @@ public class AdminProjectOverviewController implements Initializable {
         ViewGuide.changePasswordView(primStage);
     }
     
-    private void setUserTable(){
-        tblEmployeeTable.setItems(am.GetProjectEmployees(am.getCurrentProject()));
-    }
-
     @FXML
     private void newUser(ActionEvent event) {
         am.setSelectedUser(null); 
