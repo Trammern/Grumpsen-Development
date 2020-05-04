@@ -45,7 +45,7 @@ public class TimeGrowthController implements Initializable
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Date");
         
-        NumberAxis yAxis = new NumberAxis(0,1500,150);
+        NumberAxis yAxis = new NumberAxis(am.getCurrentTask().getTimeUsed().get(0).getHours(),48,8);
         yAxis.setLabel("Hours Spent");
         
         LineChart  lc = new LineChart(xAxis, yAxis);
@@ -55,7 +55,7 @@ public class TimeGrowthController implements Initializable
         
         
             for (TaskTime tt : am.getCurrentTask().getTimeUsed()) {
-                series.getData().add(new XYChart.Data(tt.getDateOfWeek(), am.getCurrentTask().getTotalTimeUsed().getTotalMinutes()));
+                series.getData().add(new XYChart.Data(tt.getDateOfWeek(), am.getCurrentTask().timeGrowth()));
                 System.out.println("got data point");
             }
         
