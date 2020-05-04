@@ -16,6 +16,7 @@ public class TaskTime {
     private int min;
     private int hours;
     private LocalDate dateOfWeek;
+    private long totalMinutes = 0;
 
     public TaskTime(int sec, int min, int hours) {
         this.sec = sec;
@@ -67,12 +68,8 @@ public class TaskTime {
         this.hours = hours;
     }
     
-    public long getTotalMinutes(){
-        long totalSeconds = 0;
-        
-        totalSeconds = Math.round(min + hours*60);
-        
-        return totalSeconds;
-    }
+    
+    
+   
     
 }

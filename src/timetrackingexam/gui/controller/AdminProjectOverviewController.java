@@ -96,7 +96,8 @@ public class AdminProjectOverviewController implements Initializable {
     @FXML
     private void removeEmployee(ActionEvent event) {
         User user = tblEmployeeTable.getSelectionModel().getSelectedItem();
-        selectedProject.getUsers().remove(user);  
+        user.removeUser(selectedProject);
+        //am.fetch(); //add more
         //selectedProject.getUsers();
     }
 

@@ -21,6 +21,8 @@ public class Task {
     private User user;
     private List<TaskTime> timeUsed = new ArrayList<>();;
     private int quartersUsed;
+    private int timeIndex = 0;
+    private long timeGrowth = 0;
 
     protected Task(int id, String name, Project project, User user) {
         this.id = id;
@@ -113,6 +115,12 @@ public class Task {
         }
         
         return new TaskTime(sec, min, hour);
+    }
+    
+    public long timeGrowth(){
+        timeGrowth = timeGrowth + timeUsed.get(timeIndex).getHours();
+        timeIndex++;
+        return timeGrowth;
     }
     
     @Override

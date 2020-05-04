@@ -49,6 +49,7 @@ public class MockProjectManager {
         TaskTime tt4 = new TaskTime(24, 1, 12, LocalDate.parse("2020-05-03"));
         TaskTime tt5 = new TaskTime(2, 5, 4, LocalDate.parse("2020-05-04"));
         TaskTime tt6 = new TaskTime(59, 7, 1, LocalDate.parse("2020-05-05"));
+        TaskTime tt7 = new TaskTime(59, 7, 6, LocalDate.parse("2020-05-06"));
         
         
         t1.addTaskTime(tt1);
@@ -57,6 +58,7 @@ public class MockProjectManager {
         t1.addTaskTime(tt4);
         t1.addTaskTime(tt5);
         t1.addTaskTime(tt6);
+        t1.addTaskTime(tt7);
         
         
         
