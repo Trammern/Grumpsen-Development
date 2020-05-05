@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.bll.facade.ITaskManager;
+import timetrackingexam.dal.facade.IProjectDal;
 import timetrackingexam.dal.mockdata.MockProjectManager;
 
 /**
@@ -19,11 +20,11 @@ import timetrackingexam.dal.mockdata.MockProjectManager;
 public class TaskManager implements ITaskManager
 {
     private Task task;
-    private MockProjectManager mockProjectManager;
+    private IProjectDal projectDal;
 
     public TaskManager()
     {
-        mockProjectManager = new MockProjectManager();
+        projectDal = new MockProjectManager();
     }
 
     
@@ -31,30 +32,30 @@ public class TaskManager implements ITaskManager
     @Override
     public boolean deleteTask(Task selectedTask, Project currentProject)
     {
-        return mockProjectManager.deleteTask(selectedTask, currentProject);
+        return projectDal.deleteTask(selectedTask, currentProject);
     }
 
 
     @Override
     public List<Task> readTask()
     {
-        return mockProjectManager.getTasks();
+        return projectDal.getTasks();
     }
 
     @Override
     public boolean createTask(Task t, Project p)
     {
-        return mockProjectManager.createTask(t,p);
+        return projectDal.createTask(t,p);
     }
 
     @Override
     public boolean updateTask(Task updateTask)
     {
-        return mockProjectManager.updateTask(updateTask);
+        return projectDal.updateTask(updateTask);
     }
 
     public ObservableList<Task> getTimeUsed(Task t) {
-        return mockProjectManager.getTimeUsed(t);
+        return projectDal.getTimeUsed(t);
     }
     
     

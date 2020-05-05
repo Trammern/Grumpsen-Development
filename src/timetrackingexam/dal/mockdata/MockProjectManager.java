@@ -11,12 +11,13 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
+import timetrackingexam.dal.facade.IProjectDal;
 
 /**
  *
  * @author math2
  */
-public class MockProjectManager {
+public class MockProjectManager implements IProjectDal {
 
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();

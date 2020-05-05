@@ -7,6 +7,7 @@ package timetrackingexam.bll;
 
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
+import timetrackingexam.dal.facade.IProjectDal;
 import timetrackingexam.dal.mockdata.MockProjectManager;
 
 /**
@@ -14,22 +15,22 @@ import timetrackingexam.dal.mockdata.MockProjectManager;
  * @author math2
  */
 public class ProjectManager {
-    private final MockProjectManager mpm;
+    private final IProjectDal projectDal;
 
     public ProjectManager() {
-        mpm = new MockProjectManager();
+        projectDal = new MockProjectManager();
     }
     
     public ObservableList<Project> getAllProjects(){
-        return mpm.getProjects();
+        return projectDal.getProjects();
     }
     
     public boolean createNewProject(Project p){
-        return mpm.createNewProject(p);
+        return projectDal.createNewProject(p);
     }
 
     public boolean updateProject(Project p) {
-        return mpm.updateProject(p);
+        return projectDal.updateProject(p);
     }
 
     
