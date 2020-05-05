@@ -19,6 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
+import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
 
@@ -84,23 +85,20 @@ public class AddEditUserViewController implements Initializable {
         if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || role == null) {
             AlertBox.errorAlert("You have not entered all the necessary information");
             return;
-        }
-        
-        if (!am.checkIfEmailIsUsed(email)) {
-            saveChanges(new User(firstName, lastName, email, password, role));            
-        }       
-        else if (selectedUser != null) {
-            if (selectedUser.getEmail().equals(email)) {
+        }        
+       
+        if (selectedUser != null) {
+            saveChanges(new User(firstName, lastName, email, password, role));
+        } else if (LoginTools.validateEmail(email)) {
+            if (!am.checkIfEmailIsUsed(email)) {
                 saveChanges(new User(firstName, lastName, email, password, role));
+            } else {
+                AlertBox.errorAlert("Email is already used by another user");
             }
-            else AlertBox.errorAlert("Email is already used by another user");
-            return;
+        } else {
+            AlertBox.errorAlert("You must enter a valid email address");
         }
-        else {
-            AlertBox.errorAlert("Email is already used by another user");
-        }
-        
-        
+
     }
     
     private void saveChanges(User user) {
