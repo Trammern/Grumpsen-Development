@@ -42,6 +42,7 @@ public class AdminProjectOverviewController implements Initializable {
     private ObservableList<User> projectUsers;
     private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/AddEditUserView.fxml";    
     private static final String ADD_PROJECT_USERS_VIEW_PATH = "/timetrackingexam/gui/view/AddProjectUsersView.fxml";    
+    private static final String PROJECT_MANAGEMENT_VIEW_PATH = "/timetrackingexam/gui/view/ProjectManagementView.fxml";    
     
     @FXML
     private TableView<User> tblEmployeeTable;
@@ -69,6 +70,8 @@ public class AdminProjectOverviewController implements Initializable {
     private JFXButton btnAdd;
     @FXML
     private JFXButton btnRemove;
+    @FXML
+    private JFXButton btnBack;
 
     /**
      * Initializes the controller class.
@@ -156,6 +159,12 @@ public class AdminProjectOverviewController implements Initializable {
         else {
             AlertBox.errorAlert("Select a user to edit");
         }
+    }
+
+    @FXML
+    private void backToProjectManagement(ActionEvent event) {
+        Stage primStage = (Stage) btnBack.getScene().getWindow();
+        ViewGuide.openView(PROJECT_MANAGEMENT_VIEW_PATH, "Project Management View", primStage, true, true);
     }
     
 }

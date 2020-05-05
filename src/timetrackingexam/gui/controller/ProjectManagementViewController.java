@@ -70,7 +70,10 @@ public class ProjectManagementViewController implements Initializable {
        am = AppModel.getInstance();
        lstProjects.setItems(getAllProjects());
        currentUser = am.getCurrentUser();
-       menuUser.setText(currentUser.getEmail());       
+       menuUser.setText(currentUser.getEmail());
+       am.setCurrentProject(null);
+       am.setCurrentTask(null);
+       am.setSelectedUser(null);
               
     }    
 
@@ -85,24 +88,30 @@ public class ProjectManagementViewController implements Initializable {
         if(am.getCurrentProject()!=null){
             openAddEditWindow();
         }
+        else {
+            AlertBox.errorAlert("Select a project to edit");
+        }
     }
 
     @FXML
     private void openProject(ActionEvent event) {
-        try
-        {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AdminProjectOverview.fxml"));
-            Parent root1 = (Parent) fxml.load();
-            Stage stage = new Stage();
-            Stage primStage = (Stage) txtSelectedProject.getScene().getWindow();
-            stage.setScene(new Scene(root1));
-            primStage.close();
-            stage.showAndWait();
-            stage.setTitle("Timer");
-        } catch (IOException ex)
-        {
-            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+        if (am.getCurrentProject() != null) {
+            try {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AdminProjectOverview.fxml"));
+                Parent root1 = (Parent) fxml.load();
+                Stage stage = new Stage();
+                Stage primStage = (Stage) txtSelectedProject.getScene().getWindow();
+                stage.setScene(new Scene(root1));
+                primStage.close();
+                stage.showAndWait();
+                stage.setTitle("Project view");
+            } catch (IOException ex) {
+                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            AlertBox.errorAlert("Select a project to open");
         }
+        
     }
     
     @FXML
