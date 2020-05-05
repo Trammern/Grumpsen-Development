@@ -19,10 +19,10 @@ public class Task {
     private String description;
     private Project project;
     private User user;
-    private List<TaskTime> timeUsed = new ArrayList<>();;
-    private int quartersUsed;
+    private List<TaskTime> timeUsed = new ArrayList<>();
     private int timeIndex = 0;
     private long timeGrowth = 0;
+    private int timeAssigned;
 
     protected Task(int id, String name, Project project, User user) {
         this.id = id;
@@ -34,10 +34,12 @@ public class Task {
      * Temporary Constructor for testing purposes
      * @param id
      * @param name 
+     * @param timeAssigned
      */
-    public Task(int id, String name) {
+    public Task(int id, String name, int timeAssigned) {
         this.id = id;
         this.name = name;
+        this.timeAssigned = timeAssigned;
     }
 
     public Task(String name, String description)
@@ -78,6 +80,23 @@ public class Task {
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public int getTimeAssigned() {
+        return timeAssigned;
+    }
+
+    public void setTimeAssigned(int timeAssigned) {
+        this.timeAssigned = timeAssigned;
+    }
+    
+    public int getHoursUsed(){
+        int hoursUsed = 0;
+        for (TaskTime taskTime : timeUsed) {
+            hoursUsed = hoursUsed + taskTime.getHours();
+        }
+        
+        return hoursUsed;
     }
     
     public int ConvertToQuarters(int min, int hours){

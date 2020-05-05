@@ -34,12 +34,12 @@ public class MockProjectManager {
         projects.add(p2);
         projects.add(p3);
         
-        Task t1 = new Task(1, "Task1");
-        Task t2 = new Task(2, "Task2");
-        Task t3 = new Task(3, "Task3");
-        Task t4 = new Task(4, "Task4");
-        Task t5 = new Task(5, "Task5");
-        Task t6 = new Task(6, "Task6");
+        Task t1 = new Task(1, "Task1", 30);
+        Task t2 = new Task(2, "Task2", 5);
+        Task t3 = new Task(3, "Task3", 10);
+        Task t4 = new Task(4, "Task4", 20);
+        Task t5 = new Task(5, "Task5", 20);
+        Task t6 = new Task(6, "Task6", 20);
         
         Task t7 = new Task("Create something", "Description of something");
         

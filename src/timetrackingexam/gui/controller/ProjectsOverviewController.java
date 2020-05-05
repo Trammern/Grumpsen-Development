@@ -196,7 +196,27 @@ public class ProjectsOverviewController implements Initializable {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.changePasswordView(primStage);
     }
+
+    @FXML
+    private void handleBarChart(ActionEvent event) {
+        
+        try
+            {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AssigenedTime.fxml"));
+                Parent root1 = (Parent) fxml.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root1));
+                stage.showAndWait();
+                stage.setTitle("Assigned Time For Tasks");
+            
+            } catch (IOException ex)
+            {   
+                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     
     
     
-}
+
