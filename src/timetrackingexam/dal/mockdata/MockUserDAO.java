@@ -32,7 +32,7 @@ public class MockUserDAO implements IUserDal
         User u3 = new User("Richard",  "Doe", "rdoe@gmail.com", "123456", Role.Default);
         User u4 = new User("Admin", "Admin", "admin", "admin", Role.Admin);
         User u5 = new User ("default", "default", "default", "default", Role.Default);
-        User u6 = new User("Richard",  "Doe", "r", "1", Role.Default);
+        User u6 = new User("Daniel",  "Doe", "r", "1", Role.Default);
                 
         u1.assignUser(new Project(1, "Project X"));
         u2.assignUser(new Project(1, "Project X"));
@@ -77,16 +77,13 @@ public class MockUserDAO implements IUserDal
         projectEmployees.clear();
         
         for (User user : users) {
-            for (Project project : user.getProjects()) {
+            for (Project project : user.getProjects()) {                
                 if(project.getId() == p.getId()){
                     projectEmployees.add(user);
                 }
             }
         }
         
-        for (User user : projectEmployees) {
-            System.out.println("Hey");
-        }
         return projectEmployees;
     }
 

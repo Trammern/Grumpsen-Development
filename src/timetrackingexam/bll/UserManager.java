@@ -6,6 +6,7 @@
 package timetrackingexam.bll;
 
 import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
@@ -61,7 +62,9 @@ public class UserManager
     }
     
     public ObservableList<User> getProjectNonEmployees(Project project) {
-        ObservableList<User> nonEmployees = getAllUsers();
+        ObservableList<User> nonEmployees = FXCollections.observableArrayList();
+        nonEmployees.clear();
+        nonEmployees.addAll(getAllUsers());                
         nonEmployees.removeAll(getProjectEmployees(project));
         return nonEmployees;
         

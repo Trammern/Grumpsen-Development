@@ -78,8 +78,8 @@ public class AdminProjectOverviewController implements Initializable {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
        menuUser.setText(currentUser.getEmail());             
-       setProject(am.getCurrentProject());
-       projectUsers = am.GetProjectEmployees(selectedProject);
+       setProject(am.getCurrentProject());       
+       projectUsers = am.GetProjectEmployees(selectedProject);       
        tblEmployeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); 
        tblEmployeeTable.setItems(projectUsers);       
               
