@@ -56,6 +56,7 @@ public class Login implements Initializable
        appModel.setCurrentUser(null);
        appModel.setCurrentProject(null);
        appModel.setCurrentTask(null);
+       appModel.setSelectedUser(null);
        initKeys();
 
     }    

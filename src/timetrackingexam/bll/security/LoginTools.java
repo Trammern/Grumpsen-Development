@@ -37,4 +37,8 @@ public class LoginTools {
         
         return password;
     }
+    
+    public static boolean validateEmail(String email) {
+        return email.matches("[\\w-]+@([\\w-]+\\.)+[\\w-]+");
+    }
 }
