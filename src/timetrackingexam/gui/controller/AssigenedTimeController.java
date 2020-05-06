@@ -5,8 +5,10 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -14,6 +16,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.be.Task;
 
@@ -30,6 +33,8 @@ public class AssigenedTimeController implements Initializable
     private NumberAxis yAxis;
     @FXML
     private BorderPane diagramPane;
+    @FXML
+    private JFXButton btnBack;
 
     /**
      * Initializes the controller class.
@@ -83,5 +88,12 @@ public class AssigenedTimeController implements Initializable
         timeAllottedSeries.setName("Time Allotted");
         
         return timeAllottedSeries;
+    }
+
+    @FXML
+    private void handleGoBack(ActionEvent event)
+    {
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
     }
 }

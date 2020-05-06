@@ -5,6 +5,7 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
 import java.net.URL;
@@ -59,6 +60,8 @@ public class TaskOverviewController implements Initializable {
     private Menu menuUser;
     @FXML
     private MenuItem menuItemPassword;
+    @FXML
+    private JFXButton btnBack;
 
     /**
      * Initializes the controller class.
@@ -83,23 +86,9 @@ public class TaskOverviewController implements Initializable {
 
     @FXML
     private void back(ActionEvent event) {
-        try
-            {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/ProjectOverview.fxml"));
-                Parent root1 = (Parent) fxml.load();
-                Stage primStage = (Stage) txtCurrentProject.getScene().getWindow();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root1));
-                primStage.close();
-                stage.showAndWait();
-                stage.setTitle("Timer");
-
-                
-    
-            } catch (IOException ex)
-            {
-                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        
+        Stage primStage = (Stage) btnBack.getScene().getWindow();
+        ViewGuide.openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Project Overview", primStage, true, true);
     }
 
     @FXML

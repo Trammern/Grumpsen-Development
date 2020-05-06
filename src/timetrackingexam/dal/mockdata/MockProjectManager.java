@@ -61,7 +61,10 @@ public class MockProjectManager implements IProjectDal {
         t1.addTaskTime(tt6);
         t1.addTaskTime(tt7);
         
-        
+        t4.addTaskTime(tt7);
+        t4.addTaskTime(tt4);
+        t5.addTaskTime(tt3);
+        t6.addTaskTime(tt5);
         
         p1.addTask(t1);
         p1.addTask(t2);

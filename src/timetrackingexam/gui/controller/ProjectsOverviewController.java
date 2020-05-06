@@ -214,6 +214,24 @@ public class ProjectsOverviewController implements Initializable {
                 Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+    @FXML
+    private void handlePieChart(ActionEvent event)
+    {
+        try
+        {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/UsedTimePerTask.fxml"));
+            Parent root1 = (Parent) fxml.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initOwner((Stage) menuBar.getScene().getWindow());
+            stage.showAndWait();
+            stage.setTitle("Time used");
+        } catch (IOException ex)
+        {
+            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
         
     }
     
