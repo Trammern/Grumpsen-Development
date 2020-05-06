@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
+import timetrackingexam.be.Task;
 import timetrackingexam.gui.model.AppModel;
 
 /**
@@ -34,27 +35,30 @@ public class UsedTimePerTaskController implements Initializable
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         am = AppModel.getInstance();
         
-        // TODO:
-        // Load all tasks from current project as new piechart data
-        // Get the time used for each task distributed into the piechart
         
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Hours", 25),
-                new PieChart.Data("Hours Left", 35)
-        );
+        
+        ObservableList<Task> allTasks = am.getCurrentProject().getTasks();
+    
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
+        for (Task task : allTasks)
+        {
+            pieChartData.add(new PieChart.Data(task.getName(), task.getHoursUsed()));
+            System.out.println(task.getHoursUsed());
+        }
         
         pieChart.setData(pieChartData);
         pieChart.setClockwise(true);
         pieChart.setStartAngle(180);
         pieChart.setLabelsVisible(true);
-
         pieChart.setTitle(am.getCurrentProject() + "");
     }
 
