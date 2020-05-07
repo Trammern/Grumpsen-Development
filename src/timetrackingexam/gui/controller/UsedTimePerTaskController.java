@@ -7,6 +7,7 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +27,7 @@ import timetrackingexam.gui.model.AppModel;
 public class UsedTimePerTaskController implements Initializable
 {
 
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     private AppModel am;
     
     @FXML
@@ -43,7 +45,7 @@ public class UsedTimePerTaskController implements Initializable
     {
         am = AppModel.getInstance();
         
-        
+        double totalTime = 0;
         
         ObservableList<Task> allTasks = am.getCurrentProject().getTasks();
     
@@ -53,6 +55,12 @@ public class UsedTimePerTaskController implements Initializable
         {
             pieChartData.add(new PieChart.Data(task.getName(), task.getHoursUsed()));
             System.out.println(task.getHoursUsed());
+            totalTime += task.getHoursUsed();
+        }
+        
+        for (PieChart.Data data : pieChartData)
+        {
+            data.setName(data.getName() + " (" + df2.format(data.getPieValue() / totalTime * 100) + "%)");
         }
         
         pieChart.setData(pieChartData);
