@@ -18,6 +18,7 @@
           <Menu mnemonicParsing="false" text="Navigate">
             <items>
               <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#closeProgram" text="Close" />
+                  <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Tools">
@@ -35,7 +36,6 @@
             <Menu fx:id="menuUser" mnemonicParsing="false" text="User">
               <items>
                 <MenuItem fx:id="menuItemPassword" mnemonicParsing="false" onAction="#openPasswordView" text="Change password" />
-                  <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
               </items>
             </Menu>
         </menus>
