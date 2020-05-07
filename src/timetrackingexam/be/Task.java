@@ -107,9 +107,18 @@ public class Task {
     }
 
     public boolean addTaskTime(TaskTime tt) {
-        
-                System.out.println("date added");
-                return timeUsed.add(tt);
+        /*for (TaskTime taskTime : timeUsed) {
+            if(tt.getId() == taskTime.getId()){
+                taskTime.setHours(tt.getHours());
+                taskTime.setHours(tt.getMin());
+                taskTime.setHours(tt.getSec());
+                System.out.println("Date Updated");
+                return true;
+            }
+        }*/
+        System.out.println("date added");
+        return timeUsed.add(tt);
+         
     }
 
     public List<TaskTime> getTimeUsed() {

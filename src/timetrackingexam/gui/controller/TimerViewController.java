@@ -32,6 +32,7 @@ public class TimerViewController implements Initializable {
     private boolean timeIsActive = true;
     private AppModel am;
     private Task currentTask;
+    private TaskTime oldTT;
     private int seconds;
     private int minutes;
     private int hours;
@@ -64,7 +65,7 @@ public class TimerViewController implements Initializable {
         am = AppModel.getInstance();
         txtTaskText.setText(am.getCurrentTask().getName());
         setCurrentTask();
-        
+        btnSubmit.setDisable(timeIsActive);
         
     }    
     /**
@@ -75,7 +76,9 @@ public class TimerViewController implements Initializable {
     private void btnStopStart(ActionEvent event){
         if(timeIsActive){
             toggleBtnProperties();
+            convertLabelsToInteger();
             am.startTimer(fldSec, fldMin, fldHour);
+            oldTT = new TaskTime(seconds, minutes, hours);
         }
         else{
             toggleBtnProperties();
@@ -94,7 +97,10 @@ public class TimerViewController implements Initializable {
         if(timeIsActive){
             am.stopTimer();
             convertLabelsToInteger();
-            am.getCurrentTask().addTaskTime(new TaskTime(seconds, minutes, hours));
+            am.getCurrentTask().addTaskTime(new TaskTime(
+                    seconds - oldTT.getSec(),
+                    minutes - oldTT.getMin(),
+                    hours - oldTT.getHours()));
             Stage primStage = (Stage) fldHour.getScene().getWindow();
             primStage.close();
         }
@@ -124,7 +130,7 @@ public class TimerViewController implements Initializable {
     }
     
     private void setCurrentTask(){
-        currentTask=am.getCurrentTask();
+        currentTask = am.getCurrentTask();
         
         if(currentTask.getTotalTimeUsed()!=null){
             TaskTime tt = currentTask.getTotalTimeUsed();

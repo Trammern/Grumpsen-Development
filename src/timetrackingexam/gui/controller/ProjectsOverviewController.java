@@ -82,6 +82,7 @@ public class ProjectsOverviewController implements Initializable {
         selectedProject = am.getProjects().get(0);
         am.setCurrentProject(selectedProject);
         lstTaskList.setItems(selectedProject.getTasks());
+        txtSlectedTask.setText("(Select Project)");
     } 
 
     @FXML

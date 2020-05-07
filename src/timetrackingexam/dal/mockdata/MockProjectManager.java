@@ -35,6 +35,9 @@ public class MockProjectManager implements IProjectDal {
         projects.add(p2);
         projects.add(p3);
         
+        p1.setDescription("Create a program that allows the user to manage"
+                + " his/hers and their staffs time");
+        
         Task t1 = new Task(1, "Task1", 30);
         Task t2 = new Task(2, "Task2", 5);
         Task t3 = new Task(3, "Task3", 10);
@@ -47,10 +50,10 @@ public class MockProjectManager implements IProjectDal {
         TaskTime tt1 = new TaskTime(45, 4, 1, LocalDate.parse("2020-04-30"));
         TaskTime tt2 = new TaskTime(5, 55, 5, LocalDate.parse("2020-05-01"));
         TaskTime tt3 = new TaskTime(14, 1, 12, LocalDate.parse("2020-05-02"));
-        TaskTime tt4 = new TaskTime(24, 1, 12, LocalDate.parse("2020-05-03"));
+        TaskTime tt4 = new TaskTime(5, 1, 12, LocalDate.parse("2020-05-03"));
         TaskTime tt5 = new TaskTime(2, 5, 4, LocalDate.parse("2020-05-04"));
-        TaskTime tt6 = new TaskTime(59, 7, 1, LocalDate.parse("2020-05-05"));
-        TaskTime tt7 = new TaskTime(59, 7, 6, LocalDate.parse("2020-05-06"));
+        TaskTime tt6 = new TaskTime(5, 7, 1, LocalDate.parse("2020-05-05"));
+        TaskTime tt7 = new TaskTime(1, 7, 6, LocalDate.parse("2020-05-07"));
         
         
         t1.addTaskTime(tt1);

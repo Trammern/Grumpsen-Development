@@ -59,14 +59,14 @@ public class TimerRunnable implements Runnable{
                 catch (InterruptedException ex) {
                 }
 
-                if (seconds >= 60) {
-                    seconds = seconds - 60;
+                if (seconds >= 59) {
+                    seconds = -1;
                     minutes++;
                 }
 
-                if (minutes >= 60) {
-                    seconds = seconds - 60;
-                    minutes = minutes - 60;
+                if (minutes >= 59) {
+                    seconds = -1;
+                    minutes = -1;
                     hours++;
                 }
         }

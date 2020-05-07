@@ -12,6 +12,7 @@ import java.time.LocalDate;
  * @author math2
  */
 public class TaskTime {
+    private int id;
     private int sec;
     private int min;
     private int hours;
@@ -23,6 +24,7 @@ public class TaskTime {
         this.min = min;
         this.hours = hours;
         dateOfWeek = LocalDate.now();
+        setId();
     }
     /*
      * For Testing
@@ -32,6 +34,7 @@ public class TaskTime {
         this.min = min;
         this.hours = hours;
         this.dateOfWeek = dateOfWeek;
+        setId();
     }
     
     
@@ -68,8 +71,18 @@ public class TaskTime {
         this.hours = hours;
     }
     
+    private void setId(){
+        if(id>=1){
+            id = id++;
+        }
+        else{
+            id = 1;
+        }
+    }
     
-    
+    public int getId(){
+        return id;
+    }
    
     
 }

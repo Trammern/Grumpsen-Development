@@ -74,7 +74,7 @@ public class ProjectManagementViewController implements Initializable {
        am.setCurrentProject(null);
        am.setCurrentTask(null);
        am.setSelectedUser(null);
-              
+       txtSelectedProject.setText("(Select Project)");
     }    
 
     @FXML
