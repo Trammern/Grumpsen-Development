@@ -69,6 +69,8 @@ public class ProjectsOverviewController implements Initializable {
     private Menu menuUser;
     @FXML
     private MenuItem menuItemPassword;
+    @FXML
+    private MenuItem menuItemAdmin;
 
     /**
      * Initializes the controller class.
@@ -83,6 +85,10 @@ public class ProjectsOverviewController implements Initializable {
         am.setCurrentProject(selectedProject);
         lstTaskList.setItems(selectedProject.getTasks());
         txtSlectedTask.setText("(Select Project)");
+        if (currentUser.getRole()!=User.Role.Admin) {
+            menuItemAdmin.setDisable(true);
+            menuItemAdmin.setVisible(false);
+        }
     } 
 
     @FXML
@@ -232,6 +238,12 @@ public class ProjectsOverviewController implements Initializable {
         {
             Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void goToAdmin(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.projectManagementView(primStage);
     }
         
     }

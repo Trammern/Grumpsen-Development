@@ -60,6 +60,8 @@ public class ProjectManagementViewController implements Initializable {
     private Menu menuUser;
     @FXML
     private JFXTextArea fldDescription;
+    @FXML
+    private MenuItem menuItemTasks;
 
     /**
      * Initializes the controller class.
@@ -155,6 +157,12 @@ public class ProjectManagementViewController implements Initializable {
     private void openPasswordView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.changePasswordView(primStage);
+    }
+
+    @FXML
+    private void goToTasks(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.projectsOverview(primStage);
     }
 
     

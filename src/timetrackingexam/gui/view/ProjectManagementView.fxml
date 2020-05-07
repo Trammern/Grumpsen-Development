@@ -16,6 +16,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Navigate">
             <items>
+                  <MenuItem fx:id="menuItemTasks" mnemonicParsing="false" onAction="#goToTasks" text="Task overview" />
               <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#closeProgram" text="Close" />
             </items>
           </Menu>
