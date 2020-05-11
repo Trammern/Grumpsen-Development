@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -71,12 +72,31 @@ public class ProjectsOverviewController implements Initializable {
     private MenuItem menuItemPassword;
     @FXML
     private MenuItem menuItemAdmin;
+    @FXML
+    private JFXButton btnTimeButton;
+    @FXML
+    private Text txtTaskText;
+    @FXML
+    private Label txtSec;
+    @FXML
+    private Label txtMin;
+    @FXML
+    private JFXButton btnSubmit;
+    @FXML
+    private TextField fldSec;
+    @FXML
+    private TextField fldMin;
+    @FXML
+    private TextField fldHour;
+    @FXML
+    private Label txtHour;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         am = AppModel.getInstance();
         currentUser = am.getCurrentUser();
         menuUser.setText(currentUser.getEmail());
@@ -97,7 +117,6 @@ public class ProjectsOverviewController implements Initializable {
         openAddEdit();
     }
 
-    @FXML
     private void OpenTask(ActionEvent event) {
         if(am.getCurrentTask() != null){
             try
@@ -245,7 +264,22 @@ public class ProjectsOverviewController implements Initializable {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.projectManagementView(primStage);
     }
+
+    @FXML
+    private void btnStopStart(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleSubmit(ActionEvent event)
+    {
+    }
         
+    
+    
+    
+    
+    
     }
     
     
