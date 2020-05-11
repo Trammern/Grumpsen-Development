@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.be.User.Role;
+import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.dal.facade.IUserDal;
 
 /**
@@ -33,7 +34,14 @@ public class MockUserDAO implements IUserDal
         User u4 = new User("Admin", "Admin", "admin", "admin", Role.Admin);
         User u5 = new User ("default", "default", "default", "default", Role.Default);
         User u6 = new User("Daniel",  "Doe", "r", "1", Role.Default);
-                
+             
+        u1.setPassword(LoginTools.hashPassword(u1.getPassword()));
+        u2.setPassword(LoginTools.hashPassword(u2.getPassword()));
+        u3.setPassword(LoginTools.hashPassword(u3.getPassword()));
+        u4.setPassword(LoginTools.hashPassword(u4.getPassword()));
+        u5.setPassword(LoginTools.hashPassword(u5.getPassword()));
+        u6.setPassword(LoginTools.hashPassword(u6.getPassword()));
+        
         u1.assignUser(new Project(1, "Project X"));
         u2.assignUser(new Project(1, "Project X"));
         u3.assignUser(new Project(1, "Project X"));
