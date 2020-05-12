@@ -5,8 +5,6 @@
  */
 package timetrackingexam.be;
 
-import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,16 +14,18 @@ import javafx.collections.ObservableList;
  */
 public class Project {
     
+    private final static int DEFAULT_RATE = 150;
+    
     private int id;
     private String name;
     private String description;
     private double rate;
-    private Client client;
+    private int clientId;
     private ObservableList<Task> tasks;
     private ObservableList<User> users;
     
-    public Project(int id, String name, Client client) {
-        this(id, name, client, client.getDefaultrate());
+    public Project(int id, String name, int clientId) {
+        this(id, name, clientId, DEFAULT_RATE);
     }
 
     public Project(int id, String name) {
@@ -37,10 +37,10 @@ public class Project {
     
     
 
-    protected Project(int id, String name, Client client, double rate) {
+    protected Project(int id, String name, int clientId, double rate) {
         this.id = id;
         this.name = name;
-        this.client = client;
+        this.clientId = clientId;
         this.rate = rate;
         users = FXCollections.observableArrayList();
         tasks = FXCollections.observableArrayList();        
@@ -70,12 +70,12 @@ public class Project {
         this.rate = rate;
     }
 
-    public Client getClient() {
-        return client;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     public ObservableList<Task> getTasks() {
@@ -84,6 +84,16 @@ public class Project {
 
     public void setTasks(ObservableList<Task> tasks) {
         this.tasks = tasks;
+    }
+    
+    public int getTimeUsedByUser(User user){
+        int totalTimeUsed = 0;
+        for (Task task : tasks) {
+            if(user.getId() == task.getUserId()){
+                totalTimeUsed = totalTimeUsed + task.getHoursUsed();
+            }
+        }
+        return totalTimeUsed;
     }
 
     public ObservableList<User> getUsers() {
@@ -133,6 +143,8 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    
     
     
     

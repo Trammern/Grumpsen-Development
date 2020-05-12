@@ -47,6 +47,8 @@ public class MockProjectManager implements IProjectDal {
         
         Task t7 = new Task("Create something", "Description of something");
         
+        t1.setUserId(1);
+        
         TaskTime tt1 = new TaskTime(45, 4, 1, LocalDate.parse("2020-04-30"));
         TaskTime tt2 = new TaskTime(5, 55, 5, LocalDate.parse("2020-05-01"));
         TaskTime tt3 = new TaskTime(14, 1, 12, LocalDate.parse("2020-05-02"));

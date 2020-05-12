@@ -11,9 +11,20 @@ package timetrackingexam.be;
  */
 public class ProjectFactory {
     
-    public Project create(int id, String name, Client client, double rate) {
-        Project project = new Project(id, name, client, rate);
-        client.getProjects().add(project);
+   
+    /*
+    vi bør nok overveje en anden måde at holde styr på hvilke klienter har
+    hvilke projekter, vi kan alligevel ikke gemme objekter i en database
+    lad os lave en metode at tilføje projekter i DAL laget i stedet hvis ikke
+    Dette er den eneste måde.
+    
+    -mvh.
+    Birins
+    */
+    
+    public Project create(int id, String name, int clientId, double rate) {
+        Project project = new Project(id, name, clientId, rate);
+        //client.getProjects().add(project);
         return project;
     }
     

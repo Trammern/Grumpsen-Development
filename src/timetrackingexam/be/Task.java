@@ -14,19 +14,19 @@ import java.util.List;
  */
 public class Task {
     
-    private int id;
     private int projectId;
+    private int userId;
     private String name;
     private String description;
-    private int userId;
-    private List<TaskTime> timeUsed = new ArrayList<>();
     private int timeAssigned;
+    
+    private List<TaskTime> timeUsed = new ArrayList<>();
 
-    protected Task(int id, String name, int userId, int projectId) {
-        this.id = id;
+    protected Task(int projectId, int userId, String name, int timeAssigned) {
         this.projectId = projectId;
         this.name = name;
         this.userId = userId; 
+        this.timeAssigned = timeAssigned;
     }
     /**
      * Temporary Constructor for testing purposes
@@ -35,7 +35,6 @@ public class Task {
      * @param timeAssigned
      */
     public Task(int id, String name, int timeAssigned) {
-        this.id = id;
         this.name = name;
         this.timeAssigned = timeAssigned;
     }
@@ -110,12 +109,6 @@ public class Task {
         return timeUsed;
     }
     
-
-    public int getId()
-    {
-        return id;
-    }
-    
     public TaskTime getTotalTimeUsed() {
         int sec = 0;
         int min = 0;
@@ -142,7 +135,7 @@ public class Task {
             return false;
         }
         final Task other = (Task) obj;
-        if (this.id != other.id) {
+        if (this.userId != other.userId && this.projectId != other.projectId) {
             return false;
         }
         return true;

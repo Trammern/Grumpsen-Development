@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
@@ -88,10 +89,10 @@ public class AddEditUserViewController implements Initializable {
         }        
        
         if (selectedUser != null) {
-            saveChanges(new User(firstName, lastName, email, password, role));
+            saveChanges(new User(firstName, lastName, email, password, role, selectedUser.getId()));
         } else if (LoginTools.validateEmail(email)) {
             if (!am.checkIfEmailIsUsed(email)) {
-                saveChanges(new User(firstName, lastName, email, password, role));
+                saveChanges(new User(firstName, lastName, email, password, role, selectedUser.getId()));
             } else {
                 AlertBox.errorAlert("Email is already used by another user");
             }
@@ -119,6 +120,7 @@ public class AddEditUserViewController implements Initializable {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
+
     
     
     

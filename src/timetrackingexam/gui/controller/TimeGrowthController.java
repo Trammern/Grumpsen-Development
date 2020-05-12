@@ -69,7 +69,7 @@ public class TimeGrowthController implements Initializable
         
         
             for (TaskTime tt : currentTask.getTimeUsed()) {
-                series.getData().add(new XYChart.Data(tt.getDateOfWeek(), am.getLineChartData(t)));
+                series.getData().add(new XYChart.Data(tt.getDate().toString(), am.getLineChartData(t)));
             }
         
         lc.getData().add(series);

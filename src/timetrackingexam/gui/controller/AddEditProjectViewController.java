@@ -75,11 +75,13 @@ public class AddEditProjectViewController implements Initializable {
         Project newProject = new Project(4, fldName.getText());
         
         Double rate = Double.parseDouble(fldRate.getText());
-        Client c = null;
+        int clientId = 0;
         String description = fldDescription.getText();
         
+        //Not Implemented
+        newProject.setClientId(clientId);
+        
         newProject.setRate(rate);
-        newProject.setClient(c);
         newProject.setDescription(description);
         
         if(am.createNewProject(newProject)){
@@ -92,7 +94,10 @@ public class AddEditProjectViewController implements Initializable {
     private void updateProject(){
         updatedProject.setName(fldName.getText());
         updatedProject.setRate(Double.parseDouble(fldRate.getText()));
-        updatedProject.setClient(null);
+        
+        //Not implementet
+        updatedProject.setClientId(0);
+        
         updatedProject.setDescription(fldDescription.getText());
         am.updateProject(updatedProject);
         Stage primStage = (Stage) fldName.getScene().getWindow();

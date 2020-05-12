@@ -28,12 +28,12 @@ public class MockUserDAO implements IUserDal
     public MockUserDAO() {
         users = FXCollections.observableArrayList();
         
-        User u1 = new User("John", "Doe", "johndoe@hotmail.com", "qwerty", Role.Admin);
-        User u2 = new User("Billy", "Joe", "billyboy@hotmail.com", "qaz123", Role.Default);
-        User u3 = new User("Richard",  "Doe", "rdoe@gmail.com", "123456", Role.Default);
-        User u4 = new User("Admin", "Admin", "admin", "admin", Role.Admin);
-        User u5 = new User ("default", "default", "default", "default", Role.Default);
-        User u6 = new User("Daniel",  "Doe", "r", "1", Role.Default);
+        User u1 = new User("John", "Doe", "johndoe@hotmail.com", "qwerty", Role.Admin, 1);
+        User u2 = new User("Billy", "Joe", "billyboy@hotmail.com", "qaz123", Role.Default, 2);
+        User u3 = new User("Richard",  "Doe", "rdoe@gmail.com", "123456", Role.Default, 3);
+        User u4 = new User("Admin", "Admin", "admin", "admin", Role.Admin, 4);
+        User u5 = new User ("default", "default", "default", "default", Role.Default, 5);
+        User u6 = new User("Daniel",  "Doe", "r", "1", Role.Default, 6);
              
         u1.setPassword(LoginTools.hashPassword(u1.getPassword()));
         u2.setPassword(LoginTools.hashPassword(u2.getPassword()));
