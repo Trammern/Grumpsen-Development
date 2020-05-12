@@ -1,25 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
+package timetrackingexam.dal.dbaccess;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author Jonas
- */
-public class DBSettings {
+
+public class DBSettings
+{
 
     private SQLServerDataSource dataSource;
 
@@ -28,12 +20,12 @@ public class DBSettings {
      *
      * @throws IOException
      */
-    public DBSettings() throws FileNotFoundException, IOException{
+    public DBSettings() throws FileNotFoundException, IOException
+    {
         Properties props = new Properties();
-           
-            props.load(new FileReader("DBSettings.txt"));
 
-        
+        props.load(new FileReader("DBSettings.txt"));
+
         dataSource = new SQLServerDataSource();
         dataSource.setDatabaseName(props.getProperty("database"));
         dataSource.setUser(props.getProperty("user"));
@@ -47,7 +39,8 @@ public class DBSettings {
      * @return a Connection to the database
      * @throws SQLServerException
      */
-    public Connection getConnection() throws SQLServerException {
+    public Connection getConnection() throws SQLServerException
+    {
         return dataSource.getConnection();
     }
 }
