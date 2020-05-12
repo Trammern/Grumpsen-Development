@@ -15,20 +15,18 @@ import java.util.List;
 public class Task {
     
     private int id;
+    private int projectId;
     private String name;
     private String description;
-    private Project project;
-    private User user;
+    private int userId;
     private List<TaskTime> timeUsed = new ArrayList<>();
-    private int timeIndex = 0;
-    private long timeGrowth = 0;
     private int timeAssigned;
 
-    protected Task(int id, String name, Project project, User user) {
+    protected Task(int id, String name, int userId, int projectId) {
         this.id = id;
+        this.projectId = projectId;
         this.name = name;
-        this.project = project;
-        this.user = user; 
+        this.userId = userId; 
     }
     /**
      * Temporary Constructor for testing purposes
@@ -56,20 +54,12 @@ public class Task {
         this.name = name;
     }
 
-    public Project getProject() {
-        return project;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getDescription()
@@ -99,12 +89,7 @@ public class Task {
         return hoursUsed;
     }
     
-    public int ConvertToQuarters(int min, int hours){
-        int totalQuarters;
-        totalQuarters = min/15 + hours * 4;
-        
-        return totalQuarters;
-    }
+    
 
     public boolean addTaskTime(TaskTime tt) {
         /*for (TaskTime taskTime : timeUsed) {
@@ -143,12 +128,6 @@ public class Task {
         }
         
         return new TaskTime(sec, min, hour);
-    }
-    
-    public long timeGrowth(){
-        timeGrowth = timeGrowth + timeUsed.get(timeIndex).getHours();
-        timeIndex++;
-        return timeGrowth;
     }
     
     @Override

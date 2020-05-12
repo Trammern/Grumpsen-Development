@@ -18,6 +18,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.gui.model.AppModel;
 
@@ -30,6 +31,7 @@ public class TimeGrowthController implements Initializable
 {
 
     AppModel am = AppModel.getInstance();
+    private Task currentTask;
     
     @FXML
     private BorderPane chartPane;
@@ -42,6 +44,18 @@ public class TimeGrowthController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        currentTask = am.getCurrentTask();
+        chartPane.setCenter(buildChart(currentTask));
+    }    
+
+    @FXML
+    private void handleNavigateBack(ActionEvent event)
+    {
+        Stage stage = (Stage) btnNavigateBack.getScene().getWindow();
+        stage.close();
+    }
+    
+    private LineChart buildChart(Task t){
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Date");
         
@@ -54,20 +68,12 @@ public class TimeGrowthController implements Initializable
         series.setName("Hours used on task");
         
         
-            for (TaskTime tt : am.getCurrentTask().getTimeUsed()) {
-                series.getData().add(new XYChart.Data(tt.getDateOfWeek(), am.getCurrentTask().timeGrowth()));
-                System.out.println("got data point");
+            for (TaskTime tt : currentTask.getTimeUsed()) {
+                series.getData().add(new XYChart.Data(tt.getDateOfWeek(), am.getLineChartData(t)));
             }
         
-    lc.getData().add(series);
-    chartPane.setCenter(lc);
-    }    
-
-    @FXML
-    private void handleNavigateBack(ActionEvent event)
-    {
-        Stage stage = (Stage) btnNavigateBack.getScene().getWindow();
-        stage.close();
+        lc.getData().add(series);
+        return lc;
     }
     
 }
