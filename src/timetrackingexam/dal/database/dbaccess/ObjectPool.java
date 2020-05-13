@@ -1,4 +1,4 @@
-package timetrackingexam.dal.dbaccess;
+package timetrackingexam.dal.database.dbaccess;
 
 import java.util.Enumeration;
 import java.util.Hashtable;

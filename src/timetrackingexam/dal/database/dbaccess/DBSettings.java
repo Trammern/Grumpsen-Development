@@ -1,5 +1,5 @@
 
-package timetrackingexam.dal.dbaccess;
+package timetrackingexam.dal.database.dbaccess;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
