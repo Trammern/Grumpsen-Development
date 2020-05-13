@@ -16,6 +16,7 @@ import javafx.beans.property.ObjectProperty;
  */
 public class User
 {
+    private int Id;
     private String firstName;
     private String lastName;
     private final String email;
@@ -24,8 +25,9 @@ public class User
     private List<Project> projects;
     private List<Task> tasks;
 
-    public User(String firstName, String lastName, String email, String password, Role role)
+    public User(String firstName, String lastName, String email, String password, Role role, int Id)
     {
+        this.Id = Id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -35,7 +37,13 @@ public class User
         tasks = new ArrayList<>();
     }
 
-    
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
     
     public String getFirstName()
     {

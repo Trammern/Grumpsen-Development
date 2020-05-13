@@ -208,4 +208,8 @@ public class AppModel
         userManager.removeUsersFromProject(project, users);
     }
     
+    public long getLineChartData(Task t){
+        return taskManager.getLineChartData(t);
+    }
+    
 }

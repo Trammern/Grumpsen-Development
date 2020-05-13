@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.bll.facade.ITaskManager;
+import timetrackingexam.bll.utilities.StatisticsCalculator;
 import timetrackingexam.dal.facade.IProjectDal;
 import timetrackingexam.dal.mockdata.MockProjectManager;
 
@@ -20,10 +21,12 @@ import timetrackingexam.dal.mockdata.MockProjectManager;
 public class TaskManager implements ITaskManager
 {
     private Task task;
+    private StatisticsCalculator cal;
     private IProjectDal projectDal;
 
     public TaskManager()
     {
+        cal = new StatisticsCalculator();
         projectDal = new MockProjectManager();
     }
 
@@ -56,6 +59,10 @@ public class TaskManager implements ITaskManager
 
     public ObservableList<Task> getTimeUsed(Task t) {
         return projectDal.getTimeUsed(t);
+    }
+
+    public long getLineChartData(Task t) {
+        return cal.timeGrowth(t);
     }
     
     

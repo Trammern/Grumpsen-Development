@@ -44,6 +44,17 @@ public class UsedTimePerTaskController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         am = AppModel.getInstance();
+        buildChart();
+    }
+
+    @FXML
+    private void handleNavigateBack(ActionEvent event)
+    {
+        Stage stage = (Stage) btnNavigateBack.getScene().getWindow();
+        stage.close();
+    }
+    
+    private void buildChart(){
         
         double totalTime = 0;
         
@@ -68,13 +79,6 @@ public class UsedTimePerTaskController implements Initializable
         pieChart.setStartAngle(180);
         pieChart.setLabelsVisible(true);
         pieChart.setTitle(am.getCurrentProject() + "");
-    }
-
-    @FXML
-    private void handleNavigateBack(ActionEvent event)
-    {
-        Stage stage = (Stage) btnNavigateBack.getScene().getWindow();
-        stage.close();
     }
 
 }
