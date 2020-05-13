@@ -30,6 +30,10 @@ public class Client {
         projects = new ArrayList<>();
     }
 
+    public Client(String name, int clientId, int taskId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getName() {
         return name;
     }
