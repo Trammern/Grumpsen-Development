@@ -5,6 +5,7 @@
  */
 package timetrackingexam.dal.facade;
 
+import java.util.List;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;

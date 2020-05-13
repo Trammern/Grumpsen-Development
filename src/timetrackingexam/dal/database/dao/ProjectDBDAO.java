@@ -5,6 +5,12 @@
  */
 package timetrackingexam.dal.database.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
@@ -15,64 +21,44 @@ import timetrackingexam.dal.facade.IProjectDal;
  *
  * @author Rizvan
  */
-public class ProjectDBDAO implements IProjectDal
+public class ProjectDBDAO
 {
-    
+
     private ConnectionPool pool;
 
     public ProjectDBDAO()
     {
         pool = ConnectionPool.getInstance();
     }
-    
-    
 
-    @Override
-    public ObservableList<Project> getProjects()
+    public boolean createProject(Connection con, Project p)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        String sql = "INSERT INTO Project (id, name, clientId, rate) VALUES (?,?,?,?)";
+        try ( PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
+        {
+            ps.setInt(1, p.getId());
+            ps.setString(2, p.getName());
+            ps.setInt(3, p.getClientId());
+            ps.setDouble(4, p.getRate());
 
-    @Override
-    public ObservableList<Task> getTasks()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            int updatedRows = ps.executeUpdate();
 
-    @Override
-    public boolean createNewProject(Project p)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            if (updatedRows == 1)
+            {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next())
+                {
+                    int id = rs.getInt(1);
+                    Project project = new Project(id, p.getName(), p.getClientId(), p.getRate());
+                    //missing
+                }
+            }
 
-    @Override
-    public boolean createTask(Task t, Project p)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean updateProject(Project p)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean updateTask(Task updateTask)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ObservableList<Task> getTimeUsed(Task t)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
 }

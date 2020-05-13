@@ -5,6 +5,7 @@
  */
 package timetrackingexam.bll;
 
+import java.util.List;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.dal.facade.IProjectDal;
@@ -21,7 +22,7 @@ public class ProjectManager {
         projectDal = new MockProjectManager();
     }
     
-    public ObservableList<Project> getAllProjects(){
+    public List<Project> getAllProjects(){
         return projectDal.getProjects();
     }
     

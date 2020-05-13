@@ -37,7 +37,7 @@ public class Project {
     
     
 
-    protected Project(int id, String name, int clientId, double rate) {
+    public Project(int id, String name, int clientId, double rate) {
         this.id = id;
         this.name = name;
         this.clientId = clientId;

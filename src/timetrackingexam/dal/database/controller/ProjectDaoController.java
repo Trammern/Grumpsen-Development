@@ -6,6 +6,7 @@
 package timetrackingexam.dal.database.controller;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import timetrackingexam.be.Project;
 import timetrackingexam.dal.database.dao.ProjectDBDAO;
@@ -27,9 +28,12 @@ public class ProjectDaoController
         projectDao = new ProjectDBDAO();
     }
     
-    public boolean createProject()
+    public boolean createProject(Project p)
     {
-        return false;
+        Connection con = conPool.checkOut();
+        Boolean project = projectDao.createProject(con, p);
+        conPool.checkIn(con);
+        return project;
     }
     
     public boolean deleteProject()
@@ -37,7 +41,7 @@ public class ProjectDaoController
         return false;
     }
 
-    public boolean editProject()
+    public boolean editProject(Project p)
     {
         return false;
     }
@@ -46,6 +50,8 @@ public class ProjectDaoController
     {
         return null;
     }
+
+
     
     
     
