@@ -14,21 +14,19 @@ import java.util.List;
  */
 public class Task {
     
-    private int id;
+    private int projectId;
+    private int userId;
     private String name;
     private String description;
-    private Project project;
-    private User user;
-    private List<TaskTime> timeUsed = new ArrayList<>();
-    private int timeIndex = 0;
-    private long timeGrowth = 0;
     private int timeAssigned;
+    
+    private List<TaskTime> timeUsed = new ArrayList<>();
 
-    protected Task(int id, String name, Project project, User user) {
-        this.id = id;
+    protected Task(int projectId, int userId, String name, int timeAssigned) {
+        this.projectId = projectId;
         this.name = name;
-        this.project = project;
-        this.user = user; 
+        this.userId = userId; 
+        this.timeAssigned = timeAssigned;
     }
     /**
      * Temporary Constructor for testing purposes
@@ -37,7 +35,6 @@ public class Task {
      * @param timeAssigned
      */
     public Task(int id, String name, int timeAssigned) {
-        this.id = id;
         this.name = name;
         this.timeAssigned = timeAssigned;
     }
@@ -56,20 +53,12 @@ public class Task {
         this.name = name;
     }
 
-    public Project getProject() {
-        return project;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getDescription()
@@ -99,27 +88,25 @@ public class Task {
         return hoursUsed;
     }
     
-    public int ConvertToQuarters(int min, int hours){
-        int totalQuarters;
-        totalQuarters = min/15 + hours * 4;
-        
-        return totalQuarters;
-    }
+    
 
     public boolean addTaskTime(TaskTime tt) {
-        
-                System.out.println("date added");
-                return timeUsed.add(tt);
+        /*for (TaskTime taskTime : timeUsed) {
+            if(tt.getId() == taskTime.getId()){
+                taskTime.setHours(tt.getHours());
+                taskTime.setHours(tt.getMin());
+                taskTime.setHours(tt.getSec());
+                System.out.println("Date Updated");
+                return true;
+            }
+        }*/
+        System.out.println("date added");
+        return timeUsed.add(tt);
+         
     }
 
     public List<TaskTime> getTimeUsed() {
         return timeUsed;
-    }
-    
-
-    public int getId()
-    {
-        return id;
     }
     
     public TaskTime getTotalTimeUsed() {
@@ -136,12 +123,6 @@ public class Task {
         return new TaskTime(sec, min, hour);
     }
     
-    public long timeGrowth(){
-        timeGrowth = timeGrowth + timeUsed.get(timeIndex).getHours();
-        timeIndex++;
-        return timeGrowth;
-    }
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -154,7 +135,7 @@ public class Task {
             return false;
         }
         final Task other = (Task) obj;
-        if (this.id != other.id) {
+        if (this.userId != other.userId && this.projectId != other.projectId) {
             return false;
         }
         return true;

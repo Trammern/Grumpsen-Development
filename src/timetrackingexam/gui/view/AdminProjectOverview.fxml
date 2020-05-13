@@ -14,9 +14,10 @@
    <children>
       <MenuBar fx:id="menuBar" layoutX="26.0" layoutY="33.0" prefHeight="25.0" prefWidth="482.0" stylesheets="@../../../UsedTimePerTaskCSS.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Admin">
+          <Menu mnemonicParsing="false" text="Navigavte">
             <items>
               <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#closeProgram" text="Close" />
+                  <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Tools">
@@ -29,25 +30,24 @@
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </Menu>
-          <Menu fx:id="menuUser" mnemonicParsing="false" text="User">
+          <Menu fx:id="menuUser" mnemonicParsing="false" text="Admin">
             <items>
               <MenuItem fx:id="menuItemPassword" mnemonicParsing="false" onAction="#openPasswordView" text="Change password" />
-                  <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <JFXButton fx:id="btnAdd" layoutX="14.0" layoutY="318.0" onAction="#addEmployee" text="Add" textFill="#f4f4f4" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
-      <JFXButton fx:id="btnRemove" layoutX="53.0" layoutY="322.0" onAction="#removeEmployee" text="Remove" textFill="#f4f4f4" AnchorPane.leftAnchor="70.0" />
-      <JFXButton layoutX="138.0" layoutY="322.0" onAction="#openTaskView" text="Go to tasks" textFill="#f4f4f4" AnchorPane.leftAnchor="140.0" />
+      <JFXButton fx:id="btnAdd" layoutX="20.0" layoutY="321.0" onAction="#addEmployee" text="Add" textFill="#f4f4f4" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="20.0" />
+      <JFXButton fx:id="btnRemove" layoutX="68.0" layoutY="321.0" onAction="#removeEmployee" text="Remove" textFill="#f4f4f4" AnchorPane.leftAnchor="68.0" />
+      <JFXButton layoutX="136.0" layoutY="321.0" onAction="#openTaskView" text="Go to tasks" textFill="#f4f4f4" AnchorPane.leftAnchor="136.0" />
       <TableView fx:id="tblEmployeeTable" layoutX="19.0" layoutY="116.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <columns>
           <TableColumn fx:id="columnName" prefWidth="240.0" text="Name" />
-          <TableColumn prefWidth="100.0" text="Billable Hours" />
-            <TableColumn prefWidth="100.0" text="Total Hours" />
+          <TableColumn fx:id="columnBilHours" prefWidth="100.0" text="Billable Hours" />
+            <TableColumn fx:id="columnTotalHours" prefWidth="100.0" text="Total Hours" />
         </columns>
       </TableView>
-      <Text fx:id="txtCurrentProject" fill="#f4f4f4" layoutX="10.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X Overview" AnchorPane.leftAnchor="20.0">
+      <Text fx:id="txtCurrentProject" fill="#f4f4f4" layoutX="79.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project X Overview" AnchorPane.leftAnchor="79.0">
          <font>
             <Font size="21.0" />
          </font>
@@ -62,8 +62,8 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <JFXButton fx:id="btnNewUser" layoutX="326.0" layoutY="321.0" onAction="#newUser" text="New user" textFill="#f4f4f4" />
-      <JFXButton fx:id="btnEditUser" layoutX="400.0" layoutY="321.0" onAction="#editUser" text="Edit user" textFill="#f4f4f4" />
-      <JFXButton fx:id="btnBack" layoutX="206.0" layoutY="42.0" onAction="#backToProjectManagement" prefHeight="25.0" prefWidth="50.0" text="Back" textFill="#f4f4f4" />
+      <JFXButton fx:id="btnNewUser" layoutX="312.0" layoutY="321.0" onAction="#newUser" text="New user" textFill="#f4f4f4" />
+      <JFXButton fx:id="btnEditUser" layoutX="382.0" layoutY="321.0" onAction="#editUser" text="User Details" textFill="#f4f4f4" />
+      <JFXButton fx:id="btnBack" layoutX="20.0" layoutY="42.0" onAction="#backToProjectManagement" prefHeight="25.0" prefWidth="50.0" text="Back" textFill="#f4f4f4" />
    </children>
 </AnchorPane>

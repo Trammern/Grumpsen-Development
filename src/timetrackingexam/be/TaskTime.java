@@ -12,17 +12,18 @@ import java.time.LocalDate;
  * @author math2
  */
 public class TaskTime {
+    private int taskid;
+    private int userId;
     private int sec;
     private int min;
     private int hours;
-    private LocalDate dateOfWeek;
-    private long totalMinutes = 0;
+    private LocalDate date;
 
     public TaskTime(int sec, int min, int hours) {
         this.sec = sec;
         this.min = min;
         this.hours = hours;
-        dateOfWeek = LocalDate.now();
+        date = LocalDate.now();
     }
     /*
      * For Testing
@@ -31,17 +32,17 @@ public class TaskTime {
         this.sec = sec;
         this.min = min;
         this.hours = hours;
-        this.dateOfWeek = dateOfWeek;
+        this.date = dateOfWeek;
     }
     
     
     
-    public String getDateOfWeek() {
-        return dateOfWeek.toString();
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateOfWeek(LocalDate dateOfWeek) {
-        this.dateOfWeek = dateOfWeek;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getSec() {
@@ -67,8 +68,23 @@ public class TaskTime {
     public void setHours(int hours) {
         this.hours = hours;
     }
-    
-    
+
+    public int getTaskid() {
+        return taskid;
+    }
+
+    public void setTaskid(int taskid) {
+        this.taskid = taskid;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     
    
     

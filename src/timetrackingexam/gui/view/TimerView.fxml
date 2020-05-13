@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="380.0" stylesheets="@../../../StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.TimerViewController">
    <children>
-      <JFXButton fx:id="btnTimeButton" layoutX="96.0" layoutY="127.0" onAction="#btnStopStart" prefHeight="40.0" prefWidth="90.0" text="Start">
+      <JFXButton fx:id="btnTimeButton2" layoutX="96.0" layoutY="127.0" onAction="#btnStopStart" prefHeight="40.0" prefWidth="90.0" text="Start">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,22 +34,22 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <JFXButton fx:id="btnSubmit" layoutX="194.0" layoutY="127.0" onAction="#handleSubmit" prefHeight="40.0" prefWidth="90.0" text="Submit">
+      <JFXButton fx:id="btnSubmit2" layoutX="194.0" layoutY="127.0" onAction="#handleSubmit" prefHeight="40.0" prefWidth="90.0" text="Submit">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="fldSec" layoutX="69.0" layoutY="69.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldSec2" layoutX="69.0" layoutY="69.0" prefHeight="44.0" prefWidth="58.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="fldMin" layoutX="171.0" layoutY="69.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldMin2" layoutX="171.0" layoutY="69.0" prefHeight="44.0" prefWidth="58.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="fldHour" layoutX="286.0" layoutY="69.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldHour2" layoutX="286.0" layoutY="69.0" prefHeight="44.0" prefWidth="58.0">
          <font>
             <Font size="20.0" />
          </font>

@@ -72,6 +72,10 @@ public class AdminProjectOverviewController implements Initializable {
     private JFXButton btnRemove;
     @FXML
     private JFXButton btnBack;
+    @FXML
+    private TableColumn<User, String> columnBilHours;
+    @FXML
+    private TableColumn<User, String> columnTotalHours;
 
     /**
      * Initializes the controller class.
@@ -94,6 +98,12 @@ public class AdminProjectOverviewController implements Initializable {
             String name = data.getValue().getLastName() + ", " + data.getValue().getFirstName();
             return new SimpleStringProperty(name);
         });
+        
+        columnTotalHours.setCellValueFactory(data -> {
+            String totalHours = am.getCurrentProject().getTimeUsedByUser(data.getValue())+"";
+            return new SimpleStringProperty(totalHours);
+        }
+        );
     }
 
     @FXML
@@ -166,5 +176,7 @@ public class AdminProjectOverviewController implements Initializable {
         Stage primStage = (Stage) btnBack.getScene().getWindow();
         ViewGuide.openView(PROJECT_MANAGEMENT_VIEW_PATH, "Project Management View", primStage, true, true);
     }
+    
+    
     
 }
