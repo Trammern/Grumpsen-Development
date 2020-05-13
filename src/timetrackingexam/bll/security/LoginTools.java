@@ -47,6 +47,16 @@ public class LoginTools {
         return email.matches("[\\w-]+@([\\w-]+\\.)+[\\w-]+");
     }
     
+    /**
+     * Password must contain one number
+     * @param password
+     * @return 
+     */
+    public static boolean validatePassword(String password)
+    {
+        return password.matches("^(?=.*[0-9])$");
+    }
+    
     public static String hashPassword(String password) { 
         String base = password;
         try {            
