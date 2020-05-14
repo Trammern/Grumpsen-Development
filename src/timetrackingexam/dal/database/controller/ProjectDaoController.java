@@ -36,10 +36,10 @@ public class ProjectDaoController
         return project;
     }
     
-    public boolean deleteProject()
+    public boolean deleteProject(Project p)
     {
         Connection con = conPool.checkOut();
-        Boolean delete = true;//delete project from dao
+        Boolean delete = projectDao.deleteProject(con, p);
         conPool.checkIn(con);
         return delete;
     }
