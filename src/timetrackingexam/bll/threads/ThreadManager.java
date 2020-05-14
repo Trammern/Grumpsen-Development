@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timetrackingexam.bll;
+package timetrackingexam.bll.threads;
 
 import javafx.scene.control.TextField;
 import timetrackingexam.bll.threads.Scheduler;

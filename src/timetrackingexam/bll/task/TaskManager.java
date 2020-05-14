@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timetrackingexam.bll;
+package timetrackingexam.bll.task;
 
 import java.util.List;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
-import timetrackingexam.bll.facade.ITaskManager;
 import timetrackingexam.bll.utilities.StatisticsCalculator;
 import timetrackingexam.dal.facade.IProjectDal;
 import timetrackingexam.dal.mockdata.MockProjectManager;

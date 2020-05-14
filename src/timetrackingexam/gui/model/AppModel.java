@@ -14,10 +14,10 @@ import javafx.scene.control.TextField;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
-import timetrackingexam.bll.ProjectManager;
-import timetrackingexam.bll.TaskManager;
-import timetrackingexam.bll.ThreadManager;
-import timetrackingexam.bll.UserManager;
+import timetrackingexam.bll.project.ProjectManager;
+import timetrackingexam.bll.task.TaskManager;
+import timetrackingexam.bll.threads.ThreadManager;
+import timetrackingexam.bll.user.UserManager;
 
 /**
  *

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timetrackingexam.bll.facade;
+package timetrackingexam.bll.task;
 
 import java.util.List;
 import timetrackingexam.be.Project;
