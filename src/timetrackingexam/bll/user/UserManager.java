@@ -32,10 +32,6 @@ public class UserManager
         return userDal.getAllUsers();
     }
     
-    public void changePassword(User user) {
-        userDal.changePassword(user);
-    }
-    
     public boolean checkIfEmailIsUsed(String email) {
         
         boolean used = false;

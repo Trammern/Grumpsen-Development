@@ -161,11 +161,6 @@ public class AppModel
         return tm.isRunning();
     }
     
-    public void changePassword(User user) {
-        userManager.changePassword(user);
-    }
-
-
     public User getSelectedUser() {
         return selectedUser;
     }

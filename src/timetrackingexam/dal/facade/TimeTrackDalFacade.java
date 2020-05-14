@@ -106,12 +106,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public void changePassword(User user)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void addUser(User user)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -138,6 +132,11 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public void removeUserFromProject(Project project, User user)
     {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteUser(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

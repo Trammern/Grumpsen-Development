@@ -59,10 +59,6 @@ public class MockUserDAO implements IUserDal
         return users;
     }
     
-    public void changePassword(User user) {
-        //todo
-    }
-    
     public void addUser(User user) {
         users.add(user);
     }
@@ -103,6 +99,11 @@ public class MockUserDAO implements IUserDal
     @Override
     public void removeUserFromProject(Project project, User user) {
         user.removeUser(project);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        users.remove(user);
     }
     
     
