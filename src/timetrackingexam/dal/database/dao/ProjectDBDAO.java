@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
@@ -59,6 +60,21 @@ public class ProjectDBDAO
             Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public List<Project> getAllProjects(Connection con)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Boolean updateProject(Connection con, Project p)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Boolean deleteProject(Connection con, Project p)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
