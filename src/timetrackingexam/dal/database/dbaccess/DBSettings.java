@@ -20,17 +20,22 @@ public class DBSettings
      *
      * @throws IOException
      */
-    public DBSettings() throws FileNotFoundException, IOException
+    public DBSettings()
     {
         Properties props = new Properties();
 
-        props.load(new FileReader("DBSettings.txt"));
+        try{
+            props.load(new FileReader("DBSettings.txt"));
 
-        dataSource = new SQLServerDataSource();
-        dataSource.setDatabaseName(props.getProperty("database"));
-        dataSource.setUser(props.getProperty("user"));
-        dataSource.setPassword(props.getProperty("password"));
-        dataSource.setServerName(props.getProperty("server"));
+            dataSource = new SQLServerDataSource();
+            dataSource.setDatabaseName(props.getProperty("database"));
+            dataSource.setUser(props.getProperty("user"));
+            dataSource.setPassword(props.getProperty("password"));
+            dataSource.setServerName(props.getProperty("server"));
+        }
+        catch(IOException ioE){
+            System.out.println("File could not be read");
+        }
     }
 
     /**
@@ -41,6 +46,7 @@ public class DBSettings
      */
     public Connection getConnection() throws SQLServerException
     {
-        return dataSource.getConnection();
+            return dataSource.getConnection();
+        
     }
 }

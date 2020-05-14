@@ -22,10 +22,10 @@ public class Task {
     
     private List<TaskTime> timeUsed = new ArrayList<>();
 
-    protected Task(int projectId, int userId, String name, int timeAssigned) {
+    public Task(int projectId, int userId, String name, int timeAssigned) {
         this.projectId = projectId;
-        this.name = name;
         this.userId = userId; 
+        this.name = name;
         this.timeAssigned = timeAssigned;
     }
     /**
@@ -60,6 +60,16 @@ public class Task {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+    
+    
 
     public String getDescription()
     {

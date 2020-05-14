@@ -34,13 +34,7 @@ public class ConnectionPool extends ObjectPool<Connection>
     private ConnectionPool()
     {
         super();
-        try
-        {
-            dbSettings = new DBSettings();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(ConnectionPool.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dbSettings = new DBSettings();
     }
     
     
