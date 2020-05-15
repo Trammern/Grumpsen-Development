@@ -15,21 +15,24 @@ import timetrackingexam.dal.mockdata.MockProjectManager;
  *
  * @author math2
  */
-public class ProjectManager {
+public class ProjectManager implements IProjectManager {
     private final IProjectDal projectDal;
 
     public ProjectManager() {
         projectDal = new MockProjectManager();
     }
     
+    @Override
     public List<Project> getAllProjects(){
         return projectDal.getProjects();
     }
     
+    @Override
     public boolean createNewProject(Project p){
         return projectDal.createNewProject(p);
     }
 
+    @Override
     public boolean updateProject(Project p) {
         return projectDal.updateProject(p);
     }
