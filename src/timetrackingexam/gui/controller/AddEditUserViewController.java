@@ -78,7 +78,7 @@ public class AddEditUserViewController implements Initializable {
     @FXML
     private void saveUser(ActionEvent event) {
         String email = txtEmail.getText();
-        String password = (selectedUser!=null ) ? selectedUser.getPassword() : txtPassword.getText();
+        String password = (selectedUser!=null ) ? selectedUser.getPassword() : LoginTools.hashPassword(txtPassword.getText());
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         User.Role role = cbbRole.getSelectionModel().getSelectedItem();

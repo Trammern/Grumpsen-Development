@@ -57,10 +57,7 @@ public class AppModel
     public void fetch(){
         getAllUsers();
         getProjects();
-        getTasks();
-        if (currentProject!=null) {
-            GetProjectEmployees(currentProject);
-        }
+        getTasks();        
     }
     
     public ObservableList<User> getAllUsers()

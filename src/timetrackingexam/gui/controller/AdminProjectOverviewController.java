@@ -39,7 +39,7 @@ public class AdminProjectOverviewController implements Initializable {
     private AppModel am;
     private User currentUser;
     private Project selectedProject;
-    private ObservableList<User> projectUsers;
+    private ObservableList<User> allUsers;
     private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/AddEditUserView.fxml";    
     private static final String ADD_PROJECT_USERS_VIEW_PATH = "/timetrackingexam/gui/view/AddProjectUsersView.fxml";    
     private static final String PROJECT_MANAGEMENT_VIEW_PATH = "/timetrackingexam/gui/view/ProjectManagementView.fxml";    
@@ -85,10 +85,10 @@ public class AdminProjectOverviewController implements Initializable {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
        menuUser.setText(currentUser.getEmail());             
-       setProject(am.getCurrentProject());       
-       projectUsers = am.GetProjectEmployees(selectedProject);       
+       setProject(am.getCurrentProject()); //to be deleted       
+       allUsers = am.getAllUsers();
        tblEmployeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); 
-       tblEmployeeTable.setItems(projectUsers);       
+       tblEmployeeTable.setItems(allUsers);       
               
        initColumns();
     }    
