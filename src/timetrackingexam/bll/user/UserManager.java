@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.facade.IUserDal;
+import timetrackingexam.dal.facade.TimeTrackDalFacade;
 import timetrackingexam.dal.mockdata.MockUserDAO;
 
 /**
@@ -24,7 +25,7 @@ public class UserManager
 
     public UserManager()
     {
-        userDal = new MockUserDAO();
+        userDal = new TimeTrackDalFacade();
     }
 
     public ObservableList<User> getAllUsers()
