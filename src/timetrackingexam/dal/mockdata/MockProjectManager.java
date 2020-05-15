@@ -49,27 +49,27 @@ public class MockProjectManager implements IProjectDal {
         
         t1.setUserId(1);
         
-        TaskTime tt1 = new TaskTime(45, 4, 1, LocalDate.parse("2020-04-30"));
-        TaskTime tt2 = new TaskTime(5, 55, 5, LocalDate.parse("2020-05-01"));
-        TaskTime tt3 = new TaskTime(14, 1, 12, LocalDate.parse("2020-05-02"));
-        TaskTime tt4 = new TaskTime(5, 1, 12, LocalDate.parse("2020-05-03"));
-        TaskTime tt5 = new TaskTime(2, 5, 4, LocalDate.parse("2020-05-04"));
-        TaskTime tt6 = new TaskTime(5, 7, 1, LocalDate.parse("2020-05-05"));
-        TaskTime tt7 = new TaskTime(1, 7, 6, LocalDate.parse("2020-05-07"));
+//        TaskTime tt1 = new TaskTime(45, 4, 1, LocalDate.parse("2020-04-30"));
+//        TaskTime tt2 = new TaskTime(5, 55, 5, LocalDate.parse("2020-05-01"));
+//        TaskTime tt3 = new TaskTime(14, 1, 12, LocalDate.parse("2020-05-02"));
+//        TaskTime tt4 = new TaskTime(5, 1, 12, LocalDate.parse("2020-05-03"));
+//        TaskTime tt5 = new TaskTime(2, 5, 4, LocalDate.parse("2020-05-04"));
+//        TaskTime tt6 = new TaskTime(5, 7, 1, LocalDate.parse("2020-05-05"));
+//        TaskTime tt7 = new TaskTime(1, 7, 6, LocalDate.parse("2020-05-07"));
         
         
-        t1.addTaskTime(tt1);
-        t2.addTaskTime(tt2);
-        t3.addTaskTime(tt3);
-        t1.addTaskTime(tt4);
-        t1.addTaskTime(tt5);
-        t1.addTaskTime(tt6);
-        t1.addTaskTime(tt7);
-        
-        t4.addTaskTime(tt7);
-        t4.addTaskTime(tt4);
-        t5.addTaskTime(tt3);
-        t6.addTaskTime(tt5);
+//        t1.addTaskTime(tt1);
+//        t2.addTaskTime(tt2);
+//        t3.addTaskTime(tt3);
+//        t1.addTaskTime(tt4);
+//        t1.addTaskTime(tt5);
+//        t1.addTaskTime(tt6);
+//        t1.addTaskTime(tt7);
+//        
+//        t4.addTaskTime(tt7);
+//        t4.addTaskTime(tt4);
+//        t5.addTaskTime(tt3);
+//        t6.addTaskTime(tt5);
         
         p1.addTask(t1);
         p1.addTask(t2);
