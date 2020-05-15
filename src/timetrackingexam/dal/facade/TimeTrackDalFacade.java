@@ -11,6 +11,7 @@ import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.database.controller.ProjectDaoController;
+import timetrackingexam.dal.database.controller.UserDBDAOController;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
 /**
@@ -21,10 +22,12 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 {
 
     private ProjectDaoController projectController;
+    private UserDBDAOController userController;
 
     public TimeTrackDalFacade()
     {
         projectController = new ProjectDaoController(ConnectionPool.getInstance());
+        userController = new UserDBDAOController(ConnectionPool.getInstance());
     }
     
     
@@ -110,19 +113,19 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public ObservableList<User> getAllUsers()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return userController.getAllUsers();
     }
 
     @Override
     public boolean addUser(User user)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return userController.addUser(user);
     }
 
     @Override
     public boolean updateUser(User user)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return userController.updateUser(user);
     }
 
     @Override
@@ -145,7 +148,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 
     @Override
     public boolean deleteUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return userController.deleteUser(user);
     }
     
 }
