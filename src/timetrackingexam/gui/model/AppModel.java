@@ -173,14 +173,16 @@ public class AppModel
         return userManager.checkIfEmailIsUsed(email);
     }
     
-    public void addUser(User user) {
-        userManager.addUser(user);
-        getAllUsers();
+    public boolean addUser(User user) {
+        return userManager.addUser(user);        
     }
     
-    public void updateUser(User user) {
-        userManager.updateUser(user);
-        getAllUsers();
+    public boolean updateUser(User user) {
+        return userManager.updateUser(user);        
+    }
+    
+    public boolean deleteUser(User user) {
+        return userManager.deleteUser(user);        
     }
 
     public ObservableList<User> GetProjectEmployees(Project p) {

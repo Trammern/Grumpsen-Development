@@ -45,12 +45,16 @@ public class UserManager
         return used;
     }
     
-    public void addUser(User user) {
-        userDal.addUser(user);
+    public boolean addUser(User user) {
+        return userDal.addUser(user);
     }
     
-    public void updateUser(User user) {
-        userDal.updateUser(user);
+    public boolean updateUser(User user) {
+        return userDal.updateUser(user);
+    }
+    
+    public boolean deleteUser(User user) {
+        return userDal.deleteUser(user);
     }
 
     public ObservableList<User> getProjectEmployees(Project p) {

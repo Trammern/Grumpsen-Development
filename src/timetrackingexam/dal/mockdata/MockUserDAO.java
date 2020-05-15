@@ -59,11 +59,11 @@ public class MockUserDAO implements IUserDal
         return users;
     }
     
-    public void addUser(User user) {
-        users.add(user);
+    public boolean addUser(User user) {
+        return users.add(user);
     }
     
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
         for (User currentUser : users) {
             if (currentUser.equals(user)) {
                 currentUser.setFirstName(user.getFirstName());
@@ -73,6 +73,7 @@ public class MockUserDAO implements IUserDal
                 
             }
         }
+        return true; //temporary
     }
 
     @Override
@@ -102,8 +103,8 @@ public class MockUserDAO implements IUserDal
     }
 
     @Override
-    public void deleteUser(User user) {
-        users.remove(user);
+    public boolean deleteUser(User user) {
+        return users.remove(user);
     }
     
     

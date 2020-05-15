@@ -17,9 +17,9 @@ import timetrackingexam.be.User;
 public interface IUserDal {
     
     public ObservableList<User> getAllUsers();    
-    public void addUser(User user);
-    public void updateUser(User user);
-    public void deleteUser(User user);
+    public boolean addUser(User user);
+    public boolean updateUser(User user);
+    public boolean deleteUser(User user);
     public ObservableList<User> getProjectEmployees(Project p); //delete
     public void addUserToProject(Project project, User user); //delete
     public void removeUserFromProject(Project project, User user); //delete
