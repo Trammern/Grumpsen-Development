@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Task {
     
+    private int id;
     private int projectId;
     private int userId;
     private String name;
@@ -22,11 +23,11 @@ public class Task {
     
     private List<TaskTime> timeUsed = new ArrayList<>();
 
-    public Task(int projectId, int userId, String name, int timeAssigned) {
+    public Task(int id, int projectId, int userId, String name) {
+        this.id = id;
         this.projectId = projectId;
         this.userId = userId; 
         this.name = name;
-        this.timeAssigned = timeAssigned;
     }
     /**
      * Temporary Constructor for testing purposes
@@ -68,8 +69,14 @@ public class Task {
     public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
-    
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDescription()
     {

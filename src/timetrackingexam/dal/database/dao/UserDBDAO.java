@@ -39,6 +39,43 @@ public class UserDBDAO {
         }
     }
     
+    public boolean createUser(Connection con, User user) throws SQLException {
+        String sql = "INSERT INTO Employee (FirstName, LastName, Email, Password, Role) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getRole().toString());
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        }
+    }
     
+    public boolean updateUser(Connection con, User user) throws SQLException {
+        String sql = "UPDATE Employee SET FirstName = ?, LastName = ?, Email = ?, Password = ?, Role = ? WHERE ID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getRole().toString());
+            ps.setInt(6, user.getId());
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        }
+    }
+    
+    public boolean deleteUser(Connection con, User user) throws SQLException {
+        String sql = "DELETE FROM Employee WHERE ID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, user.getId());
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        }
+    }
     
 }

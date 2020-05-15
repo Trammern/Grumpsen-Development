@@ -58,5 +58,4 @@ public class UserDatabaseDalFacade implements IUserDal {
         return controller.deleteUser(user);
     }
     
-    
 }

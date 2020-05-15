@@ -26,9 +26,11 @@ public class TaskTime {
         date = LocalDate.now();
     }
     /*
-     * For Testing
+     * For realz
      */
-    public TaskTime(int sec, int min, int hours, LocalDate dateOfWeek) {
+    public TaskTime(int taskId, int userId, int sec, int min, int hours, LocalDate dateOfWeek) {
+        this.taskid = taskId;
+        this.userId = userId;
         this.sec = sec;
         this.min = min;
         this.hours = hours;

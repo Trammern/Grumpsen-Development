@@ -43,15 +43,43 @@ public class UserDBDAOController {
     }
     
     public boolean addUser(User user) {
-        return true;
+        
+        try {
+            Connection con = pool.checkOut();
+            boolean databaseUpdated = userDao.createUser(con, user);
+            pool.checkIn(con);
+            return databaseUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBDAOController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
     }
     
     public boolean updateUser(User user) {
-        return true;
+        
+        try {
+            Connection con = pool.checkOut();
+            boolean databaseUpdated = userDao.updateUser(con, user);
+            pool.checkIn(con);
+            return databaseUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBDAOController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     public boolean deleteUser(User user) {
-        return true;
-    }    
-        
+        try {
+            Connection con = pool.checkOut();
+            boolean databaseUpdated = userDao.deleteUser(con, user);
+            pool.checkIn(con);
+            return databaseUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBDAOController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }  
+       
+       
 }
