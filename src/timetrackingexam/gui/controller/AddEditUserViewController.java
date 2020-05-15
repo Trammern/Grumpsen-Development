@@ -92,7 +92,7 @@ public class AddEditUserViewController implements Initializable {
             saveChanges(new User(firstName, lastName, email, password, role, selectedUser.getId()));
         } else if (LoginTools.validateEmail(email)) {
             if (!am.checkIfEmailIsUsed(email)) {
-                saveChanges(new User(firstName, lastName, email, password, role, selectedUser.getId()));
+                saveChanges(new User(firstName, lastName, email, password, role, 0));
             } else {
                 AlertBox.errorAlert("Email is already used by another user");
             }
