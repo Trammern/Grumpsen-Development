@@ -45,20 +45,23 @@
       </MenuBar>
 
       <JFXComboBox fx:id="cbbProjectSelect" focusColor="#405aa8" layoutX="14.0" layoutY="46.0" onAction="#setItemsOnList" prefHeight="25.0" prefWidth="190.0" promptText="Project X" style="-fx-background-color: #6ea3ff;" stylesheets="@../../../StyleSheet.css" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" />
-      <JFXListView fx:id="lstTaskList" layoutX="10.0" layoutY="113.0" onMouseClicked="#setCurrentTask" prefHeight="330.0" prefWidth="190.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="10.0" />
+      <JFXListView fx:id="lstTaskList" layoutX="8.0" layoutY="113.0" onMouseClicked="#setCurrentTask" prefHeight="330.0" prefWidth="201.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="8.0" />
 
-      <JFXTextArea fx:id="txtTaskDescription" editable="false" layoutX="326.0" layoutY="322.0" prefHeight="143.0" prefWidth="237.0" style="-fx-background-color: #51649c;" stylesheets="@../../../StyleSheet.css" AnchorPane.rightAnchor="118.0" />
+      <JFXTextArea fx:id="txtTaskDescription" editable="false" layoutX="247.0" layoutY="122.0" prefHeight="143.0" prefWidth="387.0" style="-fx-background-color: #51649c;" stylesheets="@../../../StyleSheet.css" AnchorPane.rightAnchor="47.0" />
       <JFXButton fx:id="btnAddTask" layoutX="10.0" layoutY="453.0" onAction="#addTask" prefHeight="25.0" prefWidth="72.0" stylesheets="@../../../StyleSheet.css" text="Add Task" />
-      <Label fx:id="txtSlectedTask" layoutX="362.0" layoutY="-24.0" prefHeight="17.0" prefWidth="98.0" text="None" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="357.0" AnchorPane.topAnchor="-24.0" />
-      <Label layoutX="331.0" layoutY="294.0" text="Description:" textFill="WHITE" />
-      <Label layoutX="215.0" layoutY="-24.0" text="Currently selected task:" textFill="WHITE" AnchorPane.bottomAnchor="357.0" AnchorPane.topAnchor="-24.0">
+      <Label fx:id="txtSlectedTask" layoutX="384.0" layoutY="49.0" prefHeight="40.0" prefWidth="262.0" text="None" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="410.0" AnchorPane.topAnchor="49.0" />
+      <Label layoutX="247.0" layoutY="105.0" text="Description:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="247.0" layoutY="35.0" prefHeight="68.0" prefWidth="132.0" text="Currently selected task:" textFill="WHITE" AnchorPane.bottomAnchor="396.0" AnchorPane.topAnchor="35.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <JFXButton fx:id="btnEditTask" layoutX="89.0" layoutY="453.0" onAction="#handleEditTask" text="Edit Task" />
       <JFXButton fx:id="btnDeleteTask" layoutX="158.0" layoutY="453.0" onAction="#handleDeleteTask" prefHeight="25.0" prefWidth="51.0" text="Delete" />
-      <JFXButton fx:id="btnTimeButton" layoutX="223.0" layoutY="161.0" onAction="#btnStopStart" prefHeight="40.0" prefWidth="90.0" text="Start">
+      <JFXButton fx:id="btnTimeButton" layoutX="334.0" layoutY="403.0" onAction="#btnStopStart" prefHeight="40.0" prefWidth="90.0" text="Start">
          <font>
             <Font size="18.0" />
          </font>
@@ -68,37 +71,37 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Label fx:id="txtSec" layoutX="483.0" layoutY="110.0" text="Sec: " textFill="#c6c6c6">
+      <Label fx:id="txtSec" layoutX="495.0" layoutY="327.0" text="Sec: " textFill="#c6c6c6">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="txtMin" layoutX="362.0" layoutY="110.0" text="Min: " textFill="#c6c6c6">
+      <Label fx:id="txtMin" layoutX="379.0" layoutY="327.0" text="Min: " textFill="#c6c6c6">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="txtHour" layoutX="223.0" layoutY="110.0" text="Hours:" textFill="#c6c6c6">
+      <Label fx:id="txtHour" layoutX="252.0" layoutY="327.0" text="Hours:" textFill="#c6c6c6">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnSubmit" layoutX="339.0" layoutY="161.0" onAction="#handleSubmit" prefHeight="40.0" prefWidth="90.0" text="Submit">
+      <JFXButton fx:id="btnSubmit" layoutX="444.0" layoutY="403.0" onAction="#handleSubmit" prefHeight="40.0" prefWidth="90.0" text="Submit">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="fldSec" layoutX="530.0" layoutY="103.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldSec" layoutX="534.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="fldMin" layoutX="411.0" layoutY="103.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldMin" layoutX="423.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="fldHour" layoutX="293.0" layoutY="103.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldHour" layoutX="312.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0">
          <font>
             <Font size="20.0" />
          </font>

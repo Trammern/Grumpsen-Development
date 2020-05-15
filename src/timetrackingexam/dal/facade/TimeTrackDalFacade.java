@@ -11,6 +11,7 @@ import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.database.controller.ProjectDaoController;
+import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
 /**
  *
@@ -20,6 +21,13 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 {
 
     private ProjectDaoController projectController;
+
+    public TimeTrackDalFacade()
+    {
+        projectController = new ProjectDaoController(ConnectionPool.getInstance());
+    }
+    
+    
     
     @Override
     public ObservableList<Project> getProjects()
