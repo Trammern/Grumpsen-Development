@@ -17,7 +17,7 @@ import timetrackingexam.dal.mockdata.MockUserDAO;
  *
  * @author Rizvan
  */
-public class UserManager
+public class UserManager implements IUserManager
 {
     
     private IUserDal userDal;
@@ -27,6 +27,7 @@ public class UserManager
         userDal = new MockUserDAO();
     }
 
+    @Override
     public ObservableList<User> getAllUsers()
     {
         return userDal.getAllUsers();
@@ -45,22 +46,27 @@ public class UserManager
         return used;
     }
     
+    @Override
     public boolean addUser(User user) {
         return userDal.addUser(user);
     }
     
+    @Override
     public boolean updateUser(User user) {
         return userDal.updateUser(user);
     }
     
+    @Override
     public boolean deleteUser(User user) {
         return userDal.deleteUser(user);
     }
 
+    @Override
     public ObservableList<User> getProjectEmployees(Project p) {
         return userDal.getProjectEmployees(p);
     }
     
+    @Override
     public ObservableList<User> getProjectNonEmployees(Project project) {
         ObservableList<User> nonEmployees = FXCollections.observableArrayList();
         nonEmployees.clear();
