@@ -29,13 +29,13 @@ public class UserDatabaseDalFacade implements IUserDal {
     }
 
     @Override
-    public void addUser(User user) {
-        controller.addUser(user);
+    public boolean addUser(User user) {
+        return controller.addUser(user);
     }
 
     @Override
-    public void updateUser(User user) {
-        controller.updateUser(user);
+    public boolean updateUser(User user) {
+        return controller.updateUser(user);
     }
     
     @Override
@@ -54,8 +54,8 @@ public class UserDatabaseDalFacade implements IUserDal {
     }
 
     @Override
-    public void deleteUser(User user) {
-        controller.deleteUser(user);
+    public boolean deleteUser(User user) {
+        return controller.deleteUser(user);
     }
     
     

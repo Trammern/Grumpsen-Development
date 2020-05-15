@@ -42,16 +42,16 @@ public class UserDBDAOController {
         
     }
     
-    public void addUser(User user) {
-        
+    public boolean addUser(User user) {
+        return true;
     }
     
-    public void updateUser(User user) {
-        
+    public boolean updateUser(User user) {
+        return true;
     }
     
-    public void deleteUser(User user) {
-        
+    public boolean deleteUser(User user) {
+        return true;
     }    
         
 }
