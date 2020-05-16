@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -121,6 +123,7 @@ public class Login implements Initializable
             primStage.close();
         } catch (IOException e) {
             AlertBox.errorAlert("Could not open new window");
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
     }   
        

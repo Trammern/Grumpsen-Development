@@ -35,7 +35,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public ObservableList<Project> getProjects()
     {
-        return (ObservableList<Project>) projectController.getProjects();
+        return projectController.getProjects();
     }
 
     @Override

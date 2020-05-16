@@ -8,6 +8,7 @@ package timetrackingexam.dal.database.controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.dal.database.dao.ProjectDBDAO;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
@@ -52,10 +53,10 @@ public class ProjectDaoController
         return edit;
     }
     
-    public List<Project> getProjects()
+    public ObservableList<Project> getProjects()
     {
         Connection con = conPool.checkOut();
-        List<Project> allProjects = projectDao.getAllProjects(con);
+        ObservableList<Project> allProjects = projectDao.getAllProjects(con);
         conPool.checkIn(con);
         return allProjects;
     }

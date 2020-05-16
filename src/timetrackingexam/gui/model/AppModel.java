@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
+import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.project.ProjectManager;
 import timetrackingexam.bll.task.TaskManager;
 import timetrackingexam.bll.threads.ThreadManager;
@@ -30,6 +31,7 @@ public class AppModel
     private Project currentProject;
     private Task currentTask;
     private User selectedUser;
+    private TimeTrackBLLFacade ttBll;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
@@ -41,6 +43,7 @@ public class AppModel
 
     private AppModel()
     {
+        ttBll = new TimeTrackBLLFacade();
         userManager = new UserManager();
         projectManager = new ProjectManager();
         taskManager = new TaskManager();
@@ -79,7 +82,7 @@ public class AppModel
     
     public ObservableList<Project> getProjects(){
         projects.clear();
-        projects.addAll(projectManager.getAllProjects());        
+        projects.addAll(ttBll.getAllProjects());        
         return projects;
     }
     

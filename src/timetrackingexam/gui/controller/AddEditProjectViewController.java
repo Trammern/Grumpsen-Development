@@ -72,14 +72,14 @@ public class AddEditProjectViewController implements Initializable {
     
     private void createProject(){
         
-        Project newProject = new Project(4, fldName.getText());
+        Project newProject = new Project(fldName.getText(), fldDescription.getText(), 0);
         
-        Double rate = Double.parseDouble(fldRate.getText());
+        int rate = Integer.parseInt(fldRate.getText());
         int clientId = 0;
         String description = fldDescription.getText();
         
         //Not Implemented
-        newProject.setClientId(clientId);
+        newProject.setClientID(clientId);
         
         newProject.setRate(rate);
         newProject.setDescription(description);
@@ -93,10 +93,10 @@ public class AddEditProjectViewController implements Initializable {
     
     private void updateProject(){
         updatedProject.setName(fldName.getText());
-        updatedProject.setRate(Double.parseDouble(fldRate.getText()));
+        updatedProject.setRate(Integer.parseInt(fldRate.getText()));
         
         //Not implementet
-        updatedProject.setClientId(0);
+        updatedProject.setClientID(0);
         
         updatedProject.setDescription(fldDescription.getText());
         am.updateProject(updatedProject);

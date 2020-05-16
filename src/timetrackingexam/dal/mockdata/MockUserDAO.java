@@ -42,17 +42,17 @@ public class MockUserDAO implements IUserDal
         u5.setPassword(LoginTools.hashPassword(u5.getPassword()));
         u6.setPassword(LoginTools.hashPassword(u6.getPassword()));
         
-        u1.assignUser(new Project(1, "Project X"));
-        u2.assignUser(new Project(1, "Project X"));
-        u3.assignUser(new Project(1, "Project X"));
-        
-        users.add(u1);
-        users.add(u2);
-        users.add(u3);
-        users.add(u4);
-        users.add(u5);
-        users.add(u6);
-        
+//        u1.assignUser(new Project(1, "Project X"));
+//        u2.assignUser(new Project(1, "Project X"));
+//        u3.assignUser(new Project(1, "Project X"));
+//        
+//        users.add(u1);
+//        users.add(u2);
+//        users.add(u3);
+//        users.add(u4);
+//        users.add(u5);
+//        users.add(u6);
+//        
     }    
     
     public ObservableList<User> getAllUsers() {

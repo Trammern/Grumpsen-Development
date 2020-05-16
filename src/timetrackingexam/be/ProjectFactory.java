@@ -22,8 +22,8 @@ public class ProjectFactory {
     Birins
     */
     
-    public Project create(int id, String name, int clientId, double rate) {
-        Project project = new Project(id, name, clientId, rate);
+    public Project create(int id, String name, String description, int clientId, int rate) {
+        Project project = new Project(name, clientId, description, rate);
         //client.getProjects().add(project);
         return project;
     }

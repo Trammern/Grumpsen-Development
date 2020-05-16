@@ -21,6 +21,12 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     
     private TimeTrackDalFacade dalFacade;
 
+    public TimeTrackBLLFacade() {
+        this.dalFacade = new TimeTrackDalFacade();
+    }
+    
+    
+
     @Override
     public boolean createTask(Task t, Project p)
     {

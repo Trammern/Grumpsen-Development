@@ -19,32 +19,27 @@ public class Project {
     private int id;
     private String name;
     private String description;
-    private double rate;
-    private int clientId;
+    private int rate;
+    private int clientID;
     private ObservableList<Task> tasks;
     private ObservableList<User> users;
     
-    public Project(int id, String name, int clientId) {
-        this(id, name, clientId, DEFAULT_RATE);
+    public Project(String name, int clientID, String description, int rate) {
+        this.name = name;
+        this.clientID = clientID;
+        this.description = description;
+        this.rate = rate;
     }
 
-    public Project(int id, String name) {
-        this.id = id;
+    public Project(String name, String description, int clientID) {
         this.name = name;
+        this.description = description;
+        this.clientID = clientID;
+        this.rate = DEFAULT_RATE;
         users = FXCollections.observableArrayList();
         tasks = FXCollections.observableArrayList();
     }
-    
-    
-
-    public Project(int id, String name, int clientId, double rate) {
-        this.id = id;
-        this.name = name;
-        this.clientId = clientId;
-        this.rate = rate;
-        users = FXCollections.observableArrayList();
-        tasks = FXCollections.observableArrayList();        
-    }    
+   
     
     public int getId() {
         return id;
@@ -62,20 +57,20 @@ public class Project {
         this.name = name;
     }
 
-    public double getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getClientID() {
+        return clientID;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
     }
 
     public ObservableList<Task> getTasks() {
