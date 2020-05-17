@@ -5,6 +5,7 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
@@ -29,6 +30,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
 /**
@@ -64,6 +66,10 @@ public class ProjectManagementViewController implements Initializable {
     private MenuItem menuItemTasks;
     @FXML
     private MenuItem menuItemUser;
+    @FXML
+    private JFXButton btnNewProject;
+    @FXML
+    private JFXButton btnEditProject;
 
     /**
      * Initializes the controller class.
@@ -79,8 +85,15 @@ public class ProjectManagementViewController implements Initializable {
        am.setCurrentTask(null);
        am.setSelectedUser(null);
        txtSelectedProject.setText("(Select Project)");
+       
+       initTooltips();
     }    
 
+    private void initTooltips() {
+        btnNewProject.setTooltip(TooltipFactory.create("Click here to create a new project", 500, 250));        
+        btnEditProject.setTooltip(TooltipFactory.create("Click here to edit an existing project.\nSelect a project first", 500, 250));
+    }
+    
     @FXML
     private void newProject(ActionEvent event) {
         am.setCurrentProject(null);

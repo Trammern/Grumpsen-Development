@@ -27,6 +27,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
 /**
@@ -84,6 +85,7 @@ public class UserManagementViewController implements Initializable {
        tblEmployeeTable.setItems(allUsers);       
               
        initColumns();
+       initTooltips();
     }    
     
     private void initColumns() {
@@ -97,6 +99,11 @@ public class UserManagementViewController implements Initializable {
             String totalHours = "";
             return new SimpleStringProperty(totalHours);
         });
+    }
+    
+    private void initTooltips() {
+        btnNewUser.setTooltip(TooltipFactory.create("Click here to create a new employee profile", 500, 250));        
+        btnEditUser.setTooltip(TooltipFactory.create("Click here to edit an existing employee profile.\nSelect a user first", 500, 250));
     }
     
     @FXML

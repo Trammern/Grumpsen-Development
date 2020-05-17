@@ -33,6 +33,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
 /**
@@ -117,7 +118,16 @@ public class ProjectsOverviewController implements Initializable {
             menuItemUser.setDisable(true);
             menuItemUser.setVisible(false);
         }
+        
+        initTooltips();
     } 
+    
+    private void initTooltips() {
+        btnAddTask.setTooltip(TooltipFactory.create("Click here to create a new task for the selected project", 500, 250));        
+        btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first", 500, 250));
+        btnDeleteTask.setTooltip(TooltipFactory.create("Click here to delete a task.\nSelect a task first", 500, 250));
+        btnTimeButton.setTooltip(TooltipFactory.create("Click here to start or pause registering the time you work on the task", 500, 250));
+    }
 
     @FXML
     private void addTask(ActionEvent event) {
