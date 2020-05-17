@@ -21,11 +21,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -120,6 +122,7 @@ public class ProjectsOverviewController implements Initializable {
         }
         
         initTooltips();
+        initEffects();
     } 
     
     private void initTooltips() {
@@ -127,6 +130,21 @@ public class ProjectsOverviewController implements Initializable {
         btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first", 500, 250));
         btnDeleteTask.setTooltip(TooltipFactory.create("Click here to delete a task.\nSelect a task first", 500, 250));
         btnTimeButton.setTooltip(TooltipFactory.create("Click here to start or pause registering the time you work on the task", 500, 250));
+    }
+    
+    private void initEffects() {
+        buttonEffect(btnAddTask);
+        buttonEffect(btnEditTask);
+        buttonEffect(btnDeleteTask);        
+    }
+    
+    private void buttonEffect(Button button) {
+        button.setOnMouseEntered(e -> {
+            button.setEffect(new DropShadow());
+        });
+        button.setOnMouseExited(e -> {
+           button.setEffect(null); 
+        });
     }
 
     @FXML

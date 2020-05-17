@@ -15,12 +15,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import timetrackingexam.be.Project;
@@ -86,6 +88,7 @@ public class UserManagementViewController implements Initializable {
               
        initColumns();
        initTooltips();
+       initEffects();
     }    
     
     private void initColumns() {
@@ -104,6 +107,20 @@ public class UserManagementViewController implements Initializable {
     private void initTooltips() {
         btnNewUser.setTooltip(TooltipFactory.create("Click here to create a new employee profile", 500, 250));        
         btnEditUser.setTooltip(TooltipFactory.create("Click here to edit an existing employee profile.\nSelect a user first", 500, 250));
+    }
+    
+    private void initEffects() {
+        buttonEffect(btnNewUser);
+        buttonEffect(btnEditUser);
+    }
+    
+    private void buttonEffect(Button button) {
+        button.setOnMouseEntered(e -> {
+            button.setEffect(new DropShadow());
+        });
+        button.setOnMouseExited(e -> {
+           button.setEffect(null); 
+        });
     }
     
     @FXML

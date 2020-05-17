@@ -20,9 +20,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -87,11 +89,26 @@ public class ProjectManagementViewController implements Initializable {
        txtSelectedProject.setText("(Select Project)");
        
        initTooltips();
+       initEffects();
     }    
 
     private void initTooltips() {
         btnNewProject.setTooltip(TooltipFactory.create("Click here to create a new project", 500, 250));        
         btnEditProject.setTooltip(TooltipFactory.create("Click here to edit an existing project.\nSelect a project first", 500, 250));
+    }
+    
+    private void initEffects() {
+        buttonEffect(btnNewProject);
+        buttonEffect(btnEditProject);
+    }
+    
+    private void buttonEffect(Button button) {
+        button.setOnMouseEntered(e -> {
+            button.setEffect(new DropShadow());
+        });
+        button.setOnMouseExited(e -> {
+           button.setEffect(null); 
+        });
     }
     
     @FXML
