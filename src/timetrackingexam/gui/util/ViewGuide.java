@@ -20,12 +20,14 @@ public class ViewGuide {
     
     public static final String LOGIN_VIEW_PATH = "/timetrackingexam/gui/view/Login.fxml";
     public static final String LOGIN_VIEW_TITLE = "Login as user";
-    public static final String PASSWORD_VIEW_PATH = "/timetrackingexam/gui/view/ChangePasswordView.fxml";
+    public static final String PASSWORD_VIEW_PATH = "/timetrackingexam/gui/view/promts/ChangePasswordView.fxml";
     public static final String PASSWORD_VIEW_TITLE = "Change your password";
     public static final String PROJECTS_OVERVIEW_PATH = "/timetrackingexam/gui/view/ProjectsOverview.fxml";
     public static final String PROJECTS_OVERVIEW_TITLE = "Projects Overview";
     public static final String PROJECT_MANAGEMENT_PATH = "/timetrackingexam/gui/view/ProjectManagementView.fxml";
-    public static final String PROJECT_MANAGEMENT_TITLE = "Project Management View";
+    public static final String PROJECT_MANAGEMENT_TITLE = "Project Management";
+    public static final String USER_MANAGEMENT_PATH = "/timetrackingexam/gui/view/UserManagementView.fxml";
+    public static final String USER_MANAGEMENT_TITLE = "User Management";
     
     public static void openView(String viewPath, String title, Stage primStage, boolean closeCurrentView, boolean disableInputToOtherViews) {
         try {
@@ -69,6 +71,10 @@ public class ViewGuide {
     
     public static void projectManagementView(Stage primStage) {
         openView(PROJECT_MANAGEMENT_PATH, PROJECT_MANAGEMENT_TITLE, primStage, true, true);
+    }
+    
+    public static void userManagementView(Stage primStage) {
+        openView(USER_MANAGEMENT_PATH, USER_MANAGEMENT_TITLE, primStage, true, true);
     }
     
 }

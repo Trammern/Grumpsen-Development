@@ -62,6 +62,8 @@ public class ProjectManagementViewController implements Initializable {
     private JFXTextArea fldDescription;
     @FXML
     private MenuItem menuItemTasks;
+    @FXML
+    private MenuItem menuItemUser;
 
     /**
      * Initializes the controller class.
@@ -95,27 +97,6 @@ public class ProjectManagementViewController implements Initializable {
         }
     }
 
-    @FXML
-    private void openProject(ActionEvent event) {
-        if (am.getCurrentProject() != null) {
-            try {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AdminProjectOverview.fxml"));
-                Parent root1 = (Parent) fxml.load();
-                Stage stage = new Stage();
-                Stage primStage = (Stage) txtSelectedProject.getScene().getWindow();
-                stage.setScene(new Scene(root1));
-                primStage.close();
-                stage.showAndWait();
-                stage.setTitle("Project view");
-            } catch (IOException ex) {
-                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            AlertBox.errorAlert("Select a project to open");
-        }
-        
-    }
-    
     @FXML
     private void setSelectedProject(MouseEvent event) {
         selectedProject = lstProjects.getSelectionModel().getSelectedItem();
@@ -163,6 +144,12 @@ public class ProjectManagementViewController implements Initializable {
     private void goToTasks(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.projectsOverview(primStage);
+    }
+
+    @FXML
+    private void goToUserManagement(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.userManagementView(primStage);
     }
 
     

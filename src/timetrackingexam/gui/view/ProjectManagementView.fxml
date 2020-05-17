@@ -16,7 +16,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Navigate">
             <items>
-                  <MenuItem fx:id="menuItemTasks" mnemonicParsing="false" onAction="#goToTasks" text="Task overview" />
+                  <MenuItem fx:id="menuItemTasks" mnemonicParsing="false" onAction="#goToTasks" text="Task Overview" />
+                  <MenuItem fx:id="menuItemUser" mnemonicParsing="false" onAction="#goToUserManagement" text="User Management" />
               <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#closeProgram" text="Close" />
                   <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
             </items>
@@ -46,7 +47,6 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <JFXButton layoutX="259.0" layoutY="295.0" onAction="#openProject" text="Open Project" textFill="#f4f4f4" />
       <JFXTextArea fx:id="fldDescription" layoutX="266.0" layoutY="108.0" prefHeight="175.0" prefWidth="147.0" text="Create a program that allows our client to administerthe working hours of theiremployees" />
    </children>
 </AnchorPane>

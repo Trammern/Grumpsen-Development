@@ -34,22 +34,18 @@ import timetrackingexam.gui.util.ViewGuide;
  *
  * @author math2
  */
-public class AdminProjectOverviewController implements Initializable {
+public class UserManagementViewController implements Initializable {
 
     private AppModel am;
     private User currentUser;
     private Project selectedProject;
     private ObservableList<User> allUsers;
-    private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/AddEditUserView.fxml";    
-    private static final String ADD_PROJECT_USERS_VIEW_PATH = "/timetrackingexam/gui/view/AddProjectUsersView.fxml";    
+    private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/promts/AddEditUserView.fxml";
+      
     private static final String PROJECT_MANAGEMENT_VIEW_PATH = "/timetrackingexam/gui/view/ProjectManagementView.fxml";    
     
     @FXML
-    private TableView<User> tblEmployeeTable;
-    @FXML
-    private Text txtCurrentProject;
-    @FXML
-    private Text txtSalary;
+    private TableView<User> tblEmployeeTable;   
     @FXML
     private TableColumn<User, String> columnName;
     @FXML
@@ -65,17 +61,15 @@ public class AdminProjectOverviewController implements Initializable {
     @FXML
     private JFXButton btnNewUser;
     @FXML
-    private JFXButton btnEditUser;
-    @FXML
-    private JFXButton btnAdd;
-    @FXML
-    private JFXButton btnRemove;
-    @FXML
-    private JFXButton btnBack;
+    private JFXButton btnEditUser;    
     @FXML
     private TableColumn<User, String> columnBilHours;
     @FXML
     private TableColumn<User, String> columnTotalHours;
+    @FXML
+    private MenuItem menuItemProject;
+    @FXML
+    private MenuItem menuItemTask;
 
     /**
      * Initializes the controller class.
@@ -84,8 +78,7 @@ public class AdminProjectOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
-       menuUser.setText(currentUser.getEmail());             
-       setProject(am.getCurrentProject()); //to be deleted       
+       menuUser.setText(currentUser.getEmail());           
        allUsers = am.getAllUsers();
        tblEmployeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); 
        tblEmployeeTable.setItems(allUsers);       
@@ -100,39 +93,12 @@ public class AdminProjectOverviewController implements Initializable {
         });
         
         columnTotalHours.setCellValueFactory(data -> {
-            String totalHours = am.getCurrentProject().getTimeUsedByUser(data.getValue())+"";
+            //String totalHours = am.getCurrentProject().getTimeUsedByUser(data.getValue())+"";
+            String totalHours = "";
             return new SimpleStringProperty(totalHours);
-        }
-        );
-    }
-
-    @FXML
-    private void addEmployee(ActionEvent event) {
-        Stage primStage = (Stage) btnAdd.getScene().getWindow();
-        ViewGuide.openView(ADD_PROJECT_USERS_VIEW_PATH, "Add users to project", primStage, false, true);
-        am.fetch();
-        
-    }
-
-    @FXML
-    private void removeEmployee(ActionEvent event) {
-        List<User> users = tblEmployeeTable.getSelectionModel().getSelectedItems();
-        for (User user : users) {
-            user.removeUser(selectedProject);
-        }        
-        am.fetch();
-    }
-
-    @FXML
-    private void openTaskView(ActionEvent event) {
+        });
     }
     
-    private void setProject(Project project) {
-        selectedProject = project;
-        txtCurrentProject.setText(selectedProject.getName());
-        txtSalary.setText("Hourly Salary: " + selectedProject.getRate());
-    }
-
     @FXML
     private void closeProgram(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
@@ -156,7 +122,7 @@ public class AdminProjectOverviewController implements Initializable {
         am.setSelectedUser(null); 
         Stage primStage = (Stage) btnEditUser.getScene().getWindow();
         ViewGuide.openView(ADD_EDIT_USER_VIEW_PATH, "New user", primStage, false, true);
-        am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem());
+        am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem()); //why?
     }
 
     @FXML
@@ -169,14 +135,19 @@ public class AdminProjectOverviewController implements Initializable {
         else {
             AlertBox.errorAlert("Select a user to edit");
         }
+    }       
+
+    @FXML
+    private void goToProjectManagement(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.projectManagementView(primStage);
     }
 
     @FXML
-    private void backToProjectManagement(ActionEvent event) {
-        Stage primStage = (Stage) btnBack.getScene().getWindow();
-        ViewGuide.openView(PROJECT_MANAGEMENT_VIEW_PATH, "Project Management View", primStage, true, true);
+    private void goToTasks(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.projectsOverview(primStage);
     }
-    
     
     
 }

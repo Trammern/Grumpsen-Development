@@ -90,6 +90,8 @@ public class ProjectsOverviewController implements Initializable {
     private TextField fldHour;
     @FXML
     private Label txtHour;
+    @FXML
+    private MenuItem menuItemUser;
 
     /**
      * Initializes the controller class.
@@ -112,6 +114,8 @@ public class ProjectsOverviewController implements Initializable {
         if (currentUser.getRole()!=User.Role.Admin) {
             menuItemAdmin.setDisable(true);
             menuItemAdmin.setVisible(false);
+            menuItemUser.setDisable(true);
+            menuItemUser.setVisible(false);
         }
     } 
 
@@ -291,6 +295,12 @@ public class ProjectsOverviewController implements Initializable {
     private void handleSubmit(ActionEvent event)
     {
         am.stopTimer();
+    }
+
+    @FXML
+    private void goToUserManagement(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.userManagementView(primStage);
     }
         
     
