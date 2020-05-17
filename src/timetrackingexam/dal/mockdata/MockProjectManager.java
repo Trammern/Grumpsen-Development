@@ -126,4 +126,9 @@ public class MockProjectManager implements IProjectDal {
     public ObservableList<Task> getTimeUsed(Task t) {
         return tasks;
     }
+
+    @Override
+    public ObservableList<Task> getTasksInProject(Project p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

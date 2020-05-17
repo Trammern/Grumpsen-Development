@@ -8,13 +8,10 @@ package timetrackingexam.gui.controller;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.gui.model.AppModel;
 
@@ -85,8 +82,8 @@ public class AddEditProjectViewController implements Initializable {
         newProject.setDescription(description);
         
         if(am.createNewProject(newProject)){
-                System.out.println("project added");
-                Stage primStage = (Stage) fldName.getScene().getWindow();
+                System.out.println("Hey");
+                Stage primStage = (Stage) fldRate.getScene().getWindow();
                 primStage.close();
             }
     }

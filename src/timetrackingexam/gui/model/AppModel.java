@@ -189,9 +189,17 @@ public class AppModel
         return userManager.getProjectEmployees(p);
     }
 
-    public ObservableList<Task> getTimeUsed(Task t) {
-        return taskManager.getTimeUsed(t);
+    public ObservableList<Task> getTasksInProject(Project p){
+        return projectManager.getTasksInProject(p);
     }
+    /**
+     * Bruger vi denne her til noget?
+     * @param t
+     * @return 
+     */
+//    public ObservableList<Task> getTimeUsed(Task t) {
+//        return taskManager.getTimeUsed(t);
+//    }
     
     public ObservableList<User> getProjectNonEmployees(Project project) {
         return userManager.getProjectNonEmployees(project);

@@ -46,7 +46,7 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     }
 
     @Override
-    public List<Task> readTask()
+    public ObservableList<Task> readTask()
     {
         return dalFacade.getAllTasks();
     }
@@ -103,6 +103,11 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     public ObservableList<User> getProjectNonEmployees(Project project)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ObservableList<Task> getTasksInProject(Project p) {
+        return dalFacade.getTasksInProject(p);
     }
     
 }

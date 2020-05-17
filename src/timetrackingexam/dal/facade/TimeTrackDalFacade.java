@@ -11,6 +11,7 @@ import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.database.controller.ProjectDaoController;
+import timetrackingexam.dal.database.controller.TaskDaoController;
 import timetrackingexam.dal.database.controller.UserDBDAOController;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
@@ -23,11 +24,14 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 
     private ProjectDaoController projectController;
     private UserDBDAOController userController;
+    private TaskDaoController taskController;
 
     public TimeTrackDalFacade()
     {
         projectController = new ProjectDaoController(ConnectionPool.getInstance());
         userController = new UserDBDAOController(ConnectionPool.getInstance());
+        taskController = new TaskDaoController(ConnectionPool.getInstance());
+        
     }
     
     
@@ -41,7 +45,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public ObservableList<Task> getTasks()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taskController.getAllTasks();
     }
 
     @Override
@@ -53,7 +57,8 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public boolean createTask(Task t, Project p)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        t.setProjectId(p.getId());
+        return taskController.CreateTask(t);
     }
 
     @Override
@@ -149,6 +154,11 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public boolean deleteUser(User user) {
         return userController.deleteUser(user);
+    }
+
+    @Override
+    public ObservableList<Task> getTasksInProject(Project p) {
+        return projectController.getTasksInProject(p);
     }
     
 }

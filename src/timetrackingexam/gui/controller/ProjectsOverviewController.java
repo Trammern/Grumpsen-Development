@@ -101,9 +101,9 @@ public class ProjectsOverviewController implements Initializable {
         currentUser = am.getCurrentUser();
         menuUser.setText(currentUser.getEmail());
         cbbProjectSelect.setItems(am.getProjects());
-        selectedProject = am.getProjects().get(0);
-        am.setCurrentProject(selectedProject);
-        lstTaskList.setItems(selectedProject.getTasks());
+        am.setCurrentProject(cbbProjectSelect.getItems().get(0));
+        selectedProject = am.getCurrentProject();
+        lstTaskList.setItems(am.getTasksInProject(selectedProject));
         txtSlectedTask.setText("(Select Project)");
         if (currentUser.getRole()!=User.Role.Admin) {
             menuItemAdmin.setDisable(true);
@@ -141,7 +141,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void setItemsOnList(ActionEvent event) {
         selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();        
-        lstTaskList.setItems(selectedProject.getTasks());
+        lstTaskList.setItems(am.getTasksInProject(selectedProject));
         am.setCurrentProject(selectedProject);      
     }
 
@@ -181,7 +181,7 @@ public class ProjectsOverviewController implements Initializable {
     {
         try
         {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AddTask.fxml"));
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/promts/AddTask.fxml"));
             Parent root1 = (Parent) fxml.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

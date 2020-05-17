@@ -24,5 +24,6 @@ public interface IProjectDal {
     public boolean deleteTask(Task selectedTask, Project currentProject);
     public boolean updateTask(Task updateTask);
     public ObservableList<Task> getTimeUsed(Task t);
+    public ObservableList<Task> getTasksInProject(Project p);
     
 }

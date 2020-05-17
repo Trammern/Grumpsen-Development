@@ -38,7 +38,7 @@ import timetrackingexam.gui.util.ViewGuide;
  */
 public class ProjectManagementViewController implements Initializable {
 
-    private final String ADD_EDIT_PATH = "/timetrackingexam/gui/view/AddEditProjectView.fxml";
+    private final String ADD_EDIT_PATH = "/timetrackingexam/gui/view/promts/AddEditProjectView.fxml";
     
     private AppModel am;
     private User currentUser;

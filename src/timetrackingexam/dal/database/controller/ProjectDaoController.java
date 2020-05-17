@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
+import timetrackingexam.be.Task;
 import timetrackingexam.dal.database.dao.ProjectDBDAO;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
@@ -59,6 +60,13 @@ public class ProjectDaoController
         ObservableList<Project> allProjects = projectDao.getAllProjects(con);
         conPool.checkIn(con);
         return allProjects;
+    }
+
+    public ObservableList<Task> getTasksInProject(Project p) {
+        Connection con = conPool.checkOut();
+        ObservableList<Task> tasksInProject = projectDao.getTasksInProject(p, con);
+        conPool.checkIn(con);
+        return tasksInProject;
     }
 
 
