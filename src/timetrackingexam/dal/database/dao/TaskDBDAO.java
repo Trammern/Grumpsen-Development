@@ -36,10 +36,10 @@ public class TaskDBDAO{
     public static TaskDBDAO getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new TaskDBDAO();
+            return INSTANCE;
         } else {
             return INSTANCE;
         }
-        return null;
     }
 
     public Task getSpecificTask(Connection con, Task task) {
@@ -102,10 +102,13 @@ public class TaskDBDAO{
             pstmt.setString(3, task.getDescription());
             pstmt.setInt(4, task.getUserId());
             pstmt.setInt(5, task.getTimeAssigned());
-
+            
             int updatedRows = pstmt.executeUpdate();
+            
+            createTime(task, new TaskTime(task.getId(), 0, 0, 0, 0, LocalDate.now()), con);
 
             return updatedRows > 0;
+            
         } catch (SQLException sqlE) {
             System.out.println("Failed to grab element from database");
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
@@ -135,8 +138,8 @@ public class TaskDBDAO{
 
     public boolean updateTask(Connection con, Task task) {
         try{
-            String sql = "UPDATE task"
-                    + "SET task.Name = ?, task.Description = ?, task.AssignedTime = ?"
+            String sql = "UPDATE task "
+                    + "SET task.Name = ?, task.Description = ?, task.AssignedTime = ? "
                     + "WHERE task.ID = ?";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -156,7 +159,7 @@ public class TaskDBDAO{
         }
     }
 
-    public ObservableList<TaskTime> getTaskTime(Connection con, Task task) {
+    public TaskTime getTime(Connection con, Task task) {
         try{
 
             ObservableList<TaskTime> taskTimes = FXCollections.observableArrayList();
@@ -174,16 +177,59 @@ public class TaskDBDAO{
                         rs.getInt("UserID"),
                         rs.getInt("Sec"),
                         rs.getInt("Min"),
-                        rs.getInt("Hours"),
+                        rs.getInt("Hour"),
                         LocalDate.parse(rs.getString("Date"))
                 ));
             }
+            
+            int hours = 0;
+            int min = 0;
+            int sec = 0;
+            
+            for (TaskTime taskTime : taskTimes) {
+                hours = hours + taskTime.getHours();
+                min = min + taskTime.getMin();
+                sec = sec + taskTime.getSec();
+            }
+            
+            TaskTime totalTime = new TaskTime(sec, min, hours);
 
-            return taskTimes;
+            return totalTime;
         } catch (SQLException sqlE) {
             System.out.println("Failed to grab element from database");
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
             return null;
+        }
+    }
+    /**
+     * Need a user to complete implementation
+     * @param t
+     * @param con
+     * @param tat
+     * @return 
+     */
+    public boolean createTime(Task t, TaskTime tat, Connection con){
+        try{
+            String sql = "INSERT INTO time (taskId, UserID, Sec, Min, Hour, Date)"
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, t.getProjectId());
+            ps.setInt(2, tat.getUserId());
+            ps.setInt(3, tat.getMin());
+            ps.setInt(4, tat.getMin());
+            ps.setInt(5, tat.getHours());
+            ps.setString(6, tat.getDate().toString());
+            
+            int updatedRows = ps.executeUpdate();
+            
+            return updatedRows > 0;
+        }        
+        catch(SQLException sqlE){
+            System.out.println("Failed to grab element from database");
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return false;
         }
     }
 

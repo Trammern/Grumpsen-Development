@@ -76,7 +76,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public boolean updateTask(Task updateTask)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taskController.updateTask(updateTask);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public ObservableList<Task> getAllTasks()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taskController.getAllTasks();
     }
 
     @Override
@@ -105,12 +105,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 
     @Override
     public boolean deleteTask(Task task)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ObservableList<TaskTime> getTaskTime(Task task)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -160,5 +154,12 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public ObservableList<Task> getTasksInProject(Project p) {
         return projectController.getTasksInProject(p);
     }
+
+    @Override
+    public TaskTime getTime(Task t) {
+        return taskController.getTime(t);
+    }
+
+
     
 }

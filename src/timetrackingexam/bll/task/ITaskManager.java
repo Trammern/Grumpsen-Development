@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskTime;
 
 /**
  *
@@ -25,6 +26,12 @@ public interface ITaskManager
     public boolean updateTask(Task updateTask);
     
     public ObservableList<Task> readTask();
+    
+    public TaskTime getTime(Task t);
+    
+    public boolean updateTime();
+    
+    public boolean createTime();
     
      
 }

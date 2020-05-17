@@ -24,11 +24,10 @@
                   <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Tools">
+          <Menu mnemonicParsing="false" text="Statistics">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#handleBarChart" text="Assigned Time Chart" />
                   <MenuItem mnemonicParsing="false" onAction="#handlePieChart" text="Piechart" />
-              <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -36,7 +35,7 @@
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
-            <Menu fx:id="menuUser" mnemonicParsing="false" text="User">
+            <Menu fx:id="menuUser" mnemonicParsing="false" text="Account">
               <items>
                 <MenuItem fx:id="menuItemPassword" mnemonicParsing="false" onAction="#openPasswordView" text="Change password" />
               </items>
@@ -91,17 +90,17 @@
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="fldSec" layoutX="534.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldSec" layoutX="534.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0" text="0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="fldMin" layoutX="423.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldMin" layoutX="423.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0" text="0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="fldHour" layoutX="312.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0">
+      <TextField fx:id="fldHour" layoutX="312.0" layoutY="320.0" prefHeight="44.0" prefWidth="58.0" text="0">
          <font>
             <Font size="20.0" />
          </font>

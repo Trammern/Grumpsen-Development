@@ -6,9 +6,11 @@
 package timetrackingexam.bll.task;
 
 import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskTime;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.utilities.StatisticsCalculator;
 import timetrackingexam.dal.facade.IProjectDal;
@@ -59,6 +61,24 @@ public class TaskManager implements ITaskManager
     public long getLineChartData(Task t) {
         return cal.timeGrowth(t);
     }
+
+    @Override
+    public TaskTime getTime(Task t) {
+        return taskManager.getTime(t);
+    }
+    
+    
+
+    @Override
+    public boolean updateTime() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean createTime() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     
     

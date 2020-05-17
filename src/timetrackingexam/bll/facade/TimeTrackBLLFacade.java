@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.facade.TimeTrackDalFacade;
 
@@ -109,5 +110,26 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     public ObservableList<Task> getTasksInProject(Project p) {
         return dalFacade.getTasksInProject(p);
     }
+
+    @Override
+    public boolean updateTime() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean createTime() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TaskTime getTime(Task t) {
+        dalFacade.getTime(t);
+        return dalFacade.getTime(t);
+        
+    }
+
+    
+    
+
     
 }

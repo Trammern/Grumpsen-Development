@@ -98,6 +98,9 @@ public class ProjectsOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         am = AppModel.getInstance();
+        
+        btnSubmit.setDisable(true);
+        
         currentUser = am.getCurrentUser();
         menuUser.setText(currentUser.getEmail());
         cbbProjectSelect.setItems(am.getProjects());
@@ -105,6 +108,7 @@ public class ProjectsOverviewController implements Initializable {
         selectedProject = am.getCurrentProject();
         lstTaskList.setItems(am.getTasksInProject(selectedProject));
         txtSlectedTask.setText("(Select Project)");
+        
         if (currentUser.getRole()!=User.Role.Admin) {
             menuItemAdmin.setDisable(true);
             menuItemAdmin.setVisible(false);
@@ -150,6 +154,11 @@ public class ProjectsOverviewController implements Initializable {
         if (lstTaskList.getSelectionModel().getSelectedItem() != null) {
             am.setCurrentTask(lstTaskList.getSelectionModel().getSelectedItem());
             txtSlectedTask.setText(am.getCurrentTask().getName());
+            
+            fldHour.setText(am.getTimeUsed(am.getCurrentTask()).getHours()+ "");
+            fldMin.setText(am.getTimeUsed(am.getCurrentTask()).getMin()+ "");
+            fldSec.setText(am.getTimeUsed(am.getCurrentTask()).getSec()+ "");
+         
         }
         
         if (am.getCurrentTask().getDescription() == null)
@@ -268,11 +277,20 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnStopStart(ActionEvent event)
     {
+        if(!am.timerIsRunning()){
+            am.startTimer(fldSec, fldMin, fldHour);
+            btnSubmit.setDisable(true);
+        }
+        else{
+            am.pauseTimer();
+            btnSubmit.setDisable(false);
+        }
     }
 
     @FXML
     private void handleSubmit(ActionEvent event)
     {
+        am.stopTimer();
     }
         
     

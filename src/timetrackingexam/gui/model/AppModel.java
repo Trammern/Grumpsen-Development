@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.project.ProjectManager;
@@ -126,7 +127,13 @@ public class AppModel
     public boolean addTask(Task t, Project p)
     {
         tasks.add(t);
-        return taskManager.createTask(t,p);
+        if(taskManager.createTask(t,p)){
+            fetch();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
     public boolean updateTask(Task updateTask)
@@ -192,14 +199,10 @@ public class AppModel
     public ObservableList<Task> getTasksInProject(Project p){
         return projectManager.getTasksInProject(p);
     }
-    /**
-     * Bruger vi denne her til noget?
-     * @param t
-     * @return 
-     */
-//    public ObservableList<Task> getTimeUsed(Task t) {
-//        return taskManager.getTimeUsed(t);
-//    }
+        
+    public TaskTime getTimeUsed(Task t){
+       return taskManager.getTime(t);
+    }
     
     public ObservableList<User> getProjectNonEmployees(Project project) {
         return userManager.getProjectNonEmployees(project);

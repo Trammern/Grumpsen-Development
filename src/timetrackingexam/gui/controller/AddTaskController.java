@@ -89,9 +89,10 @@ public class AddTaskController implements Initializable
     
     private void editTask()
     {
-        updateTask.setName(txtAddTaskName.getText());
-        updateTask.setDescription(txtAddTaskDescription.getText());
-        am.updateTask(updateTask);
+        Task updatedTask = new Task(
+                txtAddTaskName.getText(),
+                txtAddTaskDescription.getText());
+        am.updateTask(updatedTask);
         
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();

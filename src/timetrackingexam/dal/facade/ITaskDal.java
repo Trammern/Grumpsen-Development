@@ -20,7 +20,7 @@ public interface ITaskDal {
     public boolean deleteTask(Task task);
     public boolean updateTask(Task task);
     
-    public ObservableList<TaskTime> getTaskTime(Task task);
+    public TaskTime getTime(Task t);
     
     
 }
