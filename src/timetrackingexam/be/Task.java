@@ -23,28 +23,31 @@ public class Task {
     
     private List<TaskTime> timeUsed = new ArrayList<>();
 
+    /**
+     * Constructor for creating tasks
+     * @param id
+     * @param projectId
+     * @param userId
+     * @param name 
+     */
     public Task(int id, int projectId, int userId, String name) {
         this.id = id;
         this.projectId = projectId;
         this.userId = userId; 
         this.name = name;
     }
-    /**
-     * Temporary Constructor for testing purposes
-     * @param id
-     * @param name 
-     * @param timeAssigned
-     */
-    public Task(int id, String name, int timeAssigned) {
-        this.name = name;
-        this.timeAssigned = timeAssigned;
-    }
 
-    public Task(String name, String description)
-    {
+    /**
+     * Constructor for editing Tasks 
+     * @param name
+     * @param description 
+     */
+    public Task(String name, String description) {
         this.name = name;
         this.description = description;
     }
+    
+    
 
     public String getName() {
         return name;
@@ -104,23 +107,8 @@ public class Task {
         
         return hoursUsed;
     }
-    
-    
-
-    public boolean addTaskTime(TaskTime tt) {
-        /*for (TaskTime taskTime : timeUsed) {
-            if(tt.getId() == taskTime.getId()){
-                taskTime.setHours(tt.getHours());
-                taskTime.setHours(tt.getMin());
-                taskTime.setHours(tt.getSec());
-                System.out.println("Date Updated");
-                return true;
-            }
-        }*/
-        System.out.println("date added");
-        return timeUsed.add(tt);
          
-    }
+    
 
     public List<TaskTime> getTimeUsed() {
         return timeUsed;

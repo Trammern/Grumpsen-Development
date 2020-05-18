@@ -204,6 +204,10 @@ public class AppModel
        return taskManager.getTime(t);
     }
     
+    public boolean addTime(TaskTime tt){
+        return taskManager.addTime(tt, getCurrentTask());
+    }
+    
     public ObservableList<User> getProjectNonEmployees(Project project) {
         return userManager.getProjectNonEmployees(project);
     }

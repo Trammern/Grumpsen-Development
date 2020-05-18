@@ -5,6 +5,7 @@
  */
 package timetrackingexam.bll.task;
 
+import java.time.LocalDate;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,16 +68,19 @@ public class TaskManager implements ITaskManager
         return taskManager.getTime(t);
     }
     
-    
-
     @Override
-    public boolean updateTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean updateTime(TaskTime tt) {
+        return taskManager.updateTime(tt);
     }
 
     @Override
-    public boolean createTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addTime(TaskTime tt, Task t) {
+        if(!tt.getDate().toString().equals(LocalDate.now().toString())){
+            return taskManager.addTime(tt, t);
+        }
+        else{
+            return updateTime(tt);
+        }
     }
 
     

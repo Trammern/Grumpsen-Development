@@ -5,7 +5,6 @@
  */
 package timetrackingexam.bll.task;
 
-import java.util.List;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
@@ -29,9 +28,9 @@ public interface ITaskManager
     
     public TaskTime getTime(Task t);
     
-    public boolean updateTime();
+    public boolean updateTime(TaskTime tt);
     
-    public boolean createTime();
+    public boolean addTime(TaskTime tt, Task t);
     
      
 }

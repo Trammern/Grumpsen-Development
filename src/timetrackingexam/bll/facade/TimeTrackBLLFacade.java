@@ -112,13 +112,13 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     }
 
     @Override
-    public boolean updateTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean updateTime(TaskTime tt) {
+        return dalFacade.updateTime(tt);
     }
 
     @Override
-    public boolean createTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addTime(TaskTime tt, Task t) {
+        return dalFacade.addTime(tt, t);
     }
 
     @Override

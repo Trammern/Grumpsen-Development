@@ -159,6 +159,16 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public TaskTime getTime(Task t) {
         return taskController.getTime(t);
     }
+    
+    @Override
+    public boolean updateTime(TaskTime tt) {
+        return taskController.updateTime(tt);
+    }
+    
+    @Override
+    public boolean addTime(TaskTime tt, Task t) {
+        return taskController.addTime(tt, t);
+    }
 
 
     

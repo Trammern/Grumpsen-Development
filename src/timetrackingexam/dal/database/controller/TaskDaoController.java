@@ -74,4 +74,18 @@ public class TaskDaoController
         conPool.checkIn(con);
         return time;
     }
+
+    public boolean updateTime(TaskTime tt) {
+        Connection con = conPool.checkOut();
+        boolean timeUpdated = taskDAO.updateTime(tt, con);
+        conPool.checkIn(con);
+        return timeUpdated;
+    }
+
+    public boolean addTime(TaskTime tt, Task t) {
+        Connection con = conPool.checkOut();
+        boolean timeAdded = taskDAO.addTime(t, tt, con);
+        conPool.checkIn(con);
+        return timeAdded;
+    }
 }

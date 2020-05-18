@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +32,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.ViewGuide;
@@ -155,10 +157,11 @@ public class ProjectsOverviewController implements Initializable {
             am.setCurrentTask(lstTaskList.getSelectionModel().getSelectedItem());
             txtSlectedTask.setText(am.getCurrentTask().getName());
             
-            fldHour.setText(am.getTimeUsed(am.getCurrentTask()).getHours()+ "");
-            fldMin.setText(am.getTimeUsed(am.getCurrentTask()).getMin()+ "");
-            fldSec.setText(am.getTimeUsed(am.getCurrentTask()).getSec()+ "");
-         
+            if(am.getTimeUsed(am.getCurrentTask()) != null){
+                fldHour.setText(am.getTimeUsed(am.getCurrentTask()).getHours()+ "");
+                fldMin.setText(am.getTimeUsed(am.getCurrentTask()).getMin()+ "");
+                fldSec.setText(am.getTimeUsed(am.getCurrentTask()).getSec()+ "");
+            }
         }
         
         if (am.getCurrentTask().getDescription() == null)
@@ -280,9 +283,11 @@ public class ProjectsOverviewController implements Initializable {
         if(!am.timerIsRunning()){
             am.startTimer(fldSec, fldMin, fldHour);
             btnSubmit.setDisable(true);
+            btnTimeButton.setText("Pause");
         }
         else{
             am.pauseTimer();
+            btnTimeButton.setText("Start");
             btnSubmit.setDisable(false);
         }
     }
@@ -291,6 +296,13 @@ public class ProjectsOverviewController implements Initializable {
     private void handleSubmit(ActionEvent event)
     {
         am.stopTimer();
+        am.addTime(new TaskTime(
+                am.getCurrentTask().getId(),
+                am.getCurrentUser().getId(),
+                Integer.parseInt(fldHour.getText()),
+                Integer.parseInt(fldMin.getText()),
+                Integer.parseInt(fldSec.getText()),
+                LocalDate.now()));
     }
         
     

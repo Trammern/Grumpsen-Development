@@ -105,7 +105,7 @@ public class TaskDBDAO{
             
             int updatedRows = pstmt.executeUpdate();
             
-            createTime(task, new TaskTime(task.getId(), 0, 0, 0, 0, LocalDate.now()), con);
+            addTime(task, new TaskTime(task.getId(), 0, 0, 0, 0, LocalDate.now()), con);
 
             return updatedRows > 0;
             
@@ -165,21 +165,27 @@ public class TaskDBDAO{
             ObservableList<TaskTime> taskTimes = FXCollections.observableArrayList();
 
             String sql = "SELECT * FROM Time "
-                    + "INNER JOIN Task ON Task.ID = Time.TaskID";
+                    + "INNER JOIN Task ON Task.ID = Time.TaskID "
+                    + "WHERE Task.ID = ?";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
 
+            pstmt.setInt(1, task.getId()); 
+            
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                taskTimes.add(new TaskTime(
+                TaskTime timeToBeAdded = new TaskTime(
                         rs.getInt("TaskID"),
                         rs.getInt("UserID"),
                         rs.getInt("Sec"),
                         rs.getInt("Min"),
                         rs.getInt("Hour"),
-                        LocalDate.parse(rs.getString("Date"))
-                ));
+                        LocalDate.parse(rs.getString("Date")));
+                
+                timeToBeAdded.setTimeID(rs.getInt("ID"));
+                
+                taskTimes.add(timeToBeAdded);
             }
             
             int hours = 0;
@@ -208,16 +214,16 @@ public class TaskDBDAO{
      * @param tat
      * @return 
      */
-    public boolean createTime(Task t, TaskTime tat, Connection con){
+    public boolean addTime(Task t, TaskTime tat, Connection con){
         try{
             String sql = "INSERT INTO time (taskId, UserID, Sec, Min, Hour, Date)"
                     + "VALUES (?, ?, ?, ?, ?, ?)";
             
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setInt(1, t.getProjectId());
+            ps.setInt(1, t.getId());
             ps.setInt(2, tat.getUserId());
-            ps.setInt(3, tat.getMin());
+            ps.setInt(3, tat.getSec());
             ps.setInt(4, tat.getMin());
             ps.setInt(5, tat.getHours());
             ps.setString(6, tat.getDate().toString());
@@ -226,6 +232,30 @@ public class TaskDBDAO{
             
             return updatedRows > 0;
         }        
+        catch(SQLException sqlE){
+            System.out.println("Failed to grab element from database");
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return false;
+        }
+    }
+    
+    public boolean updateTime(TaskTime tt, Connection con){
+        try{
+            String sql = "UPDATE time "
+                    + "SET hour = ? , min = ?, sec = ? "
+                    + "WHERE ID = ?";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, tt.getHours());
+            ps.setInt(2, tt.getMin());
+            ps.setInt(3, tt.getSec());
+            ps.setInt(4, tt.getTimeID());
+            
+            int updatedRows = ps.executeUpdate();
+            
+            return updatedRows > 0;
+        }
         catch(SQLException sqlE){
             System.out.println("Failed to grab element from database");
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);

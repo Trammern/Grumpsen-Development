@@ -21,6 +21,8 @@ public interface ITaskDal {
     public boolean updateTask(Task task);
     
     public TaskTime getTime(Task t);
+    public boolean addTime(TaskTime tt, Task t);
+    public boolean updateTime(TaskTime tt);
     
     
 }
