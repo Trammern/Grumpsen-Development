@@ -7,6 +7,7 @@ package timetrackingexam.dal.database.dao;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ import timetrackingexam.dal.facade.IProjectDal;
  *
  * @author Rizvan
  */
-public class ProjectDBDAO
+public class ProjectDBDAO  implements Serializable
 {
 
     private ConnectionPool pool;
@@ -177,12 +178,15 @@ public class ProjectDBDAO
                         sb.append( rs.getString("Description"));
                         sb.append(",");
                         sb.append (rs.getInt("Rate"));
+                        sb.append("\r\n");
                         
-               pw.write(sb.toString());
+                        
+             
+                 
+            }
+          pw.write(sb.toString());
                  pw.close();
                  System.out.println("finish");
-            }
-        
 
         } catch (SQLException ex)
         {
