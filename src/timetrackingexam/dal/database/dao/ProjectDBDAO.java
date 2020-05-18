@@ -5,6 +5,8 @@
  */
 package timetrackingexam.dal.database.dao;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -148,6 +150,43 @@ public class ProjectDBDAO
         catch(SQLException sqlE){
             Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
             return null;
+        }
+    }
+    
+    public void getCSV(Connection con) throws FileNotFoundException
+    {
+        PrintWriter pw = new PrintWriter("CSV.txt");
+          StringBuilder sb= new StringBuilder();
+        
+        String sql = "SELECT * FROM Project";
+        
+        try ( PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
+        {
+            
+            
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                 
+                        sb.append(rs.getString("Name"));
+                        sb.append(",");
+                        sb.append( rs.getInt("ClientID"));
+                        sb.append(",");
+                        sb.append( rs.getString("Description"));
+                        sb.append(",");
+                        sb.append (rs.getInt("Rate"));
+                        
+               pw.write(sb.toString());
+                 pw.close();
+                 System.out.println("finish");
+            }
+        
+
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -25,5 +25,5 @@ public interface IProjectDal {
     public boolean updateTask(Task updateTask);
     public ObservableList<Task> getTimeUsed(Task t);
     public ObservableList<Task> getTasksInProject(Project p);
-    
+    public void getCSV();
 }

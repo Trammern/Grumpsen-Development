@@ -223,5 +223,9 @@ public class AppModel
     public long getLineChartData(Task t){
         return taskManager.getLineChartData(t);
     }
+    public void getCSV()
+    {
+        projectManager.getCSV();
+    }
     
 }

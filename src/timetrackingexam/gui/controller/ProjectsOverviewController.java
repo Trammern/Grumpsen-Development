@@ -97,6 +97,8 @@ public class ProjectsOverviewController implements Initializable {
     private Label txtHour;
     @FXML
     private MenuItem menuItemUser;
+    @FXML
+    private Button ff;
 
     /**
      * Initializes the controller class.
@@ -341,6 +343,12 @@ public class ProjectsOverviewController implements Initializable {
     private void goToUserManagement(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.userManagementView(primStage);
+    }
+
+    @FXML
+    private void dd(ActionEvent event)
+    {
+        am.getCSV();
     }
         
     
