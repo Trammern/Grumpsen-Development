@@ -32,6 +32,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.NodeCustomizer;
 import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
@@ -93,22 +94,13 @@ public class ProjectManagementViewController implements Initializable {
     }    
 
     private void initTooltips() {
-        btnNewProject.setTooltip(TooltipFactory.create("Click here to create a new project", 500, 250));        
-        btnEditProject.setTooltip(TooltipFactory.create("Click here to edit an existing project.\nSelect a project first", 500, 250));
+        btnNewProject.setTooltip(TooltipFactory.create("Click here to create a new project"));        
+        btnEditProject.setTooltip(TooltipFactory.create("Click here to edit an existing project.\nSelect a project first"));
     }
     
     private void initEffects() {
-        buttonEffect(btnNewProject);
-        buttonEffect(btnEditProject);
-    }
-    
-    private void buttonEffect(Button button) {
-        button.setOnMouseEntered(e -> {
-            button.setEffect(new DropShadow());
-        });
-        button.setOnMouseExited(e -> {
-           button.setEffect(null); 
-        });
+        NodeCustomizer.nodeEffect(btnNewProject);
+        NodeCustomizer.nodeEffect(btnEditProject);
     }
     
     @FXML
