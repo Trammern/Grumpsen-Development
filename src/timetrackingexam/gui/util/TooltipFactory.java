@@ -14,10 +14,17 @@ import javafx.util.Duration;
  */
 public class TooltipFactory {
     
-    public static Tooltip create(String text, int millisToShow, int millisToHide) {
+    public static final int DEFAULT_MILLIS_SHOW_DELAY = 500;
+    public static final int DEFAULT_MILLIS_HIDE_DELAY = 0;
+    
+    public static Tooltip create(String text) {
+        return create(text, DEFAULT_MILLIS_SHOW_DELAY, DEFAULT_MILLIS_HIDE_DELAY);
+    }
+    
+    public static Tooltip create(String text, int millisShowDelay, int millisHideDelay) {
         Tooltip tooltip = new Tooltip(text);
-        tooltip.setShowDelay(Duration.millis(millisToShow));
-        tooltip.setHideDelay(Duration.millis(millisToHide));
+        tooltip.setShowDelay(Duration.millis(millisShowDelay));
+        tooltip.setHideDelay(Duration.millis(millisHideDelay));
         return tooltip;
     }
     

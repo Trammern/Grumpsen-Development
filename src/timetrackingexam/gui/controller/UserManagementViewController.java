@@ -29,6 +29,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.NodeCustomizer;
 import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
@@ -105,22 +106,13 @@ public class UserManagementViewController implements Initializable {
     }
     
     private void initTooltips() {
-        btnNewUser.setTooltip(TooltipFactory.create("Click here to create a new employee profile", 500, 250));        
-        btnEditUser.setTooltip(TooltipFactory.create("Click here to edit an existing employee profile.\nSelect a user first", 500, 250));
+        btnNewUser.setTooltip(TooltipFactory.create("Click here to create a new employee profile"));        
+        btnEditUser.setTooltip(TooltipFactory.create("Click here to edit an existing employee profile.\nSelect a user first"));
     }
     
     private void initEffects() {
-        buttonEffect(btnNewUser);
-        buttonEffect(btnEditUser);
-    }
-    
-    private void buttonEffect(Button button) {
-        button.setOnMouseEntered(e -> {
-            button.setEffect(new DropShadow());
-        });
-        button.setOnMouseExited(e -> {
-           button.setEffect(null); 
-        });
+        NodeCustomizer.nodeEffect(btnNewUser);
+        NodeCustomizer.nodeEffect(btnEditUser);
     }
     
     @FXML
