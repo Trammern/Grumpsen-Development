@@ -5,6 +5,7 @@
  */
 package timetrackingexam.gui.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
@@ -19,9 +20,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,6 +32,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
 /**
@@ -62,6 +66,12 @@ public class ProjectManagementViewController implements Initializable {
     private JFXTextArea fldDescription;
     @FXML
     private MenuItem menuItemTasks;
+    @FXML
+    private MenuItem menuItemUser;
+    @FXML
+    private JFXButton btnNewProject;
+    @FXML
+    private JFXButton btnEditProject;
 
     /**
      * Initializes the controller class.
@@ -77,8 +87,30 @@ public class ProjectManagementViewController implements Initializable {
        am.setCurrentTask(null);
        am.setSelectedUser(null);
        txtSelectedProject.setText("(Select Project)");
+       
+       initTooltips();
+       initEffects();
     }    
 
+    private void initTooltips() {
+        btnNewProject.setTooltip(TooltipFactory.create("Click here to create a new project", 500, 250));        
+        btnEditProject.setTooltip(TooltipFactory.create("Click here to edit an existing project.\nSelect a project first", 500, 250));
+    }
+    
+    private void initEffects() {
+        buttonEffect(btnNewProject);
+        buttonEffect(btnEditProject);
+    }
+    
+    private void buttonEffect(Button button) {
+        button.setOnMouseEntered(e -> {
+            button.setEffect(new DropShadow());
+        });
+        button.setOnMouseExited(e -> {
+           button.setEffect(null); 
+        });
+    }
+    
     @FXML
     private void newProject(ActionEvent event) {
         am.setCurrentProject(null);
@@ -95,27 +127,6 @@ public class ProjectManagementViewController implements Initializable {
         }
     }
 
-    @FXML
-    private void openProject(ActionEvent event) {
-        if (am.getCurrentProject() != null) {
-            try {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AdminProjectOverview.fxml"));
-                Parent root1 = (Parent) fxml.load();
-                Stage stage = new Stage();
-                Stage primStage = (Stage) txtSelectedProject.getScene().getWindow();
-                stage.setScene(new Scene(root1));
-                primStage.close();
-                stage.showAndWait();
-                stage.setTitle("Project view");
-            } catch (IOException ex) {
-                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            AlertBox.errorAlert("Select a project to open");
-        }
-        
-    }
-    
     @FXML
     private void setSelectedProject(MouseEvent event) {
         selectedProject = lstProjects.getSelectionModel().getSelectedItem();
@@ -163,6 +174,12 @@ public class ProjectManagementViewController implements Initializable {
     private void goToTasks(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.projectsOverview(primStage);
+    }
+
+    @FXML
+    private void goToUserManagement(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.userManagementView(primStage);
     }
 
     

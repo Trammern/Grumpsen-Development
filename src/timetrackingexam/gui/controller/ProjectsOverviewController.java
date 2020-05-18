@@ -22,11 +22,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -35,6 +37,7 @@ import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
 /**
@@ -92,6 +95,8 @@ public class ProjectsOverviewController implements Initializable {
     private TextField fldHour;
     @FXML
     private Label txtHour;
+    @FXML
+    private MenuItem menuItemUser;
 
     /**
      * Initializes the controller class.
@@ -114,8 +119,35 @@ public class ProjectsOverviewController implements Initializable {
         if (currentUser.getRole()!=User.Role.Admin) {
             menuItemAdmin.setDisable(true);
             menuItemAdmin.setVisible(false);
+            menuItemUser.setDisable(true);
+            menuItemUser.setVisible(false);
         }
+        
+        initTooltips();
+        initEffects();
     } 
+    
+    private void initTooltips() {
+        btnAddTask.setTooltip(TooltipFactory.create("Click here to create a new task for the selected project", 500, 250));        
+        btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first", 500, 250));
+        btnDeleteTask.setTooltip(TooltipFactory.create("Click here to delete a task.\nSelect a task first", 500, 250));
+        btnTimeButton.setTooltip(TooltipFactory.create("Click here to start or pause registering the time you work on the task", 500, 250));
+    }
+    
+    private void initEffects() {
+        buttonEffect(btnAddTask);
+        buttonEffect(btnEditTask);
+        buttonEffect(btnDeleteTask);        
+    }
+    
+    private void buttonEffect(Button button) {
+        button.setOnMouseEntered(e -> {
+            button.setEffect(new DropShadow());
+        });
+        button.setOnMouseExited(e -> {
+           button.setEffect(null); 
+        });
+    }
 
     @FXML
     private void addTask(ActionEvent event) {
@@ -303,6 +335,12 @@ public class ProjectsOverviewController implements Initializable {
                 Integer.parseInt(fldMin.getText()),
                 Integer.parseInt(fldSec.getText()),
                 LocalDate.now()));
+    }
+
+    @FXML
+    private void goToUserManagement(ActionEvent event) {
+        Stage primStage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.userManagementView(primStage);
     }
         
     

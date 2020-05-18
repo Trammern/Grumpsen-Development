@@ -19,7 +19,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Navigate">
             <items>
-                  <MenuItem fx:id="menuItemAdmin" mnemonicParsing="false" onAction="#goToAdmin" text="Admin View" />
+                  <MenuItem fx:id="menuItemAdmin" mnemonicParsing="false" onAction="#goToAdmin" text="Project Management" />
+                  <MenuItem fx:id="menuItemUser" mnemonicParsing="false" onAction="#goToUserManagement" text="User Management" />
               <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#closeProgram" text="Close" />
                   <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
             </items>
