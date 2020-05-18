@@ -328,12 +328,12 @@ public class ProjectsOverviewController implements Initializable {
     private void handleSubmit(ActionEvent event)
     {
         am.stopTimer();
-        am.addTime(new TaskTime(
+        am.updateTime(new TaskTime(
                 am.getCurrentTask().getId(),
                 am.getCurrentUser().getId(),
-                Integer.parseInt(fldHour.getText()),
-                Integer.parseInt(fldMin.getText()),
                 Integer.parseInt(fldSec.getText()),
+                Integer.parseInt(fldMin.getText()),
+                Integer.parseInt(fldHour.getText()),
                 LocalDate.now()));
     }
 
