@@ -304,13 +304,13 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnStopStart(ActionEvent event)
     {
-        if(!am.timerIsRunning()){
+        if(!am.timerIsRunning()||btnTimeButton.getText().equals("Start")){
             am.startTimer(fldSec, fldMin, fldHour);
             btnSubmit.setDisable(true);
             btnTimeButton.setText("Pause");
         }
-        else{
-            am.pauseTimer();
+        else if (btnTimeButton.getText().equals("Pause")){
+            am.stopTimer();
             btnTimeButton.setText("Start");
             btnSubmit.setDisable(false);
         }
