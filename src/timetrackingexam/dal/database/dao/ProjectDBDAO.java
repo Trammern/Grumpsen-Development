@@ -186,7 +186,7 @@ public class ProjectDBDAO  implements Serializable
             }
           pw.write(sb.toString());
                  pw.close();
-                 System.out.println("finish");
+                 System.out.println("TXT File Created...");
 
         } catch (SQLException ex)
         {
