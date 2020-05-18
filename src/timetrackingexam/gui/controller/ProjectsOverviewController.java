@@ -37,6 +37,7 @@ import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
+import timetrackingexam.gui.util.NodeCustomizer;
 import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
 
@@ -130,27 +131,18 @@ public class ProjectsOverviewController implements Initializable {
     } 
     
     private void initTooltips() {
-        btnAddTask.setTooltip(TooltipFactory.create("Click here to create a new task for the selected project", 500, 250));        
-        btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first", 500, 250));
-        btnDeleteTask.setTooltip(TooltipFactory.create("Click here to delete a task.\nSelect a task first", 500, 250));
-        btnTimeButton.setTooltip(TooltipFactory.create("Click here to start or pause registering the time you work on the task", 500, 250));
+        btnAddTask.setTooltip(TooltipFactory.create("Click here to create a new task for the selected project"));        
+        btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first"));
+        btnDeleteTask.setTooltip(TooltipFactory.create("Click here to delete a task.\nSelect a task first"));
+        btnTimeButton.setTooltip(TooltipFactory.create("Click here to start or pause registering the time you work on the task"));
     }
     
-    private void initEffects() {
-        buttonEffect(btnAddTask);
-        buttonEffect(btnEditTask);
-        buttonEffect(btnDeleteTask);        
+    private void initEffects() {        
+        NodeCustomizer.nodeEffect(btnAddTask);
+        NodeCustomizer.nodeEffect(btnEditTask);
+        NodeCustomizer.nodeEffect(btnDeleteTask);
     }
     
-    private void buttonEffect(Button button) {
-        button.setOnMouseEntered(e -> {
-            button.setEffect(new DropShadow());
-        });
-        button.setOnMouseExited(e -> {
-           button.setEffect(null); 
-        });
-    }
-
     @FXML
     private void addTask(ActionEvent event) {
         am.setCurrentTask(null);
@@ -314,13 +306,13 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnStopStart(ActionEvent event)
     {
-        if(!am.timerIsRunning()){
+        if(!am.timerIsRunning()||btnTimeButton.getText().equals("Start")){
             am.startTimer(fldSec, fldMin, fldHour);
             btnSubmit.setDisable(true);
             btnTimeButton.setText("Pause");
         }
-        else{
-            am.pauseTimer();
+        else if (btnTimeButton.getText().equals("Pause")){
+            am.stopTimer();
             btnTimeButton.setText("Start");
             btnSubmit.setDisable(false);
         }
@@ -330,12 +322,12 @@ public class ProjectsOverviewController implements Initializable {
     private void handleSubmit(ActionEvent event)
     {
         am.stopTimer();
-        am.addTime(new TaskTime(
+        am.updateTime(new TaskTime(
                 am.getCurrentTask().getId(),
                 am.getCurrentUser().getId(),
-                Integer.parseInt(fldHour.getText()),
-                Integer.parseInt(fldMin.getText()),
                 Integer.parseInt(fldSec.getText()),
+                Integer.parseInt(fldMin.getText()),
+                Integer.parseInt(fldHour.getText()),
                 LocalDate.now()));
     }
 
