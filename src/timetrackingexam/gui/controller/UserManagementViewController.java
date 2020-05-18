@@ -83,8 +83,7 @@ public class UserManagementViewController implements Initializable {
        am = AppModel.getInstance();
        currentUser = am.getCurrentUser();
        menuUser.setText(currentUser.getEmail());           
-       allUsers = am.getAllUsers();
-       tblEmployeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); 
+       allUsers = am.getAllUsers();        
        tblEmployeeTable.setItems(allUsers);       
               
        initColumns();

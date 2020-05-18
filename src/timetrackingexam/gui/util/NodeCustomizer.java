@@ -17,8 +17,11 @@ public class NodeCustomizer {
     
     public static void nodeEffect(Node node) {
         node.setOnMouseEntered(e -> {
-            node.setEffect(new DropShadow());
-            //node.setEffect(new Bloom());
+            DropShadow ds = new DropShadow();
+            ds.setInput(new Bloom(0.7));
+            node.setEffect(ds);
+            //node.setEffect(new DropShadow());
+            //node.setEffect(new Bloom(0.65));
         });
         node.setOnMouseExited(e -> {
            node.setEffect(null); 
