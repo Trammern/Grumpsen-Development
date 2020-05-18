@@ -14,10 +14,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
@@ -62,6 +64,8 @@ public class AddEditUserViewController implements Initializable {
         if (selectedUser != null) {
             setUserInformation(selectedUser);
         }
+        initKeys();
+        
     }    
 
     private void setUserInformation(User user) {
@@ -75,8 +79,28 @@ public class AddEditUserViewController implements Initializable {
         cbbRole.getSelectionModel().select(user.getRole());
     }
     
+    private void initKeys() {
+        actionOnEnterKey(txtEmail);
+        actionOnEnterKey(txtFirstName);
+        actionOnEnterKey(txtLastName);
+        actionOnEnterKey(txtPassword);
+        actionOnEnterKey(cbbRole);
+    }
+    
+    private void actionOnEnterKey(Node node) {
+        node.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER)) {
+                validateInformation();
+            }
+        });
+    }
+    
     @FXML
-    private void saveUser(ActionEvent event) {
+    private void saveUser(ActionEvent event) {        
+        validateInformation();
+    }
+    
+    private void validateInformation() {
         String email = txtEmail.getText();
         String password = (selectedUser!=null ) ? selectedUser.getPassword() : LoginTools.hashPassword(txtPassword.getText());
         String firstName = txtFirstName.getText();
@@ -99,7 +123,6 @@ public class AddEditUserViewController implements Initializable {
         } else {
             AlertBox.errorAlert("You must enter a valid email address");
         }
-
     }
     
     private void saveChanges(User user) {

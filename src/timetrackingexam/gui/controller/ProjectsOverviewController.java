@@ -141,6 +141,8 @@ public class ProjectsOverviewController implements Initializable {
         NodeCustomizer.nodeEffect(btnAddTask);
         NodeCustomizer.nodeEffect(btnEditTask);
         NodeCustomizer.nodeEffect(btnDeleteTask);
+        NodeCustomizer.nodeEffect(btnTimeButton);
+        NodeCustomizer.nodeEffect(btnSubmit);        
     }
     
     @FXML
