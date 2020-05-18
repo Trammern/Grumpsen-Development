@@ -98,6 +98,8 @@ public class ProjectsOverviewController implements Initializable {
     private Label txtHour;
     @FXML
     private MenuItem menuItemUser;
+    @FXML
+    private Button ff;
 
     /**
      * Initializes the controller class.
@@ -304,13 +306,13 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnStopStart(ActionEvent event)
     {
-        if(!am.timerIsRunning()){
+        if(!am.timerIsRunning()||btnTimeButton.getText().equals("Start")){
             am.startTimer(fldSec, fldMin, fldHour);
             btnSubmit.setDisable(true);
             btnTimeButton.setText("Pause");
         }
-        else{
-            am.pauseTimer();
+        else if (btnTimeButton.getText().equals("Pause")){
+            am.stopTimer();
             btnTimeButton.setText("Start");
             btnSubmit.setDisable(false);
         }
@@ -320,12 +322,12 @@ public class ProjectsOverviewController implements Initializable {
     private void handleSubmit(ActionEvent event)
     {
         am.stopTimer();
-        am.addTime(new TaskTime(
+        am.updateTime(new TaskTime(
                 am.getCurrentTask().getId(),
                 am.getCurrentUser().getId(),
-                Integer.parseInt(fldHour.getText()),
-                Integer.parseInt(fldMin.getText()),
                 Integer.parseInt(fldSec.getText()),
+                Integer.parseInt(fldMin.getText()),
+                Integer.parseInt(fldHour.getText()),
                 LocalDate.now()));
     }
 
@@ -333,6 +335,12 @@ public class ProjectsOverviewController implements Initializable {
     private void goToUserManagement(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.userManagementView(primStage);
+    }
+
+    @FXML
+    private void dd(ActionEvent event)
+    {
+        am.getCSV();
     }
         
     

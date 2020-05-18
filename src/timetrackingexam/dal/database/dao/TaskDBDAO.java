@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -17,8 +18,6 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
-import timetrackingexam.dal.database.dbaccess.DBSettings;
-import timetrackingexam.dal.facade.ITaskDal;
 
 /**
  *
@@ -75,12 +74,14 @@ public class TaskDBDAO{
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tasks.add(new Task(
+                Task taskToBeAdded = new Task(
                         rs.getInt("ID"),
                         rs.getInt("ProjectID"),
                         rs.getInt("UserID"),
                         rs.getString("Name")
-                ));
+                );
+                
+                tasks.add(taskToBeAdded);
             }
             return tasks;
         } catch (SQLException sqlE) {
@@ -106,7 +107,7 @@ public class TaskDBDAO{
             int updatedRows = pstmt.executeUpdate();
             
             addTime(task, new TaskTime(task.getId(), 0, 0, 0, 0, LocalDate.now()), con);
-
+            
             return updatedRows > 0;
             
         } catch (SQLException sqlE) {
@@ -243,14 +244,14 @@ public class TaskDBDAO{
         try{
             String sql = "UPDATE time "
                     + "SET hour = ? , min = ?, sec = ? "
-                    + "WHERE ID = ?";
+                    + "WHERE date = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1, tt.getHours());
             ps.setInt(2, tt.getMin());
             ps.setInt(3, tt.getSec());
-            ps.setInt(4, tt.getTimeID());
+            ps.setString(4, tt.getDate().toString());
             
             int updatedRows = ps.executeUpdate();
             

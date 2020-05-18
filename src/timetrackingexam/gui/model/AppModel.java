@@ -208,6 +208,10 @@ public class AppModel
         return taskManager.addTime(tt, getCurrentTask());
     }
     
+    public boolean updateTime(TaskTime tt){
+        return taskManager.updateTime(tt);
+    }
+    
     public ObservableList<User> getProjectNonEmployees(Project project) {
         return userManager.getProjectNonEmployees(project);
     }
@@ -222,6 +226,10 @@ public class AppModel
     
     public long getLineChartData(Task t){
         return taskManager.getLineChartData(t);
+    }
+    public void getCSV()
+    {
+        projectManager.getCSV();
     }
     
 }

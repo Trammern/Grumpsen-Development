@@ -42,7 +42,12 @@ public class ProjectManager implements IProjectManager {
     public ObservableList<Task> getTasksInProject(Project p) {
         return projectDal.getTasksInProject(p);
     }
-
+    
+    public void getCSV()
+    {
+       projectDal.getCSV();
+    }
+          
     
     
 }
