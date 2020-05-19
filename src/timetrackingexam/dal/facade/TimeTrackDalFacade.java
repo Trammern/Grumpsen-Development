@@ -157,17 +157,17 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 
     @Override
     public TaskTime getTime(Task t) {
-        return taskController.getTime(t);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
     public boolean updateTime(TaskTime tt) {
-        return taskController.updateTime(tt);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
     public boolean addTime(TaskTime tt, Task t) {
-        return taskController.addTime(tt, t);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

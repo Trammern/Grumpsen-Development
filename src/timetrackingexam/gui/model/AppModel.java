@@ -199,18 +199,6 @@ public class AppModel
     public ObservableList<Task> getTasksInProject(Project p){
         return projectManager.getTasksInProject(p);
     }
-        
-    public TaskTime getTimeUsed(Task t){
-       return taskManager.getTime(t);
-    }
-    
-    public boolean addTime(TaskTime tt){
-        return taskManager.addTime(tt, getCurrentTask());
-    }
-    
-    public boolean updateTime(TaskTime tt){
-        return taskManager.updateTime(tt);
-    }
     
     public ObservableList<User> getProjectNonEmployees(Project project) {
         return userManager.getProjectNonEmployees(project);

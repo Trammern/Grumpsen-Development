@@ -105,9 +105,7 @@ public class TaskDBDAO{
             pstmt.setInt(5, task.getTimeAssigned());
             
             int updatedRows = pstmt.executeUpdate();
-            
-            addTime(task, new TaskTime(task.getId(), 0, 0, 0, 0, LocalDate.now()), con);
-            
+                       
             return updatedRows > 0;
             
         } catch (SQLException sqlE) {
@@ -159,109 +157,4 @@ public class TaskDBDAO{
             return false;
         }
     }
-
-    public TaskTime getTime(Connection con, Task task) {
-        try{
-
-            ObservableList<TaskTime> taskTimes = FXCollections.observableArrayList();
-
-            String sql = "SELECT * FROM Time "
-                    + "INNER JOIN Task ON Task.ID = Time.TaskID "
-                    + "WHERE Task.ID = ?";
-
-            PreparedStatement pstmt = con.prepareStatement(sql);
-
-            pstmt.setInt(1, task.getId()); 
-            
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                TaskTime timeToBeAdded = new TaskTime(
-                        rs.getInt("TaskID"),
-                        rs.getInt("UserID"),
-                        rs.getInt("Sec"),
-                        rs.getInt("Min"),
-                        rs.getInt("Hour"),
-                        LocalDate.parse(rs.getString("Date")));
-                
-                timeToBeAdded.setTimeID(rs.getInt("ID"));
-                
-                taskTimes.add(timeToBeAdded);
-            }
-            
-            int hours = 0;
-            int min = 0;
-            int sec = 0;
-            
-            for (TaskTime taskTime : taskTimes) {
-                hours = hours + taskTime.getHours();
-                min = min + taskTime.getMin();
-                sec = sec + taskTime.getSec();
-            }
-            
-            TaskTime totalTime = new TaskTime(sec, min, hours);
-
-            return totalTime;
-        } catch (SQLException sqlE) {
-            System.out.println("Failed to grab element from database");
-            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
-            return null;
-        }
-    }
-    /**
-     * Need a user to complete implementation
-     * @param t
-     * @param con
-     * @param tat
-     * @return 
-     */
-    public boolean addTime(Task t, TaskTime tat, Connection con){
-        try{
-            String sql = "INSERT INTO time (taskId, UserID, Sec, Min, Hour, Date)"
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
-            
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setInt(1, t.getId());
-            ps.setInt(2, tat.getUserId());
-            ps.setInt(3, tat.getSec());
-            ps.setInt(4, tat.getMin());
-            ps.setInt(5, tat.getHours());
-            ps.setString(6, tat.getDate().toString());
-            
-            int updatedRows = ps.executeUpdate();
-            
-            return updatedRows > 0;
-        }        
-        catch(SQLException sqlE){
-            System.out.println("Failed to grab element from database");
-            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
-            return false;
-        }
-    }
-    
-    public boolean updateTime(TaskTime tt, Connection con){
-        try{
-            String sql = "UPDATE time "
-                    + "SET hour = ? , min = ?, sec = ? "
-                    + "WHERE date = ?";
-            
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setInt(1, tt.getHours());
-            ps.setInt(2, tt.getMin());
-            ps.setInt(3, tt.getSec());
-            ps.setString(4, tt.getDate().toString());
-            
-            int updatedRows = ps.executeUpdate();
-            
-            return updatedRows > 0;
-        }
-        catch(SQLException sqlE){
-            System.out.println("Failed to grab element from database");
-            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
-            return false;
-        }
-    }
-
 }
