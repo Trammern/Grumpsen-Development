@@ -20,7 +20,6 @@ public interface ITaskDal {
     public boolean createTask(Task task);
     public boolean deleteTask(Task task);
     public boolean updateTask(Task task);
-    public boolean deleteTask(Task selectedTask, Project currentProject);
     public boolean createTask(Task t, Project p);
     
     public TaskTime getTime(Task t);

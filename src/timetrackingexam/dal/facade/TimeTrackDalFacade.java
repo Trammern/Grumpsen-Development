@@ -62,9 +62,9 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
+    public boolean deleteTask(Task selectedTask)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taskController.deleteTask(selectedTask);
     }
 
     @Override
