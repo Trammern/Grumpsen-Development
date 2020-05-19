@@ -38,11 +38,4 @@ public class ProjectManager implements IProjectManager {
     public boolean updateProject(Project p) {
         return projectDal.updateProject(p);
     }
-
-    public ObservableList<Task> getTasksInProject(Project p) {
-        return projectDal.getTasksInProject(p);
-    }
-
-    
-    
 }

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
@@ -64,15 +65,19 @@ public class TaskDBDAO{
         }
     }
 
-    public ObservableList<Task> getAllTasks(Connection con) {
+    public ObservableList getTasks(Connection con, Project p) {
         try{
 
             ObservableList<Task> tasks = FXCollections.observableArrayList();
 
-            String sql = "SELECT * FROM task";
+            String sql = "SELECT * FROM task "
+                    + "WHERE ProjectID = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
 
+            pstmt.setInt(1, p.getId());
+            
             ResultSet rs = pstmt.executeQuery();
+            
             while (rs.next()) {
                 Task taskToBeAdded = new Task(
                         rs.getInt("ID"),
@@ -263,5 +268,6 @@ public class TaskDBDAO{
             return false;
         }
     }
+
 
 }

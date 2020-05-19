@@ -7,6 +7,7 @@ package timetrackingexam.dal.database.controller;
 
 import java.sql.Connection;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.dal.database.dao.TaskDBDAO;
@@ -33,14 +34,6 @@ public class TaskDaoController
         Task selectetTask = taskDAO.getSpecificTask(con, t);
         conPool.checkIn(con);
         return selectetTask;
-    }
-    
-    public ObservableList<Task> getAllTasks()
-    {
-        Connection con = conPool.checkOut();
-        ObservableList<Task> tasks = taskDAO.getAllTasks(con);
-        conPool.checkIn(con);
-        return tasks;
     }
 
     public boolean CreateTask(Task task)
@@ -87,5 +80,12 @@ public class TaskDaoController
         boolean timeAdded = taskDAO.addTime(t, tt, con);
         conPool.checkIn(con);
         return timeAdded;
+    }
+
+    public ObservableList<Task> getTasks(Project p) {
+        Connection con = conPool.checkOut();
+        ObservableList tasks = taskDAO.getTasks(con, p);
+        conPool.checkIn(con);
+        return tasks;
     }
 }

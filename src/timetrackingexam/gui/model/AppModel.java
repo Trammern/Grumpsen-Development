@@ -15,6 +15,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
+import timetrackingexam.bll.facade.ITimeTrackBLL;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.project.ProjectManager;
 import timetrackingexam.bll.task.TaskManager;
@@ -32,6 +33,7 @@ public class AppModel
     private Project currentProject;
     private Task currentTask;
     private User selectedUser;
+    private ITimeTrackBLL ttInterface;
     private TimeTrackBLLFacade ttBll;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
@@ -44,6 +46,7 @@ public class AppModel
 
     private AppModel()
     {
+        ttInterface = new TimeTrackBLLFacade();
         ttBll = new TimeTrackBLLFacade();
         userManager = new UserManager();
         projectManager = new ProjectManager();
@@ -90,7 +93,7 @@ public class AppModel
     public ObservableList<Task> getTasks()
     {
         tasks.clear();
-        tasks.addAll(taskManager.readTask());
+        tasks.addAll(ttInterface.getTasks(currentProject));
         return tasks;
         
     }
@@ -195,21 +198,9 @@ public class AppModel
     public ObservableList<User> GetProjectEmployees(Project p) {
         return userManager.getProjectEmployees(p);
     }
-
-    public ObservableList<Task> getTasksInProject(Project p){
-        return projectManager.getTasksInProject(p);
-    }
         
-    public TaskTime getTimeUsed(Task t){
-       return taskManager.getTime(t);
-    }
-    
-    public boolean addTime(TaskTime tt){
-        return taskManager.addTime(tt, getCurrentTask());
-    }
-    
-    public boolean updateTime(TaskTime tt){
-        return taskManager.updateTime(tt);
+    public TaskTime getTime(){
+        return ttInterface.getTime(currentTask);
     }
     
     public ObservableList<User> getProjectNonEmployees(Project project) {
