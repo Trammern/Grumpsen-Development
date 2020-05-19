@@ -97,7 +97,7 @@ public class MockProjectManager implements IProjectDal {
         return projects.add(p);
     }
 
-    public boolean createTask(Task t, Project p)
+    public boolean addTask(Task t, Project p)
     {
         return p.addTask(t);
     }

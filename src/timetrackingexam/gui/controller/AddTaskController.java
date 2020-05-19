@@ -78,11 +78,14 @@ public class AddTaskController implements Initializable
     
     private void newTask()
     {
-        String name = txtAddTaskName.getText().trim();
-        String description = txtAddTaskDescription.getText().trim();
-        Project p = am.getCurrentProject();
-        Task t = new Task(name, description);
-        am.addTask(t,p);
+        Task newTask = new Task(
+                am.getCurrentProject().getId(),
+                am.getCurrentUser().getId(),
+                txtAddTaskName.getText(),
+                txtAddTaskDescription.getText()
+               );
+        am.addTask(newTask, am.getCurrentProject());
+        
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }

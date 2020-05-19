@@ -39,7 +39,7 @@ public class TaskManager implements ITaskManager
     @Override
     public boolean deleteTask(Task selectedTask, Project currentProject)
     {
-        return taskManager.deleteTask(selectedTask, currentProject);
+        return false;
     }
 
 
@@ -47,12 +47,6 @@ public class TaskManager implements ITaskManager
     public ObservableList<Task> getTasks(Project p)
     {
         return taskManager.getTasks(p);
-    }
-
-    @Override
-    public boolean createTask(Task t, Project p)
-    {
-        return taskManager.createTask(t,p);
     }
 
     @Override
@@ -83,6 +77,11 @@ public class TaskManager implements ITaskManager
         else{
             return updateTime(tt);
         }
+    }
+
+    @Override
+    public boolean addTask(Task t, Project p) {
+        return taskManager.addTask(t, p);
     }
 
     

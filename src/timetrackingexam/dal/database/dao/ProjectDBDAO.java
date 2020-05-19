@@ -116,39 +116,39 @@ public class ProjectDBDAO
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    /**
-     * Jeg ved ikke om vi skal rykke denne her til task dbdao istedet. Min logik
-     * er at hvis jeg skal finde en task leder jeg i projekt
-     * @param p
-     * @param con
-     * @return 
-     */
-    public ObservableList<Task> getTasksInProject(Project p, Connection con) {
-        ObservableList<Task> tasksInProject = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM task "
-                + "WHERE "
-                + "ProjectID = ?";
-        try(PreparedStatement ps = con.prepareStatement(sql)){
-            
-            ps.setInt(1, p.getId());
-            
-            ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
-                tasksInProject.add(new Task(
-                        rs.getInt("ID"),
-                        rs.getInt("ProjectID"),
-                        rs.getInt("UserID"),
-                        rs.getString("Description")
-                ));
-            }
-            return tasksInProject;
-        }
-        catch(SQLException sqlE){
-            Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
-            return null;
-        }
-    }
-    
+//
+//    /**
+//     * Jeg ved ikke om vi skal rykke denne her til task dbdao istedet. Min logik
+//     * er at hvis jeg skal finde en task leder jeg i projekt
+//     * @param p
+//     * @param con
+//     * @return 
+//     */
+//    public ObservableList<Task> getTasksInProject(Project p, Connection con) {
+//        ObservableList<Task> tasksInProject = FXCollections.observableArrayList();
+//        String sql = "SELECT * FROM task "
+//                + "WHERE "
+//                + "ProjectID = ?";
+//        try(PreparedStatement ps = con.prepareStatement(sql)){
+//            
+//            ps.setInt(1, p.getId());
+//            
+//            ResultSet rs = ps.executeQuery();
+//            
+//            while(rs.next()){
+//                tasksInProject.add(new Task(
+//                        rs.getInt("ID"),
+//                        rs.getInt("ProjectID"),
+//                        rs.getInt("UserID"),
+//                        rs.getString("Description")
+//                ));
+//            }
+//            return tasksInProject;
+//        }
+//        catch(SQLException sqlE){
+//            Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+//            return null;
+//        }
+//    }
+//    
 }

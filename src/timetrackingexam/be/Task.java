@@ -25,16 +25,16 @@ public class Task {
 
     /**
      * Constructor for creating tasks
-     * @param id
      * @param projectId
      * @param userId
      * @param name 
+     * @param description 
      */
-    public Task(int id, int projectId, int userId, String name) {
-        this.id = id;
+    public Task(int projectId, int userId, String name, String description) {
         this.projectId = projectId;
-        this.userId = userId; 
+        this.userId = userId;
         this.name = name;
+        this.description = description;
     }
 
     /**

@@ -25,19 +25,11 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     public TimeTrackBLLFacade() {
         this.dalFacade = new TimeTrackDalFacade();
     }
-    
-    
-
-    @Override
-    public boolean createTask(Task t, Project p)
-    {
-        return dalFacade.createTask(t, p);
-    }
 
     @Override
     public boolean deleteTask(Task selectedTask, Project currentProject)
     {
-        return dalFacade.deleteTask(selectedTask, currentProject);
+        return false;
     }
 
     @Override
@@ -120,6 +112,11 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     @Override
     public ObservableList<Task> getTasks(Project p) {
         return dalFacade.getTasks(p);
+    }
+
+    @Override
+    public boolean addTask(Task t, Project p) {
+        return dalFacade.addTask(t, p);
     }
 
     

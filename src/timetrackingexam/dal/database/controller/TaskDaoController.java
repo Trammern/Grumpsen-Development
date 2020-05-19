@@ -27,19 +27,11 @@ public class TaskDaoController
         this.conPool = conPool;
         taskDAO = TaskDBDAO.getInstance();
     }
-    
-    public Task getSpecificTask(Task t)
-    {
-        Connection con = conPool.checkOut();
-        Task selectetTask = taskDAO.getSpecificTask(con, t);
-        conPool.checkIn(con);
-        return selectetTask;
-    }
 
-    public boolean CreateTask(Task task)
+    public boolean addTask(Task t, Project p)
     {
         Connection con = conPool.checkOut();
-        Boolean create = taskDAO.createTask(con, task);
+        Boolean create = taskDAO.addTask(t, p, con);
         conPool.checkIn(con);
         return create;
     }
@@ -62,24 +54,15 @@ public class TaskDaoController
     
 
     public TaskTime getTime(Task t) {
-        Connection con = conPool.checkOut();
-        TaskTime time = taskDAO.getTime(con, t);
-        conPool.checkIn(con);
-        return time;
+        return null;
     }
 
     public boolean updateTime(TaskTime tt) {
-        Connection con = conPool.checkOut();
-        boolean timeUpdated = taskDAO.updateTime(tt, con);
-        conPool.checkIn(con);
-        return timeUpdated;
+        return false;
     }
 
     public boolean addTime(TaskTime tt, Task t) {
-        Connection con = conPool.checkOut();
-        boolean timeAdded = taskDAO.addTime(t, tt, con);
-        conPool.checkIn(con);
-        return timeAdded;
+        return false;
     }
 
     public ObservableList<Task> getTasks(Project p) {

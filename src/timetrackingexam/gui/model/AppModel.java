@@ -129,8 +129,7 @@ public class AppModel
     
     public boolean addTask(Task t, Project p)
     {
-        tasks.add(t);
-        if(taskManager.createTask(t,p)){
+        if(ttInterface.addTask(t, p)){
             fetch();
             return true;
         }

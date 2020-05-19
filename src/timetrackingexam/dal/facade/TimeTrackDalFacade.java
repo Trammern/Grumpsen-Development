@@ -49,13 +49,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public boolean createTask(Task t, Project p)
-    {
-        t.setProjectId(p.getId());
-        return taskController.CreateTask(t);
-    }
-
-    @Override
     public boolean updateProject(Project p)
     {
         return projectController.editProject(p);
@@ -71,24 +64,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public boolean updateTask(Task updateTask)
     {
         return taskController.updateTask(updateTask);
-    }
-    
-    @Override
-    public Task getSpecificTask(Task task)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean createTask(Task task)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean deleteTask(Task task)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -152,8 +127,8 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
-
-
-    
+    @Override
+    public boolean addTask(Task t, Project p) {
+        return taskController.addTask(t, p);
+    }
 }

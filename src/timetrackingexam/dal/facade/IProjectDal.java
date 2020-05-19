@@ -18,7 +18,7 @@ public interface IProjectDal {
     
     public ObservableList<Project> getProjects();
     public boolean createNewProject(Project p);
-    public boolean createTask(Task t, Project p);
+    public boolean addTask(Task t, Project p);
     public boolean updateProject(Project p);
     
 }

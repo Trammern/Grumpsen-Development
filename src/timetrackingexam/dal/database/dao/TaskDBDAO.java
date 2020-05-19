@@ -42,29 +42,6 @@ public class TaskDBDAO{
         }
     }
 
-    public Task getSpecificTask(Connection con, Task task) {
-        try{
-            String sql = "SELECT * FROM task WHERE task.userId = ? AND task.projectId = ?";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-
-            pstmt.setInt(1, task.getUserId());
-            pstmt.setInt(2, task.getProjectId());
-
-            ResultSet rs = pstmt.executeQuery();
-
-            return new Task(
-                    rs.getInt("ID"),
-                    rs.getInt("ProjectID"),
-                    rs.getInt("UserID"),
-                    rs.getString("name")
-            );
-
-        } catch (SQLException sqlE) {
-            System.out.println("Failed to grab element from database");
-            return null;
-        }
-    }
-
     public ObservableList getTasks(Connection con, Project p) {
         try{
 
@@ -80,11 +57,13 @@ public class TaskDBDAO{
             
             while (rs.next()) {
                 Task taskToBeAdded = new Task(
-                        rs.getInt("ID"),
                         rs.getInt("ProjectID"),
                         rs.getInt("UserID"),
-                        rs.getString("Name")
+                        rs.getString("Name"),
+                        rs.getString("Description")
                 );
+                
+                taskToBeAdded.setId(rs.getInt("ID"));
                 
                 tasks.add(taskToBeAdded);
             }
@@ -92,31 +71,6 @@ public class TaskDBDAO{
         } catch (SQLException sqlE) {
             System.out.println("Failed to grab element from database");
             return null;
-        }
-    }
-
-    public boolean createTask(Connection con, Task task) {
-        try{
-            String sql = "INSERT INTO task (ProjectID, Name, Description, userID, TimeAssigned)"
-                    + "VALUES"
-                    + "(?, ?, ?, ?, ?)";
-
-            PreparedStatement pstmt = con.prepareStatement(sql);
-
-            pstmt.setInt(1, task.getProjectId());
-            pstmt.setString(2, task.getName());
-            pstmt.setString(3, task.getDescription());
-            pstmt.setInt(4, task.getUserId());
-            pstmt.setInt(5, task.getTimeAssigned());
-            
-            int updatedRows = pstmt.executeUpdate();
-                       
-            return updatedRows > 0;
-            
-        } catch (SQLException sqlE) {
-            System.out.println("Failed to grab element from database");
-            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
-            return false;
         }
     }
 
@@ -156,6 +110,31 @@ public class TaskDBDAO{
             int updatedRows = pstmt.executeUpdate();
 
             return updatedRows > 0;
+        } catch (SQLException sqlE) {
+            System.out.println("Failed to grab element from database");
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return false;
+        }
+    }
+
+    public Boolean addTask(Task t, Project p, Connection con) {
+        try{
+            String sql = "INSERT INTO task (ProjectID, Name, Description, UserID, TimeAssigned)"
+                    + "VALUES"
+                    + "(?, ?, ?, ?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(sql);
+
+            pstmt.setInt(1, t.getProjectId());
+            pstmt.setString(2, t.getName());
+            pstmt.setString(3, t.getDescription());
+            pstmt.setInt(4, t.getUserId());
+            pstmt.setInt(5, t.getTimeAssigned());
+            
+            int updatedRows = pstmt.executeUpdate();
+                       
+            return updatedRows > 0;
+            
         } catch (SQLException sqlE) {
             System.out.println("Failed to grab element from database");
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);

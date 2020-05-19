@@ -15,12 +15,10 @@ import timetrackingexam.be.TaskTime;
  * @author math2
  */
 public interface ITaskDal {
-    public Task getSpecificTask(Task task);
     public ObservableList<Task> getTasks(Project p);
-    public boolean createTask(Task task);
     public boolean deleteTask(Task task);
     public boolean updateTask(Task task);
-    public boolean createTask(Task t, Project p);
+    public boolean addTask(Task t, Project p);
     
     public TaskTime getTime(Task t);
     public boolean addTime(TaskTime tt, Task t);
