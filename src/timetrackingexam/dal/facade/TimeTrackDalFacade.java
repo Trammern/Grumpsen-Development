@@ -43,12 +43,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public ObservableList<Task> getTasks()
-    {
-        return taskController.getAllTasks();
-    }
-
-    @Override
     public boolean createNewProject(Project p)
     {
         return projectController.createProject(p);
@@ -68,9 +62,9 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
+    public boolean deleteTask(Task selectedTask)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taskController.deleteTask(selectedTask);
     }
 
     @Override
@@ -78,23 +72,11 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     {
         return taskController.updateTask(updateTask);
     }
-
-    @Override
-    public ObservableList<Task> getTimeUsed(Task t)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public Task getSpecificTask(Task task)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ObservableList<Task> getAllTasks()
-    {
-        return taskController.getAllTasks();
     }
 
     @Override
@@ -149,10 +131,10 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public boolean deleteUser(User user) {
         return userController.deleteUser(user);
     }
-
+    
     @Override
-    public ObservableList<Task> getTasksInProject(Project p) {
-        return projectController.getTasksInProject(p);
+    public ObservableList<Task> getTasks(Project p) {
+        return taskController.getTasks(p);
     }
 
     @Override
@@ -169,6 +151,8 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public boolean addTime(TaskTime tt, Task t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
 
     

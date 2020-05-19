@@ -51,6 +51,7 @@ public class ProjectsOverviewController implements Initializable {
     private AppModel am;
     private User currentUser;
     private Project selectedProject;
+    private TaskTime selectedTime;
 
     @FXML
     private JFXComboBox<Project> cbbProjectSelect;
@@ -114,7 +115,7 @@ public class ProjectsOverviewController implements Initializable {
         cbbProjectSelect.setItems(am.getProjects());
         am.setCurrentProject(cbbProjectSelect.getItems().get(0));
         selectedProject = am.getCurrentProject();
-        lstTaskList.setItems(am.getTasksInProject(selectedProject));
+        lstTaskList.setItems(am.getTasks());
         txtSlectedTask.setText("(Select Project)");
         
         if (currentUser.getRole()!=User.Role.Admin) {
@@ -170,8 +171,8 @@ public class ProjectsOverviewController implements Initializable {
     
     @FXML
     private void setItemsOnList(ActionEvent event) {
-        selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();        
-        lstTaskList.setItems(am.getTasksInProject(selectedProject));
+        am.setCurrentProject(cbbProjectSelect.getSelectionModel().getSelectedItem());        
+        lstTaskList.setItems(am.getTasks());
         am.setCurrentProject(selectedProject);      
     }
 
@@ -181,10 +182,13 @@ public class ProjectsOverviewController implements Initializable {
             am.setCurrentTask(lstTaskList.getSelectionModel().getSelectedItem());
             txtSlectedTask.setText(am.getCurrentTask().getName());
             
-            if(am.getTimeUsed(am.getCurrentTask()) != null){
-                fldHour.setText(am.getTimeUsed(am.getCurrentTask()).getHours()+ "");
-                fldMin.setText(am.getTimeUsed(am.getCurrentTask()).getMin()+ "");
-                fldSec.setText(am.getTimeUsed(am.getCurrentTask()).getSec()+ "");
+            
+            
+            if(am.getTime() != null){
+                selectedTime = am.getTime();
+                fldHour.setText(am.getTime().getHours()+ "");
+                fldMin.setText(am.getTime().getMin()+ "");
+                fldSec.setText(am.getTime().getSec()+ "");
             }
         }
         
@@ -320,13 +324,6 @@ public class ProjectsOverviewController implements Initializable {
     private void handleSubmit(ActionEvent event)
     {
         am.stopTimer();
-        am.updateTime(new TaskTime(
-                am.getCurrentTask().getId(),
-                am.getCurrentUser().getId(),
-                Integer.parseInt(fldSec.getText()),
-                Integer.parseInt(fldMin.getText()),
-                Integer.parseInt(fldHour.getText()),
-                LocalDate.now()));
     }
 
     @FXML

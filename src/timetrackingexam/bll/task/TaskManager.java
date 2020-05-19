@@ -15,6 +15,8 @@ import timetrackingexam.be.TaskTime;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.utilities.StatisticsCalculator;
 import timetrackingexam.dal.facade.IProjectDal;
+import timetrackingexam.dal.facade.ITaskDal;
+import timetrackingexam.dal.facade.TimeTrackDalFacade;
 import timetrackingexam.dal.mockdata.MockProjectManager;
 /**
  *
@@ -24,12 +26,12 @@ public class TaskManager implements ITaskManager
 {
     private Task task;
     private StatisticsCalculator cal;
-    private final ITaskManager taskManager;
+    private final ITaskDal taskManager;
 
     public TaskManager()
     {
         cal = new StatisticsCalculator();
-        taskManager = new TimeTrackBLLFacade();
+        taskManager = new TimeTrackDalFacade();
     }
 
     
@@ -42,9 +44,9 @@ public class TaskManager implements ITaskManager
 
 
     @Override
-    public ObservableList<Task> readTask()
+    public ObservableList<Task> getTasks(Project p)
     {
-        return taskManager.readTask();
+        return taskManager.getTasks(p);
     }
 
     @Override
