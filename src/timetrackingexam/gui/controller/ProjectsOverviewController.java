@@ -99,7 +99,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private MenuItem menuItemUser;
     @FXML
-    private Button ff;
+    private JFXButton btnNoneBillable;
 
     /**
      * Initializes the controller class.
@@ -135,6 +135,7 @@ public class ProjectsOverviewController implements Initializable {
         btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first"));
         btnDeleteTask.setTooltip(TooltipFactory.create("Click here to delete a task.\nSelect a task first"));
         btnTimeButton.setTooltip(TooltipFactory.create("Click here to start or pause registering the time you work on the task"));
+        btnNoneBillable.setTooltip(TooltipFactory.create("Click here to start or pause Nonebillable time when working on this task"));
     }
     
     private void initEffects() {        
@@ -319,6 +320,20 @@ public class ProjectsOverviewController implements Initializable {
             btnSubmit.setDisable(false);
         }
     }
+        @FXML
+    private void btnNoneBillable (ActionEvent event)
+    {
+        if(!am.timerIsRunning()||btnNoneBillable.getText().equals("None-Billable")){
+            am.startTimer(fldSec, fldMin, fldHour);
+            btnSubmit.setDisable(true);
+            btnNoneBillable.setText("Pause");
+        }
+        else if (btnNoneBillable.getText().equals("Pause")){
+            am.stopTimer();
+            btnNoneBillable.setText("Start");
+            btnSubmit.setDisable(false);
+        }
+    }
 
     @FXML
     private void handleSubmit(ActionEvent event)
@@ -339,18 +354,16 @@ public class ProjectsOverviewController implements Initializable {
         ViewGuide.userManagementView(primStage);
     }
 
-    @FXML
     private void dd(ActionEvent event)
     {
         am.getCSV();
     }
-        
-    
-    
-    
-    
-    
+
+    @FXML
+    private void handleNoneBillable(ActionEvent event) {
     }
+     
+}
     
     
     
