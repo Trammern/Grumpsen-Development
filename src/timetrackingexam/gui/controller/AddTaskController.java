@@ -28,8 +28,9 @@ import timetrackingexam.gui.model.AppModel;
 public class AddTaskController implements Initializable
 {
    private AppModel am;
-   private Task updateTask;
-
+   private Task currentTask;
+   
+   
     @FXML
     private TextField txtAddTaskName;
     @FXML
@@ -48,6 +49,7 @@ public class AddTaskController implements Initializable
         am = AppModel.getInstance();
         if (am.getCurrentTask() != null)
         {
+            currentTask = am.getCurrentTask();
             txtAddTaskName.setText(am.getCurrentTask().getName());
             txtAddTaskDescription.setText(am.getCurrentTask().getDescription());
         }
@@ -97,10 +99,16 @@ public class AddTaskController implements Initializable
     
     private void editTask()
     {
-        Task updatedTask = new Task(
+        Task updateTask = new Task(
+                am.getCurrentProject().getId(),
+                am.getCurrentUser().getId(),
                 txtAddTaskName.getText(),
-                txtAddTaskDescription.getText());
-        am.updateTask(updatedTask);
+                txtAddTaskDescription.getText()
+               );
+        
+        updateTask.setId(currentTask.getId());
+        
+        am.updateTask(updateTask);
         
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();

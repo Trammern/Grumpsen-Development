@@ -140,18 +140,12 @@ public class AppModel
     
     public boolean updateTask(Task updateTask)
     {
-        if(taskManager.updateTask(updateTask))
+        if(ttInterface.updateTask(updateTask))
         {
-            getTasks();
+            fetch();
             return true;
         }
         return false;  
-    }
-    
-    public boolean removeTask(Task selectedTask, Project currentProject)
-    {
-        tasks.remove(selectedTask);
-        return taskManager.deleteTask(selectedTask, currentProject);
     }
     
     public void startTimer(TextField sec, TextField min, TextField hours){
@@ -216,6 +210,10 @@ public class AppModel
     
     public long getLineChartData(Task t){
         return taskManager.getLineChartData(t);
+    }
+
+    public boolean deleteTask() {
+        return ttInterface.deleteTask(currentTask);
     }
     
 }

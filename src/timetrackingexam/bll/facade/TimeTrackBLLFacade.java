@@ -27,12 +27,6 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     }
 
     @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
-    {
-        return false;
-    }
-
-    @Override
     public boolean updateTask(Task updateTask)
     {
         return dalFacade.updateTask(updateTask);
@@ -117,6 +111,12 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     @Override
     public boolean addTask(Task t, Project p) {
         return dalFacade.addTask(t, p);
+    }
+
+    @Override
+    public boolean deleteTask(Task selectedTask)
+    {
+        return dalFacade.deleteTask(selectedTask);
     }
 
     

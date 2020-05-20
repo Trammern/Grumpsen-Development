@@ -55,12 +55,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public boolean deleteTask(Task selectedTask)
-    {
-        return taskController.deleteTask(selectedTask);
-    }
-
-    @Override
     public boolean updateTask(Task updateTask)
     {
         return taskController.updateTask(updateTask);
@@ -130,5 +124,11 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public boolean addTask(Task t, Project p) {
         return taskController.addTask(t, p);
+    }
+
+    @Override
+    public boolean deleteTask(Task selectedTask)
+    {
+        return taskController.deleteTask(selectedTask);
     }
 }

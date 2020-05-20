@@ -53,6 +53,7 @@ public class ProjectsOverviewController implements Initializable {
     private User currentUser;
     private Project selectedProject;
     private TaskTime selectedTime;
+    private boolean hasRun;
 
     @FXML
     private JFXComboBox<Project> cbbProjectSelect;
@@ -110,17 +111,8 @@ public class ProjectsOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         am = AppModel.getInstance();
-        
-        btnSubmit.setDisable(true);
-        
-        currentUser = am.getCurrentUser();
-        menuUser.setText(currentUser.getEmail());
-        cbbProjectSelect.setItems(am.getProjects());
-        am.setCurrentProject(cbbProjectSelect.getItems().get(0));
-        selectedProject = am.getCurrentProject();
-        lstTaskList.setItems(am.getTasks());
-        txtSlectedTask.setText("(Select Project)");
-        
+        setNodes();
+        hasRun = true;
         if (currentUser.getRole()!=User.Role.Admin) {
             menuItemAdmin.setDisable(true);
             menuItemAdmin.setVisible(false);
@@ -180,12 +172,12 @@ public class ProjectsOverviewController implements Initializable {
             txtTaskDescription.setText(am.getCurrentTask().getDescription());
         } 
             
-            if(am.getTime() != null){
-                selectedTime = am.getTime();
-                fldHour.setText(am.getTime().getHours()+ "");
-                fldMin.setText(am.getTime().getMin()+ "");
-                fldSec.setText(am.getTime().getSec()+ "");
-            }
+//            if(am.getTime() != null){
+//                selectedTime = am.getTime();
+//                fldHour.setText(am.getTime().getHours()+ "");
+//                fldMin.setText(am.getTime().getMin()+ "");
+//                fldSec.setText(am.getTime().getSec()+ "");
+//            }
         }
         
         
@@ -232,10 +224,9 @@ public class ProjectsOverviewController implements Initializable {
     private void handleDeleteTask(ActionEvent event)
     {
         Task selectedTask = lstTaskList.getSelectionModel().getSelectedItem();
-        Project currentProject = am.getCurrentProject();
-        if (selectedTask != null)
+        if (selectedTask != null && am.deleteTask())
         {
-            am.removeTask(selectedTask, currentProject);
+           am.fetch();
         }
         else
         {
@@ -319,7 +310,22 @@ public class ProjectsOverviewController implements Initializable {
     }
         
     
-    
+    private void setNodes(){
+        
+        
+        txtSlectedTask.setText("(Select Project)");
+        cbbProjectSelect.setItems(am.getProjects());
+        btnSubmit.setDisable(true);
+        
+        if(!hasRun){
+            currentUser = am.getCurrentUser();
+            am.setCurrentProject(cbbProjectSelect.getItems().get(0));
+            selectedProject = am.getCurrentProject();
+        }
+        
+        lstTaskList.setItems(am.getTasks());
+        menuUser.setText(currentUser.getEmail());
+    }
     
     
     

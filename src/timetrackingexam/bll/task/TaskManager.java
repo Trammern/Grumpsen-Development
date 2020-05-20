@@ -37,9 +37,9 @@ public class TaskManager implements ITaskManager
     
     
     @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
+    public boolean deleteTask(Task selectedTask)
     {
-        return false;
+        return taskManager.deleteTask(task);
     }
 
 

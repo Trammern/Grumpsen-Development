@@ -20,7 +20,7 @@ public interface ITaskManager
     //void for mockdata
     public boolean addTask(Task t, Project p);
     public ObservableList<Task> getTasks(Project ps);
-    public boolean deleteTask(Task selectedTask, Project currentProject);
+    public boolean deleteTask(Task selectedTask);
     public boolean updateTask(Task updateTask);
     
     public TaskTime getTime(Task t);

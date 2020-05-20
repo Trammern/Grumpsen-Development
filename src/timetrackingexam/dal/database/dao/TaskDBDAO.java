@@ -76,9 +76,9 @@ public class TaskDBDAO{
 
     public boolean deleteTask(Connection con, Task task) {
         try{
-            String sql = "DELETE FROM task"
-                    + "WHERE"
-                    + "task.ID = ?";
+            String sql = "DELETE FROM task "
+                    + "WHERE "
+                    + "ID = ?";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -93,25 +93,30 @@ public class TaskDBDAO{
             return false;
         }
     }
-
+    /**
+     * Updated the element in the database setting a new description and name
+     * @param con the connection used for the database
+     * @param task the task you want to replace the old task
+     * @return boolean based on weather or not the statement was executed succesfully
+     */
     public boolean updateTask(Connection con, Task task) {
         try{
             String sql = "UPDATE task "
-                    + "SET task.Name = ?, task.Description = ?, task.AssignedTime = ? "
-                    + "WHERE task.ID = ?";
+                    + "SET Name = ?, Description = ? "
+                    + "WHERE ID = ?";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
 
             pstmt.setString(1, task.getName());
             pstmt.setString(2, task.getDescription());
-            pstmt.setInt(3, task.getTimeAssigned());
-            pstmt.setInt(4, task.getId());
+            pstmt.setInt(3, task.getId());
 
             int updatedRows = pstmt.executeUpdate();
-
+            System.out.println(updatedRows);
+            
             return updatedRows > 0;
         } catch (SQLException sqlE) {
-            System.out.println("Failed to grab element from database");
+            System.out.println("Failed to manipulate element from database");
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
             return false;
         }
