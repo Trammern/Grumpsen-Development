@@ -103,8 +103,7 @@ public class ProjectsOverviewController implements Initializable {
     private MenuItem menuItemUser;
     @FXML
     private Label lblTaskCreated;
-  
-  
+    @FXML
     private JFXButton btnNoneBillable;
 
 
