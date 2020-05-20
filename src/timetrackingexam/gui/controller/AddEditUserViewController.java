@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
-import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.AlertFactory;
 
 /**
  * FXML Controller class
@@ -111,7 +111,7 @@ public class AddEditUserViewController implements Initializable {
         User.Role role = cbbRole.getSelectionModel().getSelectedItem();
         
         if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || role == null) {
-            AlertBox.showErrorAlert("You have not entered all the necessary information");
+            AlertFactory.showErrorAlert("You have not entered all the necessary information");
             return;
         }        
        
@@ -121,25 +121,25 @@ public class AddEditUserViewController implements Initializable {
             if (!am.checkIfEmailIsUsed(email)) {
                 saveChanges(new User(firstName, lastName, email, password, role, 0));
             } else {
-                AlertBox.showErrorAlert("Email is already used by another user");
+                AlertFactory.showErrorAlert("Email is already used by another user");
             }
         } else {
-            AlertBox.showErrorAlert("You must enter a valid email address");
+            AlertFactory.showErrorAlert("You must enter a valid email address");
         }
     }
     
     private void saveChanges(User user) {
 
-        Alert alert = AlertBox.createConfirmationAlert(String.format("%s%n%s", "Are you sure you want to save this", user));
+        Alert alert = AlertFactory.createConfirmationAlert(String.format("%s%n%s", "Are you sure you want to save this", user));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             if (selectedUser == null) {
                 am.addUser(user);
-                //am.fetch();
+                am.fetch();
                 close();
             } else {
                 am.updateUser(user);
-                //am.fetch();
+                am.fetch();
                 close();
             }
         } else {

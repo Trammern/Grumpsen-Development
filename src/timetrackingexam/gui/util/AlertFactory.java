@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
  *
  * @author fauxtistic
  */
-public class AlertBox {   
+public class AlertFactory {   
             
     public static void showErrorAlert(String message) {
         Alert alert = createAlert("Error Dialog", "ERROR", message, Alert.AlertType.ERROR);        

@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
-import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.AlertFactory;
 
 /**
  *
@@ -88,7 +88,7 @@ public class Login implements Initializable
         String password = txtPassword.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
-            AlertBox.showErrorAlert("The input fields must be filled out");
+            AlertFactory.showErrorAlert("The input fields must be filled out");
         } else {
             User user = LoginTools.getVerifiedUser(email, password, appModel.getAllUsers());
 
@@ -103,10 +103,10 @@ public class Login implements Initializable
                         openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");
                         break;
                     default:
-                        AlertBox.showErrorAlert("No view defined for this role");
+                        AlertFactory.showErrorAlert("No view defined for this role");
                 }
             } else {
-                AlertBox.showErrorAlert("Email or password incorrect");
+                AlertFactory.showErrorAlert("Email or password incorrect");
             }
         }
         txtPassword.clear();
@@ -123,7 +123,7 @@ public class Login implements Initializable
             stage.show();
             primStage.close();
         } catch (IOException e) {
-            AlertBox.showErrorAlert("Could not open new window");
+            AlertFactory.showErrorAlert("Could not open new window");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
     }   
