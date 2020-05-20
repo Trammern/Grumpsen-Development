@@ -172,12 +172,17 @@ public class ProjectsOverviewController implements Initializable {
             txtTaskDescription.setText(am.getCurrentTask().getDescription());
         } 
             
-//            if(am.getTime() != null){
-//                selectedTime = am.getTime();
-//                fldHour.setText(am.getTime().getHours()+ "");
-//                fldMin.setText(am.getTime().getMin()+ "");
-//                fldSec.setText(am.getTime().getSec()+ "");
-//            }
+            if(am.getTime() != null){
+                selectedTime = am.getTime();
+                fldHour.setText(am.getTime().getHours()+ "");
+                fldMin.setText(am.getTime().getMin()+ "");
+                fldSec.setText(am.getTime().getSec()+ "");
+            }
+            else{
+                fldHour.setText("0");
+                fldMin.setText("0");
+                fldSec.setText("0");
+            }
         }
         
         

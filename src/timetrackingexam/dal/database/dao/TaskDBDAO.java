@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -168,6 +169,46 @@ public class TaskDBDAO{
             System.out.println("Failed to grab element from database");
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
             return false;
+        }
+    }
+    
+    /**
+     * Slemme Mathias Lav straks det her om!!!
+     * @param con
+     * @param t
+     * @return 
+     */
+
+    public TaskTime getTime(Connection con, Task t) {
+        try{
+
+
+            String sql = "SELECT * " +
+                    "FROM Time " +
+                    "WHERE TaskID = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+
+            pstmt.setInt(1, t.getId());
+            
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                TaskTime time = new TaskTime(
+                        rs.getInt("TaskID"),
+                        rs.getInt("UserID"),
+                        rs.getInt("Sec"),
+                        rs.getInt("Min"),
+                        rs.getInt("Hour"),
+                        LocalDate.parse(rs.getString("date"))
+                );   
+                
+                return time;
+            }
+            return null;
+            
+        } catch (SQLException sqlE) {
+            System.out.println("Failed to grab element from database");
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return null;
         }
     }
 }

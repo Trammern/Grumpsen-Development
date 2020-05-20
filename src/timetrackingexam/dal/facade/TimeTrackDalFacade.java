@@ -108,7 +108,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 
     @Override
     public TaskTime getTime(Task t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taskController.getTime(t);
     }
     
     @Override

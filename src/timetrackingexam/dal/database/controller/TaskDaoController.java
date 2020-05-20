@@ -54,7 +54,10 @@ public class TaskDaoController
     
 
     public TaskTime getTime(Task t) {
-        return null;
+        Connection con = conPool.checkOut();
+        TaskTime time = taskDAO.getTime(con, t);
+        conPool.checkIn(con);
+        return time;
     }
 
     public boolean updateTime(TaskTime tt) {
