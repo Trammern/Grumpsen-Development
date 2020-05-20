@@ -61,14 +61,17 @@ public class TaskDaoController
         return false;
     }
 
-    public boolean addTime(TaskTime tt, Task t) {
-        return false;
-    }
-
     public ObservableList<Task> getTasks(Project p) {
         Connection con = conPool.checkOut();
         ObservableList tasks = taskDAO.getTasks(con, p);
         conPool.checkIn(con);
         return tasks;
+    }
+
+    public boolean submitTime(TaskTime tt) {
+        Connection con = conPool.checkOut();
+        boolean created = taskDAO.submitTime(tt, con);
+        conPool.checkIn(con);
+        return created;
     }
 }

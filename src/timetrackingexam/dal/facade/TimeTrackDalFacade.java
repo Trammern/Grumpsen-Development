@@ -116,10 +116,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    @Override
-    public boolean addTime(TaskTime tt, Task t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public boolean addTask(Task t, Project p) {
@@ -130,5 +126,10 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public boolean deleteTask(Task selectedTask)
     {
         return taskController.deleteTask(selectedTask);
+    }
+
+    @Override
+    public boolean submitTime(TaskTime tt) {
+        return taskController.submitTime(tt);
     }
 }

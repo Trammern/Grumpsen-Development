@@ -300,7 +300,16 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void handleSubmit(ActionEvent event)
     {
-        am.stopTimer();
+        TaskTime tt = new TaskTime(
+                am.getCurrentTask().getId(),
+                currentUser.getId(),
+                Integer.parseInt(fldSec.getText()),
+                Integer.parseInt(fldMin.getText()),
+                Integer.parseInt(fldHour.getText()),
+                LocalDate.now()
+        );
+        
+        am.submitTime(tt);
     }
 
     @FXML

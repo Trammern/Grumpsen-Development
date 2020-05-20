@@ -25,7 +25,7 @@ public interface ITaskManager
     
     public TaskTime getTime(Task t);
     public boolean updateTime(TaskTime tt);
-    public boolean addTime(TaskTime tt, Task t);
+    public boolean submitTime(TaskTime tt);
     
      
 }

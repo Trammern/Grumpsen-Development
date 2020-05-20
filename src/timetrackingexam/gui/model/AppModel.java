@@ -215,5 +215,9 @@ public class AppModel
     public boolean deleteTask() {
         return ttInterface.deleteTask(currentTask);
     }
+
+    public boolean submitTime(TaskTime tt) {
+        return ttInterface.submitTime(tt);
+    }
     
 }

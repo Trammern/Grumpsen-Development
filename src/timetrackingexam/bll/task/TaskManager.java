@@ -70,9 +70,9 @@ public class TaskManager implements ITaskManager
     }
 
     @Override
-    public boolean addTime(TaskTime tt, Task t) {
+    public boolean submitTime(TaskTime tt) {
         if(!tt.getDate().toString().equals(LocalDate.now().toString())){
-            return taskManager.addTime(tt, t);
+            return taskManager.submitTime(tt);
         }
         else{
             return updateTime(tt);

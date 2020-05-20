@@ -92,11 +92,6 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     }
 
     @Override
-    public boolean addTime(TaskTime tt, Task t) {
-        return dalFacade.addTime(tt, t);
-    }
-
-    @Override
     public TaskTime getTime(Task t) {
         dalFacade.getTime(t);
         return dalFacade.getTime(t);
@@ -117,6 +112,11 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     public boolean deleteTask(Task selectedTask)
     {
         return dalFacade.deleteTask(selectedTask);
+    }
+
+    @Override
+    public boolean submitTime(TaskTime tt) {
+        return dalFacade.submitTime(tt);
     }
 
     

@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -135,6 +133,32 @@ public class TaskDBDAO{
             pstmt.setString(3, t.getDescription());
             pstmt.setInt(4, t.getUserId());
             pstmt.setInt(5, t.getTimeAssigned());
+            
+            int updatedRows = pstmt.executeUpdate();
+                       
+            return updatedRows > 0;
+            
+        } catch (SQLException sqlE) {
+            System.out.println("Failed to grab element from database");
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return false;
+        }
+    }
+
+    public boolean submitTime(TaskTime tt, Connection con) {
+        try{
+            String sql = "INSERT INTO time (TaskID, UserID, Sec, Min, Hour, Date)"
+                    + "VALUES"
+                    + "(?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(sql);
+
+            pstmt.setInt(1, tt.getTaskid());
+            pstmt.setInt(2, tt.getUserId());
+            pstmt.setInt(3, tt.getSec());
+            pstmt.setInt(4, tt.getMin());
+            pstmt.setInt(5, tt.getHours());
+            pstmt.setString(6, tt.getDate().toString());
             
             int updatedRows = pstmt.executeUpdate();
                        
