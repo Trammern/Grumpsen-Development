@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -99,6 +100,8 @@ public class ProjectsOverviewController implements Initializable {
     private Label txtHour;
     @FXML
     private MenuItem menuItemUser;
+    @FXML
+    private Label lblTaskCreated;
 
     /**
      * Initializes the controller class.
@@ -127,6 +130,9 @@ public class ProjectsOverviewController implements Initializable {
         
         initTooltips();
         initEffects();
+        
+        
+        
     } 
     
     private void initTooltips() {
@@ -148,26 +154,6 @@ public class ProjectsOverviewController implements Initializable {
         openAddEdit();
     }
 
-    private void OpenTask(ActionEvent event) {
-        if(am.getCurrentTask() != null){
-            try
-            {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/TaskOverview.fxml"));
-                Parent root1 = (Parent) fxml.load();
-                Stage primStage = (Stage) txtSlectedTask.getScene().getWindow();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root1));
-                primStage.close();
-                stage.showAndWait();
-                stage.setTitle("Task Overview");
-            
-            
-            } catch (IOException ex)
-            {   
-                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
     
     @FXML
     private void setItemsOnList(ActionEvent event) {
@@ -182,15 +168,6 @@ public class ProjectsOverviewController implements Initializable {
             am.setCurrentTask(lstTaskList.getSelectionModel().getSelectedItem());
             txtSlectedTask.setText(am.getCurrentTask().getName());
             
-            
-            
-            if(am.getTime() != null){
-                selectedTime = am.getTime();
-                fldHour.setText(am.getTime().getHours()+ "");
-                fldMin.setText(am.getTime().getMin()+ "");
-                fldSec.setText(am.getTime().getSec()+ "");
-            }
-        }
         
         if (am.getCurrentTask().getDescription() == null)
         {
@@ -201,7 +178,16 @@ public class ProjectsOverviewController implements Initializable {
         {
             txtTaskDescription.setStyle("-fx-font-style: normal;");
             txtTaskDescription.setText(am.getCurrentTask().getDescription());
+        } 
+            
+            if(am.getTime() != null){
+                selectedTime = am.getTime();
+                fldHour.setText(am.getTime().getHours()+ "");
+                fldMin.setText(am.getTime().getMin()+ "");
+                fldSec.setText(am.getTime().getSec()+ "");
+            }
         }
+        
         
     }
 
@@ -210,7 +196,7 @@ public class ProjectsOverviewController implements Initializable {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         primStage.close();
     }
-
+    
     @FXML
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();

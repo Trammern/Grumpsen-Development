@@ -7,6 +7,8 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -86,6 +88,9 @@ public class AddTaskController implements Initializable
                );
         am.addTask(newTask, am.getCurrentProject());
         
+        Date created = new Date();
+        newTask.setTaskCreated(created);
+
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }

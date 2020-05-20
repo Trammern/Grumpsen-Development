@@ -6,6 +6,7 @@
 package timetrackingexam.be;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public class Task {
     private String name;
     private String description;
     private int timeAssigned;
+    private Date taskCreated;
     
     private List<TaskTime> timeUsed = new ArrayList<>();
 
@@ -107,6 +109,18 @@ public class Task {
         
         return hoursUsed;
     }
+
+    public Date getTaskCreated()
+    {
+        return taskCreated;
+    }
+
+    public void setTaskCreated(Date taskCreated)
+    {
+        this.taskCreated = taskCreated;
+    }
+    
+   
          
     
 
