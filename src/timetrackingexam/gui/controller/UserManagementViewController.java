@@ -148,7 +148,7 @@ public class UserManagementViewController implements Initializable {
             ViewGuide.openView(ADD_EDIT_USER_VIEW_PATH, "Edit user", primStage, false, true);
         }
         else {
-            AlertBox.errorAlert("Select a user to edit");
+            AlertBox.showErrorAlert("Select a user to edit");
         }
     }       
 

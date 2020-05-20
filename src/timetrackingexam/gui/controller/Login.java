@@ -88,7 +88,7 @@ public class Login implements Initializable
         String password = txtPassword.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
-            AlertBox.errorAlert("The input fields must be filled out");
+            AlertBox.showErrorAlert("The input fields must be filled out");
         } else {
             User user = LoginTools.getVerifiedUser(email, password, appModel.getAllUsers());
 
@@ -103,10 +103,10 @@ public class Login implements Initializable
                         openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");
                         break;
                     default:
-                        AlertBox.errorAlert("No view defined for this role");
+                        AlertBox.showErrorAlert("No view defined for this role");
                 }
             } else {
-                AlertBox.errorAlert("Email or password incorrect");
+                AlertBox.showErrorAlert("Email or password incorrect");
             }
         }
         txtPassword.clear();
@@ -123,7 +123,7 @@ public class Login implements Initializable
             stage.show();
             primStage.close();
         } catch (IOException e) {
-            AlertBox.errorAlert("Could not open new window");
+            AlertBox.showErrorAlert("Could not open new window");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
     }   

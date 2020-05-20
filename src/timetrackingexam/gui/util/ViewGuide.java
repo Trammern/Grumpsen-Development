@@ -53,7 +53,7 @@ public class ViewGuide {
             }
             
         } catch (IOException e) {
-            AlertBox.errorAlert("Could not open new window");
+            AlertBox.showErrorAlert("Could not open new window");
         }
     }
     

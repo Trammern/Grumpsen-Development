@@ -9,12 +9,15 @@ import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -108,7 +111,7 @@ public class AddEditUserViewController implements Initializable {
         User.Role role = cbbRole.getSelectionModel().getSelectedItem();
         
         if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || role == null) {
-            AlertBox.errorAlert("You have not entered all the necessary information");
+            AlertBox.showErrorAlert("You have not entered all the necessary information");
             return;
         }        
        
@@ -118,28 +121,38 @@ public class AddEditUserViewController implements Initializable {
             if (!am.checkIfEmailIsUsed(email)) {
                 saveChanges(new User(firstName, lastName, email, password, role, 0));
             } else {
-                AlertBox.errorAlert("Email is already used by another user");
+                AlertBox.showErrorAlert("Email is already used by another user");
             }
         } else {
-            AlertBox.errorAlert("You must enter a valid email address");
+            AlertBox.showErrorAlert("You must enter a valid email address");
         }
     }
     
     private void saveChanges(User user) {
-        if (selectedUser == null) {
-            am.addUser(user);
+
+        Alert alert = AlertBox.createConfirmationAlert(String.format("%s%n%s", "Are you sure you want to save this", user));
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            if (selectedUser == null) {
+                am.addUser(user);
+                //am.fetch();
+                close();
+            } else {
+                am.updateUser(user);
+                //am.fetch();
+                close();
+            }
+        } else {
+            alert.close();
         }
-        else am.updateUser(user);
-        
-        am.fetch();
-        Stage stage = (Stage) btnSaveUser.getScene().getWindow();
-        stage.close();
-        
-        
     }
 
     @FXML
     private void cancel(ActionEvent event) {
+        close();
+    }
+    
+    private void close() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }

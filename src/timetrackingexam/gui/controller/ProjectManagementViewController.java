@@ -115,7 +115,7 @@ public class ProjectManagementViewController implements Initializable {
             openAddEditWindow();
         }
         else {
-            AlertBox.errorAlert("Select a project to edit");
+            AlertBox.showErrorAlert("Select a project to edit");
         }
     }
 
@@ -140,7 +140,7 @@ public class ProjectManagementViewController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            AlertBox.errorAlert("Could not open new window");
+            AlertBox.showErrorAlert("Could not open new window");
         }
     }
 

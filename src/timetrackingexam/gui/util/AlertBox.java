@@ -6,6 +6,7 @@
 package timetrackingexam.gui.util;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
 
 /**
@@ -14,14 +15,23 @@ import javafx.scene.layout.Region;
  */
 public class AlertBox {   
             
-    public static void errorAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Dialog");
-        alert.setHeaderText("ERROR");
+    public static void showErrorAlert(String message) {
+        Alert alert = createAlert("Error Dialog", "ERROR", message, Alert.AlertType.ERROR);        
+        alert.showAndWait();
+    }
+    
+    public static Alert createConfirmationAlert(String message) {
+        return createAlert("Confirm action", null, message, Alert.AlertType.CONFIRMATION);
+    } 
+    
+    public static Alert createAlert(String title, String header, String message, AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.setResizable(true);
         alert.setContentText(String.format(message));
-        alert.showAndWait();
+        return alert;
     }
     
 }

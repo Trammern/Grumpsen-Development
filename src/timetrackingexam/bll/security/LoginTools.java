@@ -72,7 +72,7 @@ public class LoginTools {
             return hexString.toString();      
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(LoginTools.class.getName()).log(Level.SEVERE, null, ex);
-            AlertBox.errorAlert("Error in user login system");
+            AlertBox.showErrorAlert("Error in user login system");
         }
         return null;
     }
