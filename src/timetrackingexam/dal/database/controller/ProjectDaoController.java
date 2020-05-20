@@ -5,6 +5,7 @@
  */
 package timetrackingexam.dal.database.controller;
 
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -62,8 +63,13 @@ public class ProjectDaoController
         return allProjects;
     }
 
-
-    
+   public void getCSV() throws FileNotFoundException
+   
+   {
+        Connection con = conPool.checkOut();
+        projectDao.getCSV(con);
+        conPool.checkIn(con);
+   }
     
     
 }

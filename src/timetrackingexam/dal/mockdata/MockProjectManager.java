@@ -126,4 +126,11 @@ public class MockProjectManager implements IProjectDal {
     public ObservableList<Task> getTimeUsed(Task t) {
         return tasks;
     }
+
+
+    @Override
+    public void getCSV()
+    {
+    }
+
 }

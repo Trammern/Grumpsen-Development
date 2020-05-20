@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -64,12 +65,12 @@ public class Login implements Initializable
     }    
     
     private void initKeys() {
-        txtName.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ENTER)) {
-                login();
-            }
-        });
-        txtPassword.setOnKeyPressed(e -> {
+        actionOnEnterKey(txtPassword);
+        actionOnEnterKey(txtName);
+    }
+    
+    private void actionOnEnterKey(Node node) {
+        node.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
                 login();
             }

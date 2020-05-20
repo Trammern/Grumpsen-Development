@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -53,22 +54,17 @@ public class ChangePasswordViewController implements Initializable {
     }    
     
     private void initKeys() {
-        txtOldPass.setOnKeyPressed(e -> {
+        actionOnEnterKey(txtOldPass);
+        actionOnEnterKey(txtNewPass);
+        actionOnEnterKey(txtNewPass2);
+    }
+    
+    private void actionOnEnterKey(Node node) {
+        node.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
                 changePassword();
             }
         });
-        txtNewPass.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ENTER)) {
-                changePassword();
-            }
-        });
-        txtNewPass2.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ENTER)) {
-                changePassword();
-            }
-        });
-        
     }
 
     @FXML
