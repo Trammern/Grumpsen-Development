@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
-import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.AlertFactory;
 import timetrackingexam.gui.util.NodeCustomizer;
 import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
@@ -148,7 +148,7 @@ public class UserManagementViewController implements Initializable {
             ViewGuide.openView(ADD_EDIT_USER_VIEW_PATH, "Edit user", primStage, false, true);
         }
         else {
-            AlertBox.errorAlert("Select a user to edit");
+            AlertFactory.showErrorAlert("Select a user to edit");
         }
     }       
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import timetrackingexam.be.User;
-import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.AlertFactory;
 
 /**
  *
@@ -72,7 +72,7 @@ public class LoginTools {
             return hexString.toString();      
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(LoginTools.class.getName()).log(Level.SEVERE, null, ex);
-            AlertBox.errorAlert("Error in user login system");
+            AlertFactory.showErrorAlert("Error in user login system");
         }
         return null;
     }

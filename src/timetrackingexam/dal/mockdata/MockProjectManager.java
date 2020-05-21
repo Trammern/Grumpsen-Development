@@ -97,7 +97,7 @@ public class MockProjectManager implements IProjectDal {
         return projects.add(p);
     }
 
-    public boolean createTask(Task t, Project p)
+    public boolean addTask(Task t, Project p)
     {
         return p.addTask(t);
     }
@@ -127,15 +127,6 @@ public class MockProjectManager implements IProjectDal {
         return tasks;
     }
 
-    @Override
-    public ObservableList<Task> getTasksInProject(Project p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public void getCSV()
-    {
-    }
 
-    
 }

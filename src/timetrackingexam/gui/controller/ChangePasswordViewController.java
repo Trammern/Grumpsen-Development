@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
-import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.AlertFactory;
 
 /**
  * FXML Controller class
@@ -79,11 +79,11 @@ public class ChangePasswordViewController implements Initializable {
         String repeatedNewPassword = txtNewPass2.getText();
         
         if (oldPassword.isEmpty() || newPassword.isEmpty() || repeatedNewPassword.isEmpty()) {
-            AlertBox.errorAlert("All input fields must be filled out");
+            AlertFactory.showErrorAlert("All input fields must be filled out");
             return;
         }
         if (!newPassword.equals(repeatedNewPassword)) {
-            AlertBox.errorAlert("The text in the two fields where you have entered the new password do not match");
+            AlertFactory.showErrorAlert("The text in the two fields where you have entered the new password do not match");
             txtNewPass.clear();
             txtNewPass2.clear();
             return;
@@ -97,7 +97,7 @@ public class ChangePasswordViewController implements Initializable {
             stage.close();
         }
         else {
-            AlertBox.errorAlert("The password you have entered in the first field is incorrect");
+            AlertFactory.showErrorAlert("The password you have entered in the first field is incorrect");
             txtOldPass.clear();            
         }      
     }

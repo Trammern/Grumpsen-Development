@@ -46,22 +46,9 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public ObservableList<Task> getTasks()
-    {
-        return taskController.getAllTasks();
-    }
-
-    @Override
     public boolean createNewProject(Project p)
     {
         return projectController.createProject(p);
-    }
-
-    @Override
-    public boolean createTask(Task t, Project p)
-    {
-        t.setProjectId(p.getId());
-        return taskController.CreateTask(t);
     }
 
     @Override
@@ -71,45 +58,9 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean updateTask(Task updateTask)
     {
         return taskController.updateTask(updateTask);
-    }
-
-    @Override
-    public ObservableList<Task> getTimeUsed(Task t)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Task getSpecificTask(Task task)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ObservableList<Task> getAllTasks()
-    {
-        return taskController.getAllTasks();
-    }
-
-    @Override
-    public boolean createTask(Task task)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean deleteTask(Task task)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -152,10 +103,10 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public boolean deleteUser(User user) {
         return userController.deleteUser(user);
     }
-
+    
     @Override
-    public ObservableList<Task> getTasksInProject(Project p) {
-        return projectController.getTasksInProject(p);
+    public ObservableList<Task> getTasks(Project p) {
+        return taskController.getTasks(p);
     }
 
     @Override
@@ -165,17 +116,23 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     
     @Override
     public boolean updateTime(TaskTime tt) {
-        return taskController.updateTime(tt);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+
     @Override
-    public boolean addTime(TaskTime tt, Task t) {
-        return taskController.addTime(tt, t);
+    public boolean addTask(Task t, Project p) {
+        return taskController.addTask(t, p);
     }
 
     @Override
+    public boolean deleteTask(Task selectedTask)
+    {
+        return taskController.deleteTask(selectedTask);
+    }
     public void getCSV()
     {
+
         try
         {
             projectController.getCSV();
@@ -183,10 +140,13 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
         {
             Logger.getLogger(TimeTrackDalFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+      //  projectController.getCSV();
+
     }
 
-  
-
-
-    
+    @Override
+    public boolean submitTime(TaskTime tt) {
+        return taskController.submitTime(tt);
+    }
 }

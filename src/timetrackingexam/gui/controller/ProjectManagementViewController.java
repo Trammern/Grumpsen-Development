@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
-import timetrackingexam.gui.util.AlertBox;
+import timetrackingexam.gui.util.AlertFactory;
 import timetrackingexam.gui.util.NodeCustomizer;
 import timetrackingexam.gui.util.TooltipFactory;
 import timetrackingexam.gui.util.ViewGuide;
@@ -115,7 +115,7 @@ public class ProjectManagementViewController implements Initializable {
             openAddEditWindow();
         }
         else {
-            AlertBox.errorAlert("Select a project to edit");
+            AlertFactory.showErrorAlert("Select a project to edit");
         }
     }
 
@@ -140,7 +140,7 @@ public class ProjectManagementViewController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            AlertBox.errorAlert("Could not open new window");
+            AlertFactory.showErrorAlert("Could not open new window");
         }
     }
 

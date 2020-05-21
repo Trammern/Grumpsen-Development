@@ -25,31 +25,11 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     public TimeTrackBLLFacade() {
         this.dalFacade = new TimeTrackDalFacade();
     }
-    
-    
-
-    @Override
-    public boolean createTask(Task t, Project p)
-    {
-        return dalFacade.createTask(t, p);
-    }
-
-    @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
-    {
-        return dalFacade.deleteTask(selectedTask, currentProject);
-    }
 
     @Override
     public boolean updateTask(Task updateTask)
     {
         return dalFacade.updateTask(updateTask);
-    }
-
-    @Override
-    public ObservableList<Task> readTask()
-    {
-        return dalFacade.getAllTasks();
     }
 
     @Override
@@ -107,18 +87,8 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     }
 
     @Override
-    public ObservableList<Task> getTasksInProject(Project p) {
-        return dalFacade.getTasksInProject(p);
-    }
-
-    @Override
     public boolean updateTime(TaskTime tt) {
         return dalFacade.updateTime(tt);
-    }
-
-    @Override
-    public boolean addTime(TaskTime tt, Task t) {
-        return dalFacade.addTime(tt, t);
     }
 
     @Override
@@ -126,6 +96,27 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
         dalFacade.getTime(t);
         return dalFacade.getTime(t);
         
+    }
+
+    @Override
+    public ObservableList<Task> getTasks(Project p) {
+        return dalFacade.getTasks(p);
+    }
+
+    @Override
+    public boolean addTask(Task t, Project p) {
+        return dalFacade.addTask(t, p);
+    }
+
+    @Override
+    public boolean deleteTask(Task selectedTask)
+    {
+        return dalFacade.deleteTask(selectedTask);
+    }
+
+    @Override
+    public boolean submitTime(TaskTime tt) {
+        return dalFacade.submitTime(tt);
     }
 
     

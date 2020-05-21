@@ -22,5 +22,4 @@ public interface IProjectManager
 
     public boolean updateProject(Project p);
     
-    public ObservableList<Task> getTasksInProject(Project p);
 }

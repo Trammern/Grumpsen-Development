@@ -17,13 +17,7 @@ import timetrackingexam.be.Task;
 public interface IProjectDal {
     
     public ObservableList<Project> getProjects();
-    public ObservableList<Task> getTasks();
     public boolean createNewProject(Project p);
-    public boolean createTask(Task t, Project p);
+    public boolean addTask(Task t, Project p);
     public boolean updateProject(Project p);
-    public boolean deleteTask(Task selectedTask, Project currentProject);
-    public boolean updateTask(Task updateTask);
-    public ObservableList<Task> getTimeUsed(Task t);
-    public ObservableList<Task> getTasksInProject(Project p);
-    public void getCSV();
 }

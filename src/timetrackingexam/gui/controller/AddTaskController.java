@@ -7,6 +7,8 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,8 +28,9 @@ import timetrackingexam.gui.model.AppModel;
 public class AddTaskController implements Initializable
 {
    private AppModel am;
-   private Task updateTask;
-
+   private Task currentTask;
+   
+   
     @FXML
     private TextField txtAddTaskName;
     @FXML
@@ -46,6 +49,7 @@ public class AddTaskController implements Initializable
         am = AppModel.getInstance();
         if (am.getCurrentTask() != null)
         {
+            currentTask = am.getCurrentTask();
             txtAddTaskName.setText(am.getCurrentTask().getName());
             txtAddTaskDescription.setText(am.getCurrentTask().getDescription());
         }
@@ -78,21 +82,33 @@ public class AddTaskController implements Initializable
     
     private void newTask()
     {
-        String name = txtAddTaskName.getText().trim();
-        String description = txtAddTaskDescription.getText().trim();
-        Project p = am.getCurrentProject();
-        Task t = new Task(name, description);
-        am.addTask(t,p);
+        Task newTask = new Task(
+                am.getCurrentProject().getId(),
+                am.getCurrentUser().getId(),
+                txtAddTaskName.getText(),
+                txtAddTaskDescription.getText()
+               );
+        am.addTask(newTask, am.getCurrentProject());
+        
+        Date created = new Date();
+        newTask.setTaskCreated(created);
+
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }
     
     private void editTask()
     {
-        Task updatedTask = new Task(
+        Task updateTask = new Task(
+                am.getCurrentProject().getId(),
+                am.getCurrentUser().getId(),
                 txtAddTaskName.getText(),
-                txtAddTaskDescription.getText());
-        am.updateTask(updatedTask);
+                txtAddTaskDescription.getText()
+               );
+        
+        updateTask.setId(currentTask.getId());
+        
+        am.updateTask(updateTask);
         
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();

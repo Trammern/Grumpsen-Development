@@ -63,13 +63,6 @@ public class ProjectDaoController
         return allProjects;
     }
 
-    public ObservableList<Task> getTasksInProject(Project p) {
-        Connection con = conPool.checkOut();
-        ObservableList<Task> tasksInProject = projectDao.getTasksInProject(p, con);
-        conPool.checkIn(con);
-        return tasksInProject;
-    }
-
    public void getCSV() throws FileNotFoundException
    
    {

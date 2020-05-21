@@ -15,6 +15,8 @@ import timetrackingexam.be.TaskTime;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.utilities.StatisticsCalculator;
 import timetrackingexam.dal.facade.IProjectDal;
+import timetrackingexam.dal.facade.ITaskDal;
+import timetrackingexam.dal.facade.TimeTrackDalFacade;
 import timetrackingexam.dal.mockdata.MockProjectManager;
 /**
  *
@@ -24,33 +26,27 @@ public class TaskManager implements ITaskManager
 {
     private Task task;
     private StatisticsCalculator cal;
-    private final ITaskManager taskManager;
+    private final ITaskDal taskManager;
 
     public TaskManager()
     {
         cal = new StatisticsCalculator();
-        taskManager = new TimeTrackBLLFacade();
+        taskManager = new TimeTrackDalFacade();
     }
 
     
     
     @Override
-    public boolean deleteTask(Task selectedTask, Project currentProject)
+    public boolean deleteTask(Task selectedTask)
     {
-        return taskManager.deleteTask(selectedTask, currentProject);
+        return taskManager.deleteTask(task);
     }
 
 
     @Override
-    public ObservableList<Task> readTask()
+    public ObservableList<Task> getTasks(Project p)
     {
-        return taskManager.readTask();
-    }
-
-    @Override
-    public boolean createTask(Task t, Project p)
-    {
-        return taskManager.createTask(t,p);
+        return taskManager.getTasks(p);
     }
 
     @Override
@@ -74,13 +70,18 @@ public class TaskManager implements ITaskManager
     }
 
     @Override
-    public boolean addTime(TaskTime tt, Task t) {
+    public boolean submitTime(TaskTime tt) {
         if(!tt.getDate().toString().equals(LocalDate.now().toString())){
-            return taskManager.addTime(tt, t);
+            return taskManager.submitTime(tt);
         }
         else{
             return updateTime(tt);
         }
+    }
+
+    @Override
+    public boolean addTask(Task t, Project p) {
+        return taskManager.addTask(t, p);
     }
 
     

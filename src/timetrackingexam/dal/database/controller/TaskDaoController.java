@@ -7,6 +7,7 @@ package timetrackingexam.dal.database.controller;
 
 import java.sql.Connection;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.dal.database.dao.TaskDBDAO;
@@ -26,27 +27,11 @@ public class TaskDaoController
         this.conPool = conPool;
         taskDAO = TaskDBDAO.getInstance();
     }
-    
-    public Task getSpecificTask(Task t)
-    {
-        Connection con = conPool.checkOut();
-        Task selectetTask = taskDAO.getSpecificTask(con, t);
-        conPool.checkIn(con);
-        return selectetTask;
-    }
-    
-    public ObservableList<Task> getAllTasks()
-    {
-        Connection con = conPool.checkOut();
-        ObservableList<Task> tasks = taskDAO.getAllTasks(con);
-        conPool.checkIn(con);
-        return tasks;
-    }
 
-    public boolean CreateTask(Task task)
+    public boolean addTask(Task t, Project p)
     {
         Connection con = conPool.checkOut();
-        Boolean create = taskDAO.createTask(con, task);
+        Boolean create = taskDAO.addTask(t, p, con);
         conPool.checkIn(con);
         return create;
     }
@@ -76,16 +61,20 @@ public class TaskDaoController
     }
 
     public boolean updateTime(TaskTime tt) {
-        Connection con = conPool.checkOut();
-        boolean timeUpdated = taskDAO.updateTime(tt, con);
-        conPool.checkIn(con);
-        return timeUpdated;
+        return false;
     }
 
-    public boolean addTime(TaskTime tt, Task t) {
+    public ObservableList<Task> getTasks(Project p) {
         Connection con = conPool.checkOut();
-        boolean timeAdded = taskDAO.addTime(t, tt, con);
+        ObservableList tasks = taskDAO.getTasks(con, p);
         conPool.checkIn(con);
-        return timeAdded;
+        return tasks;
+    }
+
+    public boolean submitTime(TaskTime tt) {
+        Connection con = conPool.checkOut();
+        boolean created = taskDAO.submitTime(tt, con);
+        conPool.checkIn(con);
+        return created;
     }
 }

@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -51,6 +52,8 @@ public class ProjectsOverviewController implements Initializable {
     private AppModel am;
     private User currentUser;
     private Project selectedProject;
+    private TaskTime selectedTime;
+    private boolean hasRun;
 
     @FXML
     private JFXComboBox<Project> cbbProjectSelect;
@@ -99,7 +102,14 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private MenuItem menuItemUser;
     @FXML
+
     private Button CSVbtn;
+
+    private Label lblTaskCreated;
+    @FXML
+    private JFXButton btnNoneBillable;
+
+
 
     /**
      * Initializes the controller class.
@@ -108,6 +118,7 @@ public class ProjectsOverviewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         am = AppModel.getInstance();
+
         
         btnSubmit.setDisable(true);
         
@@ -117,9 +128,13 @@ public class ProjectsOverviewController implements Initializable {
         am.setCurrentProject(cbbProjectSelect.getItems().get(0));
         selectedProject = am.getCurrentProject();
         
-        lstTaskList.setItems(am.getTasksInProject(selectedProject));
+       // lstTaskList.setItems(am.getTasksInProject(selectedProject));
         txtSlectedTask.setText("(Select Project)");
         
+
+        setNodes();
+        hasRun = true;
+
         if (currentUser.getRole()!=User.Role.Admin) {
             menuItemAdmin.setDisable(true);
             menuItemAdmin.setVisible(false);
@@ -129,6 +144,9 @@ public class ProjectsOverviewController implements Initializable {
         
         initTooltips();
         initEffects();
+        
+        
+        
     } 
     
     private void initTooltips() {
@@ -136,6 +154,7 @@ public class ProjectsOverviewController implements Initializable {
         btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first"));
         btnDeleteTask.setTooltip(TooltipFactory.create("Click here to delete a task.\nSelect a task first"));
         btnTimeButton.setTooltip(TooltipFactory.create("Click here to start or pause registering the time you work on the task"));
+        btnNoneBillable.setTooltip(TooltipFactory.create("Click here to start or pause Nonebillable time when working on this task"));
     }
     
     private void initEffects() {        
@@ -152,31 +171,11 @@ public class ProjectsOverviewController implements Initializable {
         openAddEdit();
     }
 
-    private void OpenTask(ActionEvent event) {
-        if(am.getCurrentTask() != null){
-            try
-            {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/TaskOverview.fxml"));
-                Parent root1 = (Parent) fxml.load();
-                Stage primStage = (Stage) txtSlectedTask.getScene().getWindow();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root1));
-                primStage.close();
-                stage.showAndWait();
-                stage.setTitle("Task Overview");
-            
-            
-            } catch (IOException ex)
-            {   
-                Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
     
     @FXML
     private void setItemsOnList(ActionEvent event) {
-        selectedProject = cbbProjectSelect.getSelectionModel().getSelectedItem();        
-        lstTaskList.setItems(am.getTasksInProject(selectedProject));
+        am.setCurrentProject(cbbProjectSelect.getSelectionModel().getSelectedItem());        
+        lstTaskList.setItems(am.getTasks());
         am.setCurrentProject(selectedProject);      
     }
 
@@ -186,12 +185,6 @@ public class ProjectsOverviewController implements Initializable {
             am.setCurrentTask(lstTaskList.getSelectionModel().getSelectedItem());
             txtSlectedTask.setText(am.getCurrentTask().getName());
             
-            if(am.getTimeUsed(am.getCurrentTask()) != null){
-                fldHour.setText(am.getTimeUsed(am.getCurrentTask()).getHours()+ "");
-                fldMin.setText(am.getTimeUsed(am.getCurrentTask()).getMin()+ "");
-                fldSec.setText(am.getTimeUsed(am.getCurrentTask()).getSec()+ "");
-            }
-        }
         
         if (am.getCurrentTask().getDescription() == null)
         {
@@ -202,7 +195,21 @@ public class ProjectsOverviewController implements Initializable {
         {
             txtTaskDescription.setStyle("-fx-font-style: normal;");
             txtTaskDescription.setText(am.getCurrentTask().getDescription());
+        } 
+            
+            if(am.getTime() != null){
+                selectedTime = am.getTime();
+                fldHour.setText(am.getTime().getHours()+ "");
+                fldMin.setText(am.getTime().getMin()+ "");
+                fldSec.setText(am.getTime().getSec()+ "");
+            }
+            else{
+                fldHour.setText("0");
+                fldMin.setText("0");
+                fldSec.setText("0");
+            }
         }
+        
         
     }
 
@@ -211,7 +218,7 @@ public class ProjectsOverviewController implements Initializable {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         primStage.close();
     }
-
+    
     @FXML
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
@@ -247,10 +254,9 @@ public class ProjectsOverviewController implements Initializable {
     private void handleDeleteTask(ActionEvent event)
     {
         Task selectedTask = lstTaskList.getSelectionModel().getSelectedItem();
-        Project currentProject = am.getCurrentProject();
-        if (selectedTask != null)
+        if (selectedTask != null && am.deleteTask())
         {
-            am.removeTask(selectedTask, currentProject);
+           am.fetch();
         }
         else
         {
@@ -320,18 +326,34 @@ public class ProjectsOverviewController implements Initializable {
             btnSubmit.setDisable(false);
         }
     }
+        @FXML
+    private void btnNoneBillable (ActionEvent event)
+    {
+        if(!am.timerIsRunning()||btnNoneBillable.getText().equals("None-Billable")){
+            am.startTimer(fldSec, fldMin, fldHour);
+            btnSubmit.setDisable(true);
+            btnNoneBillable.setText("Pause");
+        }
+        else if (btnNoneBillable.getText().equals("Pause")){
+            am.stopTimer();
+            btnNoneBillable.setText("Start");
+            btnSubmit.setDisable(false);
+        }
+    }
 
     @FXML
     private void handleSubmit(ActionEvent event)
     {
-        am.stopTimer();
-        am.updateTime(new TaskTime(
+        TaskTime tt = new TaskTime(
                 am.getCurrentTask().getId(),
-                am.getCurrentUser().getId(),
+                currentUser.getId(),
                 Integer.parseInt(fldSec.getText()),
                 Integer.parseInt(fldMin.getText()),
                 Integer.parseInt(fldHour.getText()),
-                LocalDate.now()));
+                LocalDate.now()
+        );
+        
+        am.submitTime(tt);
     }
 
     @FXML
@@ -339,21 +361,42 @@ public class ProjectsOverviewController implements Initializable {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.userManagementView(primStage);
     }
+        
+    
+    private void setNodes(){
+        
+        
+        txtSlectedTask.setText("(Select Project)");
+        cbbProjectSelect.setItems(am.getProjects());
+        btnSubmit.setDisable(true);
+        
+        if(!hasRun){
+            currentUser = am.getCurrentUser();
+            am.setCurrentProject(cbbProjectSelect.getItems().get(0));
+            selectedProject = am.getCurrentProject();
+        }
+        
+        lstTaskList.setItems(am.getTasks());
+        menuUser.setText(currentUser.getEmail());
+    }
+
 
    
 
     @FXML
     private void btnCSV(ActionEvent event)
+
+  
+
     {
         am.getCSV();
     }
-        
-    
-    
-    
-    
-    
+
+    @FXML
+    private void handleNoneBillable(ActionEvent event) {
     }
+     
+}
     
     
     
