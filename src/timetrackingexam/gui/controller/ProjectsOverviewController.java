@@ -99,7 +99,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private MenuItem menuItemUser;
     @FXML
-    private Button ff;
+    private Button CSVbtn;
 
     /**
      * Initializes the controller class.
@@ -116,6 +116,7 @@ public class ProjectsOverviewController implements Initializable {
         cbbProjectSelect.setItems(am.getProjects());
         am.setCurrentProject(cbbProjectSelect.getItems().get(0));
         selectedProject = am.getCurrentProject();
+        
         lstTaskList.setItems(am.getTasksInProject(selectedProject));
         txtSlectedTask.setText("(Select Project)");
         
@@ -339,8 +340,10 @@ public class ProjectsOverviewController implements Initializable {
         ViewGuide.userManagementView(primStage);
     }
 
+   
+
     @FXML
-    private void dd(ActionEvent event)
+    private void btnCSV(ActionEvent event)
     {
         am.getCSV();
     }

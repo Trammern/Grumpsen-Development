@@ -5,6 +5,9 @@
  */
 package timetrackingexam.dal.facade;
 
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
@@ -173,7 +176,13 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public void getCSV()
     {
-        projectController.getCSV();
+        try
+        {
+            projectController.getCSV();
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(TimeTrackDalFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
   

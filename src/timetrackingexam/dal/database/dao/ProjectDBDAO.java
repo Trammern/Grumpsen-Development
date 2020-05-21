@@ -161,6 +161,7 @@ public class ProjectDBDAO  implements Serializable
         
         String sql = "SELECT * FROM Project";
         
+        
         try ( PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
         {
             
@@ -178,6 +179,7 @@ public class ProjectDBDAO  implements Serializable
                         sb.append( rs.getString("Description"));
                         sb.append(",");
                         sb.append (rs.getInt("Rate"));
+                       
                         sb.append("\r\n");
                         
                         

@@ -107,7 +107,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="ff" layoutX="592.0" layoutY="453.0" mnemonicParsing="false" onAction="#dd" text="Button" />
+      <Button fx:id="CSVbtn" layoutX="592.0" layoutY="453.0" mnemonicParsing="false" onAction="#btnCSV" text="Button" />
 
      
 
