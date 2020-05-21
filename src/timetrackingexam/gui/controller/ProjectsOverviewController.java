@@ -326,7 +326,6 @@ public class ProjectsOverviewController implements Initializable {
             btnSubmit.setDisable(false);
         }
     }
-        @FXML
     private void btnNoneBillable (ActionEvent event)
     {
         if(!am.timerIsRunning()||btnNoneBillable.getText().equals("None-Billable")){
@@ -385,15 +384,13 @@ public class ProjectsOverviewController implements Initializable {
 
     @FXML
     private void btnCSV(ActionEvent event)
-
-  
-
     {
         am.getCSV();
     }
 
     @FXML
     private void handleNoneBillable(ActionEvent event) {
+    
     }
      
 }
