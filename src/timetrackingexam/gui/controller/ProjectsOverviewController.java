@@ -275,7 +275,7 @@ public class ProjectsOverviewController implements Initializable {
         
         try
             {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AssigenedTime.fxml"));
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/DiagramView.fxml"));
                 Parent root1 = (Parent) fxml.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root1));
@@ -293,7 +293,7 @@ public class ProjectsOverviewController implements Initializable {
     {
         try
         {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/UsedTimePerTask.fxml"));
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/DiagramView.fxml"));
             Parent root1 = (Parent) fxml.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
