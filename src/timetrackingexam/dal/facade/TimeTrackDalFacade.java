@@ -5,6 +5,7 @@
  */
 package timetrackingexam.dal.facade;
 
+import java.time.LocalDate;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
@@ -113,7 +114,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     
     @Override
     public boolean updateTime(TaskTime tt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taskController.updateTime(tt);
     }
     
 
@@ -134,6 +135,11 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
 
     @Override
     public boolean submitTime(TaskTime tt) {
-        return taskController.submitTime(tt);
+        if(!tt.getDate().toString().equals(LocalDate.now().toString())){
+            return taskController.submitTime(tt);
+        }
+        else{
+            return updateTime(tt);
+        }
     }
 }

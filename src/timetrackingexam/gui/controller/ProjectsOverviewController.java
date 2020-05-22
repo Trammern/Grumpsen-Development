@@ -101,10 +101,9 @@ public class ProjectsOverviewController implements Initializable {
     private Label txtHour;
     @FXML
     private MenuItem menuItemUser;
+  
+  
     @FXML
-    private Label lblTaskCreated;
-  
-  
     private JFXButton btnNoneBillable;
 
 
@@ -257,7 +256,7 @@ public class ProjectsOverviewController implements Initializable {
         
         try
             {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/AssigenedTime.fxml"));
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/DiagramView.fxml"));
                 Parent root1 = (Parent) fxml.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root1));
@@ -275,7 +274,7 @@ public class ProjectsOverviewController implements Initializable {
     {
         try
         {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/UsedTimePerTask.fxml"));
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/DiagramView.fxml"));
             Parent root1 = (Parent) fxml.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -308,7 +307,6 @@ public class ProjectsOverviewController implements Initializable {
             btnSubmit.setDisable(false);
         }
     }
-        @FXML
     private void btnNoneBillable (ActionEvent event)
     {
         if(!am.timerIsRunning()||btnNoneBillable.getText().equals("None-Billable")){
@@ -362,10 +360,6 @@ public class ProjectsOverviewController implements Initializable {
         menuUser.setText(currentUser.getEmail());
     }
 
-    private void dd(ActionEvent event)
-    {
-        am.getCSV();
-    }
 
     @FXML
     private void handleNoneBillable(ActionEvent event) {

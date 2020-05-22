@@ -6,8 +6,11 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.ObjectStreamConstants;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +27,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
+import timetrackingexam.bll.utilities.StatisticsCalculator;
 import timetrackingexam.gui.model.AppModel;
 
 /**
@@ -35,10 +39,9 @@ public class DiagramViewController implements Initializable
 {
 
     private final AppModel am = AppModel.getInstance();
+    private final StatisticsCalculator sc = new StatisticsCalculator();
     private static final DecimalFormat DF2 = new DecimalFormat("#.##");
-    private Task currentTask;
-    private CategoryAxis xAxis;
-    private NumberAxis yAxis;
+    private List<TaskTime> timeData;
     
     @FXML
     private BorderPane chartPane;
@@ -51,104 +54,57 @@ public class DiagramViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        currentTask = am.getCurrentTask();
-        chartPane.setCenter(buildLineChart(currentTask));
+        timeData = new ArrayList<>();
+        
+        for (Task task : am.getTasks()) {
+            timeData.add(task.getTotalTimeUsed());
+        }
+        
+        buildLineChart();
     }    
 
     @FXML
-    private void handleNavigateBack(ActionEvent event)
-    {
-        Stage stage = (Stage) btnNavigateBack.getScene().getWindow();
-        stage.close();
+    private void handleNavigateBack(ActionEvent event){
     }
     
     private void buildBarChart(){
+    
         
-        
-        
-        xAxis = new CategoryAxis();
-        xAxis.setLabel("Tasks");
-        
-        yAxis = new NumberAxis(0, 40, 2);
-        yAxis.setLabel("Time in Hours");
-        
-        BarChart barChart = new BarChart<>(xAxis, yAxis);
-        
-        barChart.setTitle("Assigned time per task overview");
-        barChart.setLegendVisible(true);
-        
-        
-        barChart.getData().addAll(initializeTimeUsed(), intitalizeTimeAllotted());
-        
-        chartPane.setCenter(barChart);
     }
     
-    private LineChart buildLineChart(Task t){
-        xAxis = new CategoryAxis();
-        xAxis.setLabel("Date");
-        
-        yAxis = new NumberAxis(am.getCurrentTask().getTimeUsed().get(0).getHours(),48,8);
-        yAxis.setLabel("Hours Spent");
-        
-        LineChart  lc = new LineChart(xAxis, yAxis);
-        
-        XYChart.Series series = new XYChart.Series();
-        series.setName("Hours used on task");
+    private void buildLineChart(){
         
         
-            for (TaskTime tt : currentTask.getTimeUsed()) {
-                series.getData().add(new XYChart.Data(tt.getDate().toString(), am.getLineChartData(t)));
-            }
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
         
-        lc.getData().add(series);
-        return lc;
+        LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
+        
+        lineChart.getData().add(initializeTimeUsed());
+        
+        chartPane.setCenter(lineChart);
+        
     }
     
-    private void buildChart(){
-        
-        double totalTime = 0;
-        PieChart pieChart = new PieChart();
-        
-        ObservableList<Task> allTasks = am.getCurrentProject().getTasks();
-    
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-
-        for (Task task : allTasks)
-        {
-            pieChartData.add(new PieChart.Data(task.getName(), task.getHoursUsed()));
-            System.out.println(task.getHoursUsed());
-            totalTime += task.getHoursUsed();
-        }
-        
-        for (PieChart.Data data : pieChartData)
-        {
-            data.setName(data.getName() + " (" + DF2.format(data.getPieValue() / totalTime * 100) + "%)");
-        }
-        
-        pieChart.setData(pieChartData);
-        pieChart.setClockwise(true);
-        pieChart.setStartAngle(180);
-        pieChart.setLabelsVisible(true);
-        pieChart.setTitle(am.getCurrentProject() + "");
+    private void buildPieChart(){
     }
     
     private XYChart.Series initializeTimeUsed(){
         
-        XYChart.Series timeUsedSeries = new XYChart.Series<>();
-        for (Task task : am.getCurrentProject().getTasks()) {
-            timeUsedSeries.getData().add(new XYChart.Data<>(task.getName(), task.getHoursUsed()));
+        XYChart.Series series = new XYChart.Series();
+        for (TaskTime taskTime : timeData){
+            series.getData().add(new XYChart.Data(
+                    taskTime.getDate().toString(),
+                    taskTime.getHours()));
         }
-        timeUsedSeries.setName("Hours Used");
-        return timeUsedSeries;
+        return series;
     }
     
     private XYChart.Series intitalizeTimeAllotted(){
-        XYChart.Series timeAllottedSeries = new XYChart.Series<>();
-        for (Task task : am.getCurrentProject().getTasks()) {
-            timeAllottedSeries.getData().add(new XYChart.Data<>(task.getName(), task.getTimeAssigned()));
-        }
-        timeAllottedSeries.setName("Time Allotted");
-        
-        return timeAllottedSeries;
+        return null;
+    }
+    
+    private XYChart.Series initializeTimeSpent(){
+        return null;
     }
 }

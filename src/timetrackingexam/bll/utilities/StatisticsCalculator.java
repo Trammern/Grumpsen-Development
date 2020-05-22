@@ -5,6 +5,8 @@
  */
 package timetrackingexam.bll.utilities;
 
+import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 
@@ -16,7 +18,7 @@ import timetrackingexam.be.TaskTime;
  */
 public class StatisticsCalculator {
     
-    private int lcIndex;
+    private int lcIndex = 0;
     private int lineChartGrowth;
     
     
@@ -26,19 +28,11 @@ public class StatisticsCalculator {
      * @param currentTask the task you want the statistics of
      * @return a long representing the incrementing time
      */
-    public long timeGrowth(Task currentTask){
-        lineChartGrowth = lineChartGrowth + currentTask.getTimeUsed().get(lcIndex).getHours();
-        lcIndex++;
-        return lineChartGrowth;
+    public int timeGrowth(ObservableList<Task> tasks){
+        return tasks.get(lcIndex).getTotalTimeUsed().getHours();
     }
     
     public int getHoursUsed(Task currentTask){
-        int hoursUsed = 0;
-        
-        for (TaskTime taskTime : currentTask.getTimeUsed()) {
-            hoursUsed = hoursUsed + taskTime.getHours();
-        }
-        
-        return hoursUsed;
+        return currentTask.getTotalTimeUsed().getHours();
     }
 }

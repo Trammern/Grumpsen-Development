@@ -172,6 +172,30 @@ public class TaskDBDAO{
         }
     }
     
+    public boolean updateTime(TaskTime tt, Connection con) {
+        try{
+            String sql = "UPDATE time "
+                    + "SET Hour = ?, Min = ?, Sec = ? "
+                    + "WHERE TaskId = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(sql);
+
+            pstmt.setInt(1, tt.getHours());
+            pstmt.setInt(2, tt.getMin());
+            pstmt.setInt(3, tt.getSec());
+            pstmt.setInt(4, tt.getTaskid());
+
+            int updatedRows = pstmt.executeUpdate();
+            System.out.println(updatedRows);
+            
+            return updatedRows > 0;
+        } catch (SQLException sqlE) {
+            System.out.println("Failed to manipulate element from database");
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return false;
+        }
+    }
+    
     /**
      * Slemme Mathias Lav straks det her om!!!
      * @param con
@@ -211,4 +235,6 @@ public class TaskDBDAO{
             return null;
         }
     }
+
+    
 }

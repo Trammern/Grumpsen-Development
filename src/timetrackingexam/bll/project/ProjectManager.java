@@ -38,9 +38,4 @@ public class ProjectManager implements IProjectManager {
     public boolean updateProject(Project p) {
         return projectDal.updateProject(p);
     }
-    
-    public void getCSV()
-    {
-       projectDal.getCSV();
-    }
 }

@@ -207,10 +207,6 @@ public class AppModel
     public void removeUsersFromProject(Project project, List<User> users) {
         userManager.removeUsersFromProject(project, users);
     }
-    
-    public long getLineChartData(Task t){
-        return taskManager.getLineChartData(t);
-    }
 
     public boolean deleteTask() {
         return ttInterface.deleteTask(currentTask);
@@ -218,11 +214,6 @@ public class AppModel
 
     public boolean submitTime(TaskTime tt) {
         return ttInterface.submitTime(tt);
-    }
-  
-    public void getCSV()
-    {
-        projectManager.getCSV();
     }
     
 }

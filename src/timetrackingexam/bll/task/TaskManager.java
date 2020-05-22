@@ -55,10 +55,6 @@ public class TaskManager implements ITaskManager
         return taskManager.updateTask(updateTask);
     }
 
-    public long getLineChartData(Task t) {
-        return cal.timeGrowth(t);
-    }
-
     @Override
     public TaskTime getTime(Task t) {
         return taskManager.getTime(t);

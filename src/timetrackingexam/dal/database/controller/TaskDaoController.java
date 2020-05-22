@@ -61,7 +61,10 @@ public class TaskDaoController
     }
 
     public boolean updateTime(TaskTime tt) {
-        return false;
+        Connection con = conPool.checkOut();
+        boolean updated = taskDAO.updateTime(tt, con);
+        conPool.checkIn(con);
+        return updated;
     }
 
     public ObservableList<Task> getTasks(Project p) {
