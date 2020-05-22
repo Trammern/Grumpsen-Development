@@ -385,7 +385,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnCSV(ActionEvent event)
     {
-        am.getCSV();
+        //am.getCSV();
     }
 
     @FXML
