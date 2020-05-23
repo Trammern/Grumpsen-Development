@@ -10,10 +10,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.time.LocalDate;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
+import timetrackingexam.dal.database.controller.ClientDBDAOController;
 import timetrackingexam.dal.database.controller.ProjectDaoController;
 import timetrackingexam.dal.database.controller.TaskDaoController;
 import timetrackingexam.dal.database.controller.UserDBDAOController;
@@ -29,12 +31,14 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     private ProjectDaoController projectController;
     private UserDBDAOController userController;
     private TaskDaoController taskController;
+    private ClientDBDAOController clientController;
 
     public TimeTrackDalFacade()
     {
         projectController = new ProjectDaoController(ConnectionPool.getInstance());
         userController = new UserDBDAOController(ConnectionPool.getInstance());
         taskController = new TaskDaoController(ConnectionPool.getInstance());
+        clientController = new ClientDBDAOController(ConnectionPool.getInstance());
         
     }
     
@@ -154,5 +158,25 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
         else{
             return updateTime(tt);
         }
+    }
+
+    @Override
+    public ObservableList<Client> getAllClients() {
+        return clientController.getAllClient();
+    }
+
+    @Override
+    public boolean createClient(Client client) {
+        return clientController.createClient(client);
+    }
+
+    @Override
+    public boolean updateClient(Client client) {
+        return clientController.updateClient(client);
+    }
+
+    @Override
+    public boolean deleteClient(Client client) {
+        return clientController.deleteClient(client);
     }
 }

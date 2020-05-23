@@ -8,6 +8,8 @@ package timetrackingexam.be;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -15,25 +17,18 @@ import java.util.Objects;
  */
 public class Client {
     
+    private int id;
     private String name;
-    private double defaultrate; //use BigDecimal instead? different opinions
-    private List<Project> projects;
+    private int defaultrate; //use BigDecimal instead? different opinions
+    private ObservableList<Project> projects;
        
-    public Client(String name) {        
+    public Client(int id, String name, int defaultrate) {     
+        this.id = id;
         this.name = name;
-        projects = new ArrayList<>();
-    }
-    
-    public Client(String name, double defaultrate) {
-        this.name = name;        
         this.defaultrate = defaultrate;
-        projects = new ArrayList<>();
-    }
-
-    public Client(String name, int clientId, int taskId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+        projects = FXCollections.observableArrayList();
+    }    
+    
     public String getName() {
         return name;
     }
@@ -42,22 +37,30 @@ public class Client {
         this.name = name;
     }
 
-    public double getDefaultrate() {
+    public int getDefaultrate() {
         return defaultrate;
     }
 
-    public void setDefaultrate(double defaultrate) {
+    public void setDefaultrate(int defaultrate) {
         this.defaultrate = defaultrate;
     }
 
-    public List<Project> getProjects() {
+    public ObservableList<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<Project> projects) {
+    public void setProjects(ObservableList<Project> projects) {
         this.projects = projects;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+                
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
