@@ -7,11 +7,14 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -90,11 +93,7 @@ public class ChangePasswordViewController implements Initializable {
         }
         String verifiedNewPassword = LoginTools.getVerifiedNewPassword(user, oldPassword, newPassword);
         if (verifiedNewPassword != null) {
-            user.setPassword(verifiedNewPassword);
-            am.updateUser(user);
-            //am.getAllUsers(); //necessary?
-            Stage stage = (Stage) btnCancel.getScene().getWindow();
-            stage.close();
+            confirmPassword(user, verifiedNewPassword);
         }
         else {
             AlertFactory.showErrorAlert("The password you have entered in the first field is incorrect");
@@ -102,8 +101,26 @@ public class ChangePasswordViewController implements Initializable {
         }      
     }
 
+    private void confirmPassword(User user, String password) {
+        Alert alert = AlertFactory.createConfirmationAlert("Are you sure you want to change your password?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            user.setPassword(password);
+            am.updateUser(user);
+            am.fetch();
+            close();
+        } 
+        else {
+            alert.close();
+        }        
+    }
+    
     @FXML
     private void cancel(ActionEvent event) {
+        close();
+    }
+    
+    private void close() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
