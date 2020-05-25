@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +58,13 @@ public class ProjectsOverviewController implements Initializable {
     int totalHour;
     int totalMin;
     int totalSec;
-
+    private static final Logger logger = Logger.getLogger(ProjectsOverviewController.class.getName());
+    Date dateStart;
+    Date dateStop;
+    
+    
+            
+    
     @FXML
     private JFXComboBox<Project> cbbProjectSelect;
     @FXML
@@ -317,11 +324,14 @@ public class ProjectsOverviewController implements Initializable {
             am.startTimer(fldSec, fldMin, fldHour);
             btnSubmit.setDisable(true);
             btnTimeButton.setText("Pause");
+            
+            logger.log(Level.INFO, "{0} - The timer has been started by {1}", dateStart = new Date());
         }
-        else if (btnTimeButton.getText().equals("Pause")){
+        else{
             am.stopTimer();
             btnTimeButton.setText("Start");
             btnSubmit.setDisable(false);
+            logger.log(Level.INFO, "{0} - The timer has been stopped", dateStop = new Date());
         }
     }
     private void btnNoneBillable (ActionEvent event)
@@ -351,6 +361,8 @@ public class ProjectsOverviewController implements Initializable {
         );
         
         am.submitTime(tt);
+        long timeSpent = (dateStop.getTime() - dateStart.getTime()) / 1000;
+        logger.info("You have submitted " + timeSpent + " seconds to this task");
     }
 
     @FXML

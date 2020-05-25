@@ -108,7 +108,7 @@ public class DiagramViewController implements Initializable
         NumberAxis yAxis = new NumberAxis();
         
         LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
-        
+ 
         lineChart.getData().add(sc.timeGrowth());
         lineChart.setTitle("Growth over time");
         lineChart.setLegendVisible(false);
@@ -119,7 +119,7 @@ public class DiagramViewController implements Initializable
         PieChart chart = new PieChart(sc.getHoursPerTaskUsed());
         chart.setTitle("Time used per task");
         chart.setLegendVisible(false);
-
+        
         chartPane.setCenter(chart);
     }
 }
