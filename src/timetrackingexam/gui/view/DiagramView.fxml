@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,10 +14,11 @@
    <children>
       <Pane layoutY="89.0" prefHeight="385.0" prefWidth="614.0" stylesheets="@../../../UsedTimePerTaskCSS.css">
          <children>
-            <BorderPane fx:id="chartPane" layoutX="20.0" layoutY="18.0" prefHeight="352.0" prefWidth="574.0" />
+            <BorderPane fx:id="chartPane" layoutX="20.0" layoutY="42.0" prefHeight="328.0" prefWidth="574.0" />
+            <JFXComboBox fx:id="cmbChooseChart" layoutX="249.0" layoutY="14.0" onAction="#handleCombo" prefHeight="25.0" prefWidth="116.0" promptText="Choose chart" />
          </children>
       </Pane>
-      <Label layoutX="262.0" layoutY="36.0" text="Time Growth">
+      <Label layoutX="280.0" layoutY="36.0" text="Statistics">
          <font>
             <Font size="14.0" />
          </font>

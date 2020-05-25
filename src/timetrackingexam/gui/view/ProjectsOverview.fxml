@@ -27,8 +27,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Statistics">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleBarChart" text="Assigned Time Chart" />
-                  <MenuItem mnemonicParsing="false" onAction="#handlePieChart" text="Piechart" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlePieChart" text="Charts" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
