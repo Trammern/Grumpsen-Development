@@ -7,6 +7,7 @@ package timetrackingexam.bll.facade;
 
 import java.util.List;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
@@ -123,6 +124,31 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
         }
         
         return used;
+    }
+    
+    @Override
+    public ObservableList<Client> getAllClients() {
+        return dalFacade.getAllClients();
+    }
+
+    @Override
+    public boolean createClient(Client client) {
+        return dalFacade.createClient(client);
+    }
+
+    @Override
+    public boolean updateClient(Client client) {
+        return dalFacade.updateClient(client);
+    }
+
+    @Override
+    public boolean deleteClient(Client client) {
+        return dalFacade.deleteClient(client);
+    }
+
+    @Override
+    public ObservableList<Project> getAllClientProjects(Client client) {
+        return dalFacade.getAllClientProjects(client);
     }
 
     

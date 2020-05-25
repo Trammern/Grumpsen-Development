@@ -163,4 +163,9 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public boolean deleteClient(Client client) {
         return clientController.deleteClient(client);
     }
+
+    @Override
+    public ObservableList<Project> getAllClientProjects(Client client) {
+        return clientController.getAllClientProjects(client);
+    }
 }
