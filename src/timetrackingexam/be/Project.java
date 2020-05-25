@@ -39,7 +39,14 @@ public class Project {
         users = FXCollections.observableArrayList();
         tasks = FXCollections.observableArrayList();
     }
-   
+
+    public Project(int id, String name, String description, int rate, int clientID) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rate = rate;
+        this.clientID = clientID;
+    }           
     
     public int getId() {
         return id;

@@ -82,7 +82,26 @@ public class ClientDBDAO {
     }
     
     public ObservableList<Project> getAllClientProjects(Connection con, Client client) throws SQLException {
-        return null;
+        String sql = "SELECT * FROM Project WHERE ClientID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ObservableList<Project> clientProjects = FXCollections.observableArrayList();
+            ps.setInt(1, client.getId());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String name = rs.getString("Name");
+                String description = rs.getString("Description");
+                int rate = rs.getInt("Rate");
+                int clientId = rs.getInt("ClientID");
+                
+                Project project = new Project(id, name, description, rate, clientId);
+                
+                clientProjects.add(project);
+            }
+            return clientProjects;
+        }
     }
     
 }

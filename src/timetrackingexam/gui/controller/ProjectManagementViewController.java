@@ -6,6 +6,7 @@
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
@@ -28,6 +29,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
@@ -73,6 +75,8 @@ public class ProjectManagementViewController implements Initializable {
     private JFXButton btnNewProject;
     @FXML
     private JFXButton btnEditProject;
+    @FXML
+    private JFXComboBox<Client> cbbClients;
 
     /**
      * Initializes the controller class.
@@ -81,7 +85,8 @@ public class ProjectManagementViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        
        am = AppModel.getInstance();
-       lstProjects.setItems(getAllProjects());
+       cbbClients.setItems(am.getAllClients()); 
+       
        currentUser = am.getCurrentUser();
        menuUser.setText(currentUser.getEmail());
        am.setCurrentProject(null);
@@ -89,10 +94,19 @@ public class ProjectManagementViewController implements Initializable {
        am.setSelectedUser(null);
        txtSelectedProject.setText("(Select Project)");
        
+       initListener();
        initTooltips();
        initEffects();
     }    
 
+    private void initListener() {
+        cbbClients.getSelectionModel().selectedItemProperty().addListener(
+            (observable, oldValue, newValue) -> {
+            lstProjects.getItems().clear();
+            showClientProjects(newValue);            
+            });
+    }
+    
     private void initTooltips() {
         btnNewProject.setTooltip(TooltipFactory.create("Click here to create a new project"));        
         btnEditProject.setTooltip(TooltipFactory.create("Click here to edit an existing project.\nSelect a project first"));
@@ -101,6 +115,10 @@ public class ProjectManagementViewController implements Initializable {
     private void initEffects() {
         NodeCustomizer.nodeEffect(btnNewProject);
         NodeCustomizer.nodeEffect(btnEditProject);
+    }
+    
+    private void showClientProjects(Client client) {
+        lstProjects.setItems(am.getAllClientProjects(client));
     }
     
     @FXML

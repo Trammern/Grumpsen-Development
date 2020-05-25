@@ -112,11 +112,13 @@ public class UserManagementViewController implements Initializable {
     private void initTooltips() {
         btnNewUser.setTooltip(TooltipFactory.create("Click here to create a new employee profile"));        
         btnEditUser.setTooltip(TooltipFactory.create("Click here to edit an existing employee profile.\nSelect a user first"));
+        btnDeleteUser.setTooltip(TooltipFactory.create("Click here to delete an existing employee profile.\nSelect a user first"));
     }
     
     private void initEffects() {
         NodeCustomizer.nodeEffect(btnNewUser);
         NodeCustomizer.nodeEffect(btnEditUser);
+        NodeCustomizer.nodeEffect(btnDeleteUser);
     }
     
     @FXML
