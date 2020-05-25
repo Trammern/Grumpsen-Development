@@ -105,6 +105,11 @@ public class TaskTime {
         this.ID = ID;
     }
 
+    @Override
+    public String toString() {
+        return taskid + " " + userId;
+    }
+
     
    
     

@@ -28,17 +28,13 @@ import timetrackingexam.bll.task.TaskManager;
 public class StatisticsCalculator {
     
     private int lcIndex = 0;
-    private int lineChartGrowth;
-    private ObservableList<TaskTime> times;
-    private ObservableList<Project> projects;
     private ObservableList<Task> tasks;
     private ITimeTrackBLL dBFacade;
+    private Project currentProject;
 
     public StatisticsCalculator(Project p) {
-        
+        currentProject = p;
         dBFacade = new TimeTrackBLLFacade();
-        tasks = dBFacade.getTasks(p);
-        times = FXCollections.observableArrayList();
     }
     
     
@@ -50,6 +46,9 @@ public class StatisticsCalculator {
      */
     public XYChart.Series timeGrowth(){
         
+        tasks = dBFacade.getTasks(currentProject);
+        ObservableList<TaskTime> times = FXCollections.observableArrayList();
+        
         XYChart.Series series = new XYChart.Series();
         for (Task task : tasks) {
             times.addAll(dBFacade.getTime(task));
@@ -60,9 +59,7 @@ public class StatisticsCalculator {
             series.getData().add(new XYChart.Data(
                     time.getDate().toString(),
                     growth));
-            
         }
-            
         return series;
     }
     
@@ -77,6 +74,7 @@ public class StatisticsCalculator {
     
     public int totalHours(Task t){
         
+        ObservableList<TaskTime> times = FXCollections.observableArrayList();
         int totalHour = 0;
         times.addAll(dBFacade.getTime(t));
         

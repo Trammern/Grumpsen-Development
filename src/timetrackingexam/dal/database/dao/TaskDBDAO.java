@@ -226,7 +226,6 @@ public class TaskDBDAO{
                         LocalDate.parse(rs.getString("date"))
                 );   
                 time.setID(rs.getInt("ID"));
-                
                 times.add(time);
             }
             return times;

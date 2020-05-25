@@ -27,6 +27,7 @@ public class TaskManager implements ITaskManager
     private Task task;
     private StatisticsCalculator cal;
     private final ITaskDal taskManager;
+    private ObservableList times = FXCollections.observableArrayList();
 
     public TaskManager()
     {
@@ -56,7 +57,9 @@ public class TaskManager implements ITaskManager
 
     @Override
     public ObservableList<TaskTime> getTime(Task t) {
-        return taskManager.getTime(t);
+        times.removeAll();
+        times.addAll(taskManager.getTime(t));
+        return times;
     }
     
     @Override

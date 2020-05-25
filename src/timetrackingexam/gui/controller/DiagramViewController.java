@@ -46,7 +46,7 @@ public class DiagramViewController implements Initializable
     private final AppModel am = AppModel.getInstance();
     private StatisticsCalculator sc;
     private static final DecimalFormat DF2 = new DecimalFormat("#.##");
-    private List<TaskTime> timeData;
+    private LineChart lineChart;
     
     @FXML
     private BorderPane chartPane;
@@ -61,18 +61,11 @@ public class DiagramViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        timeData = new ArrayList<>();
         sc = new StatisticsCalculator(am.getCurrentProject());
-        
-        for (Task task : am.getTasks()) {
-            timeData.add(task.getTotalTimeUsed());
-        }
-        
-        
         
         cmbChooseChart.getItems().add("Piechart");
         cmbChooseChart.getItems().add("Linechart");
-        
+        buildLineChart();
         
         
     }    
@@ -107,8 +100,7 @@ public class DiagramViewController implements Initializable
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         
-        LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
- 
+        lineChart = new LineChart<>(xAxis,yAxis);
         lineChart.getData().add(sc.timeGrowth());
         lineChart.setTitle("Growth over time");
         lineChart.setLegendVisible(false);
