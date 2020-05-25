@@ -39,7 +39,7 @@ public class DiagramViewController implements Initializable
 {
 
     private final AppModel am = AppModel.getInstance();
-    private final StatisticsCalculator sc = new StatisticsCalculator(am.getCurrentProject());
+    private StatisticsCalculator sc;
     private static final DecimalFormat DF2 = new DecimalFormat("#.##");
     private List<TaskTime> timeData;
     
@@ -55,21 +55,17 @@ public class DiagramViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         timeData = new ArrayList<>();
+        sc = new StatisticsCalculator(am.getCurrentProject());
         
         for (Task task : am.getTasks()) {
             timeData.add(task.getTotalTimeUsed());
         }
         
-        buildLineChart();
+        buildPieChart();
     }    
 
     @FXML
     private void handleNavigateBack(ActionEvent event){
-    }
-    
-    private void buildBarChart(){
-    
-        
     }
     
     private void buildLineChart(){
@@ -80,31 +76,19 @@ public class DiagramViewController implements Initializable
         
         LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
         
-        lineChart.getData().add(initializeTimeUsed());
-        
+        lineChart.getData().add(sc.timeGrowth());
+        lineChart.setTitle("Growth over time");
+        lineChart.setLegendVisible(false);
         chartPane.setCenter(lineChart);
         
     }
     
     private void buildPieChart(){
-    }
-    
-    private XYChart.Series initializeTimeUsed(){
         
-        XYChart.Series series = new XYChart.Series();
-        for (TaskTime taskTime : timeData){
-            series.getData().add(new XYChart.Data(
-                    taskTime.getDate().toString(),
-                    taskTime.getHours()));
-        }
-        return series;
-    }
-    
-    private XYChart.Series intitalizeTimeAllotted(){
-        return null;
-    }
-    
-    private XYChart.Series initializeTimeSpent(){
-        return null;
+        PieChart chart = new PieChart(sc.getHoursPerTaskUsed());
+        chart.setTitle("Time used per task");
+        chart.setLegendVisible(false);
+        
+        chartPane.setCenter(chart);
     }
 }

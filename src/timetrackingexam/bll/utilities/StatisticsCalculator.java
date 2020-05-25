@@ -7,6 +7,7 @@ package timetrackingexam.bll.utilities;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
@@ -37,6 +38,7 @@ public class StatisticsCalculator {
         
         dBFacade = new TimeTrackBLLFacade();
         tasks = dBFacade.getTasks(p);
+        times = FXCollections.observableArrayList();
     }
     
     
@@ -44,7 +46,6 @@ public class StatisticsCalculator {
     /**
      * This method calculates the growth in time, over time. each time it is called
      * the index goes up and it adds the integer to the sum of time growth
-     * @param currentTask the task you want the statistics of
      * @return a long representing the incrementing time
      */
     public XYChart.Series timeGrowth(){
@@ -53,17 +54,36 @@ public class StatisticsCalculator {
         for (Task task : tasks) {
             times.addAll(dBFacade.getTime(task));
         }
-        
+        int growth = 0;
         for (TaskTime time : times) {
+            growth += time.getHours();
             series.getData().add(new XYChart.Data(
                     time.getDate().toString(),
-                    time.getHours()));
+                    growth));
+            
         }
             
         return series;
     }
     
-    public int getHoursUsed(Task currentTask){
-        return currentTask.getTotalTimeUsed().getHours();
+    public ObservableList<PieChart.Data> getHoursPerTaskUsed(){
+        
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (Task task : tasks) {
+            pieChartData.add(new PieChart.Data(task.getName(), totalHours(task)));
+        }
+        return pieChartData;
+    }
+    
+    public int totalHours(Task t){
+        
+        int totalHour = 0;
+        times.addAll(dBFacade.getTime(t));
+        
+        for (TaskTime time : times) {
+            totalHour += time.getHours();
+        }
+        
+        return totalHour;
     }
 }
