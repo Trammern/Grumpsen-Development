@@ -51,7 +51,8 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <JFXButton fx:id="btnNewUser" layoutX="312.0" layoutY="273.0" onAction="#newUser" text="New user" textFill="#f4f4f4" />
-      <JFXButton fx:id="btnEditUser" layoutX="382.0" layoutY="273.0" onAction="#editUser" text="User Details" textFill="#f4f4f4" />
+      <JFXButton fx:id="btnNewUser" layoutX="222.0" layoutY="273.0" onAction="#newUser" text="New user" textFill="#f4f4f4" />
+      <JFXButton fx:id="btnEditUser" layoutX="295.0" layoutY="273.0" onAction="#editUser" text="User Details" textFill="#f4f4f4" />
+      <JFXButton fx:id="btnDeleteUser" layoutX="382.0" layoutY="273.0" onAction="#deleteUser" text="Delete user" textFill="#f4f4f4" />
    </children>
 </AnchorPane>

@@ -22,10 +22,7 @@ public interface IUserManager
     
     public boolean updateUser(User user);
     
-    public boolean deleteUser(User user);
-    
-    public ObservableList<User> getProjectEmployees(Project p);
-    
-    public ObservableList<User> getProjectNonEmployees(Project project);
-
+    public boolean deleteUser(User user);    
+   
+    public boolean checkIfEmailIsUsed(String email);
 }

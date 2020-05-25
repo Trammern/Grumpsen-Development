@@ -70,7 +70,7 @@ public class AppModel
     public ObservableList<User> getAllUsers()
     {
         users.clear();
-        users.addAll(userManager.getAllUsers());
+        users.addAll(ttInterface.getAllUsers());
         return users;
     }
 
@@ -173,25 +173,21 @@ public class AppModel
     }
     
     public boolean checkIfEmailIsUsed(String email) {
-        return userManager.checkIfEmailIsUsed(email);
+        return ttInterface.checkIfEmailIsUsed(email);
     }
     
     public boolean addUser(User user) {
-        return userManager.addUser(user);        
+        return ttInterface.addUser(user);        
     }
     
     public boolean updateUser(User user) {
-        return userManager.updateUser(user);        
+        return ttInterface.updateUser(user);        
     }
     
     public boolean deleteUser(User user) {
-        return userManager.deleteUser(user);        
+        return ttInterface.deleteUser(user);        
     }
 
-    public ObservableList<User> GetProjectEmployees(Project p) {
-        return userManager.getProjectEmployees(p);
-    }
-        
     public ObservableList<TaskTime> getAllTime(){
         return ttInterface.getTime(currentTask);
     }
@@ -200,18 +196,6 @@ public class AppModel
         return ttInterface.getTotalTime(currentTask);
     }
     
-    public ObservableList<User> getProjectNonEmployees(Project project) {
-        return userManager.getProjectNonEmployees(project);
-    }
-    
-    public void addUsersToProject(Project project, List<User> users) {
-        userManager.addUsersToProject(project, users);
-    }
-
-    public void removeUsersFromProject(Project project, List<User> users) {
-        userManager.removeUsersFromProject(project, users);
-    }
-
     public boolean deleteTask() {
         return ttInterface.deleteTask(currentTask);
     }

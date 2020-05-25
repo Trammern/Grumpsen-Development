@@ -34,6 +34,7 @@ public class UserManager implements IUserManager
         return userDal.getAllUsers();
     }
     
+    @Override
     public boolean checkIfEmailIsUsed(String email) {
         
         boolean used = false;
@@ -62,33 +63,4 @@ public class UserManager implements IUserManager
         return userDal.deleteUser(user);
     }
 
-    @Override
-    public ObservableList<User> getProjectEmployees(Project p) {
-        return userDal.getProjectEmployees(p);
-    }
-    
-    @Override
-    public ObservableList<User> getProjectNonEmployees(Project project) {
-        ObservableList<User> nonEmployees = FXCollections.observableArrayList();
-        nonEmployees.clear();
-        nonEmployees.addAll(getAllUsers());                
-        nonEmployees.removeAll(getProjectEmployees(project));
-        return nonEmployees;
-        
-    }
-    
-    public void addUsersToProject(Project project, List<User> users) {
-        for (User user : users) {
-            userDal.addUserToProject(project, user);
-        }
-        
-    }
-
-    public void removeUsersFromProject(Project project, List<User> users) {
-        for (User user : users) {
-            userDal.removeUserFromProject(project, user);
-        }
-        
-    }
-    
 }

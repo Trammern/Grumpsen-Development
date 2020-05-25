@@ -19,9 +19,6 @@ public interface IUserDal {
     public ObservableList<User> getAllUsers();    
     public boolean addUser(User user);
     public boolean updateUser(User user);
-    public boolean deleteUser(User user);
-    public ObservableList<User> getProjectEmployees(Project p); //delete
-    public void addUserToProject(Project project, User user); //delete
-    public void removeUserFromProject(Project project, User user); //delete
+    public boolean deleteUser(User user);   
     
 }
