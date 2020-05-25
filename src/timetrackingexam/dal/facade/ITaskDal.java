@@ -20,8 +20,8 @@ public interface ITaskDal {
     public boolean updateTask(Task task);
     public boolean addTask(Task t, Project p);
     
-    public TaskTime getTime(Task t);
-    public boolean submitTime(TaskTime tt);
+    public ObservableList<TaskTime> getTime(Task t);
+    public boolean submitTime(TaskTime tt, Task t);
     public boolean updateTime(TaskTime tt);
 
     

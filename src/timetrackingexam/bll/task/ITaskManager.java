@@ -23,9 +23,10 @@ public interface ITaskManager
     public boolean deleteTask(Task selectedTask);
     public boolean updateTask(Task updateTask);
     
-    public TaskTime getTime(Task t);
+    public ObservableList<TaskTime> getTime(Task t);
+    public TaskTime getTotalTime(Task currentTask);
     public boolean updateTime(TaskTime tt);
-    public boolean submitTime(TaskTime tt);
+    public boolean submitTime(TaskTime tt, Task t);
     
      
 }

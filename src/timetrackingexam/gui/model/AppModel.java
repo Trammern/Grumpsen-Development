@@ -192,8 +192,12 @@ public class AppModel
         return userManager.getProjectEmployees(p);
     }
         
-    public TaskTime getTime(){
+    public ObservableList<TaskTime> getAllTime(){
         return ttInterface.getTime(currentTask);
+    }
+    
+    public TaskTime getTotalTime(){
+        return ttInterface.getTotalTime(currentTask);
     }
     
     public ObservableList<User> getProjectNonEmployees(Project project) {
@@ -213,7 +217,7 @@ public class AppModel
     }
 
     public boolean submitTime(TaskTime tt) {
-        return ttInterface.submitTime(tt);
+        return ttInterface.submitTime(tt, currentTask);
     }
     
 }

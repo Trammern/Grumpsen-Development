@@ -39,7 +39,7 @@ public class DiagramViewController implements Initializable
 {
 
     private final AppModel am = AppModel.getInstance();
-    private final StatisticsCalculator sc = new StatisticsCalculator();
+    private final StatisticsCalculator sc = new StatisticsCalculator(am.getCurrentProject());
     private static final DecimalFormat DF2 = new DecimalFormat("#.##");
     private List<TaskTime> timeData;
     

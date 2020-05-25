@@ -53,9 +53,9 @@ public class TaskDaoController
     }
     
 
-    public TaskTime getTime(Task t) {
+    public ObservableList<TaskTime> getTime(Task t) {
         Connection con = conPool.checkOut();
-        TaskTime time = taskDAO.getTime(con, t);
+        ObservableList<TaskTime> time = taskDAO.getTime(con, t);
         conPool.checkIn(con);
         return time;
     }

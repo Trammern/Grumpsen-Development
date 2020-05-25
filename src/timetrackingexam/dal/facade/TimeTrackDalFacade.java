@@ -111,7 +111,7 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public TaskTime getTime(Task t) {
+    public ObservableList<TaskTime> getTime(Task t) {
         return taskController.getTime(t);
     }
     
@@ -147,12 +147,14 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     }
 
     @Override
-    public boolean submitTime(TaskTime tt) {
-        if(!tt.getDate().toString().equals(LocalDate.now().toString())){
-            return taskController.submitTime(tt);
+    public boolean submitTime(TaskTime tt, Task t) {
+        ObservableList<TaskTime> times = taskController.getTime(t);
+            for (TaskTime time : times) {
+                if(tt.getDate().toString().equals(time.getDate().toString()) &&
+                tt.getUserId() == time.getUserId()){
+                    return updateTime(tt);
+            }
         }
-        else{
-            return updateTime(tt);
-        }
+        return taskController.submitTime(tt);
     }
 }

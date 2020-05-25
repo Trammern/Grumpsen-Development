@@ -30,7 +30,6 @@ public class TaskManager implements ITaskManager
 
     public TaskManager()
     {
-        cal = new StatisticsCalculator();
         taskManager = new TimeTrackDalFacade();
     }
 
@@ -56,7 +55,7 @@ public class TaskManager implements ITaskManager
     }
 
     @Override
-    public TaskTime getTime(Task t) {
+    public ObservableList<TaskTime> getTime(Task t) {
         return taskManager.getTime(t);
     }
     
@@ -66,18 +65,29 @@ public class TaskManager implements ITaskManager
     }
 
     @Override
-    public boolean submitTime(TaskTime tt) {
-        if(!tt.getDate().toString().equals(LocalDate.now().toString())){
-            return taskManager.submitTime(tt);
-        }
-        else{
-            return updateTime(tt);
-        }
+    public boolean submitTime(TaskTime tt, Task t) {
+            return taskManager.submitTime(tt, t);
     }
 
     @Override
     public boolean addTask(Task t, Project p) {
         return taskManager.addTask(t, p);
+    }
+
+    @Override
+    public TaskTime getTotalTime(Task currentTask) {
+        System.out.println("I was called");
+        int totalHour=0;
+        int totalMin=0;
+        int totalSec=0;
+        
+        for (TaskTime time : taskManager.getTime(currentTask)) {
+            totalHour += time.getHours();
+            totalMin += time.getMin();
+            totalSec += time.getSec();
+        }
+        TaskTime totalTime = new TaskTime(totalSec, totalMin, totalHour);
+        return totalTime;
     }
 
     

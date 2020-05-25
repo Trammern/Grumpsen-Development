@@ -176,7 +176,7 @@ public class TaskDBDAO{
         try{
             String sql = "UPDATE time "
                     + "SET Hour = ?, Min = ?, Sec = ? "
-                    + "WHERE TaskId = ?";
+                    + "WHERE TaskId = ? AND Date = ?";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -184,6 +184,7 @@ public class TaskDBDAO{
             pstmt.setInt(2, tt.getMin());
             pstmt.setInt(3, tt.getSec());
             pstmt.setInt(4, tt.getTaskid());
+            pstmt.setString(5, tt.getDate().toString());
 
             int updatedRows = pstmt.executeUpdate();
             System.out.println(updatedRows);
@@ -203,10 +204,10 @@ public class TaskDBDAO{
      * @return 
      */
 
-    public TaskTime getTime(Connection con, Task t) {
+    public ObservableList<TaskTime> getTime(Connection con, Task t) {
         try{
-
-
+            ObservableList<TaskTime> times = FXCollections.observableArrayList();
+            
             String sql = "SELECT * " +
                     "FROM Time " +
                     "WHERE TaskID = ?";
@@ -215,7 +216,7 @@ public class TaskDBDAO{
             pstmt.setInt(1, t.getId());
             
             ResultSet rs = pstmt.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 TaskTime time = new TaskTime(
                         rs.getInt("TaskID"),
                         rs.getInt("UserID"),
@@ -224,10 +225,11 @@ public class TaskDBDAO{
                         rs.getInt("Hour"),
                         LocalDate.parse(rs.getString("date"))
                 );   
+                time.setID(rs.getInt("ID"));
                 
-                return time;
+                times.add(time);
             }
-            return null;
+            return times;
             
         } catch (SQLException sqlE) {
             System.out.println("Failed to grab element from database");

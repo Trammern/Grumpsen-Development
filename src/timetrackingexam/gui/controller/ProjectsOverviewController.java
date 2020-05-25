@@ -54,6 +54,9 @@ public class ProjectsOverviewController implements Initializable {
     private Project selectedProject;
     private TaskTime selectedTime;
     private boolean hasRun;
+    int totalHour;
+    int totalMin;
+    int totalSec;
 
     @FXML
     private JFXComboBox<Project> cbbProjectSelect;
@@ -145,6 +148,10 @@ public class ProjectsOverviewController implements Initializable {
         initTooltips();
         initEffects();
         
+        totalHour=0;
+        totalMin=0;
+        totalSec=0;
+        
         
         
     } 
@@ -197,11 +204,18 @@ public class ProjectsOverviewController implements Initializable {
             txtTaskDescription.setText(am.getCurrentTask().getDescription());
         } 
             
-            if(am.getTime() != null){
-                selectedTime = am.getTime();
-                fldHour.setText(am.getTime().getHours()+ "");
-                fldMin.setText(am.getTime().getMin()+ "");
-                fldSec.setText(am.getTime().getSec()+ "");
+            if(am.getAllTime() != null){
+                totalHour = 0;
+                totalMin = 0;
+                totalSec = 0;
+                for (TaskTime time : am.getAllTime()) {
+                    totalHour += time.getHours();
+                    totalMin += time.getMin();
+                    totalSec += time.getSec();
+                }
+                fldHour.setText(totalHour+ "");
+                fldMin.setText(totalMin+ "");
+                fldSec.setText(totalSec+ "");
             }
             else{
                 fldHour.setText("0");
@@ -346,9 +360,9 @@ public class ProjectsOverviewController implements Initializable {
         TaskTime tt = new TaskTime(
                 am.getCurrentTask().getId(),
                 currentUser.getId(),
-                Integer.parseInt(fldSec.getText()),
-                Integer.parseInt(fldMin.getText()),
-                Integer.parseInt(fldHour.getText()),
+                Integer.parseInt(fldSec.getText())-totalSec,
+                Integer.parseInt(fldMin.getText())-totalMin,
+                Integer.parseInt(fldHour.getText())-totalHour,
                 LocalDate.now()
         );
         
