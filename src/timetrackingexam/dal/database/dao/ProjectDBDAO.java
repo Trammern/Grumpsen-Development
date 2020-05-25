@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,7 +126,8 @@ public class ProjectDBDAO  implements Serializable
         PrintWriter pw = new PrintWriter("CSV.txt");
           StringBuilder sb= new StringBuilder();
         
-        String sql = "SELECT * FROM Project";
+        String sql = "SELECT * FROM Time";
+                    
         
         
         try ( PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
@@ -136,20 +138,27 @@ public class ProjectDBDAO  implements Serializable
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                
-                 
-                        sb.append(rs.getString("Name"));
-                        sb.append(",");
-                        sb.append( rs.getInt("ClientID"));
-                        sb.append(",");
-                        sb.append( rs.getString("Description"));
-                        sb.append(",");
-                        sb.append (rs.getInt("Rate"));
+                sb.append("Date: ");
+           sb.append(LocalDate.parse(rs.getString("Date")));
+            sb.append("TaskID: ");
+                        sb.append(rs.getInt( "TaskID" ));
+                        sb.append(" UserID: ");
+                        sb.append(rs.getInt("UserID"));
+                        sb.append(" Hour:");
+                          sb.append (rs.getInt("Hour"));
+                          sb.append(" Min:");
+                           sb.append (rs.getInt("Min"));
+                              sb.append(" Sec:");
+                        sb.append(rs.getInt("Sec"));
+                        
                        
+                       
+                     
+                           
+                
                         sb.append("\r\n");
                         
-                        
-             
+   
                  
             }
           pw.write(sb.toString());
