@@ -17,40 +17,67 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import timetrackingexam.dal.database.dbaccess.DBSettings;
 /**
  *
  * @author jonas
  */
 public class ClientDBDAO {
-    
-    private DBSettings dbs;
+        
+    public ObservableList<Client> getAllClients(Connection con) throws SQLException {
 
-    public ClientDBDAO() throws IOException {
-      
-            dbs = new DBSettings();
+        String sql = "SELECT * FROM Client;";
+        try (Statement stmt = con.createStatement()) {
 
-        }
- public void setClient() throws SQLServerException {
-            
-        try (Connection con = dbs.getConnection()) {
-            String sql = "SELECT * FROM Client;";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            List<Client> client = new ArrayList<>();
-            
+            ObservableList<Client> clients = FXCollections.observableArrayList();
+            ResultSet rs = stmt.executeQuery(sql);            
+
             while (rs.next()) {
-                int clientId = rs.getInt("ClientId");
-                int taskId = rs.getInt("TaskId");
-                String name = rs.getString("Task");
+                int id = rs.getInt("Id");
+                String name = rs.getString("Name");
+                int defaultrate = rs.getInt("Defaultrate");
 
-                Client c = new Client(name, clientId, taskId);               
-                
-                client.add(c);    
-                                        
+                Client client = new Client(id, name, defaultrate);
+
+                clients.add(client);
             }
-}       catch (SQLException ex) {
-            Logger.getLogger(ClientDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return clients;
         }
- }
+    }
+    
+    public boolean createClient(Connection con, Client client) throws SQLException {
+        String sql = "INSERT INTO Client (Name, Defaultrate) VALUES (?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {            
+            ps.setString(1, client.getName());
+            ps.setInt(2, client.getDefaultrate());            
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        }
+    }
+    
+    public boolean updateClient(Connection con, Client client) throws SQLException {
+        String sql = "UPDATE Client SET Name = ?, Defaultrate = ? WHERE ID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, client.getName());
+            ps.setInt(2, client.getDefaultrate());
+            ps.setInt(3, client.getId());            
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        }
+    }
+    
+    public boolean deleteClient(Connection con, Client client) throws SQLException {
+        String sql = "DELETE FROM Client WHERE ID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, client.getId());
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        }
+    }
+    
 }
