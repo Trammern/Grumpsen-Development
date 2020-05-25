@@ -119,6 +119,7 @@ public class ProjectManagementViewController implements Initializable {
     
     private void showClientProjects(Client client) {
         lstProjects.setItems(am.getAllClientProjects(client));
+        
     }
     
     @FXML

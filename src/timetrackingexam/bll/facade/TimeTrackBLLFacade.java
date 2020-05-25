@@ -151,6 +151,19 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
         return dalFacade.getAllClientProjects(client);
     }
 
+    @Override
+    public boolean checkIfClientNameIsUsed(String name) {
+        boolean used = false;
+        
+        for (Client client : getAllClients()) {
+            if (client.getName().equals(name)) {
+                used = true;
+            }
+        }
+        
+        return used;
+    }
+
     
     
 

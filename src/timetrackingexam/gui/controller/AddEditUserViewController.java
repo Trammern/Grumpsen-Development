@@ -28,6 +28,8 @@ import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertFactory;
+import timetrackingexam.gui.util.NodeCustomizer;
+import timetrackingexam.gui.util.TooltipFactory;
 
 /**
  * FXML Controller class
@@ -68,6 +70,8 @@ public class AddEditUserViewController implements Initializable {
             setUserInformation(selectedUser);
         }
         initKeys();
+        initTooltips();
+        initButtonEffects();
         
     }    
 
@@ -96,6 +100,16 @@ public class AddEditUserViewController implements Initializable {
                 validateInformation();
             }
         });
+    }
+    
+    private void initTooltips() {
+        btnSaveUser.setTooltip(TooltipFactory.create("Click to save user"));
+        btnCancel.setTooltip(TooltipFactory.create("Click to exit window without saving changes"));
+    }
+    
+    private void initButtonEffects() {
+        NodeCustomizer.nodeEffect(btnSaveUser);
+        NodeCustomizer.nodeEffect(btnCancel);
     }
     
     @FXML

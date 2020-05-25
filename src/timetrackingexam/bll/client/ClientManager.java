@@ -47,6 +47,21 @@ public class ClientManager implements IClientManager {
     public ObservableList<Project> getAllClientProjects(Client client) {
         return clientDal.getAllClientProjects(client);
     }
+
+    @Override
+    public boolean checkIfClientNameIsUsed(String name) {
+        boolean used = false;
+        
+        for (Client client : getAllClients()) {
+            if (client.getName().equals(name)) {
+                used = true;
+            }
+        }
+        
+        return used;
+    }
+    
+    
     
     
     

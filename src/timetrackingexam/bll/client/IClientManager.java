@@ -20,5 +20,6 @@ public interface IClientManager {
     public boolean updateClient(Client client);
     public boolean deleteClient(Client client);
     public ObservableList<Project> getAllClientProjects(Client client);
+    public boolean checkIfClientNameIsUsed(String name);
     
 }

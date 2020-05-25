@@ -242,4 +242,8 @@ public class AppModel
         this.currentClient = currentClient;
     }    
     
+    public boolean checkIfClientNameIsUsed(String name) {
+        return ttInterface.checkIfClientNameIsUsed(name);
+    }
+    
 }
