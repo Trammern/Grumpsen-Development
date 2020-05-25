@@ -219,5 +219,8 @@ public class AppModel
     public boolean submitTime(TaskTime tt) {
         return ttInterface.submitTime(tt, currentTask);
     }
-    
+    public void getCSV()
+    {
+        projectManager.getCSV();
+    }
 }

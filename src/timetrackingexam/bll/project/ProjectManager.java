@@ -41,6 +41,6 @@ public class ProjectManager implements IProjectManager {
     
     public void getCSV()
     {
-       //projectDal.getCSV();
+       projectDal.getCSV();
     }
 }

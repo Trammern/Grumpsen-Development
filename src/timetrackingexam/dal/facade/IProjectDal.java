@@ -20,5 +20,6 @@ public interface IProjectDal {
     public boolean createNewProject(Project p);
     public boolean addTask(Task t, Project p);
     public boolean updateProject(Project p);
+    public void getCSV();
 
 }
