@@ -7,6 +7,7 @@ package timetrackingexam.bll.facade;
 
 import java.util.List;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
@@ -73,19 +74,7 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     {
         return dalFacade.deleteUser(user);
     }
-
-    @Override
-    public ObservableList<User> getProjectEmployees(Project p)
-    {
-        return dalFacade.getProjectEmployees(p);
-    }
-
-    @Override
-    public ObservableList<User> getProjectNonEmployees(Project project)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public boolean updateTime(TaskTime tt) {
         return dalFacade.updateTime(tt);
@@ -122,6 +111,57 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     @Override
     public TaskTime getTotalTime(Task currentTask) {
         return null;
+    }
+
+    @Override
+    public boolean checkIfEmailIsUsed(String email) {
+        boolean used = false;
+        
+        for (User user : getAllUsers()) {
+            if (user.getEmail().equals(email)) {
+                used = true;
+            }
+        }
+        
+        return used;
+    }
+    
+    @Override
+    public ObservableList<Client> getAllClients() {
+        return dalFacade.getAllClients();
+    }
+
+    @Override
+    public boolean createClient(Client client) {
+        return dalFacade.createClient(client);
+    }
+
+    @Override
+    public boolean updateClient(Client client) {
+        return dalFacade.updateClient(client);
+    }
+
+    @Override
+    public boolean deleteClient(Client client) {
+        return dalFacade.deleteClient(client);
+    }
+
+    @Override
+    public ObservableList<Project> getAllClientProjects(Client client) {
+        return dalFacade.getAllClientProjects(client);
+    }
+
+    @Override
+    public boolean checkIfClientNameIsUsed(String name) {
+        boolean used = false;
+        
+        for (Client client : getAllClients()) {
+            if (client.getName().equals(name)) {
+                used = true;
+            }
+        }
+        
+        return used;
     }
 
     

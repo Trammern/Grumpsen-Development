@@ -8,6 +8,7 @@ package timetrackingexam.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,7 +16,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -74,6 +77,8 @@ public class UserManagementViewController implements Initializable {
     private MenuItem menuItemProject;
     @FXML
     private MenuItem menuItemTask;
+    @FXML
+    private JFXButton btnDeleteUser;
 
     /**
      * Initializes the controller class.
@@ -107,11 +112,13 @@ public class UserManagementViewController implements Initializable {
     private void initTooltips() {
         btnNewUser.setTooltip(TooltipFactory.create("Click here to create a new employee profile"));        
         btnEditUser.setTooltip(TooltipFactory.create("Click here to edit an existing employee profile.\nSelect a user first"));
+        btnDeleteUser.setTooltip(TooltipFactory.create("Click here to delete an existing employee profile.\nSelect a user first"));
     }
     
     private void initEffects() {
         NodeCustomizer.nodeEffect(btnNewUser);
         NodeCustomizer.nodeEffect(btnEditUser);
+        NodeCustomizer.nodeEffect(btnDeleteUser);
     }
     
     @FXML
@@ -150,7 +157,31 @@ public class UserManagementViewController implements Initializable {
         else {
             AlertFactory.showErrorAlert("Select a user to edit");
         }
-    }       
+    }     
+    
+    @FXML
+    private void deleteUser(ActionEvent event) {
+        am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem());
+        if (am.getSelectedUser()==null) {
+            AlertFactory.showErrorAlert("Select a user to delete");
+            return;
+        }
+        if (am.getSelectedUser().equals(am.getCurrentUser())) {
+            AlertFactory.showErrorAlert("You can not delete logged in user!");
+            return;
+        }
+        Alert alert = AlertFactory.createConfirmationAlert(String.format("%s%n%s", "Are you sure you want to delete this", am.getSelectedUser()));
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            am.deleteUser(am.getSelectedUser());
+            am.fetch();
+            am.setSelectedUser(null);
+            alert.close();
+        }
+        else {
+            alert.close();
+        }
+    }
 
     @FXML
     private void goToProjectManagement(ActionEvent event) {
@@ -163,6 +194,8 @@ public class UserManagementViewController implements Initializable {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.projectsOverview(primStage);
     }
+
+    
     
     
 }

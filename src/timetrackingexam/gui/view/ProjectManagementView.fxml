@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Menu?>
@@ -39,14 +40,15 @@
           </Menu>
         </menus>
       </MenuBar>
-      <JFXListView fx:id="lstProjects" layoutX="14.0" layoutY="45.0" onMouseClicked="#setSelectedProject" prefHeight="238.0" prefWidth="237.0" AnchorPane.leftAnchor="10.0" />
+      <JFXListView fx:id="lstProjects" layoutX="14.0" layoutY="66.0" onMouseClicked="#setSelectedProject" prefHeight="217.0" prefWidth="237.0" AnchorPane.leftAnchor="10.0" />
       <JFXButton fx:id="btnNewProject" layoutX="14.0" layoutY="295.0" onAction="#newProject" text="New Project" textFill="#f4f4f4" AnchorPane.leftAnchor="10.0" />
       <JFXButton fx:id="btnEditProject" layoutX="107.0" layoutY="295.0" onAction="#editProject" text="Edit Project" textFill="#f4f4f4" />
-      <Text fx:id="txtSelectedProject" fill="#f4f4f4" layoutX="266.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Select Project)" wrappingWidth="137.546875">
+      <Text fx:id="txtSelectedProject" fill="#f4f4f4" layoutX="266.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Select Project)" wrappingWidth="137.546875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
       <JFXTextArea fx:id="fldDescription" layoutX="266.0" layoutY="108.0" prefHeight="175.0" prefWidth="147.0" text="Create a program that allows our client to administerthe working hours of theiremployees" />
+      <JFXComboBox fx:id="cbbClients" layoutX="14.0" layoutY="34.0" prefHeight="25.0" prefWidth="138.0" />
    </children>
 </AnchorPane>

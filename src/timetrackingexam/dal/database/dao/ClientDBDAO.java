@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import timetrackingexam.be.Project;
 import timetrackingexam.dal.database.dbaccess.DBSettings;
 /**
  *
@@ -77,6 +78,29 @@ public class ClientDBDAO {
             
             int updatedRows = ps.executeUpdate();
             return updatedRows > 0;
+        }
+    }
+    
+    public ObservableList<Project> getAllClientProjects(Connection con, Client client) throws SQLException {
+        String sql = "SELECT * FROM Project WHERE ClientID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ObservableList<Project> clientProjects = FXCollections.observableArrayList();
+            ps.setInt(1, client.getId());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String name = rs.getString("Name");
+                String description = rs.getString("Description");
+                int rate = rs.getInt("Rate");
+                int clientId = rs.getInt("ClientID");
+                
+                Project project = new Project(id, name, description, rate, clientId);
+                
+                clientProjects.add(project);
+            }
+            return clientProjects;
         }
     }
     

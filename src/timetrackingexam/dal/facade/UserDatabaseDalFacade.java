@@ -36,23 +36,8 @@ public class UserDatabaseDalFacade implements IUserDal {
     @Override
     public boolean updateUser(User user) {
         return controller.updateUser(user);
-    }
+    }    
     
-    @Override
-    public ObservableList<User> getProjectEmployees(Project p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void addUserToProject(Project project, User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeUserFromProject(Project project, User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public boolean deleteUser(User user) {
         return controller.deleteUser(user);

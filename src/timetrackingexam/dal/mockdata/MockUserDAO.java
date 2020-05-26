@@ -74,33 +74,7 @@ public class MockUserDAO implements IUserDal
             }
         }
         return true; //temporary
-    }
-
-    @Override
-    public ObservableList<User> getProjectEmployees(Project p) {
-        
-        projectEmployees.clear();
-        
-        for (User user : users) {
-            for (Project project : user.getProjects()) {                
-                if(project.getId() == p.getId()){
-                    projectEmployees.add(user);
-                }
-            }
-        }
-        
-        return projectEmployees;
-    }
-
-    @Override
-    public void addUserToProject(Project project, User user) {
-        user.assignUser(project);
-    }
-
-    @Override
-    public void removeUserFromProject(Project project, User user) {
-        user.removeUser(project);
-    }
+    }   
 
     @Override
     public boolean deleteUser(User user) {

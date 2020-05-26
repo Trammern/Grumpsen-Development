@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
@@ -32,12 +33,14 @@ public class AppModel
     private User currentUser;
     private Project currentProject;
     private Task currentTask;
+    private Client currentClient;
     private User selectedUser;
     private ITimeTrackBLL ttInterface;
     private TimeTrackBLLFacade ttBll;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+    private final ObservableList<Client> clients = FXCollections.observableArrayList();
     private final TaskManager taskManager;
     private final UserManager userManager;
     private final ProjectManager projectManager;
@@ -64,13 +67,14 @@ public class AppModel
     public void fetch(){
         getAllUsers();
         getProjects();
-        getTasks();        
+        getTasks();    
+        getAllClients();
     }
     
     public ObservableList<User> getAllUsers()
     {
         users.clear();
-        users.addAll(userManager.getAllUsers());
+        users.addAll(ttInterface.getAllUsers());
         return users;
     }
 
@@ -173,25 +177,21 @@ public class AppModel
     }
     
     public boolean checkIfEmailIsUsed(String email) {
-        return userManager.checkIfEmailIsUsed(email);
+        return ttInterface.checkIfEmailIsUsed(email);
     }
     
     public boolean addUser(User user) {
-        return userManager.addUser(user);        
+        return ttInterface.addUser(user);        
     }
     
     public boolean updateUser(User user) {
-        return userManager.updateUser(user);        
+        return ttInterface.updateUser(user);        
     }
     
     public boolean deleteUser(User user) {
-        return userManager.deleteUser(user);        
+        return ttInterface.deleteUser(user);        
     }
 
-    public ObservableList<User> GetProjectEmployees(Project p) {
-        return userManager.getProjectEmployees(p);
-    }
-        
     public ObservableList<TaskTime> getAllTime(){
         return ttInterface.getTime(currentTask);
     }
@@ -200,18 +200,6 @@ public class AppModel
         return ttInterface.getTotalTime(currentTask);
     }
     
-    public ObservableList<User> getProjectNonEmployees(Project project) {
-        return userManager.getProjectNonEmployees(project);
-    }
-    
-    public void addUsersToProject(Project project, List<User> users) {
-        userManager.addUsersToProject(project, users);
-    }
-
-    public void removeUsersFromProject(Project project, List<User> users) {
-        userManager.removeUsersFromProject(project, users);
-    }
-
     public boolean deleteTask() {
         return ttInterface.deleteTask(currentTask);
     }
@@ -222,5 +210,40 @@ public class AppModel
     public void getCSV()
     {
         projectManager.getCSV();
+    }    
+    
+    public ObservableList<Client> getAllClients() {
+        clients.clear();
+        clients.addAll(ttInterface.getAllClients());
+        return clients;
     }
+    
+    public boolean createClient(Client client) {
+        return ttInterface.createClient(client);
+    }
+    
+    public boolean updateClient(Client client) {
+        return ttInterface.updateClient(client);
+    }
+    
+    public boolean deleteClient(Client client) {
+        return ttInterface.deleteClient(client);
+    }
+    
+    public ObservableList<Project> getAllClientProjects(Client client) {
+        return ttInterface.getAllClientProjects(client);
+    }
+
+    public Client getCurrentClient() {
+        return currentClient;
+    }
+
+    public void setCurrentClient(Client currentClient) {
+        this.currentClient = currentClient;
+    }    
+    
+    public boolean checkIfClientNameIsUsed(String name) {
+        return ttInterface.checkIfClientNameIsUsed(name);
+    }
+    
 }

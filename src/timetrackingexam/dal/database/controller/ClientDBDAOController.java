@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Client;
+import timetrackingexam.be.Project;
 import timetrackingexam.dal.database.dao.ClientDBDAO;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
@@ -78,5 +79,18 @@ public class ClientDBDAOController {
         }
         return false;
     }  
+    
+    public ObservableList<Project> getAllClientProjects(Client client) {
+        try {
+            Connection con = pool.checkOut();
+            ObservableList<Project> clientProjects = clientDao.getAllClientProjects(con, client);
+            pool.checkIn(con);
+            return clientProjects;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBDAOController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null; //maybe change
+        
+    }
     
 }
