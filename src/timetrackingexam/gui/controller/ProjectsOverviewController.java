@@ -111,9 +111,6 @@ public class ProjectsOverviewController implements Initializable {
     private Label txtHour;
     @FXML
     private MenuItem menuItemUser;
-    @FXML
-
-    private Button CSVbtn;
 
     private Label lblTaskCreated;
     @FXML
@@ -389,18 +386,14 @@ public class ProjectsOverviewController implements Initializable {
         menuUser.setText(currentUser.getEmail());
     }
 
-
-   
-
-    @FXML
-    private void btnCSV(ActionEvent event)
-    {
-       am.getCSV();
-    }
-
     @FXML
     private void handleNoneBillable(ActionEvent event) {
     
+    }
+
+    @FXML
+    private void handleCsv(ActionEvent event) {
+        am.getCSV();
     }
      
 }

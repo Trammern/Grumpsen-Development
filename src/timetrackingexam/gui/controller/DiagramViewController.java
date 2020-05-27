@@ -17,6 +17,7 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
@@ -28,7 +29,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
@@ -104,14 +107,19 @@ public class DiagramViewController implements Initializable
         lineChart.getData().add(sc.timeGrowth());
         lineChart.setTitle("Growth over time");
         lineChart.setLegendVisible(false);
+        
+        
+        
         chartPane.setCenter(lineChart);
     }
     
     private void buildPieChart(){
         PieChart chart = new PieChart(sc.getHoursPerTaskUsed());
+        
         chart.setTitle("Time used per task");
         chart.setLegendVisible(false);
         
         chartPane.setCenter(chart);
+        
     }
 }

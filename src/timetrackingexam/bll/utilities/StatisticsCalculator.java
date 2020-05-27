@@ -68,6 +68,7 @@ public class StatisticsCalculator {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (Task task : tasks) {
             pieChartData.add(new PieChart.Data(task.getName(), totalHours(task)));
+            
         }
         return pieChartData;
     }
