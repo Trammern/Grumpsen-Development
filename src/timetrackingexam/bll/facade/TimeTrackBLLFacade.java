@@ -164,6 +164,11 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
         return used;
     }
 
+    @Override
+    public boolean deleteProject(Project project) {
+        return dalFacade.deleteProject(project);
+    }
+
     
     
 

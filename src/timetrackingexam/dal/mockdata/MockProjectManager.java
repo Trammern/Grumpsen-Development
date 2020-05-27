@@ -133,6 +133,11 @@ public class MockProjectManager implements IProjectDal {
         throw new UnsupportedOperationException(); 
     }
 
+    @Override
+    public boolean deleteProject(Project project) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 }

@@ -39,6 +39,11 @@ public class ProjectManager implements IProjectManager {
         return projectDal.updateProject(p);
     }
     
+    @Override
+    public boolean deleteProject(Project project) {
+        return projectDal.deleteProject(project);
+    }
+    
     public void getCSV()
     {
        projectDal.getCSV();
