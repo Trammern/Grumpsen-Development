@@ -123,7 +123,7 @@ public class ProjectDBDAO  implements Serializable
     
     public void getCSV(Connection con) throws FileNotFoundException
     {
-        PrintWriter pw = new PrintWriter("CSV.txt");
+        PrintWriter pw = new PrintWriter("CSV.csv");
          StringBuilder sb= new StringBuilder();
         
         String sql = "SELECT * FROM Time";
