@@ -94,26 +94,22 @@ public class ProjectDBDAO  implements Serializable
         }
     }
 
-    public Boolean updateProject(Connection con, Project p)
-    {
-    String sql = "UPDATE project"
-            + "SET project.Name = ?, project.Description = ?, project.Rate"
-            + "WHERE project.ID = ?";
-    try(PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
-        
-        ps.setString(1, p.getName());
-        ps.setString(2, p.getDescription());
-        ps.setInt(3, p.getRate());
-        
-        int updatedRows = ps.executeUpdate();
-        
-        return updatedRows > 0;
-    }
-    
-    catch(SQLException sqlE){
-        Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
-        return false;
-    }
+    public Boolean updateProject(Connection con, Project p) {
+        String sql = "UPDATE Project SET Name = ?, Description = ?, Rate = ? WHERE ID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            ps.setString(1, p.getName());
+            ps.setString(2, p.getDescription());
+            ps.setInt(3, p.getRate());
+            ps.setInt(4, p.getId());
+
+            int updatedRows = ps.executeUpdate();
+
+            return updatedRows > 0;
+        } catch (SQLException sqlE) {
+            Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return false;
+        }
     }
 
     public Boolean deleteProject(Connection con, Project p)
