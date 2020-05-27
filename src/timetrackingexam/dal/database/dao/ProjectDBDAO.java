@@ -132,9 +132,6 @@ public class ProjectDBDAO  implements Serializable
         
         try ( PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
         {
-            
-            
-            
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -150,16 +147,9 @@ public class ProjectDBDAO  implements Serializable
                            sb.append (rs.getInt("Min"));
                               sb.append(" Sec:");
                         sb.append(rs.getInt("Sec"));
-                        
-                       
-                       
-                     
-                           
-                
+             
                         sb.append("\r\n");
-                        
-   
-                 
+    
             }
           pw.write(sb.toString());
                  pw.close();
