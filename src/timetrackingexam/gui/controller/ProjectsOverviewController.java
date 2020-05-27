@@ -227,8 +227,6 @@ public class ProjectsOverviewController implements Initializable {
                 fldSec.setText("0");
             }
         }
-        
-        
     }
 
     @FXML

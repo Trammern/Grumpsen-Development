@@ -10,8 +10,14 @@ import com.jfoenix.controls.JFXComboBox;
 import java.io.ObjectStreamConstants;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.collections.FXCollections;
@@ -49,7 +55,7 @@ public class DiagramViewController implements Initializable
     private final AppModel am = AppModel.getInstance();
     private StatisticsCalculator sc;
     private static final DecimalFormat DF2 = new DecimalFormat("#.##");
-    private LineChart lineChart;
+    private BarChart bc;
     
     @FXML
     private BorderPane chartPane;
@@ -68,7 +74,7 @@ public class DiagramViewController implements Initializable
         
         cmbChooseChart.getItems().add("Piechart");
         cmbChooseChart.getItems().add("Linechart");
-        buildLineChart();
+        buildBarChart();
         
         
     }    
@@ -94,23 +100,30 @@ public class DiagramViewController implements Initializable
         }
         if("Linechart".equals(cmbChooseChart.getSelectionModel().getSelectedItem()))
         {
-            buildLineChart();
+            buildBarChart();
         }
     }
     
-    private void buildLineChart()
+    private void buildBarChart()
     {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
+        bc = new BarChart(xAxis, yAxis);
         
-        lineChart = new LineChart<>(xAxis,yAxis);
-        lineChart.getData().add(sc.timeGrowth());
-        lineChart.setTitle("Growth over time");
-        lineChart.setLegendVisible(false);
+        bc.setTitle("hours used over Time");
+        xAxis.setLabel("Date");
+        yAxis.setLabel("Hours");
         
+        bc.getData().add(sc.timeUsedPerDay());
+        LocalDate ld = LocalDate.now();
+        WeekFields week = WeekFields.of(Locale.getDefault());
+        System.out.println(ld.get(week.weekOfWeekBasedYear()));
+                
+        chartPane.setCenter(bc);
+    }
+    
+    private void changeBarChart(){
         
-        
-        chartPane.setCenter(lineChart);
     }
     
     private void buildPieChart(){

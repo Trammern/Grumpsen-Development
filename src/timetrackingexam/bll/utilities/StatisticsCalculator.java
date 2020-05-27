@@ -5,6 +5,7 @@
  */
 package timetrackingexam.bll.utilities;
 
+import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -44,7 +45,7 @@ public class StatisticsCalculator {
      * the index goes up and it adds the integer to the sum of time growth
      * @return a long representing the incrementing time
      */
-    public XYChart.Series timeGrowth(){
+    public XYChart.Series timeUsedPerDay(){
         
         tasks = dBFacade.getTasks(currentProject);
         ObservableList<TaskTime> times = FXCollections.observableArrayList();
@@ -53,12 +54,16 @@ public class StatisticsCalculator {
         for (Task task : tasks) {
             times.addAll(dBFacade.getTime(task));
         }
-        int growth = 0;
+        LocalDate ld = LocalDate.now();
+        
+        times.sort((arg, arg1) -> {
+            return (arg.getDate().getDayOfYear() - arg1.getDate().getDayOfYear());
+        });
         for (TaskTime time : times) {
-            growth += time.getHours();
+            
             series.getData().add(new XYChart.Data(
                     time.getDate().toString(),
-                    growth));
+                    time.getHours()));
         }
         return series;
     }
