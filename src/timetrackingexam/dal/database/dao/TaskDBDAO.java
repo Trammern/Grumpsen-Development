@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -252,6 +253,54 @@ public class TaskDBDAO{
                 logs.add(log);
             }
             return logs;
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public boolean createTimeLog(Connection con, TaskLog timeLog)
+    {
+        try
+        {
+            String sql = "INSERT INTO TimeLog (startDate, endDate, submittedTime) VALUES (?,?,?)";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            
+            pstmt.setObject(1, timeLog.getStartDate());
+            pstmt.setObject(2, timeLog.getEndDate());
+            pstmt.setDouble(3, timeLog.getSubmittedTime());
+            
+            int updatedRows = pstmt.executeUpdate();
+            
+            return updatedRows > 0;
+
+            
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public ObservableList getTimeLogs(Connection con)
+    {
+        try
+        {
+            ObservableList<TaskLog> timeLogs = FXCollections.observableArrayList();
+            String sql = "SELECT * FROM TimeLog";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            
+            while(rs.next())
+            {
+                TaskLog time = new TaskLog
+                    (rs.getTimestamp("startDate").toLocalDateTime(),
+                    rs.getTimestamp("endDate").toLocalDateTime(),
+                    rs.getDouble("submittedTime"));
+                timeLogs.add(time);
+            }
+            return timeLogs;
         } catch (SQLException ex)
         {
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, ex);

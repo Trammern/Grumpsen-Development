@@ -7,6 +7,7 @@ package timetrackingexam.bll.facade;
 
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.bll.client.IClientManager;
 import timetrackingexam.bll.project.IProjectManager;
@@ -20,7 +21,7 @@ import timetrackingexam.bll.user.IUserManager;
 public interface ITimeTrackBLL extends ITaskManager, IProjectManager, IUserManager, IClientManager
 {
 
-    
 
     
+  
 }

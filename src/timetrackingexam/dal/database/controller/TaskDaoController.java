@@ -89,4 +89,21 @@ public class TaskDaoController
         conPool.checkIn(con);
         return logs;
     }
+
+    public boolean createTimeLog(TaskLog timeLog)
+    {
+        Connection con = conPool.checkOut();
+        boolean add = taskDAO.createTimeLog(con, timeLog);
+        conPool.checkIn(con);
+        return add;
+    }
+
+    public ObservableList<TaskLog> getTimeLogs()
+    {
+        Connection con = conPool.checkOut();
+        ObservableList timelogs = taskDAO.getTimeLogs(con);
+        conPool.checkIn(con);
+        return timelogs;
+    }
+
 }

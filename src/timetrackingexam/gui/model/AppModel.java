@@ -44,6 +44,7 @@ public class AppModel
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
     private final ObservableList<Client> clients = FXCollections.observableArrayList();
     private final ObservableList<TaskLog> logs = FXCollections.observableArrayList();
+    private final ObservableList<TaskLog> timeLogs = FXCollections.observableArrayList();
     private final TaskManager taskManager;
     private final UserManager userManager;
     private final ProjectManager projectManager;
@@ -218,7 +219,11 @@ public class AppModel
     }
 
     public boolean submitTime(TaskTime tt) {
-        return ttInterface.submitTime(tt, currentTask);
+        if(ttInterface.submitTime(tt, currentTask))
+        {
+            fetchTimeLogs();
+        }
+        return true;
     }
     public void getCSV()
     {
@@ -264,11 +269,30 @@ public class AppModel
         logs.clear();
         logs.addAll(ttBll.getAllLogs());
     }
+    
+    public void fetchTimeLogs()
+    {
+        timeLogs.clear();
+        timeLogs.addAll(ttBll.getAllTimeLogs());
+    }
+    
 
     public ObservableList<TaskLog> getLogs()
     {
         logs.clear();
         logs.addAll(ttBll.getAllLogs());
+        return logs;
+    }
+
+    public void createTimeLog(TaskLog timeLog)
+    {
+        ttBll.createTimeLog(timeLog);
+    }
+
+    public ObservableList<TaskLog> getTimeLogs()
+    {
+        timeLogs.clear();
+        logs.addAll(ttBll.getAllTimeLogs());
         return logs;
     }
     

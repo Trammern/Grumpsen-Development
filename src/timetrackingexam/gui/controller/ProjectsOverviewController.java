@@ -13,12 +13,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,10 +68,12 @@ public class ProjectsOverviewController implements Initializable {
     int totalHour;
     int totalMin;
     int totalSec;
-    Date dateStart;
-    Date dateStop;
-    FileHandler fh;
-    
+    private LocalDateTime dateStart;
+    private LocalDateTime dateStop;
+    private double timeStart;
+    private double timeStop;
+    private FileHandler fh;
+    private ObservableList<TaskLog> logs = FXCollections.observableArrayList();
     private static final Logger logger = Logger.getLogger(ProjectsOverviewController.class.getName());
     
     @FXML
@@ -120,18 +126,16 @@ public class ProjectsOverviewController implements Initializable {
     private Label lblTaskCreated;
     @FXML
     private JFXButton btnNoneBillable;
-    @FXML
     private TableView<TaskLog> tblLogs;
-    @FXML
     private TableColumn<TaskLog, Date> clmDate;
-    @FXML
     private TableColumn<TaskLog, String> clmName;
-    @FXML
     private TableColumn<TaskLog, String> clmAction;
-    @FXML
     private TableColumn<TaskLog, User> clmByUser;
     @FXML
     private JFXButton CSVbtn;
+    @FXML
+    private JFXButton btnOpenLogs;
+    
 
 
 
@@ -172,21 +176,8 @@ public class ProjectsOverviewController implements Initializable {
         totalMin=0;
         totalSec=0;
         
-        taskLogTable();
-        
     } 
     
-    public void taskLogTable()
-    {
-        clmAction.setCellValueFactory(new PropertyValueFactory<>("action"));
-        clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        clmByUser.setCellValueFactory(new PropertyValueFactory<>("user"));
-        tblLogs.getColumns().clear();
-        tblLogs.getColumns().addAll(clmAction, clmDate, clmName, clmByUser);
-        tblLogs.setItems(am.getLogs());
-        
-    }
     
     private void initTooltips() {
         btnAddTask.setTooltip(TooltipFactory.create("Click here to create a new task for the selected project"));        
@@ -338,18 +329,29 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnStopStart(ActionEvent event)
     {
+
+        boolean isDone = false;
         if(!am.timerIsRunning()||btnTimeButton.getText().equals("Start")){
             am.startTimer(fldSec, fldMin, fldHour);
             btnSubmit.setDisable(true);
             btnTimeButton.setText("Pause");
             
-            logger.log(Level.INFO, "{0} - The timer has been started", dateStart = new Date());
+            dateStart = LocalDateTime.now();
+            timeStart = new Date().getTime();
         }
         else{
             am.stopTimer();
             btnTimeButton.setText("Start");
             btnSubmit.setDisable(false);
-            logger.log(Level.INFO, "{0} - The timer has been stopped", dateStop = new Date());
+            dateStop = LocalDateTime.now();
+            timeStop = new Date().getTime();
+            isDone = true;
+        }
+
+        if (isDone)
+        {
+           TaskLog timeLog = new TaskLog(dateStart, dateStop, (timeStop - timeStart) / 1000);
+            am.createTimeLog(timeLog); 
         }
     }
     private void btnNoneBillable (ActionEvent event)
@@ -380,7 +382,7 @@ public class ProjectsOverviewController implements Initializable {
         );
         
         am.submitTime(tt);
-        long timeSpent = (dateStop.getTime() - dateStart.getTime()) / 1000;
+        
         try
         {
             fh = new FileHandler("TimeTrackLog.txt");
@@ -390,7 +392,7 @@ public class ProjectsOverviewController implements Initializable {
             fh.setFormatter(format);
             logger.log(Level.INFO, 
                 "You have submitted {0} seconds to this task by user {1}", 
-                new Object[]{timeSpent, am.getCurrentUser()});
+                new Object[]{null, am.getCurrentUser()});
             
         } catch (IOException | SecurityException ex)
         {
@@ -436,6 +438,13 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnCSV(ActionEvent event)
     {
+    }
+
+    @FXML
+    private void handleOpenLogs(ActionEvent event)
+    {
+        Stage stage = (Stage) btnOpenLogs.getScene().getWindow();
+        ViewGuide.openView("/timetrackingexam/gui/view/promts/Logs.fxml", "Logs", stage, false, false);
     }
      
 }

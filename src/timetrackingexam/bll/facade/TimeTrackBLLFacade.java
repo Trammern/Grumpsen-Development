@@ -169,11 +169,21 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     public ObservableList<TaskLog> getAllLogs()
     {
         return dalFacade.readLogs();
-	}
+    }
 	
     @Override
     public boolean deleteProject(Project project) {
         return dalFacade.deleteProject(project);
+    }
+
+    public boolean createTimeLog(TaskLog timeLog)
+    {
+        return dalFacade.addTimeLog(timeLog);
+    }
+
+    public ObservableList<TaskLog> getAllTimeLogs()
+    {
+        return dalFacade.readTimeLogs();
     }
 
     
