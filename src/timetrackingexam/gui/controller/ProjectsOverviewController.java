@@ -130,6 +130,8 @@ public class ProjectsOverviewController implements Initializable {
     private TableColumn<TaskLog, String> clmAction;
     @FXML
     private TableColumn<TaskLog, User> clmByUser;
+    @FXML
+    private JFXButton CSVbtn;
 
 
 
@@ -429,6 +431,11 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void handleCsv(ActionEvent event) {
         am.getCSV();
+    }
+
+    @FXML
+    private void btnCSV(ActionEvent event)
+    {
     }
      
 }
