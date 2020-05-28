@@ -114,10 +114,7 @@ public class DiagramViewController implements Initializable
         xAxis.setLabel("Date");
         yAxis.setLabel("Hours");
         
-        bc.getData().add(sc.timeUsedPerDay());
-        LocalDate ld = LocalDate.now();
-        WeekFields week = WeekFields.of(Locale.getDefault());
-        System.out.println(ld.get(week.weekOfWeekBasedYear()));
+        bc.getData().add(sc.timeUsedPerWeek());
                 
         chartPane.setCenter(bc);
     }
