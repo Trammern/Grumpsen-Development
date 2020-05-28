@@ -22,4 +22,6 @@ public interface IProjectManager
 
     public boolean updateProject(Project p);
     
+    public boolean deleteProject(Project project);
+    
 }

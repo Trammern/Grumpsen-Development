@@ -173,5 +173,10 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     public ObservableList<TaskLog> readLogs()
     {
         return taskController.getTaskLogs();
+	}	
+	
+    @Override
+    public boolean deleteProject(Project project) {
+        return projectController.deleteProject(project);
     }
 }

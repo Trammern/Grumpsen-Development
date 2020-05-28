@@ -39,7 +39,7 @@ public class ProjectDBDAO  implements Serializable
 
     public boolean createProject(Connection con, Project p)
     {
-        String sql = "INSERT INTO Project (Name, description , Rate, clientID) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Project (Name, Description, Rate, clientID) VALUES (?,?,?,?)";
         try ( PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
         {
             ps.setString(1, p.getName());
@@ -48,17 +48,6 @@ public class ProjectDBDAO  implements Serializable
             ps.setDouble(4, p.getClientID());
 
             int updatedRows = ps.executeUpdate();
-
-            if (updatedRows == 1)
-            {
-                ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next())
-                {
-                    int id = rs.getInt(1);
-                    Project project = new Project(p.getName(), p.getDescription(), p.getClientID());
-                    //missing
-                }
-            }
             return updatedRows > 0;
         } catch (SQLException ex)
         {
@@ -94,37 +83,42 @@ public class ProjectDBDAO  implements Serializable
         }
     }
 
-    public Boolean updateProject(Connection con, Project p)
-    {
-    String sql = "UPDATE project"
-            + "SET project.Name = ?, project.Description = ?, project.Rate"
-            + "WHERE project.ID = ?";
-    try(PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
-        
-        ps.setString(1, p.getName());
-        ps.setString(2, p.getDescription());
-        ps.setInt(3, p.getRate());
-        
-        int updatedRows = ps.executeUpdate();
-        
-        return updatedRows > 0;
-    }
-    
-    catch(SQLException sqlE){
-        Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
-        return false;
-    }
+    public Boolean updateProject(Connection con, Project p) {
+        String sql = "UPDATE Project SET Name = ?, Description = ?, Rate = ? WHERE ID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            ps.setString(1, p.getName());
+            ps.setString(2, p.getDescription());
+            ps.setInt(3, p.getRate());
+            ps.setInt(4, p.getId());
+
+            int updatedRows = ps.executeUpdate();
+
+            return updatedRows > 0;
+        } catch (SQLException sqlE) {
+            Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return false;
+        }
     }
 
     public Boolean deleteProject(Connection con, Project p)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM Project WHERE ID = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, p.getId());
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
     
     public void getCSV(Connection con) throws FileNotFoundException
     {
-        PrintWriter pw = new PrintWriter("CSV.txt");
-          StringBuilder sb= new StringBuilder();
+        PrintWriter pw = new PrintWriter("CSV.csv");
+         StringBuilder sb= new StringBuilder();
         
         String sql = "SELECT * FROM Time";
                     
@@ -132,9 +126,6 @@ public class ProjectDBDAO  implements Serializable
         
         try ( PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
         {
-            
-            
-            
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -150,16 +141,9 @@ public class ProjectDBDAO  implements Serializable
                            sb.append (rs.getInt("Min"));
                               sb.append(" Sec:");
                         sb.append(rs.getInt("Sec"));
-                        
-                       
-                       
-                     
-                           
-                
+             
                         sb.append("\r\n");
-                        
-   
-                 
+    
             }
           pw.write(sb.toString());
                  pw.close();

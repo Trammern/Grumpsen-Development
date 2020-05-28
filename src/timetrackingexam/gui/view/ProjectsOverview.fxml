@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="681.0" stylesheets="@../../../StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.ProjectsOverviewController">
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="656.0" stylesheets="@../../../StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetrackingexam.gui.controller.ProjectsOverviewController">
    <children>
       <MenuBar fx:id="menuBar" layoutX="80.0" layoutY="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -32,9 +32,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#handlePieChart" text="Charts" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Tools">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#handleCsv" text="Print CSV" />
             </items>
           </Menu>
             <Menu fx:id="menuUser" mnemonicParsing="false" text="Account">
@@ -63,6 +63,7 @@
       <JFXButton fx:id="btnEditTask" layoutX="89.0" layoutY="453.0" onAction="#handleEditTask" text="Edit Task" />
       <JFXButton fx:id="btnDeleteTask" layoutX="158.0" layoutY="453.0" onAction="#handleDeleteTask" prefHeight="25.0" prefWidth="51.0" text="Delete" />
       <JFXButton fx:id="btnTimeButton" layoutX="423.0" layoutY="250.0" onAction="#btnStopStart" prefHeight="40.0" prefWidth="90.0" text="Start">
+
          <font>
             <Font size="18.0" />
          </font>
@@ -72,17 +73,23 @@
             <Font size="15.0" />
          </font>
       </Text>
+
       <Label fx:id="txtSec" layoutX="506.0" layoutY="187.0" text="Sec: " textFill="#c6c6c6">
+
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+
       <Label fx:id="txtMin" layoutX="384.0" layoutY="187.0" text="Min: " textFill="#c6c6c6">
+
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+
       <Label fx:id="txtHour" layoutX="240.0" layoutY="187.0" text="Hours:" textFill="#c6c6c6">
+
          <font>
             <Font size="20.0" />
          </font>
@@ -98,11 +105,13 @@
          </font>
       </TextField>
       <TextField fx:id="fldMin" layoutX="429.0" layoutY="180.0" prefHeight="44.0" prefWidth="58.0" text="0">
+
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
       <TextField fx:id="fldHour" layoutX="304.0" layoutY="180.0" prefHeight="44.0" prefWidth="58.0" text="0">
+
          <font>
             <Font size="20.0" />
          </font>

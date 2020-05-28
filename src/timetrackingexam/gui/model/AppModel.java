@@ -71,7 +71,7 @@ public class AppModel
         getAllUsers();
         getProjects();
         getTasks();    
-        getAllClients();
+        getAllClients();        
     }
     
     public ObservableList<User> getAllUsers()
@@ -124,6 +124,10 @@ public class AppModel
             return true;
         }
         return false;
+    }
+    
+    public boolean deleteProject(Project project) {
+        return projectManager.deleteProject(project);
     }
     
     public void setCurrentTask(Task currentTask){
