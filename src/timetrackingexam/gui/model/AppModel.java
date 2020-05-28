@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.bll.facade.ITimeTrackBLL;
@@ -35,12 +36,14 @@ public class AppModel
     private Task currentTask;
     private Client currentClient;
     private User selectedUser;
+    private TaskLog tl;
     private ITimeTrackBLL ttInterface;
     private TimeTrackBLLFacade ttBll;
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
     private final ObservableList<Client> clients = FXCollections.observableArrayList();
+    private final ObservableList<TaskLog> logs = FXCollections.observableArrayList();
     private final TaskManager taskManager;
     private final UserManager userManager;
     private final ProjectManager projectManager;
@@ -85,7 +88,7 @@ public class AppModel
 
     public void setCurrentUser(User currentUser)
     {
-        this.currentUser = currentUser;        
+        this.currentUser = currentUser;   
     }
     
     public ObservableList<Project> getProjects(){
@@ -133,8 +136,10 @@ public class AppModel
     
     public boolean addTask(Task t, Project p)
     {
+        
         if(ttInterface.addTask(t, p)){
             fetch();
+            fetchLogs();
             return true;
         }
         else{
@@ -201,7 +206,11 @@ public class AppModel
     }
     
     public boolean deleteTask() {
-        return ttInterface.deleteTask(currentTask);
+        
+        if(ttInterface.deleteTask(currentTask))
+        {
+            fetchLogs();
+        }return true;
     }
 
     public boolean submitTime(TaskTime tt) {
@@ -245,5 +254,20 @@ public class AppModel
     public boolean checkIfClientNameIsUsed(String name) {
         return ttInterface.checkIfClientNameIsUsed(name);
     }
+    
+    public void fetchLogs()
+    {
+        logs.clear();
+        logs.addAll(ttBll.getAllLogs());
+    }
+
+    public ObservableList<TaskLog> getLogs()
+    {
+        logs.clear();
+        logs.addAll(ttBll.getAllLogs());
+        return logs;
+    }
+    
+    
     
 }

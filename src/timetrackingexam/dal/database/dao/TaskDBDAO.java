@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
@@ -233,6 +234,27 @@ public class TaskDBDAO{
         } catch (SQLException sqlE) {
             System.out.println("Failed to grab element from database");
             Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return null;
+        }
+    }
+
+    public ObservableList<TaskLog> getLogs(Connection con)
+    {
+        try
+        {
+            ObservableList<TaskLog> logs = FXCollections.observableArrayList();
+            String sql = "SELECT * FROM TaskLog";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                TaskLog log = new TaskLog(rs.getTimestamp("date"), rs.getString("action"));
+                logs.add(log);
+            }
+            return logs;
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

@@ -21,7 +21,7 @@ public class Task {
     private String name;
     private String description;
     private int timeAssigned;
-    private Date taskCreated;
+    
     
     private List<TaskTime> timeUsed = new ArrayList<>();
 
@@ -110,15 +110,6 @@ public class Task {
         return hoursUsed;
     }
 
-    public Date getTaskCreated()
-    {
-        return taskCreated;
-    }
-
-    public void setTaskCreated(Date taskCreated)
-    {
-        this.taskCreated = taskCreated;
-    }
     
    
          
@@ -141,6 +132,8 @@ public class Task {
         
         return new TaskTime(sec, min, hour);
     }
+    
+    
     
     @Override
     public boolean equals(Object obj) {

@@ -90,8 +90,6 @@ public class AddTaskController implements Initializable
                );
         am.addTask(newTask, am.getCurrentProject());
         
-        Date created = new Date();
-        newTask.setTaskCreated(created);
 
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();

@@ -15,8 +15,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,13 +31,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
@@ -58,12 +64,11 @@ public class ProjectsOverviewController implements Initializable {
     int totalHour;
     int totalMin;
     int totalSec;
-    private static final Logger logger = Logger.getLogger(ProjectsOverviewController.class.getName());
     Date dateStart;
     Date dateStop;
+    FileHandler fh;
     
-    
-            
+    private static final Logger logger = Logger.getLogger(ProjectsOverviewController.class.getName());
     
     @FXML
     private JFXComboBox<Project> cbbProjectSelect;
@@ -118,6 +123,16 @@ public class ProjectsOverviewController implements Initializable {
     private Label lblTaskCreated;
     @FXML
     private JFXButton btnNoneBillable;
+    @FXML
+    private TableView<TaskLog> tblLogs;
+    @FXML
+    private TableColumn<TaskLog, Date> clmDate;
+    @FXML
+    private TableColumn<TaskLog, String> clmName;
+    @FXML
+    private TableColumn<TaskLog, String> clmAction;
+    @FXML
+    private TableColumn<TaskLog, User> clmByUser;
 
 
 
@@ -129,7 +144,6 @@ public class ProjectsOverviewController implements Initializable {
         
         am = AppModel.getInstance();
 
-        
         btnSubmit.setDisable(true);
         
         currentUser = am.getCurrentUser();
@@ -159,9 +173,21 @@ public class ProjectsOverviewController implements Initializable {
         totalMin=0;
         totalSec=0;
         
-        
+        taskLogTable();
         
     } 
+    
+    public void taskLogTable()
+    {
+        clmAction.setCellValueFactory(new PropertyValueFactory<>("action"));
+        clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clmByUser.setCellValueFactory(new PropertyValueFactory<>("user"));
+        tblLogs.getColumns().clear();
+        tblLogs.getColumns().addAll(clmAction, clmDate, clmName, clmByUser);
+        tblLogs.setItems(am.getLogs());
+        
+    }
     
     private void initTooltips() {
         btnAddTask.setTooltip(TooltipFactory.create("Click here to create a new task for the selected project"));        
@@ -178,6 +204,12 @@ public class ProjectsOverviewController implements Initializable {
         NodeCustomizer.nodeEffect(btnTimeButton);
         NodeCustomizer.nodeEffect(btnSubmit);        
     }
+
+    public ProjectsOverviewController()
+    {
+    }
+    
+    
     
     @FXML
     private void addTask(ActionEvent event) {
@@ -296,19 +328,8 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void handlePieChart(ActionEvent event)
     {
-        try
-        {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/timetrackingexam/gui/view/DiagramView.fxml"));
-            Parent root1 = (Parent) fxml.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.initOwner((Stage) menuBar.getScene().getWindow());
-            stage.showAndWait();
-            stage.setTitle("Time used");
-        } catch (IOException ex)
-        {
-            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        ViewGuide.openView("/timetrackingexam/gui/view/DiagramView.fxml", "Charts", stage, false, false);
     }
 
     @FXML
@@ -325,7 +346,7 @@ public class ProjectsOverviewController implements Initializable {
             btnSubmit.setDisable(true);
             btnTimeButton.setText("Pause");
             
-            logger.log(Level.INFO, "{0} - The timer has been started by {1}", dateStart = new Date());
+            logger.log(Level.INFO, "{0} - The timer has been started", dateStart = new Date());
         }
         else{
             am.stopTimer();
@@ -347,6 +368,7 @@ public class ProjectsOverviewController implements Initializable {
             btnSubmit.setDisable(false);
         }
     }
+    
 
     @FXML
     private void handleSubmit(ActionEvent event)
@@ -362,7 +384,22 @@ public class ProjectsOverviewController implements Initializable {
         
         am.submitTime(tt);
         long timeSpent = (dateStop.getTime() - dateStart.getTime()) / 1000;
-        logger.info("You have submitted " + timeSpent + " seconds to this task");
+        try
+        {
+            fh = new FileHandler("TimeTrackLog.txt");
+            logger.addHandler(fh);
+
+            SimpleFormatter format = new SimpleFormatter();
+            fh.setFormatter(format);
+            logger.log(Level.INFO, 
+                "You have submitted {0} seconds to this task by user {1}", 
+                new Object[]{timeSpent, am.getCurrentUser()});
+            
+        } catch (IOException | SecurityException ex)
+        {
+            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @FXML
