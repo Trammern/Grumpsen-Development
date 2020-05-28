@@ -43,10 +43,12 @@ public class AddEditProjectViewController implements Initializable {
         
        if(am.getCurrentProject()!=null){
            updatedProject = am.getCurrentProject();
-           fldName.setText(updatedProject.getName()); 
-           fldClient.setText("Not Implemented");
+           fldName.setText(updatedProject.getName());            
            fldRate.setText(updatedProject.getRate()+"");
            fldDescription.setText(updatedProject.getDescription());
+       }
+       else {
+           fldRate.setText(am.getCurrentClient().getDefaultrate()+"");
        }
        
         
@@ -72,14 +74,11 @@ public class AddEditProjectViewController implements Initializable {
         Project newProject = new Project(fldName.getText(), fldDescription.getText(), 0);
         
         int rate = Integer.parseInt(fldRate.getText());
-        int clientId = 0;
-        String description = fldDescription.getText();
+        int clientId = am.getCurrentClient().getId();        
         
         //Not Implemented
-        newProject.setClientID(clientId);
-        
-        newProject.setRate(rate);
-        newProject.setDescription(description);
+        newProject.setClientID(clientId);        
+        newProject.setRate(rate);        
         
         if(am.createNewProject(newProject)){
                 System.out.println("Hey");
@@ -90,11 +89,9 @@ public class AddEditProjectViewController implements Initializable {
     
     private void updateProject(){
         updatedProject.setName(fldName.getText());
-        updatedProject.setRate(Integer.parseInt(fldRate.getText()));
+        updatedProject.setRate(Integer.parseInt(fldRate.getText()));       
         
-        //Not implementet
-        updatedProject.setClientID(0);
-        
+        updatedProject.setClientID(am.getCurrentClient().getId());        
         updatedProject.setDescription(fldDescription.getText());
         am.updateProject(updatedProject);
         Stage primStage = (Stage) fldName.getScene().getWindow();

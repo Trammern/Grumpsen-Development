@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.database.controller.ClientDBDAOController;
@@ -167,5 +168,15 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     @Override
     public ObservableList<Project> getAllClientProjects(Client client) {
         return clientController.getAllClientProjects(client);
+    }
+
+    public ObservableList<TaskLog> readLogs()
+    {
+        return taskController.getTaskLogs();
+	}	
+	
+    @Override
+    public boolean deleteProject(Project project) {
+        return projectController.deleteProject(project);
     }
 }

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.dal.database.dao.TaskDBDAO;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
@@ -79,5 +80,13 @@ public class TaskDaoController
         boolean created = taskDAO.submitTime(tt, con);
         conPool.checkIn(con);
         return created;
+    }
+
+    public ObservableList<TaskLog> getTaskLogs()
+    {
+        Connection con = conPool.checkOut();
+        ObservableList logs = taskDAO.getLogs(con);
+        conPool.checkIn(con);
+        return logs;
     }
 }

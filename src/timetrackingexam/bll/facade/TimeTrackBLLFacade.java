@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
+import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.be.User;
 import timetrackingexam.dal.facade.TimeTrackDalFacade;
@@ -162,6 +163,17 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
         }
         
         return used;
+    }
+
+
+    public ObservableList<TaskLog> getAllLogs()
+    {
+        return dalFacade.readLogs();
+	}
+	
+    @Override
+    public boolean deleteProject(Project project) {
+        return dalFacade.deleteProject(project);
     }
 
     
