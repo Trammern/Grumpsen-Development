@@ -114,7 +114,7 @@ public class DiagramViewController implements Initializable
         xAxis.setLabel("Date");
         yAxis.setLabel("Hours");
         
-        bc.getData().add(sc.timeUsedPerMonth());
+        
                 
         chartPane.setCenter(bc);
     }
@@ -131,5 +131,23 @@ public class DiagramViewController implements Initializable
         
         chartPane.setCenter(chart);
         
+    }
+
+    @FXML
+    private void handleDay(ActionEvent event) {
+        buildBarChart();
+        bc.getData().add(sc.timeUsedPerDay());
+    }
+
+    @FXML
+    private void handleWeek(ActionEvent event) {
+        buildBarChart();
+        bc.getData().add(sc.timeUsedPerWeek());
+    }
+
+    @FXML
+    private void handleMonth(ActionEvent event) {
+        buildBarChart();
+        bc.getData().add(sc.timeUsedPerMonth());
     }
 }

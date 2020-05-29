@@ -84,7 +84,8 @@ public class StatisticsCalculator {
             
             
             if(newWeekNumber != weekNumber || i == datas.size() -1 ){
-                weekSeries.getData().add(new XYChart.Data<>("Week " + weekNumber,
+                weekSeries.getData().add(new XYChart.Data<>(
+                        "Week " + weekNumber,
                         total));
                 weekNumber = newWeekNumber;
                 total = 0;
@@ -106,7 +107,6 @@ public class StatisticsCalculator {
         List<XYChart.Data> datas = series.getData();
         
         XYChart.Series monthSeries = new XYChart.Series();
-        
         
         LocalDate ld1 = LocalDate.parse(datas.get(0).getXValue().toString());
         String month = ld1.getMonth().toString();
