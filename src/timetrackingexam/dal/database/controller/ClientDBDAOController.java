@@ -28,7 +28,7 @@ public class ClientDBDAOController {
         this.pool = pool;
         clientDao = new ClientDBDAO();
     }
-    
+  // Gets clients i Databasen. via Client DBDAO
     public ObservableList<Client> getAllClient() {
         
         try {
@@ -39,10 +39,10 @@ public class ClientDBDAOController {
         } catch (SQLException ex) {
             Logger.getLogger(UserDBDAOController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null; //maybe change
+        return null; 
         
     }
-    
+    // Tilføjer nye Clients til Databasen via Client DBDAO
     public boolean createClient(Client client) {
          try {
             Connection con = pool.checkOut();
@@ -54,7 +54,7 @@ public class ClientDBDAOController {
         }
         return false;
     }
-    
+    // opdatere Clienten med det nye tilføjede data
     public boolean updateClient(Client client) {
         
         try {
@@ -67,7 +67,7 @@ public class ClientDBDAOController {
         }
         return false;
     }
-    
+    // Sletter Selected Client
     public boolean deleteClient(Client client) {
         try {
             Connection con = pool.checkOut();
@@ -79,7 +79,7 @@ public class ClientDBDAOController {
         }
         return false;
     }  
-    
+    // Henter alle Clients Projecter, hver client kan have flere Projecter
     public ObservableList<Project> getAllClientProjects(Client client) {
         try {
             Connection con = pool.checkOut();
@@ -89,7 +89,7 @@ public class ClientDBDAOController {
         } catch (SQLException ex) {
             Logger.getLogger(UserDBDAOController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null; //maybe change
+        return null;
         
     }
     

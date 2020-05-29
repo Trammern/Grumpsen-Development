@@ -19,7 +19,7 @@ public class Client {
     
     private int id;
     private String name;
-    private int defaultrate; //use BigDecimal instead? different opinions
+    private int defaultrate; 
     private ObservableList<Project> projects;
        
     public Client(int id, String name, int defaultrate) {     

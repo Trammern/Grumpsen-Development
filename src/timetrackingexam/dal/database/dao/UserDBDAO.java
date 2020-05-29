@@ -38,7 +38,7 @@ public class UserDBDAO {
             return users;
         }
     }
-    
+// Tilføjer en ansat til Databasen
     public boolean createUser(Connection con, User user) throws SQLException {
         String sql = "INSERT INTO Employee (FirstName, LastName, Email, Password, Role) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -52,7 +52,7 @@ public class UserDBDAO {
             return updatedRows > 0;
         }
     }
-    
+// Opdatere en ansat til Databasen
     public boolean updateUser(Connection con, User user) throws SQLException {
         String sql = "UPDATE Employee SET FirstName = ?, LastName = ?, Email = ?, Password = ?, Role = ? WHERE ID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -67,7 +67,7 @@ public class UserDBDAO {
             return updatedRows > 0;
         }
     }
-    
+// Sletter en Ansat til Databasen
     public boolean deleteUser(Connection con, User user) throws SQLException {
         String sql = "DELETE FROM Employee WHERE ID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {

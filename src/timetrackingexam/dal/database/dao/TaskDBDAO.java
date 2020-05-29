@@ -33,7 +33,7 @@ public class TaskDBDAO{
     private TaskDBDAO() {
         pool = ConnectionPool.getInstance();
     }
-
+// Tjekker om Tasken findes
     public static TaskDBDAO getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new TaskDBDAO();
@@ -74,7 +74,7 @@ public class TaskDBDAO{
             return null;
         }
     }
-
+// Deleter Task fra SQL Databasen
     public boolean deleteTask(Connection con, Task task) {
         try{
             String sql = "DELETE FROM task "
@@ -94,12 +94,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-    /**
-     * Updated the element in the database setting a new description and name
-     * @param con the connection used for the database
-     * @param task the task you want to replace the old task
-     * @return boolean based on weather or not the statement was executed succesfully
-     */
+// Updater Task fra SQL Databasen
     public boolean updateTask(Connection con, Task task) {
         try{
             String sql = "UPDATE task "
@@ -122,7 +117,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-
+// Tilføjer task til SQL databasen
     public Boolean addTask(Task t, Project p, Connection con) {
         try{
             String sql = "INSERT INTO task (ProjectID, Name, Description, UserID, TimeAssigned)"
@@ -147,7 +142,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-
+// Tilføjer tiden used time til SQL Databasen
     public boolean submitTime(TaskTime tt, Connection con) {
         try{
             String sql = "INSERT INTO time (TaskID, UserID, Sec, Min, Hour, Date)"
@@ -173,7 +168,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-    
+// Opdatere tid til Timeren i programmet
     public boolean updateTime(TaskTime tt, Connection con) {
         try{
             String sql = "UPDATE time "
@@ -199,12 +194,7 @@ public class TaskDBDAO{
         }
     }
     
-    /**
-     * Slemme Mathias Lav straks det her om!!!
-     * @param con
-     * @param t
-     * @return 
-     */
+
 
     public ObservableList<TaskTime> getTime(Connection con, Task t) {
         try{
@@ -238,7 +228,7 @@ public class TaskDBDAO{
             return null;
         }
     }
-
+// Henter alle logs fra Tasklogs i Databasen
     public ObservableList<TaskLog> getLogs(Connection con)
     {
         try
@@ -259,7 +249,7 @@ public class TaskDBDAO{
             return null;
         }
     }
-
+// Tilføjer en time log til en Task i Databasen
     public boolean createTimeLog(Connection con, TaskLog timeLog)
     {
         try
@@ -282,7 +272,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-
+// Henter Time fra Timelogs in Databasen
     public ObservableList getTimeLogs(Connection con)
     {
         try
