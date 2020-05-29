@@ -385,6 +385,7 @@ public class ProjectsOverviewController implements Initializable {
             timeLog.setTaskName(am.getCurrentTask().getName());
             am.createTimeLog(timeLog); 
         }
+        am.fetch();
         
     }
 
