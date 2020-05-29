@@ -77,24 +77,24 @@ public class StatisticsCalculator {
         int weekNumber = LocalDate.parse(
                 datas.get(0).getXValue().toString()).get(weekFields.weekOfWeekBasedYear());
         int total = 0;
-        
+        System.out.println("Datas size =" + datas.size());
         for (int i = 0; i < datas.size(); i++) {
             int newWeekNumber = LocalDate.parse(datas.get(i).getXValue().toString()).get(weekFields.weekOfWeekBasedYear());
             
-            if(newWeekNumber == weekNumber){
-                total += Integer.parseInt(datas.get(i).getYValue().toString());
-                datas.get(i).setXValue("Week " + newWeekNumber);
-                System.out.println(total);
-                weekNumber = newWeekNumber;
-            }
             
-            else{
-                weekNumber = LocalDate.parse(
-                datas.get(i).getXValue().toString()).get(weekFields.weekOfWeekBasedYear());
-                
+            
+            if(newWeekNumber != weekNumber || i == datas.size() -1 ){
                 weekSeries.getData().add(new XYChart.Data<>("Week " + weekNumber,
                         total));
+                weekNumber = newWeekNumber;
                 total = 0;
+                System.out.println("added");
+            }
+            
+            else if(newWeekNumber == weekNumber){
+                total += Integer.parseInt(datas.get(i).getYValue().toString());
+                datas.get(i).setXValue("Week " + newWeekNumber);
+                weekNumber = newWeekNumber;
             }
             
         }
