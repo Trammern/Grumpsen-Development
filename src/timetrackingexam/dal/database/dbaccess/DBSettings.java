@@ -8,18 +8,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.Properties;
-
-
 public class DBSettings
+        
+/**
+ *
+ * @author Jonas
+ */
+
 {
 
     private SQLServerDataSource dataSource;
 
-    /**
-     * Sets the user credentials, ip, and port configuration
-     *
-     * @throws IOException
-     */
+// Bruger TXT filen til at beskytte login data for Databasen
     public DBSettings()
     {
         Properties props = new Properties();

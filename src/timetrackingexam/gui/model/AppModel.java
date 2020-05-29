@@ -70,12 +70,14 @@ public class AppModel
 
     public void fetch(){
         getAllUsers();
-        getProjects();
-        getTasks();    
-        getAllClients();   
+        getTasks();    ;   
         getTimeLogs();
         getLogs();
-        
+        getProjects();           
+        getAllClients();
+        if (currentClient!=null) {
+            getTasks();
+        }         
     }
     
     public ObservableList<User> getAllUsers()

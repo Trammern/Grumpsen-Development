@@ -28,7 +28,7 @@ public class TaskDaoController
         this.conPool = conPool;
         taskDAO = TaskDBDAO.getInstance();
     }
-
+// Tilføjer task til et Project
     public boolean addTask(Task t, Project p)
     {
         Connection con = conPool.checkOut();
@@ -36,7 +36,7 @@ public class TaskDaoController
         conPool.checkIn(con);
         return create;
     }
-    
+// Deleter Task Fra Project
     public boolean deleteTask(Task task)
     {
         Connection con = conPool.checkOut();
@@ -44,7 +44,7 @@ public class TaskDaoController
         conPool.checkIn(con);
         return deleted;
     }
-    
+// Updater en task på et project
     public boolean updateTask(Task task)
     {
         Connection con = conPool.checkOut();
@@ -52,7 +52,6 @@ public class TaskDaoController
         conPool.checkIn(con);
         return updated;
     }
-    
 
     public ObservableList<TaskTime> getTime(Task t) {
         Connection con = conPool.checkOut();

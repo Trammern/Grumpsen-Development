@@ -25,6 +25,7 @@ import timetrackingexam.dal.database.dbaccess.DBSettings;
  *
  * @author jonas
  */
+// henter Alle Clients fra den ObservableListe.
 public class ClientDBDAO {
         
     public ObservableList<Client> getAllClients(Connection con) throws SQLException {
@@ -47,7 +48,7 @@ public class ClientDBDAO {
             return clients;
         }
     }
-    
+// Creates Client på  SQL Databasen
     public boolean createClient(Connection con, Client client) throws SQLException {
         String sql = "INSERT INTO Client (Name, Defaultrate) VALUES (?, ?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {            
@@ -58,7 +59,7 @@ public class ClientDBDAO {
             return updatedRows > 0;
         }
     }
-    
+// Updates the Client på SQL Databasen
     public boolean updateClient(Connection con, Client client) throws SQLException {
         String sql = "UPDATE Client SET Name = ?, Defaultrate = ? WHERE ID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -70,7 +71,7 @@ public class ClientDBDAO {
             return updatedRows > 0;
         }
     }
-    
+// Deletes the Client på SQL Databasen
     public boolean deleteClient(Connection con, Client client) throws SQLException {
         String sql = "DELETE FROM Client WHERE ID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -80,7 +81,7 @@ public class ClientDBDAO {
             return updatedRows > 0;
         }
     }
-    
+// Getter alle Clientens Projecter på SQL Databasen
     public ObservableList<Project> getAllClientProjects(Connection con, Client client) throws SQLException {
         String sql = "SELECT * FROM Project WHERE ClientID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
