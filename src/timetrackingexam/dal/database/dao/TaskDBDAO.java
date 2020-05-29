@@ -19,6 +19,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
+import timetrackingexam.be.User;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
 /**
@@ -244,12 +245,21 @@ public class TaskDBDAO{
         try
         {
             ObservableList<TaskLog> logs = FXCollections.observableArrayList();
-            String sql = "SELECT * FROM TaskLog";
+            String sql = "SELECT * FROM TaskLog JOIN Employee ON TaskLog.userID = Employee.id";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next())
             {
+                 String firstName = rs.getString("FirstName");
+                String lastName = rs.getString("LastName");
+                String email = rs.getString("Email");
+                String password = "";
+                User.Role role = User.Role.valueOf(rs.getString("Role"));
+                int id = rs.getInt("userId");
+                User user = new User(firstName, lastName, email, password, role, id);
                 TaskLog log = new TaskLog(rs.getTimestamp("date"), rs.getString("action"));
+                log.setTaskName(rs.getString("taskname"));
+                log.setCreatedBy(user);
                 logs.add(log);
             }
             return logs;
@@ -264,12 +274,14 @@ public class TaskDBDAO{
     {
         try
         {
-            String sql = "INSERT INTO TimeLog (startDate, endDate, submittedTime) VALUES (?,?,?)";
+            String sql = "INSERT INTO TimeLog (startDate, endDate, submittedTime, userId, taskName) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sql);
             
             pstmt.setObject(1, timeLog.getStartDate());
             pstmt.setObject(2, timeLog.getEndDate());
             pstmt.setDouble(3, timeLog.getSubmittedTime());
+            pstmt.setInt(4, timeLog.getCreatedBy().getId());
+            pstmt.setString(5, timeLog.getTaskName());
             
             int updatedRows = pstmt.executeUpdate();
             
@@ -288,7 +300,7 @@ public class TaskDBDAO{
         try
         {
             ObservableList<TaskLog> timeLogs = FXCollections.observableArrayList();
-            String sql = "SELECT * FROM TimeLog";
+            String sql = "SELECT * FROM TimeLog JOIN Employee ON TimeLog.userId = Employee.Id";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             
@@ -298,6 +310,17 @@ public class TaskDBDAO{
                     (rs.getTimestamp("startDate").toLocalDateTime(),
                     rs.getTimestamp("endDate").toLocalDateTime(),
                     rs.getDouble("submittedTime"));
+                
+                String firstName = rs.getString("FirstName");
+                String lastName = rs.getString("LastName");
+                String email = rs.getString("Email");
+                String password = "";
+                String taskName = rs.getString("taskName");
+                User.Role role = User.Role.valueOf(rs.getString("Role"));
+                int id = rs.getInt("userId");
+                User user = new User(firstName, lastName, email, password, role, id);
+                time.setCreatedBy(user);
+                time.setTaskName(taskName);
                 timeLogs.add(time);
             }
             return timeLogs;

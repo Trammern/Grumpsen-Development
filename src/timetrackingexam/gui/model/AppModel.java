@@ -72,7 +72,10 @@ public class AppModel
         getAllUsers();
         getProjects();
         getTasks();    
-        getAllClients();        
+        getAllClients();   
+        getTimeLogs();
+        getLogs();
+        
     }
     
     public ObservableList<User> getAllUsers()
@@ -141,7 +144,6 @@ public class AppModel
     
     public boolean addTask(Task t, Project p)
     {
-        
         if(ttInterface.addTask(t, p)){
             fetch();
             fetchLogs();
@@ -157,6 +159,8 @@ public class AppModel
         if(ttInterface.updateTask(updateTask))
         {
             fetch();
+            fetchLogs();
+            fetchTimeLogs();
             return true;
         }
         return false;  
@@ -222,8 +226,10 @@ public class AppModel
         if(ttInterface.submitTime(tt, currentTask))
         {
             fetchTimeLogs();
+            fetchLogs();
+            return true;
         }
-        return true;
+        return false;
     }
     public void getCSV()
     {
@@ -292,8 +298,8 @@ public class AppModel
     public ObservableList<TaskLog> getTimeLogs()
     {
         timeLogs.clear();
-        logs.addAll(ttBll.getAllTimeLogs());
-        return logs;
+        timeLogs.addAll(ttBll.getAllTimeLogs());
+        return timeLogs;
     }
     
     

@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timetrackingexam.be;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import timetrackingexam.gui.model.AppModel;
 
 /**
  *
@@ -21,6 +16,9 @@ public class TaskLog
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private double submittedTime;
+    private String submittedTimeStringFormat;
+    private User createdBy;
+    private String taskName;
 
     /**
      * For logging CRUD
@@ -44,6 +42,7 @@ public class TaskLog
         this.startDate = startDate;
         this.endDate = endDate;
         this.submittedTime = submittedTime;
+        submittedTimeStringFormat = submittedTime + " sek";
     }
 
     public Date getDate()
@@ -65,14 +64,20 @@ public class TaskLog
     {
         this.action = action;
     }
-
+    
     public double getSubmittedTime()
     {
         return submittedTime;
     }
+    
+    public String getSubmittedTimeStringFormat()
+    {
+        return submittedTimeStringFormat;
+    }
 
     public void setSubmittedTime(double submittedTime)
     {
+        submittedTimeStringFormat = submittedTime + " sek";
         this.submittedTime = submittedTime;
     }
 
@@ -96,13 +101,26 @@ public class TaskLog
         this.endDate = endDate;
     }
 
-    
-    
-    @Override
-    public String toString()
+    public User getCreatedBy()
     {
-        return "TaskLog{" + "startDate=" + startDate + ", endDate=" + endDate + ", submittedTime=" + submittedTime + '}';
+        return createdBy;
     }
+
+    public void setCreatedBy(User createdBy)
+    {
+        this.createdBy = createdBy;
+    }
+
+    public String getTaskName()
+    {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName)
+    {
+        this.taskName = taskName;
+    }
+
     
     
 

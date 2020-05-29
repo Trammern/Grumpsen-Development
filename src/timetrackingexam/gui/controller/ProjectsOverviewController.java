@@ -72,6 +72,7 @@ public class ProjectsOverviewController implements Initializable {
     private LocalDateTime dateStop;
     private double timeStart;
     private double timeStop;
+    private boolean isDone;
     private FileHandler fh;
     private ObservableList<TaskLog> logs = FXCollections.observableArrayList();
     private static final Logger logger = Logger.getLogger(ProjectsOverviewController.class.getName());
@@ -329,8 +330,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void btnStopStart(ActionEvent event)
     {
-
-        boolean isDone = false;
+        isDone = false;
         if(!am.timerIsRunning()||btnTimeButton.getText().equals("Start")){
             am.startTimer(fldSec, fldMin, fldHour);
             btnSubmit.setDisable(true);
@@ -348,11 +348,6 @@ public class ProjectsOverviewController implements Initializable {
             isDone = true;
         }
 
-        if (isDone)
-        {
-           TaskLog timeLog = new TaskLog(dateStart, dateStop, (timeStop - timeStart) / 1000);
-            am.createTimeLog(timeLog); 
-        }
     }
     private void btnNoneBillable (ActionEvent event)
     {
@@ -372,6 +367,7 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private void handleSubmit(ActionEvent event)
     {
+        
         TaskTime tt = new TaskTime(
                 am.getCurrentTask().getId(),
                 currentUser.getId(),
@@ -382,21 +378,12 @@ public class ProjectsOverviewController implements Initializable {
         );
         
         am.submitTime(tt);
-        
-        try
+        if (isDone)
         {
-            fh = new FileHandler("TimeTrackLog.txt");
-            logger.addHandler(fh);
-
-            SimpleFormatter format = new SimpleFormatter();
-            fh.setFormatter(format);
-            logger.log(Level.INFO, 
-                "You have submitted {0} seconds to this task by user {1}", 
-                new Object[]{null, am.getCurrentUser()});
-            
-        } catch (IOException | SecurityException ex)
-        {
-            Logger.getLogger(ProjectsOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+            TaskLog timeLog = new TaskLog(dateStart, dateStop, (timeStop - timeStart) / 1000);
+            timeLog.setCreatedBy(currentUser);
+            timeLog.setTaskName(am.getCurrentTask().getName());
+            am.createTimeLog(timeLog); 
         }
         
     }

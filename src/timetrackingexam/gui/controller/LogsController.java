@@ -14,7 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskLog;
+import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 
 /**
@@ -34,7 +36,7 @@ public class LogsController implements Initializable
     @FXML
     private TableColumn<TaskLog, String> clm1action;
     @FXML
-    private TableColumn<TaskLog, String> clm1byuser;
+    private TableColumn<TaskLog, User> clm1byuser;
     @FXML
     private TableColumn<TaskLog, String> clm1name;
     
@@ -45,9 +47,11 @@ public class LogsController implements Initializable
     @FXML
     private TableColumn<TaskLog, LocalDateTime> clm2end;
     @FXML
-    private TableColumn<TaskLog, Double> clm2stime;
+    private TableColumn<TaskLog, String> clm2stime;
     @FXML
-    private TableColumn<TaskLog, String> clm2sby;
+    private TableColumn<TaskLog, User> clm2sby;
+    @FXML
+    private TableColumn<TaskLog, String> clm2taskName2;
     
 
     /**
@@ -67,8 +71,10 @@ public class LogsController implements Initializable
     {
         clm1action.setCellValueFactory(new PropertyValueFactory<>("action"));
         clm1date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        clm1byuser.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+        clm1name.setCellValueFactory(new PropertyValueFactory<>("taskName"));
         tblCRUD.getColumns().clear();
-        tblCRUD.getColumns().addAll(clm1action, clm1date);
+        tblCRUD.getColumns().addAll(clm1action, clm1date, clm1byuser, clm1name);
         tblCRUD.setItems(am.getLogs());  
     }
     
@@ -76,9 +82,11 @@ public class LogsController implements Initializable
     {
         clm2start.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         clm2end.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        clm2stime.setCellValueFactory(new PropertyValueFactory<>("submittedTime"));
+        clm2stime.setCellValueFactory(new PropertyValueFactory<>("submittedTimeStringFormat"));
+        clm2sby.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+        clm2taskName2.setCellValueFactory(new PropertyValueFactory<>("taskName"));
         tblTimelogs.getColumns().clear();
-        tblTimelogs.getColumns().addAll(clm2start, clm2end, clm2stime);
+        tblTimelogs.getColumns().addAll(clm2start, clm2end, clm2stime, clm2sby, clm2taskName2);
         tblTimelogs.setItems(am.getTimeLogs());
         
     }
