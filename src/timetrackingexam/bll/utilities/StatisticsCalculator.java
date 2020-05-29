@@ -77,7 +77,7 @@ public class StatisticsCalculator {
         int weekNumber = LocalDate.parse(
                 datas.get(0).getXValue().toString()).get(weekFields.weekOfWeekBasedYear());
         int total = 0;
-        System.out.println("Datas size =" + datas.size());
+        
         for (int i = 0; i < datas.size(); i++) {
             int newWeekNumber = LocalDate.parse(datas.get(i).getXValue().toString()).get(weekFields.weekOfWeekBasedYear());
             
@@ -88,7 +88,6 @@ public class StatisticsCalculator {
                         total));
                 weekNumber = newWeekNumber;
                 total = 0;
-                System.out.println("added");
             }
             
             else if(newWeekNumber == weekNumber){
@@ -99,6 +98,39 @@ public class StatisticsCalculator {
             
         }
         return weekSeries;
+    }
+    
+    public XYChart.Series timeUsedPerMonth(){
+        setTime();
+        XYChart.Series series = timeUsedPerDay();
+        List<XYChart.Data> datas = series.getData();
+        
+        XYChart.Series monthSeries = new XYChart.Series();
+        
+        
+        LocalDate ld1 = LocalDate.parse(datas.get(0).getXValue().toString());
+        String month = ld1.getMonth().toString();
+        int total = 0;
+        
+        for (int i = 0; i < datas.size(); i++) {
+            LocalDate ld2 = LocalDate.parse(datas.get(i).getXValue().toString());
+            String newMonth = ld2.getMonth().toString();
+            
+            if(!newMonth.equals(month) || i == datas.size() -1 ){
+                monthSeries.getData().add(new XYChart.Data<>(month,
+                        total));
+                month = newMonth;
+                total = 0;
+            }
+            
+            else if(newMonth.equals(month)){
+                total += Integer.parseInt(datas.get(i).getYValue().toString());
+                datas.get(i).setXValue(newMonth);
+                month = newMonth;
+            }
+            
+        }
+        return monthSeries;
     }
     
       

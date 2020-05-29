@@ -114,7 +114,7 @@ public class DiagramViewController implements Initializable
         xAxis.setLabel("Date");
         yAxis.setLabel("Hours");
         
-        bc.getData().add(sc.timeUsedPerWeek());
+        bc.getData().add(sc.timeUsedPerMonth());
                 
         chartPane.setCenter(bc);
     }
