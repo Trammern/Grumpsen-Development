@@ -133,6 +133,21 @@ public class StatisticsCalculator {
         return monthSeries;
     }
     
+    public XYChart.Series intervalSeries(LocalDate ld1, LocalDate ld2){
+        XYChart.Series intervalSeries = new XYChart.Series<>();
+        
+        List<XYChart.Data> datas = timeUsedPerDay().getData();
+        
+        for (XYChart.Data data : datas) {
+            LocalDate ld = LocalDate.parse(data.getXValue().toString());
+            if (ld.getDayOfYear() >= ld1.getDayOfYear() && ld.getDayOfYear() <= ld2.getDayOfYear()) {
+                intervalSeries.getData().add(data);
+                System.out.println("added");
+            }
+        }
+        return intervalSeries;
+    }
+    
       
     
     public ObservableList<PieChart.Data> getHoursPerTaskUsed(){

@@ -7,6 +7,7 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import java.io.ObjectStreamConstants;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -63,6 +64,12 @@ public class DiagramViewController implements Initializable
     private JFXButton btnNavigateBack;
     @FXML
     private JFXComboBox<String> cmbChooseChart;
+    @FXML
+    private JFXDatePicker dateFrom;
+    @FXML
+    private JFXDatePicker dateTo;
+    @FXML
+    private JFXButton tbnInterval;
 
     /**
      * Initializes the controller class.
@@ -137,17 +144,34 @@ public class DiagramViewController implements Initializable
     private void handleDay(ActionEvent event) {
         buildBarChart();
         bc.getData().add(sc.timeUsedPerDay());
+        dateFrom.setVisible(true);
+        dateTo.setVisible(true);
+        tbnInterval.setVisible(true);
     }
 
     @FXML
     private void handleWeek(ActionEvent event) {
         buildBarChart();
         bc.getData().add(sc.timeUsedPerWeek());
+        dateFrom.setVisible(false);
+        dateTo.setVisible(false);
+        tbnInterval.setVisible(false);
     }
 
     @FXML
     private void handleMonth(ActionEvent event) {
         buildBarChart();
         bc.getData().add(sc.timeUsedPerMonth());
+        dateFrom.setVisible(false);
+        dateTo.setVisible(false);
+        tbnInterval.setVisible(false);
+    }
+
+    @FXML
+    private void handleInterval(ActionEvent event) {
+        buildBarChart();
+        
+        
+        bc.getData().add(sc.intervalSeries(dateFrom.getValue(), dateTo.getValue()));
     }
 }
