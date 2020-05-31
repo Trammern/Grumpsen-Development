@@ -73,9 +73,6 @@ public class ProjectsOverviewController implements Initializable {
     private double timeStart;
     private double timeStop;
     private boolean isDone;
-    private FileHandler fh;
-    private ObservableList<TaskLog> logs = FXCollections.observableArrayList();
-    private static final Logger logger = Logger.getLogger(ProjectsOverviewController.class.getName());
     
     @FXML
     private JFXComboBox<Project> cbbProjectSelect;
@@ -123,22 +120,13 @@ public class ProjectsOverviewController implements Initializable {
     private Label txtHour;
     @FXML
     private MenuItem menuItemUser;
-
-    private Label lblTaskCreated;
     @FXML
     private JFXButton btnNoneBillable;
-    private TableView<TaskLog> tblLogs;
-    private TableColumn<TaskLog, Date> clmDate;
-    private TableColumn<TaskLog, String> clmName;
-    private TableColumn<TaskLog, String> clmAction;
-    private TableColumn<TaskLog, User> clmByUser;
     @FXML
     private JFXButton CSVbtn;
     @FXML
     private JFXButton btnOpenLogs;
     
-
-
 
     /**
      * Initializes the controller class.
@@ -146,6 +134,7 @@ public class ProjectsOverviewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        //Singleton
         am = AppModel.getInstance();
 
         btnSubmit.setDisable(true);
@@ -179,7 +168,9 @@ public class ProjectsOverviewController implements Initializable {
         
     } 
     
-    
+    /**
+     * Method for tool tips that appear when you hover over buttons
+     */
     private void initTooltips() {
         btnAddTask.setTooltip(TooltipFactory.create("Click here to create a new task for the selected project"));        
         btnEditTask.setTooltip(TooltipFactory.create("Click here to edit an existing task.\nSelect a task first"));
@@ -188,6 +179,9 @@ public class ProjectsOverviewController implements Initializable {
         btnNoneBillable.setTooltip(TooltipFactory.create("Click here to start or pause Nonebillable time when working on this task"));
     }
     
+    /**
+     * Method for more button UI effects
+     */
     private void initEffects() {        
         NodeCustomizer.nodeEffect(btnAddTask);
         NodeCustomizer.nodeEffect(btnEditTask);
@@ -200,22 +194,31 @@ public class ProjectsOverviewController implements Initializable {
     {
     }
     
-    
-    
+    /**
+     * Handler for new task button
+     * @param event 
+     */
     @FXML
     private void addTask(ActionEvent event) {
         am.setCurrentTask(null);
         openAddEdit();
     }
 
-    
+    /**
+     * Sets all tasks in the list view 
+     * @param event 
+     */
     @FXML
     private void setItemsOnList(ActionEvent event) {
         am.setCurrentProject(cbbProjectSelect.getSelectionModel().getSelectedItem());        
         lstTaskList.setItems(am.getTasks());
         am.setCurrentProject(selectedProject);      
     }
-
+    
+    /**
+     * Sets the current task and displays information for task and time
+     * @param event 
+     */
     @FXML
     private void setCurrentTask(MouseEvent event) {
         if (lstTaskList.getSelectionModel().getSelectedItem() != null) {
@@ -254,19 +257,30 @@ public class ProjectsOverviewController implements Initializable {
             }
         }
     }
-
+    
+    /**
+     * Closes the program if cancel is clicked from the menu
+     * @param event 
+     */
     @FXML
     private void closeProgram(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         primStage.close();
     }
     
+    /**
+     * Logs out through the menu
+     * @param event 
+     */
     @FXML
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.logout(primStage);
     }
     
+    /**
+     * Opens up the "New task" window
+     */
     private void openAddEdit()
     {
         try
@@ -283,6 +297,10 @@ public class ProjectsOverviewController implements Initializable {
         }
     }
 
+    /**
+     * Edits a task
+     * @param event 
+     */
     @FXML
     private void handleEditTask(ActionEvent event)
     {
@@ -291,7 +309,11 @@ public class ProjectsOverviewController implements Initializable {
             openAddEdit();
         }
     }
-
+    
+    /**
+     * Deletes the selected task
+     * @param event 
+     */
     @FXML
     private void handleDeleteTask(ActionEvent event)
     {
@@ -305,7 +327,11 @@ public class ProjectsOverviewController implements Initializable {
             System.out.println("Please choose the task you want to delete");
         }
     }
-
+    
+    /**
+     * Opens password view through the menu
+     * @param event 
+     */
     @FXML
     private void openPasswordView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
@@ -313,7 +339,10 @@ public class ProjectsOverviewController implements Initializable {
     }
 
    
-
+    /**
+     * Opens up the chart view through the menu
+     * @param event 
+     */
     @FXML
     private void handlePieChart(ActionEvent event)
     {
@@ -321,12 +350,20 @@ public class ProjectsOverviewController implements Initializable {
         ViewGuide.openView("/timetrackingexam/gui/view/DiagramView.fxml", "Charts", stage, false, false);
     }
 
+    /**
+     * Opens up admin view through the menu
+     * @param event 
+     */
     @FXML
     private void goToAdmin(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.projectManagementView(primStage);
     }
 
+    /**
+     * Event for starting and stopping the time
+     * @param event 
+     */
     @FXML
     private void btnStopStart(ActionEvent event)
     {
@@ -347,8 +384,12 @@ public class ProjectsOverviewController implements Initializable {
             timeStop = new Date().getTime();
             isDone = true;
         }
-
     }
+    
+    /**
+     * Non billable, non working
+     * @param event 
+     */
     private void btnNoneBillable (ActionEvent event)
     {
         if(!am.timerIsRunning()||btnNoneBillable.getText().equals("None-Billable")){
@@ -363,11 +404,13 @@ public class ProjectsOverviewController implements Initializable {
         }
     }
     
-
+    /**
+     * Submits the new time and creates a log
+     * @param event 
+     */
     @FXML
     private void handleSubmit(ActionEvent event)
     {
-        
         TaskTime tt = new TaskTime(
                 am.getCurrentTask().getId(),
                 currentUser.getId(),
@@ -389,13 +432,19 @@ public class ProjectsOverviewController implements Initializable {
         
     }
 
+    /**
+     * Opens up user management view through the menu bar
+     * @param event 
+     */
     @FXML
     private void goToUserManagement(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.userManagementView(primStage);
     }
         
-    
+    /**
+     * Method for setting nodes
+     */
     private void setNodes(){
         
         
@@ -413,11 +462,19 @@ public class ProjectsOverviewController implements Initializable {
         menuUser.setText(currentUser.getEmail());
     }
 
+    /**
+     * Non billable, non working
+     * @param event 
+     */
     @FXML
     private void handleNoneBillable(ActionEvent event) {
     
     }
 
+    /**
+     * Handles CSV export
+     * @param event 
+     */
     @FXML
     private void handleCsv(ActionEvent event) {
         am.getCSV();
@@ -428,6 +485,10 @@ public class ProjectsOverviewController implements Initializable {
     {
     }
 
+    /**
+     * Opens up the log view
+     * @param event 
+     */
     @FXML
     private void handleOpenLogs(ActionEvent event)
     {

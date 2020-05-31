@@ -46,7 +46,9 @@ public class AddTaskController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        //Singleton
         am = AppModel.getInstance();
+        
         if (am.getCurrentTask() != null)
         {
             currentTask = am.getCurrentTask();
@@ -57,7 +59,10 @@ public class AddTaskController implements Initializable
     }    
 
 
-
+    /**
+     * Event that determines whether you create or edit a task
+     * @param event 
+     */
     @FXML
     private void handleSaveAddTask(ActionEvent event)
     {
@@ -71,7 +76,11 @@ public class AddTaskController implements Initializable
         }
         
     }
-
+    
+    /**
+     * Cancel the task and close the window
+     * @param event 
+     */
     @FXML
     private void handleCancelTask(ActionEvent event)
     {
@@ -79,7 +88,9 @@ public class AddTaskController implements Initializable
         stage.close();
     }
     
-    
+    /**
+     * Creates a new task object
+     */
     private void newTask()
     {
         Task newTask = new Task(
@@ -95,6 +106,9 @@ public class AddTaskController implements Initializable
         stage.close();
     }
     
+    /**
+     * Edits a task object
+     */
     private void editTask()
     {
         Task updateTask = new Task(
