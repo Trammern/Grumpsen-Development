@@ -15,6 +15,10 @@ import javafx.scene.effect.DropShadow;
  */
 public class NodeCustomizer {
     
+    /**
+     * Sets effects for hovering over node with mouse, and for no longer hovering over it
+     * @param node to set effects for
+     */
     public static void nodeEffect(Node node) {
         node.setOnMouseEntered(e -> {
             DropShadow ds = new DropShadow();

@@ -20,6 +20,12 @@ import timetrackingexam.be.User;
  */
 public class UserDBDAO {
     
+    /**
+     * Retrieves a list of all users from database via connection
+     * @param con Connection to database
+     * @return List of all users
+     * @throws SQLException 
+     */
     public ObservableList<User> getAllUsers(Connection con) throws SQLException {
         String sql = "SELECT * FROM Employee";
         try (Statement st = con.createStatement()) {
@@ -38,7 +44,14 @@ public class UserDBDAO {
             return users;
         }
     }
-// Tilføjer en ansat til Databasen
+    
+    /**
+     * Creates a single, new user in database via connection
+     * @param con Connection to database
+     * @param user to be created
+     * @return true if creation succeeded
+     * @throws SQLException 
+     */
     public boolean createUser(Connection con, User user) throws SQLException {
         String sql = "INSERT INTO Employee (FirstName, LastName, Email, Password, Role) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -52,7 +65,14 @@ public class UserDBDAO {
             return updatedRows > 0;
         }
     }
-// Opdatere en ansat til Databasen
+    
+    /**
+     * Updates a single, existing user in database via connection
+     * @param con Connection to database
+     * @param user to be updated
+     * @return true if update succeeded
+     * @throws SQLException 
+     */
     public boolean updateUser(Connection con, User user) throws SQLException {
         String sql = "UPDATE Employee SET FirstName = ?, LastName = ?, Email = ?, Password = ?, Role = ? WHERE ID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -67,7 +87,14 @@ public class UserDBDAO {
             return updatedRows > 0;
         }
     }
-// Sletter en Ansat til Databasen
+
+    /**
+     * Deletes a single, existing user in database via connection
+     * @param con Connection to database
+     * @param user to be deleted
+     * @return true if deletion succeeded
+     * @throws SQLException 
+     */
     public boolean deleteUser(Connection con, User user) throws SQLException {
         String sql = "DELETE FROM Employee WHERE ID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {

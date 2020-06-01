@@ -96,6 +96,9 @@ public class UserManagementViewController implements Initializable {
        initEffects();
     }    
     
+    /**
+     * Customizes the way columns in tableview display information about users
+     */
     private void initColumns() {
         columnName.setCellValueFactory(data -> {
             String name = data.getValue().getLastName() + ", " + data.getValue().getFirstName();
@@ -109,36 +112,58 @@ public class UserManagementViewController implements Initializable {
         });
     }
     
+    /**
+     * Sets tooltips for nodes
+     */
     private void initTooltips() {
         btnNewUser.setTooltip(TooltipFactory.create("Click here to create a new employee profile"));        
         btnEditUser.setTooltip(TooltipFactory.create("Click here to edit an existing employee profile.\nSelect a user first"));
         btnDeleteUser.setTooltip(TooltipFactory.create("Click here to delete an existing employee profile.\nSelect a user first"));
     }
     
+    /**
+     * Sets effects for nodes
+     */
     private void initEffects() {
         NodeCustomizer.nodeEffect(btnNewUser);
         NodeCustomizer.nodeEffect(btnEditUser);
         NodeCustomizer.nodeEffect(btnDeleteUser);
     }
     
+    /**
+     * Closes view and program
+     * @param event 
+     */
     @FXML
     private void closeProgram(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         primStage.close();
     }
 
+    /**
+     * Opens login view and closes currently displaying view
+     * @param event 
+     */
     @FXML
     private void logoutToLoginView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.logout(primStage);
     }
 
+    /**
+     * Opens change password view on top of currently displaying view
+     * @param event 
+     */
     @FXML
     private void openPasswordView(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.changePasswordView(primStage);
     }
     
+    /**
+     * Opens add/edit user view on top of currently displaying, with intent to create a new user
+     * @param event 
+     */
     @FXML
     private void newUser(ActionEvent event) {
         am.setSelectedUser(null); 
@@ -147,6 +172,11 @@ public class UserManagementViewController implements Initializable {
         am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem()); //why?
     }
 
+    /**
+     * Opens add/edit user view on top of currently displaying, with intent to update selected, existing user
+     * Will notify (program) user if a user is not selected with appropriate alert box
+     * @param event 
+     */
     @FXML
     private void editUser(ActionEvent event) {
         am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem());
@@ -159,6 +189,11 @@ public class UserManagementViewController implements Initializable {
         }
     }     
     
+    /**
+     * Forwards request to delete selected user
+     * Will notify (program) user if a user is not selected with appropriate alert box
+     * @param event 
+     */
     @FXML
     private void deleteUser(ActionEvent event) {
         am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem());
@@ -183,12 +218,20 @@ public class UserManagementViewController implements Initializable {
         }
     }
 
+    /**
+     * Opens project management view and closes currently displaying view
+     * @param event 
+     */
     @FXML
     private void goToProjectManagement(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
         ViewGuide.projectManagementView(primStage);
     }
 
+    /**
+     * Opens project overview and closes currently displaying view
+     * @param event 
+     */
     @FXML
     private void goToTasks(ActionEvent event) {
         Stage primStage = (Stage) menuBar.getScene().getWindow();
