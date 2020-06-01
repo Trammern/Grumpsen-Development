@@ -275,7 +275,7 @@ public class TaskDBDAO{
             ResultSet rs = pstmt.executeQuery();
             while(rs.next())
             {
-                 String firstName = rs.getString("FirstName");
+                String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
                 String email = rs.getString("Email");
                 String password = "";
