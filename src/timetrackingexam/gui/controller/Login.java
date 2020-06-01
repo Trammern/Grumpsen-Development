@@ -31,6 +31,7 @@ import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertFactory;
+import timetrackingexam.gui.util.ViewGuide;
 
 /**
  *
@@ -111,13 +112,14 @@ public class Login implements Initializable
 
             if (user != null) {
                 appModel.setCurrentUser(user);
+                Stage primStage = (Stage) btnLogin.getScene().getWindow();
 
                 switch (appModel.getCurrentUser().getRole()) {
                     case Default:
-                        openView("/timetrackingexam/gui/view/ProjectsOverview.fxml", "Projects Overview");
+                        ViewGuide.projectsOverview(primStage);
                         break;
                     case Admin:
-                        openView("/timetrackingexam/gui/view/ProjectManagementView.fxml", "Project Management View");
+                        ViewGuide.projectManagementView(primStage);
                         break;
                     default:
                         AlertFactory.showErrorAlert("No view defined for this role");
@@ -129,26 +131,4 @@ public class Login implements Initializable
         txtPassword.clear();
     }
     
-    /**
-     * Opens a new view and closes the currently displaying one
-     * @param viewPath path to .fxml file
-     * @param title of new view
-     */
-    private void openView(String viewPath, String title) {
-        try {
-            Parent loader = FXMLLoader.load(getClass().getResource(viewPath));
-            Scene scene = new Scene(loader);
-            Stage primStage = (Stage) btnLogin.getScene().getWindow();
-            Stage stage = new Stage();
-            stage.setTitle(title);
-            stage.setScene(scene);
-            stage.show();
-            primStage.close();
-        } catch (IOException e) {
-            AlertFactory.showErrorAlert("Could not open new window");
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }   
-       
-        
 }
