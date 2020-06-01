@@ -34,7 +34,7 @@ public class TaskDBDAO{
     private TaskDBDAO() {
         pool = ConnectionPool.getInstance();
     }
-// Tjekker om Tasken findes
+// Checks if the task does exist
     public static TaskDBDAO getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new TaskDBDAO();
@@ -43,7 +43,7 @@ public class TaskDBDAO{
             return INSTANCE;
         }
     }
-
+    // Gets the Tasks
     public ObservableList getTasks(Connection con, Project p) {
         try{
 
@@ -75,7 +75,7 @@ public class TaskDBDAO{
             return null;
         }
     }
-// Deleter Task fra SQL Databasen
+// Deletes the task from the SQL Database
     public boolean deleteTask(Connection con, Task task) {
         try{
             String sql = "DELETE FROM task "
@@ -95,7 +95,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-// Updater Task fra SQL Databasen
+// Updates the selected task on the Database
     public boolean updateTask(Connection con, Task task) {
         try{
             String sql = "UPDATE task "
@@ -118,7 +118,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-// Tilføjer task til SQL databasen
+// Adds task to the SQL Database
     public Boolean addTask(Task t, Project p, Connection con) {
         try{
             String sql = "INSERT INTO task (ProjectID, Name, Description, UserID, TimeAssigned)"
@@ -143,7 +143,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-// Tilføjer tiden used time til SQL Databasen
+// Adds the elipised time to the Database
     public boolean submitTime(TaskTime tt, Connection con) {
         try{
             String sql = "INSERT INTO time (TaskID, UserID, Sec, Min, Hour, Date)"
@@ -169,7 +169,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-// Opdatere tid til Timeren i programmet
+// Opdateres the time to the Database
     public boolean updateTime(TaskTime tt, Connection con) {
         try{
             String sql = "UPDATE time "
@@ -196,7 +196,7 @@ public class TaskDBDAO{
     }
     
 
-
+    // Gets the time already spend from the Database
     public ObservableList<TaskTime> getTime(Connection con, Task t) {
         try{
             ObservableList<TaskTime> times = FXCollections.observableArrayList();
@@ -229,7 +229,7 @@ public class TaskDBDAO{
             return null;
         }
     }
-    
+    // Gets the time the user has spend on the Task
     public ObservableList<TaskTime> getUserTime(Connection con, Task t, User u) {
         try{
             ObservableList<TaskTime> times = FXCollections.observableArrayList();
@@ -264,7 +264,7 @@ public class TaskDBDAO{
             return null;
         }
     }
-// Henter alle logs fra Tasklogs i Databasen
+// Recieves the full list of logs from the Tasklogs in the Database
     public ObservableList<TaskLog> getLogs(Connection con)
     {
         try
@@ -294,7 +294,7 @@ public class TaskDBDAO{
             return null;
         }
     }
-// Tilføjer en time log til en Task i Databasen
+    // Adds a timed log to the Task in the Database
     public boolean createTimeLog(Connection con, TaskLog timeLog)
     {
         try
@@ -319,7 +319,7 @@ public class TaskDBDAO{
             return false;
         }
     }
-// Henter Time fra Timelogs in Databasen
+    // Gets the Time logs from the database
     public ObservableList getTimeLogs(Connection con)
     {
         try

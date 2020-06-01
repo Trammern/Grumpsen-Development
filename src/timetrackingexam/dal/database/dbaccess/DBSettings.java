@@ -19,7 +19,7 @@ public class DBSettings
 
     private SQLServerDataSource dataSource;
 
-// Bruger TXT filen til at beskytte login data for Databasen
+// Uses a TXT file rather than hard coding it. This keeps the database safer.
     public DBSettings()
     {
         Properties props = new Properties();

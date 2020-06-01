@@ -36,7 +36,7 @@ public class ProjectDBDAO  implements Serializable
     {
         pool = ConnectionPool.getInstance();
     }
-// Laver Project på SQL Databasen
+    // Creates the Project on the SQL Database
     public boolean createProject(Connection con, Project p)
     {
         String sql = "INSERT INTO Project (Name, Description, Rate, clientID) VALUES (?,?,?,?)";
@@ -55,7 +55,7 @@ public class ProjectDBDAO  implements Serializable
         }
         return false;
     }
-// Henter Alle projecter fra SQL Databasen
+    // Collects all the projects on the ObservableList
     public ObservableList<Project> getAllProjects(Connection con)
     {
         String sql = "SELECT * FROM Project";
@@ -82,7 +82,7 @@ public class ProjectDBDAO  implements Serializable
             return null;
         }
     }
-// Opdatere et Project på SQL Databasen
+    // Updates the Project to the database
     public Boolean updateProject(Connection con, Project p) {
         String sql = "UPDATE Project SET Name = ?, Description = ?, Rate = ? WHERE ID = ?";
         try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -100,7 +100,7 @@ public class ProjectDBDAO  implements Serializable
             return false;
         }
     }
-// Sletter Projecter fra SQL Databasen
+    // Deletes selected project on the SQL Database
     public Boolean deleteProject(Connection con, Project p)
     {
         String sql = "DELETE FROM Project WHERE ID = ?";
@@ -114,7 +114,7 @@ public class ProjectDBDAO  implements Serializable
             return false;
         }
     }
-// Henter CSV og printer den til txt fil.
+    // Collects the CSV and prints it to a TXT file
     public void getCSV(Connection con) throws FileNotFoundException
     {
         PrintWriter pw = new PrintWriter("CSV.csv");

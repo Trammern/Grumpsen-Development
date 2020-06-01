@@ -23,27 +23,27 @@ public class ProjectManager implements IProjectManager {
     public ProjectManager() {
         projectDal = new TimeTrackDalFacade();
     }
-    
+    // Gets all the projects from a List
     @Override
     public List<Project> getAllProjects(){
         return projectDal.getProjects();
     }
-    
+    // Creates a New Project
     @Override
     public boolean createNewProject(Project p){
         return projectDal.createNewProject(p);
     }
-
+    // Updates a project
     @Override
     public boolean updateProject(Project p) {
         return projectDal.updateProject(p);
     }
-    
+    // Deletes the Project
     @Override
     public boolean deleteProject(Project project) {
         return projectDal.deleteProject(project);
     }
-    
+    // Get the CSV
     public void getCSV()
     {
        projectDal.getCSV();

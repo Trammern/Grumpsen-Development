@@ -19,6 +19,8 @@ import timetrackingexam.dal.facade.IUserDal;
  *
  * @author Rizvan
  */
+
+// This is the MockData 
 public class MockUserDAO implements IUserDal
 {
     

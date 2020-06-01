@@ -30,7 +30,7 @@ public class ProjectDaoController
         this.conPool = conPool;
         projectDao = new ProjectDBDAO();
     }
-// Creater Projects via Project DBDAO
+    // Creates Projects via Project DBDAO
     public boolean createProject(Project p)
     {
         Connection con = conPool.checkOut();
@@ -38,7 +38,7 @@ public class ProjectDaoController
         conPool.checkIn(con);
         return project;
     }
-// Deletes Projects via Project DBDAO
+    // Deletes Projects via Project DBDAO
     public boolean deleteProject(Project p)
     {
         Connection con = conPool.checkOut();
@@ -46,7 +46,7 @@ public class ProjectDaoController
         conPool.checkIn(con);
         return delete;
     }
-// Edits Projects via Project DBDAO
+    // Edits Projects via Project DBDAO
     public boolean editProject(Project p)
     {
         Connection con = conPool.checkOut();
@@ -54,7 +54,7 @@ public class ProjectDaoController
         conPool.checkIn(con);
         return edit;
     }
-// Henter Observeable List fra Databasen via Project DBDAO
+    // Gets the projects from an observablelist
     public ObservableList<Project> getProjects()
     {
         Connection con = conPool.checkOut();
@@ -62,7 +62,7 @@ public class ProjectDaoController
         conPool.checkIn(con);
         return allProjects;
     }
-// Laver en Txt fil af et project
+    // Creates a txt file of a list
    public void getCSV() throws FileNotFoundException
    
    {

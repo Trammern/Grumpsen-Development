@@ -36,48 +36,48 @@ public class TaskManager implements ITaskManager
     }
 
     
-    
+    // Deletes a task
     @Override
     public boolean deleteTask(Task selectedTask)
     {
         return taskManager.deleteTask(task);
     }
 
-
+    // Gets the tasks from an observable list
     @Override
     public ObservableList<Task> getTasks(Project p)
     {
         return taskManager.getTasks(p);
     }
-
+    // Updates the selected Task
     @Override
     public boolean updateTask(Task updateTask)
     {
         return taskManager.updateTask(updateTask);
     }
-
+    // Gets the time from an observablelist
     @Override
     public ObservableList<TaskTime> getTime(Task t) {
         times.removeAll();
         times.addAll(taskManager.getTime(t));
         return times;
     }
-    
+    // Updates the time of a task
     @Override
     public boolean updateTime(TaskTime tt) {
         return taskManager.updateTime(tt);
     }
-
+    // Submits the time of a task
     @Override
     public boolean submitTime(TaskTime tt, Task t) {
             return taskManager.submitTime(tt, t);
     }
-
+    // Adds a task
     @Override
     public boolean addTask(Task t, Project p) {
         return taskManager.addTask(t, p);
     }
-
+    // Gets the Total time of a task
     @Override
     public TaskTime getTotalTime(Task currentTask) {
         System.out.println("I was called");
