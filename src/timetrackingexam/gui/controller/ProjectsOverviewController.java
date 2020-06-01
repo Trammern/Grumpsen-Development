@@ -210,7 +210,7 @@ public class ProjectsOverviewController implements Initializable {
     private void setItemsOnList(ActionEvent event) {
         am.setCurrentProject(cbbProjectSelect.getSelectionModel().getSelectedItem());        
         lstTaskList.setItems(am.getTasks());
-        am.setCurrentProject(selectedProject);      
+        selectedProject = am.getCurrentProject();
     }
     
     /**

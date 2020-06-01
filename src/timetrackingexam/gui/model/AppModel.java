@@ -75,9 +75,7 @@ public class AppModel
         getLogs();
         getProjects();           
         getAllClients();
-        if (currentClient!=null) {
-            getTasks();
-        }         
+        getTasks();                
     }
     
     public ObservableList<User> getAllUsers()
@@ -106,7 +104,9 @@ public class AppModel
     public ObservableList<Task> getTasks()
     {
         tasks.clear();
-        tasks.addAll(ttInterface.getTasks(currentProject));
+        if (currentProject!=null) {            
+            tasks.addAll(ttInterface.getTasks(currentProject));
+        }        
         return tasks;
         
     }
