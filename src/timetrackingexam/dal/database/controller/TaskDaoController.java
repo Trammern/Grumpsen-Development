@@ -11,6 +11,7 @@ import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.TaskTime;
+import timetrackingexam.be.User;
 import timetrackingexam.dal.database.dao.TaskDBDAO;
 import timetrackingexam.dal.database.dbaccess.ConnectionPool;
 
@@ -103,6 +104,13 @@ public class TaskDaoController
         ObservableList timelogs = taskDAO.getTimeLogs(con);
         conPool.checkIn(con);
         return timelogs;
+    }
+
+    public ObservableList<TaskTime> getUserTime(Task t, User u) {
+        Connection con = conPool.checkOut();
+        ObservableList userTime = taskDAO.getUserTime(con, t, u);
+        conPool.checkIn(con);
+        return userTime;
     }
 
 }

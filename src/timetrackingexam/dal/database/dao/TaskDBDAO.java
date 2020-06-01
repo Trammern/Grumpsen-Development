@@ -229,6 +229,41 @@ public class TaskDBDAO{
             return null;
         }
     }
+    
+    public ObservableList<TaskTime> getUserTime(Connection con, Task t, User u) {
+        try{
+            ObservableList<TaskTime> times = FXCollections.observableArrayList();
+            
+            String sql = "SELECT * "
+                    + "FROM Time "
+                    + "WHERE UserID = ? "
+                    + "AND TaskID = ?;";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+
+            pstmt.setInt(1, u.getId());
+            pstmt.setInt(2, t.getId());
+            
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                TaskTime time = new TaskTime(
+                        rs.getInt("TaskID"),
+                        rs.getInt("UserID"),
+                        rs.getInt("Sec"),
+                        rs.getInt("Min"),
+                        rs.getInt("Hour"),
+                        LocalDate.parse(rs.getString("date"))
+                );   
+                time.setID(rs.getInt("ID"));
+                times.add(time);
+            }
+            return times;
+            
+        } catch (SQLException sqlE) {
+            System.out.println("Failed to grab element from database");
+            Logger.getLogger(TaskDBDAO.class.getName()).log(Level.SEVERE, null, sqlE);
+            return null;
+        }
+    }
 // Henter alle logs fra Tasklogs i Databasen
     public ObservableList<TaskLog> getLogs(Connection con)
     {

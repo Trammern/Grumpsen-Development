@@ -186,6 +186,11 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
         return dalFacade.readTimeLogs();
     }
 
+    @Override
+    public ObservableList<TaskTime> getUserTime(Task t, User u) {
+        return dalFacade.getUserTime(t, u);
+    }
+
     
     
 

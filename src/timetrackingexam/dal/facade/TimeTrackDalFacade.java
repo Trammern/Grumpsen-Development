@@ -189,4 +189,9 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
     {
         return taskController.getTimeLogs();
     }
+
+    @Override
+    public ObservableList<TaskTime> getUserTime(Task t, User u) {
+        return taskController.getUserTime(t,u);
+    }
 }

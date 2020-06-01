@@ -303,6 +303,10 @@ public class AppModel
         timeLogs.addAll(ttBll.getAllTimeLogs());
         return timeLogs;
     }
+
+    public ObservableList<TaskTime> getUserTime() {
+        return ttInterface.getUserTime(currentTask, currentUser);
+    }
     
     
     

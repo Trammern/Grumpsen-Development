@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
+import timetrackingexam.be.User;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.utilities.StatisticsCalculator;
 import timetrackingexam.dal.facade.IProjectDal;
@@ -91,6 +92,11 @@ public class TaskManager implements ITaskManager
         }
         TaskTime totalTime = new TaskTime(totalSec, totalMin, totalHour);
         return totalTime;
+    }
+
+    @Override
+    public ObservableList<TaskTime> getUserTime(Task t, User u) {
+        return taskManager.getUserTime(t,u);
     }
 
     

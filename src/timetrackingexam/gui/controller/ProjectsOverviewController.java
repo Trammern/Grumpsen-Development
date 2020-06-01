@@ -233,11 +233,12 @@ public class ProjectsOverviewController implements Initializable {
             txtTaskDescription.setStyle("-fx-font-style: normal;");
             txtTaskDescription.setText(am.getCurrentTask().getDescription());
         } 
+            totalHour = 0;
+            totalMin = 0;
+            totalSec = 0;
             
             if(am.getAllTime() != null){
-                totalHour = 0;
-                totalMin = 0;
-                totalSec = 0;
+                if(currentUser.getRole()==User.Role.Admin){
                 for (TaskTime time : am.getAllTime()) {
                     totalHour += time.getHours();
                     totalMin += time.getMin();
@@ -246,6 +247,17 @@ public class ProjectsOverviewController implements Initializable {
                 fldHour.setText(totalHour+ "");
                 fldMin.setText(totalMin+ "");
                 fldSec.setText(totalSec+ "");
+                }
+                else{
+                    for (TaskTime time : am.getUserTime()) {
+                    totalHour += time.getHours();
+                    totalMin += time.getMin();
+                    totalSec += time.getSec();
+                }
+                fldHour.setText(totalHour+ "");
+                fldMin.setText(totalMin+ "");
+                fldSec.setText(totalSec+ "");
+                }
             }
             else{
                 fldHour.setText("0");
