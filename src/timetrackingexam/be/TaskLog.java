@@ -44,78 +44,78 @@ public class TaskLog
         this.submittedTime = submittedTime;
         submittedTimeStringFormat = submittedTime + " sek";
     }
-
+    // Date Getter
     public Date getDate()
     {
         return date;
     }
-
+    // Date Setter
     public void setDate(Date date)
     {
         this.date = date;
     }
-
+    // Action Getter
     public String getAction()
     {
         return action;
     }
-
+    // Action Setter
     public void setAction(String action)
     {
         this.action = action;
     }
-    
+    // SubmittedTime Get
     public double getSubmittedTime()
     {
         return submittedTime;
     }
-    
+    // SubmittedTimeStingFormat Getter
     public String getSubmittedTimeStringFormat()
     {
         return submittedTimeStringFormat;
     }
-
+    // SubmittedTime Setter
     public void setSubmittedTime(double submittedTime)
     {
         submittedTimeStringFormat = submittedTime + " sek";
         this.submittedTime = submittedTime;
     }
-
+    // StartDate Getter
     public LocalDateTime getStartDate()
     {
         return startDate;
     }
-
+    // StartDate Setter
     public void setStartDate(LocalDateTime startDate)
     {
         this.startDate = startDate;
     }
-
+    // EndDate Getter
     public LocalDateTime getEndDate()
     {
         return endDate;
     }
-
+    // EndDate Setter
     public void setEndDate(LocalDateTime endDate)
     {
         this.endDate = endDate;
     }
-
+    // CreatedBy Getter
     public User getCreatedBy()
     {
         return createdBy;
     }
-
+    // CreatedBy Setter
     public void setCreatedBy(User createdBy)
     {
         this.createdBy = createdBy;
     }
-
+    // TaskName Getter
     public String getTaskName()
     {
         return taskName;
     }
-
+    //TaskName Setter 
     public void setTaskName(String taskName)
     {
         this.taskName = taskName;

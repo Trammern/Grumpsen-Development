@@ -28,7 +28,7 @@ public class Client {
         this.defaultrate = defaultrate;
         projects = FXCollections.observableArrayList();
     }    
-    
+    // Getters and setters
     public String getName() {
         return name;
     }

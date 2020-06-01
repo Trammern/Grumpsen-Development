@@ -47,47 +47,47 @@ public class Project {
         this.rate = rate;
         this.clientID = clientID;
     }           
-    
+    // Getter
     public int getId() {
         return id;
     }
-
+    // Setter 
     public void setId(int id) {
         this.id = id;
     }
-
+    // Getter
     public String getName() {
         return name;
     }
-
+    // Setter 
     public void setName(String name) {
         this.name = name;
     }
-
+    // Getter
     public int getRate() {
         return rate;
     }
-
+    // Setter 
     public void setRate(int rate) {
         this.rate = rate;
     }
-
+    // Getter
     public int getClientID() {
         return clientID;
     }
-
+    // Setter 
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
-
+    // Getter
     public ObservableList<Task> getTasks() {
         return tasks;
     }
-
+    // Setter 
     public void setTasks(ObservableList<Task> tasks) {
         this.tasks = tasks;
     }
-    
+    // Getter
     public int getTimeUsedByUser(User user){
         int totalTimeUsed = 0;
         for (Task task : tasks) {
@@ -97,19 +97,19 @@ public class Project {
         }
         return totalTimeUsed;
     }
-
+    // Getter
     public ObservableList<User> getUsers() {
         return users;
     }
-
+    // Setter 
     public void setUsers(ObservableList<User> users) {
         this.users = users;
     }
-    
+    // Adds task
     public boolean addTask(Task t){
         return tasks.add(t);
     }
-    
+    // removes task
     public boolean removeTask(Task selectedTask)
     {
         return tasks.remove(selectedTask);
@@ -132,16 +132,16 @@ public class Project {
         }
         return true;
     }
-
+    // creates the name of the task
     @Override
     public String toString() {
         return name;
     }
-
+    // gets the description
     public String getDescription() {
         return description;
     }
-
+    // Sets the Description
     public void setDescription(String description) {
         this.description = description;
     }

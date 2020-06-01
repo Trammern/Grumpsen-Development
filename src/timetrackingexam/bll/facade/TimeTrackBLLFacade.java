@@ -27,7 +27,7 @@ public class TimeTrackBLLFacade implements ITimeTrackBLL
     public TimeTrackBLLFacade() {
         this.dalFacade = new TimeTrackDalFacade();
     }
-
+    
     @Override
     public boolean updateTask(Task updateTask)
     {
