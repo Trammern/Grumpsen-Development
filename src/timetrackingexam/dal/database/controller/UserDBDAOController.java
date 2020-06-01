@@ -28,6 +28,10 @@ public class UserDBDAOController {
         userDao = new UserDBDAO();
     }
     
+    /**
+     * Retrieves a list of all users from database
+     * @return List of all users
+     */
     public ObservableList<User> getAllUsers() {
         
         try {
@@ -42,6 +46,11 @@ public class UserDBDAOController {
         
     }
     
+    /**
+     * Creates a single, new user in database
+     * @param user to be created
+     * @return true if creation succeeded, otherwise false
+     */
     public boolean addUser(User user) {
         
         try {
@@ -56,6 +65,11 @@ public class UserDBDAOController {
         
     }
     
+    /**
+     * Updates a single, existing user in database
+     * @param user to be updated
+     * @return true if update succeeded, otherwise false
+     */
     public boolean updateUser(User user) {
         
         try {
@@ -69,6 +83,11 @@ public class UserDBDAOController {
         return false;
     }
     
+    /**
+     * Deletes a single, existing user in database
+     * @param user to be deleted
+     * @return true if deletion succeeded, otherwise false
+     */
     public boolean deleteUser(User user) {
         try {
             Connection con = pool.checkOut();

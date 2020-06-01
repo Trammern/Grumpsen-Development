@@ -20,6 +20,13 @@ import timetrackingexam.gui.util.AlertFactory;
  */
 public class LoginTools {    
     
+    /**
+     * Retrieves a user matching email and password from list of users, if any
+     * @param email user's email must match
+     * @param password user's password must match
+     * @param users List in which to search for matching user
+     * @return Matching user if any, otherwise null
+     */
     public static User getVerifiedUser(String email, String password, List<User> users)
     {       
         User verifiedUser = null;
@@ -34,6 +41,13 @@ public class LoginTools {
         return verifiedUser;
     }
     
+    /**
+     * Checks if old password matches user's existing password, and then returns hashed version of new password
+     * @param user whose password to check
+     * @param oldPassword should match user's current password
+     * @param newPassword the new password user should have
+     * @return hashed version of new password, if old password matches user's existing password; otherwise null
+     */
     public static String getVerifiedNewPassword(User user, String oldPassword, String newPassword) {
         String password = null;
         if (user.getPassword().equals(hashPassword(oldPassword))) {
@@ -43,6 +57,11 @@ public class LoginTools {
         return password;
     }
     
+    /**
+     * Checks to see if email abides by regex (includes @ sign etc.) 
+     * @param email to check
+     * @return true if email matches regex, otherwise false
+     */
     public static boolean validateEmail(String email) {
         return email.matches("[\\w-]+@([\\w-]+\\.)+[\\w-]+");
     }
@@ -57,6 +76,11 @@ public class LoginTools {
         return password.matches("^(?=.*[0-9])$");
     }
     
+    /**
+     * Retrieves hashed version of password
+     * @param password to hash
+     * @return hashed password
+     */
     public static String hashPassword(String password) { 
         String base = password;
         try {            
