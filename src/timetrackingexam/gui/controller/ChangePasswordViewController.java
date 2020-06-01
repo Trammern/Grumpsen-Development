@@ -23,6 +23,8 @@ import timetrackingexam.be.User;
 import timetrackingexam.bll.security.LoginTools;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertFactory;
+import timetrackingexam.gui.util.NodeCustomizer;
+import timetrackingexam.gui.util.TooltipFactory;
 
 /**
  * FXML Controller class
@@ -54,14 +56,40 @@ public class ChangePasswordViewController implements Initializable {
         am = AppModel.getInstance();
         user = am.getCurrentUser();
         initKeys();
+        initTooltips();
+        initButtonEffects();
     }    
     
+    /**
+     * Sets tooltips for nodes
+     */
+    private void initTooltips() {
+        btnSave.setTooltip(TooltipFactory.create("Click to change password"));
+        btnCancel.setTooltip(TooltipFactory.create("Click to exit window without changing password"));
+    }
+    
+    /**
+     * Sets effects for nodes
+     */
+    private void initButtonEffects() {
+        NodeCustomizer.nodeEffect(btnSave);
+        NodeCustomizer.nodeEffect(btnCancel);
+    }    
+    
+    /**
+     * Initializes actions on enter keystroke for nodes
+     */
     private void initKeys() {
         actionOnEnterKey(txtOldPass);
         actionOnEnterKey(txtNewPass);
         actionOnEnterKey(txtNewPass2);
     }
     
+    /**
+     * Sets action on using Enter key for node
+     * Currently, when pressing enter, an attempt is made to validate information in text fields
+     * @param node to apply action on enter keystroke for
+     */
     private void actionOnEnterKey(Node node) {
         node.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
@@ -70,12 +98,20 @@ public class ChangePasswordViewController implements Initializable {
         });
     }
 
+    /**
+     * Starts process for saving changes by attempting to validate information in textfields
+     * @param event 
+     */
     @FXML
     private void savePassword(ActionEvent event) {
          changePassword();        
                         
     }
     
+    /**
+     * Attempts to validate information in text fields
+     * Checks if text fields are filled out, if old password matches user's current password, and if the new password has been written exactly the same way twice
+     */
     private void changePassword() {
         String oldPassword = txtOldPass.getText();
         String newPassword = txtNewPass.getText();
@@ -101,6 +137,12 @@ public class ChangePasswordViewController implements Initializable {
         }      
     }
 
+    /**
+     * Forwards request to update user with new information (new password)
+     * Confirmation alert box will be shown to ask (program) user if s/he is certain password should be changed
+     * @param user whose password is to be changed
+     * @param password the new password
+     */
     private void confirmPassword(User user, String password) {
         Alert alert = AlertFactory.createConfirmationAlert("Are you sure you want to change your password?");
         Optional<ButtonType> result = alert.showAndWait();
@@ -115,11 +157,18 @@ public class ChangePasswordViewController implements Initializable {
         }        
     }
     
+    /**
+     * Asks to close view
+     * @param event 
+     */
     @FXML
     private void cancel(ActionEvent event) {
         close();
     }
     
+    /**
+     * Closes view
+     */
     private void close() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();

@@ -75,6 +75,10 @@ public class AddEditUserViewController implements Initializable {
         
     }    
 
+    /**
+     * Displays user information in text fields
+     * @param user to display information from
+     */
     private void setUserInformation(User user) {
         txtEmail.setText(user.getEmail());
         txtEmail.setDisable(true);
@@ -86,6 +90,9 @@ public class AddEditUserViewController implements Initializable {
         cbbRole.getSelectionModel().select(user.getRole());
     }
     
+    /**
+     * Initializes actions on enter keystroke for nodes
+     */
     private void initKeys() {
         actionOnEnterKey(txtEmail);
         actionOnEnterKey(txtFirstName);
@@ -94,6 +101,11 @@ public class AddEditUserViewController implements Initializable {
         actionOnEnterKey(cbbRole);
     }
     
+    /**
+     * Sets action on using Enter key for node
+     * Currently, when pressing enter, an attempt is made to validate information in text fields
+     * @param node to apply action on enter keystroke for
+     */
     private void actionOnEnterKey(Node node) {
         node.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
@@ -102,21 +114,35 @@ public class AddEditUserViewController implements Initializable {
         });
     }
     
+    /**
+     * Sets tooltips for nodes
+     */
     private void initTooltips() {
         btnSaveUser.setTooltip(TooltipFactory.create("Click to save user"));
         btnCancel.setTooltip(TooltipFactory.create("Click to exit window without saving changes"));
     }
     
+    /**
+     * Sets effects for nodes
+     */
     private void initButtonEffects() {
         NodeCustomizer.nodeEffect(btnSaveUser);
         NodeCustomizer.nodeEffect(btnCancel);
     }
     
+    /**
+     * Starts process for saving changes by attempting to validate information in textfields
+     * @param event 
+     */
     @FXML
     private void saveUser(ActionEvent event) {        
         validateInformation();
     }
     
+    /**
+     * Attempts to validate information in text fields
+     * Checks if text fields alle filled out, if email is valid and if email is not used by another user
+     */
     private void validateInformation() {
         String email = txtEmail.getText();
         String password = (selectedUser!=null ) ? selectedUser.getPassword() : LoginTools.hashPassword(txtPassword.getText());
@@ -142,6 +168,12 @@ public class AddEditUserViewController implements Initializable {
         }
     }
     
+    /**
+     * Saves changes made
+     * Creates a new user or updates an existing one depending on which button was pushing when opening view
+     * Also shows confirmation alert which will ask (program) user if user is certain the changes should be made 
+     * @param user to create or update
+     */
     private void saveChanges(User user) {
 
         Alert alert = AlertFactory.createConfirmationAlert(String.format("%s%n%s", "Are you sure you want to save this", user));
@@ -161,11 +193,18 @@ public class AddEditUserViewController implements Initializable {
         }
     }
 
+    /**
+     * Asks to close view
+     * @param event 
+     */
     @FXML
     private void cancel(ActionEvent event) {
         close();
     }
     
+    /**
+     * Closes view
+     */
     private void close() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();

@@ -64,11 +64,19 @@ public class Login implements Initializable
 
     }    
     
+    /**
+     * Initializes actions on enter keystroke for nodes
+     */
     private void initKeys() {
         actionOnEnterKey(txtPassword);
         actionOnEnterKey(txtName);
     }
     
+    /**
+     * Sets action on using Enter key for node
+     * Currently, when pressing enter, an attempt is made to login
+     * @param node to apply action on enter keystroke for
+     */
     private void actionOnEnterKey(Node node) {
         node.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
@@ -77,12 +85,21 @@ public class Login implements Initializable
         });
     }
 
+    /**
+     * Attempts to login
+     * @param event 
+     */
     @FXML
     private void handleLogin(ActionEvent event)
     {
         login();
     }    
         
+    /**
+     * Checks if email and password entered in text fields match those of a user in list of all users
+     * If such a user is found, sets currentUser variable to this user and opens new view depending on whether or not user has admin privileges
+     * If text fields are not filled out, or if no user is found, will notify with appropriate alert box
+     */
     public void login() {
         String email = txtName.getText();
         String password = txtPassword.getText();
@@ -112,6 +129,11 @@ public class Login implements Initializable
         txtPassword.clear();
     }
     
+    /**
+     * Opens a new view and closes the currently displaying one
+     * @param viewPath path to .fxml file
+     * @param title of new view
+     */
     private void openView(String viewPath, String title) {
         try {
             Parent loader = FXMLLoader.load(getClass().getResource(viewPath));
