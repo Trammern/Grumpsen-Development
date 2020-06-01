@@ -114,7 +114,6 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <JFXButton fx:id="CSVbtn" layoutX="605.0" layoutY="453.0" mnemonicParsing="false" onAction="#btnCSV" text="Button" />
       <JFXButton fx:id="btnNoneBillable" layoutX="260.0" layoutY="278.0" onAction="#handleNoneBillable" prefHeight="40.0" prefWidth="132.0" text="None-Billable">
          <font>
             <Font size="18.0" />

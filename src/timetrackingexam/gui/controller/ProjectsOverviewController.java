@@ -123,8 +123,6 @@ public class ProjectsOverviewController implements Initializable {
     @FXML
     private JFXButton btnNoneBillable;
     @FXML
-    private JFXButton CSVbtn;
-    @FXML
     private JFXButton btnOpenLogs;
     
 
@@ -480,10 +478,6 @@ public class ProjectsOverviewController implements Initializable {
         am.getCSV();
     }
 
-    @FXML
-    private void btnCSV(ActionEvent event)
-    {
-    }
 
     /**
      * Opens up the log view
