@@ -33,7 +33,7 @@
                 <MenuItem mnemonicParsing="false" text="About" />
               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="User">
+          <Menu fx:id="menuUser" mnemonicParsing="false" text="User">
             <items>
               <MenuItem fx:id="menuItemPassword" mnemonicParsing="false" onAction="#openPasswordView" text="Change password" />
             </items>
