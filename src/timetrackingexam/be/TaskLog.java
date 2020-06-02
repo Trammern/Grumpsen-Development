@@ -119,14 +119,4 @@ public class TaskLog
     {
         this.taskName = taskName;
     }
-
-    
-    
-
-    
-    
-    
-    
-    
-    
 }
