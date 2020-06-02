@@ -49,7 +49,6 @@ public class AddTaskController implements Initializable
         }
     }    
 
-
     /**
      * Event that determines whether you create or edit a task
      * @param event 
