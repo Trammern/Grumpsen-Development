@@ -6,7 +6,6 @@
 package timetrackingexam.be;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,9 +21,6 @@ public class Task {
     private String description;
     private int timeAssigned;
     
-    
-    private List<TaskTime> timeUsed = new ArrayList<>();
-
     /**
      * Constructor for creating tasks
      * @param projectId
@@ -39,17 +35,7 @@ public class Task {
         this.name = name;
         this.description = description;
     }
-
-    /**
-     * Constructor for editing Tasks 
-     * @param name
-     * @param description 
-     */
-    // Adds the name and the desciption to the task
-    public Task(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
+    
     // Gets name
     public String getName() {
         return name;
@@ -100,41 +86,7 @@ public class Task {
     public void setTimeAssigned(int timeAssigned) {
         this.timeAssigned = timeAssigned;
     }
-    // Gets HoursUsed
-    public int getHoursUsed(){
-        int hoursUsed = 0;
-        for (TaskTime taskTime : timeUsed) {
-            hoursUsed = hoursUsed + taskTime.getHours();
-        }
-        
-        return hoursUsed;
-    }
-
     
-   
-         
-    
-    //Gets timeUsed
-    public List<TaskTime> getTimeUsed() {
-        return timeUsed;
-    }
-    //Gets TotalTimeUsed
-    public TaskTime getTotalTimeUsed() {
-        int sec = 0;
-        int min = 0;
-        int hour = 0;
-        
-        for (TaskTime taskTime : timeUsed) {
-            sec = sec + taskTime.getSec();
-            min = min + taskTime.getMin();
-            hour = hour + taskTime.getHours();
-        }
-        
-        return new TaskTime(sec, min, hour);
-    }
-    
-    
-   
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

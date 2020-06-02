@@ -44,6 +44,11 @@ public class StatisticsCalculator {
         tasks = dBFacade.getTasks(currentProject);
     }
     
+    public StatisticsCalculator() {
+        dBFacade = new TimeTrackBLLFacade();
+        tasks = dBFacade.getTasks(currentProject);
+    }
+    
     
     
     /**
@@ -142,7 +147,6 @@ public class StatisticsCalculator {
             LocalDate ld = LocalDate.parse(data.getXValue().toString());
             if (ld.getDayOfYear() >= ld1.getDayOfYear() && ld.getDayOfYear() <= ld2.getDayOfYear()) {
                 intervalSeries.getData().add(data);
-                System.out.println("added");
             }
         }
         return intervalSeries;

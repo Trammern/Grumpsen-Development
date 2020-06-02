@@ -97,11 +97,6 @@ public class MockProjectManager implements IProjectDal {
         return projects.add(p);
     }
 
-    public boolean addTask(Task t, Project p)
-    {
-        return p.addTask(t);
-    }
-
     public boolean updateProject(Project p) {
         for (Project project : projects) {
             if(p.getId() == project.getId()){
@@ -112,11 +107,6 @@ public class MockProjectManager implements IProjectDal {
         return false;
     }
 
-
-    public boolean deleteTask(Task selectedTask, Project currentProject)
-    {
-        return currentProject.removeTask(selectedTask);
-    }
 
     public boolean updateTask(Task updateTask)
     {
@@ -135,6 +125,11 @@ public class MockProjectManager implements IProjectDal {
 
     @Override
     public boolean deleteProject(Project project) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean addTask(Task t, Project p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

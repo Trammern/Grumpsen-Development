@@ -69,13 +69,14 @@ public class AddEditProjectViewController implements Initializable {
     
     private void createProject(){
         
-        Project newProject = new Project(fldName.getText(), fldDescription.getText(), 0);
         
+        String name = fldName.getText();
+        String desc = fldDescription.getText();
         int rate = Integer.parseInt(fldRate.getText());
         int clientId = am.getCurrentClient().getId();        
         
-        newProject.setClientID(clientId);        
-        newProject.setRate(rate);        
+        Project newProject = new Project(name, clientId, desc, rate);
+         
         
         if(am.createNewProject(newProject)){
                 System.out.println("Hey");

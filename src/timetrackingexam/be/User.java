@@ -89,30 +89,6 @@ public class User
     {
         this.role = role;
     }
-    // Projects Getter
-    public List<Project> getProjects() {
-        return projects;
-    }
-    // Projects Setter
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-    // Tasks Getter
-    public List<Task> getTasks() {
-        return tasks;
-    }
-    // Tasks Setter
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-    // User Assigner
-    public boolean assignUser(Project p){
-        return projects.add(p);
-    }
-    // User Remover
-    public boolean removeUser(Project p) {
-        return projects.remove(p);
-    }
     
     
     @Override

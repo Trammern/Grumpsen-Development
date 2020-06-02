@@ -14,15 +14,11 @@ import javafx.collections.ObservableList;
  */
 public class Project {
     
-    private final static int DEFAULT_RATE = 150;
-    
     private int id;
     private String name;
     private String description;
     private int rate;
     private int clientID;
-    private ObservableList<Task> tasks;
-    private ObservableList<User> users;
     
     public Project(String name, int clientID, String description, int rate) {
         this.name = name;
@@ -30,23 +26,7 @@ public class Project {
         this.description = description;
         this.rate = rate;
     }
-
-    public Project(String name, String description, int clientID) {
-        this.name = name;
-        this.description = description;
-        this.clientID = clientID;
-        this.rate = DEFAULT_RATE;
-        users = FXCollections.observableArrayList();
-        tasks = FXCollections.observableArrayList();
-    }
-
-    public Project(int id, String name, String description, int rate, int clientID) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.rate = rate;
-        this.clientID = clientID;
-    }           
+    
     // Getter
     public int getId() {
         return id;
@@ -79,40 +59,13 @@ public class Project {
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
-    // Getter
-    public ObservableList<Task> getTasks() {
-        return tasks;
+    // gets the description
+    public String getDescription() {
+        return description;
     }
-    // Setter 
-    public void setTasks(ObservableList<Task> tasks) {
-        this.tasks = tasks;
-    }
-    // Getter
-    public int getTimeUsedByUser(User user){
-        int totalTimeUsed = 0;
-        for (Task task : tasks) {
-            if(user.getId() == task.getUserId()){
-                totalTimeUsed = totalTimeUsed + task.getHoursUsed();
-            }
-        }
-        return totalTimeUsed;
-    }
-    // Getter
-    public ObservableList<User> getUsers() {
-        return users;
-    }
-    // Setter 
-    public void setUsers(ObservableList<User> users) {
-        this.users = users;
-    }
-    // Adds task
-    public boolean addTask(Task t){
-        return tasks.add(t);
-    }
-    // removes task
-    public boolean removeTask(Task selectedTask)
-    {
-        return tasks.remove(selectedTask);
+    // Sets the Description
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -137,14 +90,7 @@ public class Project {
     public String toString() {
         return name;
     }
-    // gets the description
-    public String getDescription() {
-        return description;
-    }
-    // Sets the Description
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    
 
     
     

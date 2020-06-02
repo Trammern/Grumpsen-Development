@@ -97,8 +97,9 @@ public class ClientDBDAO {
                 int rate = rs.getInt("Rate");
                 int clientId = rs.getInt("ClientID");
                 
-                Project project = new Project(id, name, description, rate, clientId);
+                Project project = new Project(name, clientId, description, rate);
                 
+                project.setId(id);
                 clientProjects.add(project);
             }
             return clientProjects;

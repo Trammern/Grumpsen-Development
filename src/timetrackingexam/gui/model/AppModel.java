@@ -26,24 +26,26 @@ import timetrackingexam.bll.user.UserManager;
  * @author Rizvan
  */
 public class AppModel
-{
+{ 
+    private static AppModel instance;
     
     private User currentUser;
     private Project currentProject;
     private Task currentTask;
     private Client currentClient;
     private User selectedUser;
-    private ITimeTrackBLL ttInterface;
-    private TimeTrackBLLFacade ttBll;
+    
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<Project> projects = FXCollections.observableArrayList();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
     private final ObservableList<Client> clients = FXCollections.observableArrayList();
     private final ObservableList<TaskLog> logs = FXCollections.observableArrayList();
     private final ObservableList<TaskLog> timeLogs = FXCollections.observableArrayList();
+    
+    private final ITimeTrackBLL ttInterface;
+    private final TimeTrackBLLFacade ttBll;
     private final ProjectManager projectManager;
     private final ThreadManager tm;
-    private static AppModel instance;
 
     private AppModel()
     {
@@ -52,17 +54,23 @@ public class AppModel
         projectManager = new ProjectManager();
         tm = new ThreadManager();
     }
-    // Gets the Instance
+    /**
+     * Create a new instance or get the current intance of AppModel
+     * @return AppModel Class
+     */
     public static AppModel getInstance() {
         if (instance == null) {
             instance = new AppModel();
         }
         return instance;
     }
-
+    
+    /**
+     * Updates all ObservableLists in the AppModel class
+     */
     public void fetch(){
         getAllUsers();
-        getTasks();    ;   
+        getTasks();   
         getTimeLogs();
         getLogs();
         getProjects();           

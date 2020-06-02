@@ -13,7 +13,6 @@ import java.time.LocalDate;
  */
 public class TaskTime {
     private int ID;
-    private int timeID;
     private int taskid;
     private int userId;
     private int sec;
@@ -83,14 +82,6 @@ public class TaskTime {
     // UserId Setter
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-    // TimeID Getter
-    public int getTimeID() {
-        return timeID;
-    }
-    // TimeID Setter 
-    public void setTimeID(int timeID){
-        this.timeID = timeID;
     }
     // ID Getter
     public int getID() {

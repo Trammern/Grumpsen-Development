@@ -10,7 +10,6 @@ import java.util.Date;
  */
 public class TaskLog
 {
-    private int id;
     private Date date;
     private String action;
     private LocalDateTime startDate;

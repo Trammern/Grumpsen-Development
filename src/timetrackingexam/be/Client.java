@@ -7,7 +7,6 @@ package timetrackingexam.be;
 
 import java.util.Objects;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  *
@@ -18,13 +17,11 @@ public class Client {
     private int id;
     private String name;
     private int defaultrate; 
-    private ObservableList<Project> projects;
        
     public Client(int id, String name, int defaultrate) {     
         this.id = id;
         this.name = name;
         this.defaultrate = defaultrate;
-        projects = FXCollections.observableArrayList();
     }    
     // Getters and setters
     public String getName() {
@@ -41,14 +38,6 @@ public class Client {
 
     public void setDefaultrate(int defaultrate) {
         this.defaultrate = defaultrate;
-    }
-
-    public ObservableList<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(ObservableList<Project> projects) {
-        this.projects = projects;
     }
 
     public int getId() {
