@@ -56,7 +56,10 @@ public class DiagramViewController implements Initializable
         cmbChooseChart.getItems().add("Piechart");
         cmbChooseChart.getItems().add("Linechart");
         buildBarChart();
-        
+        bc.getData().add(sc.timeUsedPerDay());
+        dateFrom.setVisible(true);
+        dateTo.setVisible(true);
+        tbnInterval.setVisible(true);
         
     }    
     
@@ -91,8 +94,6 @@ public class DiagramViewController implements Initializable
         xAxis.setLabel("Date");
         yAxis.setLabel("Hours");
         
-        
-                
         chartPane.setCenter(bc);
     }
     
