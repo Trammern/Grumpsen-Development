@@ -61,6 +61,7 @@ public class ProjectManagementViewController implements Initializable {
     private MenuBar menuBar;
     @FXML
     private MenuItem menuItemPassword;
+    @FXML
     private Menu menuUser;
     @FXML
     private JFXTextArea fldDescription;
@@ -93,7 +94,7 @@ public class ProjectManagementViewController implements Initializable {
        cbbClients.setItems(am.getAllClients()); 
        
        currentUser = am.getCurrentUser();
-       menuItemUser.setText(currentUser.getEmail());
+       menuUser.setText(currentUser.getEmail());
        am.setCurrentProject(null);
        am.setCurrentTask(null);
        am.setSelectedUser(null);
