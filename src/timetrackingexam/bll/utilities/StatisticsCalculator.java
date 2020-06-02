@@ -64,7 +64,6 @@ public class StatisticsCalculator {
     
     public XYChart.Series timeUsedPerWeek(){
         
-        setTime();
         XYChart.Series series = timeUsedPerDay();
         List<XYChart.Data> datas = series.getData();
         
@@ -77,8 +76,6 @@ public class StatisticsCalculator {
         
         for (int i = 0; i < datas.size(); i++) {
             int newWeekNumber = LocalDate.parse(datas.get(i).getXValue().toString()).get(weekFields.weekOfWeekBasedYear());
-            
-            
             
             if(newWeekNumber != weekNumber || i == datas.size() -1 ){
                 weekSeries.getData().add(new XYChart.Data<>(
