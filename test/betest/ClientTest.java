@@ -33,7 +33,6 @@ public class ClientTest {
     @Test
     public void testGetId(){
         Client c = new Client(1, "hans", 150);
-        
         assertEquals(1, c.getId());
     }
     
@@ -41,7 +40,6 @@ public class ClientTest {
     public void testSetId(){
         Client c = new Client(1, "Hans", 150);
         c.setId(15);
-        
         assertEquals(15, c.getId());
     }
     

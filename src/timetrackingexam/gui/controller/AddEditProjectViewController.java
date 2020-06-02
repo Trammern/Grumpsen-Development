@@ -79,7 +79,6 @@ public class AddEditProjectViewController implements Initializable {
          
         
         if(am.createNewProject(newProject)){
-                System.out.println("Hey");
                 Stage primStage = (Stage) fldRate.getScene().getWindow();
                 primStage.close();
             }

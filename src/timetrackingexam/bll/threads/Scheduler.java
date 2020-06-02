@@ -35,7 +35,6 @@ public class Scheduler implements Runnable {
         if (executor == null || executor.isShutdown()) {
             executor = Executors.newSingleThreadExecutor();
             executor.submit(this);
-            System.out.println("Executor was created");
         }
 
         if (currentTimer == null && QUEUE.isEmpty()) {
@@ -44,9 +43,7 @@ public class Scheduler implements Runnable {
         } else {
             try {
                 QUEUE.put(currentTimer);
-                System.out.println("Executor was used");
             } catch (InterruptedException iEx) {
-                System.out.println("Timer was stopped");
                 if(!timer.isActive()){
                     executor.shutdownNow();
                 }

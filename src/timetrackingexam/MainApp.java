@@ -54,9 +54,6 @@ public class MainApp extends Application
         if(am.timerIsRunning()){
             am.stopTimer();
         }
-        else{
-            System.out.println("Timer was not running");
-        }
         super.stop();
     }
     

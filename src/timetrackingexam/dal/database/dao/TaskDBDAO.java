@@ -109,7 +109,6 @@ public class TaskDBDAO{
             pstmt.setInt(3, task.getId());
 
             int updatedRows = pstmt.executeUpdate();
-            System.out.println(updatedRows);
             
             return updatedRows > 0;
         } catch (SQLException sqlE) {
@@ -185,7 +184,6 @@ public class TaskDBDAO{
             pstmt.setString(5, tt.getDate().toString());
 
             int updatedRows = pstmt.executeUpdate();
-            System.out.println(updatedRows);
             
             return updatedRows > 0;
         } catch (SQLException sqlE) {

@@ -90,7 +90,6 @@ public class TimerRunnable implements Runnable{
         executor = Executors.newSingleThreadExecutor();
         executor.submit(this);
         active = true;
-        System.out.println("Thread started");
     }
     
     /**
@@ -99,7 +98,6 @@ public class TimerRunnable implements Runnable{
     public void stop(){
         executor.shutdownNow();
         active = false;
-        System.out.println("Thread stopped");
         
         tSec.setEditable(true);
         tMin.setEditable(true);

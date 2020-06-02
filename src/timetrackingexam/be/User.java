@@ -5,10 +5,7 @@
  */
 package timetrackingexam.be;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import javafx.beans.property.ObjectProperty;
 
 /**
  *
@@ -22,8 +19,6 @@ public class User
     private final String email;
     private String password;
     private Role role;
-    private List<Project> projects;
-    private List<Task> tasks;
 
     public User(String firstName, String lastName, String email, String password, Role role, int Id)
     {
@@ -33,8 +28,6 @@ public class User
         this.email = email;
         this.password = password;
         this.role = role;
-        projects = new ArrayList<>();
-        tasks = new ArrayList<>();
     }
     // ID Getter
     public int getId() {

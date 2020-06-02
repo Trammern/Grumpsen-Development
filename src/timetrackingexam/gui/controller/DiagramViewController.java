@@ -64,10 +64,6 @@ public class DiagramViewController implements Initializable
         
     }    
     
-    public void test()
-    {
-        System.out.println(cmbChooseChart.getSelectionModel().getSelectedItem());
-    }
 
     @FXML
     private void handleNavigateBack(ActionEvent event)

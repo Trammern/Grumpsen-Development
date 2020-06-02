@@ -80,7 +80,6 @@ public class TaskManager implements ITaskManager
     // Gets the Total time of a task
     @Override
     public TaskTime getTotalTime(Task currentTask) {
-        System.out.println("I was called");
         int totalHour=0;
         int totalMin=0;
         int totalSec=0;

@@ -51,7 +51,6 @@ public class AddTaskController implements Initializable
             txtAddTaskName.setText(am.getCurrentTask().getName());
             txtAddTaskDescription.setText(am.getCurrentTask().getDescription());
         }
-        System.out.println(am.getCurrentProject().toString());
     }    
 
 
