@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timetrackingexam.bll.utilities;
 
 import java.time.LocalDate;
@@ -18,10 +14,6 @@ import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
 import timetrackingexam.bll.facade.ITimeTrackBLL;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
-import timetrackingexam.bll.task.ITaskManager;
-import timetrackingexam.bll.task.TaskManager;
-
-
 
 
         

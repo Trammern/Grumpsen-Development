@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timetrackingexam.gui.model;
 
 import javafx.collections.FXCollections;
@@ -17,9 +13,7 @@ import timetrackingexam.be.User;
 import timetrackingexam.bll.facade.ITimeTrackBLL;
 import timetrackingexam.bll.facade.TimeTrackBLLFacade;
 import timetrackingexam.bll.project.ProjectManager;
-import timetrackingexam.bll.task.TaskManager;
 import timetrackingexam.bll.threads.ThreadManager;
-import timetrackingexam.bll.user.UserManager;
 
 /**
  *
