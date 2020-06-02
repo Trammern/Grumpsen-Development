@@ -28,8 +28,6 @@ public class AddEditProjectViewController implements Initializable {
     @FXML
     private JFXTextField fldName;
     @FXML
-    private JFXTextField fldClient;
-    @FXML
     private JFXTextField fldRate;
     @FXML
     private JFXTextField fldDescription;
@@ -76,7 +74,6 @@ public class AddEditProjectViewController implements Initializable {
         int rate = Integer.parseInt(fldRate.getText());
         int clientId = am.getCurrentClient().getId();        
         
-        //Not Implemented
         newProject.setClientID(clientId);        
         newProject.setRate(rate);        
         

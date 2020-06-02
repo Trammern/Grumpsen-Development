@@ -7,28 +7,21 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import timetrackingexam.be.Project;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertFactory;
@@ -45,11 +38,8 @@ public class UserManagementViewController implements Initializable {
 
     private AppModel am;
     private User currentUser;
-    private Project selectedProject;
     private ObservableList<User> allUsers;
-    private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/promts/AddEditUserView.fxml";
-      
-    private static final String PROJECT_MANAGEMENT_VIEW_PATH = "/timetrackingexam/gui/view/ProjectManagementView.fxml";    
+    private static final String ADD_EDIT_USER_VIEW_PATH = "/timetrackingexam/gui/view/promts/AddEditUserView.fxml"; 
     
     @FXML
     private TableView<User> tblEmployeeTable;   
@@ -58,25 +48,13 @@ public class UserManagementViewController implements Initializable {
     @FXML
     private MenuBar menuBar;
     @FXML
-    private MenuItem menuItemClose;
-    @FXML
-    private MenuItem menuItemLogout;
-    @FXML
     private Menu menuUser;
-    @FXML
-    private MenuItem menuItemPassword;
     @FXML
     private JFXButton btnNewUser;
     @FXML
     private JFXButton btnEditUser;    
     @FXML
-    private TableColumn<User, String> columnBilHours;
-    @FXML
     private TableColumn<User, String> columnTotalHours;
-    @FXML
-    private MenuItem menuItemProject;
-    @FXML
-    private MenuItem menuItemTask;
     @FXML
     private JFXButton btnDeleteUser;
 
@@ -106,7 +84,6 @@ public class UserManagementViewController implements Initializable {
         });
         
         columnTotalHours.setCellValueFactory(data -> {
-            //String totalHours = am.getCurrentProject().getTimeUsedByUser(data.getValue())+"";
             String totalHours = "";
             return new SimpleStringProperty(totalHours);
         });
@@ -169,7 +146,7 @@ public class UserManagementViewController implements Initializable {
         am.setSelectedUser(null); 
         Stage primStage = (Stage) btnEditUser.getScene().getWindow();
         ViewGuide.openView(ADD_EDIT_USER_VIEW_PATH, "New user", primStage, false, true);
-        am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem()); //why?
+        am.setSelectedUser(tblEmployeeTable.getSelectionModel().getSelectedItem());
     }
 
     /**

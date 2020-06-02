@@ -5,11 +5,8 @@
  */
 package timetrackingexam.gui.model;
 
-import com.jfoenix.controls.JFXTextField;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import timetrackingexam.be.Client;
 import timetrackingexam.be.Project;
@@ -36,7 +33,6 @@ public class AppModel
     private Task currentTask;
     private Client currentClient;
     private User selectedUser;
-    private TaskLog tl;
     private ITimeTrackBLL ttInterface;
     private TimeTrackBLLFacade ttBll;
     private final ObservableList<User> users = FXCollections.observableArrayList();
@@ -45,8 +41,6 @@ public class AppModel
     private final ObservableList<Client> clients = FXCollections.observableArrayList();
     private final ObservableList<TaskLog> logs = FXCollections.observableArrayList();
     private final ObservableList<TaskLog> timeLogs = FXCollections.observableArrayList();
-    private final TaskManager taskManager;
-    private final UserManager userManager;
     private final ProjectManager projectManager;
     private final ThreadManager tm;
     private static AppModel instance;
@@ -55,9 +49,7 @@ public class AppModel
     {
         ttInterface = new TimeTrackBLLFacade();
         ttBll = new TimeTrackBLLFacade();
-        userManager = new UserManager();
         projectManager = new ProjectManager();
-        taskManager = new TaskManager();
         tm = new ThreadManager();
     }
     // Gets the Instance
@@ -304,7 +296,6 @@ public class AppModel
         timeLogs.addAll(ttBll.getAllTimeLogs());
         return timeLogs;
     }
-    // gets the User time from the observableList <TaskTime>
     public ObservableList<TaskTime> getUserTime() {
         return ttInterface.getUserTime(currentTask, currentUser);
     }

@@ -5,12 +5,6 @@
  */
 package timetrackingexam.bll.facade;
 
-import javafx.collections.ObservableList;
-import timetrackingexam.be.Project;
-import timetrackingexam.be.Task;
-import timetrackingexam.be.TaskLog;
-import timetrackingexam.be.TaskTime;
-import timetrackingexam.be.User;
 import timetrackingexam.bll.client.IClientManager;
 import timetrackingexam.bll.project.IProjectManager;
 import timetrackingexam.bll.task.ITaskManager;

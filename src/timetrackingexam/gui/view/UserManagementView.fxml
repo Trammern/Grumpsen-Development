@@ -16,10 +16,10 @@
         <menus>
           <Menu mnemonicParsing="false" text="Navigate">
             <items>
-                  <MenuItem fx:id="menuItemProject" mnemonicParsing="false" onAction="#goToProjectManagement" text="Project Management" />
-                  <MenuItem fx:id="menuItemTask" mnemonicParsing="false" onAction="#goToTasks" text="Task Overview" />
-              <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#closeProgram" text="Close" />
-                  <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToProjectManagement" text="Project Management" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToTasks" text="Task Overview" />
+              <MenuItem mnemonicParsing="false" onAction="#closeProgram" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#logoutToLoginView" text="Logout" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Tools">
@@ -34,7 +34,7 @@
             </Menu>
           <Menu fx:id="menuUser" mnemonicParsing="false" text="Admin">
             <items>
-              <MenuItem fx:id="menuItemPassword" mnemonicParsing="false" onAction="#openPasswordView" text="Change password" />
+              <MenuItem mnemonicParsing="false" onAction="#openPasswordView" text="Change password" />
             </items>
           </Menu>
         </menus>
@@ -42,7 +42,7 @@
       <TableView fx:id="tblEmployeeTable" layoutX="20.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <columns>
           <TableColumn fx:id="columnName" prefWidth="240.0" text="Name" />
-          <TableColumn fx:id="columnBilHours" prefWidth="100.0" text="Billable Hours" />
+          <TableColumn prefWidth="100.0" text="Billable Hours" />
             <TableColumn fx:id="columnTotalHours" prefWidth="100.0" text="Total Hours" />
         </columns>
       </TableView>

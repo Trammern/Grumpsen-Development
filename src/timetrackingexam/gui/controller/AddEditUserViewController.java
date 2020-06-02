@@ -21,7 +21,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.User;
@@ -39,7 +38,6 @@ import timetrackingexam.gui.util.TooltipFactory;
 public class AddEditUserViewController implements Initializable {
 
     private AppModel am;
-    private User currentUser;
     private User selectedUser;
     
     @FXML

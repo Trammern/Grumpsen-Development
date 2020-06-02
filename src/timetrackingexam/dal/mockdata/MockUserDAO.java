@@ -75,7 +75,7 @@ public class MockUserDAO implements IUserDal
                 
             }
         }
-        return true; //temporary
+        return true;
     }   
 
     @Override

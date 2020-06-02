@@ -7,8 +7,6 @@ package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.gui.model.AppModel;
 
@@ -46,7 +43,6 @@ public class AddTaskController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        //Singleton
         am = AppModel.getInstance();
         
         if (am.getCurrentTask() != null)

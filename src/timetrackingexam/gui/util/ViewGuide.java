@@ -6,11 +6,14 @@
 package timetrackingexam.gui.util;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import timetrackingexam.gui.controller.ProjectManagementViewController;
 
 /**
  *
@@ -62,6 +65,8 @@ public class ViewGuide {
             
         } catch (IOException e) {
             AlertFactory.showErrorAlert("Could not open new window");
+            Logger.getLogger(ViewGuide.class.getName()).log(Level.SEVERE, null, e);
+            
         }
     }
     

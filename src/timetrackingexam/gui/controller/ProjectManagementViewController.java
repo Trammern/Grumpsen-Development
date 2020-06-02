@@ -23,12 +23,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -67,7 +65,6 @@ public class ProjectManagementViewController implements Initializable {
     private MenuBar menuBar;
     @FXML
     private MenuItem menuItemPassword;
-    @FXML
     private Menu menuUser;
     @FXML
     private JFXTextArea fldDescription;
@@ -100,7 +97,7 @@ public class ProjectManagementViewController implements Initializable {
        cbbClients.setItems(am.getAllClients()); 
        
        currentUser = am.getCurrentUser();
-       menuUser.setText(currentUser.getEmail());
+       menuItemUser.setText(currentUser.getEmail());
        am.setCurrentProject(null);
        am.setCurrentTask(null);
        am.setSelectedUser(null);
@@ -192,9 +189,10 @@ public class ProjectManagementViewController implements Initializable {
             stage.setTitle("Create Project");
             stage.setScene(scene);
             stage.showAndWait();
-            showClientProjects(am.getCurrentClient()); //change later
+            showClientProjects(am.getCurrentClient());
         } catch (IOException e) {
             AlertFactory.showErrorAlert("Could not open new window");
+            Logger.getLogger(ProjectManagementViewController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -286,7 +284,7 @@ public class ProjectManagementViewController implements Initializable {
             fldDescription.setText("");
             am.fetch();            
             alert.close();
-            showClientProjects(am.getCurrentClient()); //change later
+            showClientProjects(am.getCurrentClient());
         }
         else {
             alert.close();

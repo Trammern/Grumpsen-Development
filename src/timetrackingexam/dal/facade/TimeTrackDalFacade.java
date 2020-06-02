@@ -129,7 +129,6 @@ public class TimeTrackDalFacade implements ITimeTrackDalFacade
             Logger.getLogger(TimeTrackDalFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-      //  projectController.getCSV();
 
     }
 

@@ -18,7 +18,6 @@ import timetrackingexam.be.User;
 public interface ITaskManager
 {
     
-    //void for mockdata
     public boolean addTask(Task t, Project p);
     public ObservableList<Task> getTasks(Project ps);
     public boolean deleteTask(Task selectedTask);

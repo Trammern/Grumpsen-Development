@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import timetrackingexam.be.Client;
-import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;
 import timetrackingexam.gui.util.AlertFactory;
 import timetrackingexam.gui.util.NodeCustomizer;
@@ -33,7 +32,6 @@ import timetrackingexam.gui.util.TooltipFactory;
 public class AddEditClientViewController implements Initializable {
 
     private AppModel am;
-    private User currentUser;
     private Client selectedClient;
     
     @FXML
@@ -147,7 +145,9 @@ public class AddEditClientViewController implements Initializable {
             if (am.checkIfClientNameIsUsed(name)) {
                 AlertFactory.showErrorAlert("Name is already used by another client");
             }
-            else saveChanges(new Client(rate, name, 0));
+            else {
+                saveChanges(new Client(rate, name, 0));
+            }
         }
     }
     

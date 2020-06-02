@@ -24,8 +24,6 @@ public class NodeCustomizer {
             DropShadow ds = new DropShadow();
             ds.setInput(new Bloom(0.7));
             node.setEffect(ds);
-            //node.setEffect(new DropShadow());
-            //node.setEffect(new Bloom(0.65));
         });
         node.setOnMouseExited(e -> {
            node.setEffect(null); 

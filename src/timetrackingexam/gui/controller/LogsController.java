@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskLog;
 import timetrackingexam.be.User;
 import timetrackingexam.gui.model.AppModel;

@@ -42,7 +42,7 @@ public class UserDBDAOController {
         } catch (SQLException ex) {
             Logger.getLogger(UserDBDAOController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null; //maybe change
+        return null;
         
     }
     

@@ -107,12 +107,10 @@ public class User
     }
     // User Assigner
     public boolean assignUser(Project p){
-        //p.getUsers().add(this);
         return projects.add(p);
     }
     // User Remover
     public boolean removeUser(Project p) {
-        //p.getUsers().remove(this);
         return projects.remove(p);
     }
     
