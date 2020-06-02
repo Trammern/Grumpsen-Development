@@ -52,11 +52,13 @@ public class UserManagementViewController implements Initializable {
     @FXML
     private JFXButton btnNewUser;
     @FXML
-    private JFXButton btnEditUser;    
-    @FXML
-    private TableColumn<User, String> columnTotalHours;
+    private JFXButton btnEditUser; 
     @FXML
     private JFXButton btnDeleteUser;
+    @FXML
+    private TableColumn<User, String> columnEmail;
+    @FXML
+    private TableColumn<User, String> columnUserRole;
 
     /**
      * Initializes the controller class.
@@ -83,9 +85,14 @@ public class UserManagementViewController implements Initializable {
             return new SimpleStringProperty(name);
         });
         
-        columnTotalHours.setCellValueFactory(data -> {
-            String totalHours = "";
-            return new SimpleStringProperty(totalHours);
+        columnEmail.setCellValueFactory(data -> {
+            String email = data.getValue().getEmail();
+            return new SimpleStringProperty(email);
+        });
+        
+        columnUserRole.setCellValueFactory(data -> {
+            String role = data.getValue().getRole().toString();
+            return new SimpleStringProperty(role);
         });
     }
     
