@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timetrackingexam.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -18,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -52,11 +47,13 @@ public class UserManagementViewController implements Initializable {
     @FXML
     private JFXButton btnNewUser;
     @FXML
-    private JFXButton btnEditUser;    
-    @FXML
-    private TableColumn<User, String> columnTotalHours;
+    private JFXButton btnEditUser; 
     @FXML
     private JFXButton btnDeleteUser;
+    @FXML
+    private TableColumn<User, String> columnEmail;
+    @FXML
+    private TableColumn<User, String> columnUserRole;
 
     /**
      * Initializes the controller class.
@@ -83,9 +80,14 @@ public class UserManagementViewController implements Initializable {
             return new SimpleStringProperty(name);
         });
         
-        columnTotalHours.setCellValueFactory(data -> {
-            String totalHours = "";
-            return new SimpleStringProperty(totalHours);
+        columnEmail.setCellValueFactory(data -> {
+            String email = data.getValue().getEmail();
+            return new SimpleStringProperty(email);
+        });
+        
+        columnUserRole.setCellValueFactory(data -> {
+            String role = data.getValue().getRole().toString();
+            return new SimpleStringProperty(role);
         });
     }
     

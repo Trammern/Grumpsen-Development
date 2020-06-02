@@ -41,9 +41,9 @@
       </MenuBar>
       <TableView fx:id="tblEmployeeTable" layoutX="20.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <columns>
-          <TableColumn fx:id="columnName" prefWidth="240.0" text="Name" />
-          <TableColumn prefWidth="100.0" text="Billable Hours" />
-            <TableColumn fx:id="columnTotalHours" prefWidth="100.0" text="Total Hours" />
+          <TableColumn fx:id="columnName" prefWidth="184.66672325134277" text="Name" />
+          <TableColumn fx:id="columnEmail" prefWidth="174.66661071777344" text="Email" />
+            <TableColumn fx:id="columnUserRole" prefWidth="80.66668701171875" text="User Role" />
         </columns>
       </TableView>
       <Text fill="#f4f4f4" layoutX="20.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employees" AnchorPane.leftAnchor="20.0">
