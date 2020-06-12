@@ -165,10 +165,7 @@ public class AppModel
     public void startTimer(TextField sec, TextField min, TextField hours){
         tm.startTimer(sec, min, hours);
     }
-    // Pauses the Timer
-    public void pauseTimer(){
-        tm.pauseTimer();
-    }
+
     // Stops the timer
     public void stopTimer(){
         tm.stopTimer();

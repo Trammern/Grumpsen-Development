@@ -4,7 +4,6 @@ package timetrackingexam.bll.threads;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import javafx.application.Platform;
 import javafx.scene.control.TextField;
 
 /**
@@ -16,8 +15,7 @@ public class TimerRunnable implements Runnable{
     private final int DELAY = 1;    
     private TextField tSec;
     private TextField tMin;
-    private TextField tHours
-;    
+    private TextField tHours;    
     private boolean active;
     private ExecutorService executor;
     private static int seconds = 0;
@@ -31,24 +29,19 @@ public class TimerRunnable implements Runnable{
     }
     
     /**
-     * Counts the seconds, minutes, and hours gone by since the thread was started
+     * The methods used by the executor service.
+     * It counts the time on a sepparate thread.
      */
     @Override
     public void run() {
-   
         while (active) {
-            Platform.runLater(() -> {
-                seconds++;
-                
-                tSec.setEditable(false);
-                tMin.setEditable(false);
-                tHours.setEditable(false);
                 
                 tSec.setText(seconds+"");
                 tMin.setText(minutes+"");
                 tHours.setText(hours+"");
-                });
-            
+                
+                seconds++;
+                
                 try {
                     TimeUnit.SECONDS.sleep(DELAY);
                 } 
@@ -62,49 +55,51 @@ public class TimerRunnable implements Runnable{
 
                 if (minutes >= 59) {
                     seconds = -1;
-                    minutes = -1;
+                    minutes = 0;
                     hours++;
                 }
         }
     }
     
+    /**
+     * Checks if the thread is running
+     * @return the threads status
+     */
     public boolean isActive(){
         return active;
     }
-
-    
     
     /**
-     * submits the thread to be executed
+     * submits this class to the ExecutorService, which runs it.
+     * also sets is running to true.
      */
     public void start() {
         
-        if(true){
-            convertLabelsToInt();
-        }
-        
+        convertLabelsToInt();
         executor = Executors.newSingleThreadExecutor();
         executor.submit(this);
         active = true;
+             
+        tSec.setEditable(false);
+        tMin.setEditable(false);
+        tHours.setEditable(false);
     }
     
     /**
-     * shuts down the executor and resets the labels
+     * shuts down the whole executorService.
      */
     public void stop(){
-        executor.shutdownNow();
+        executor.shutdown();
         active = false;
         
         tSec.setEditable(true);
         tMin.setEditable(true);
         tHours.setEditable(true);
-        
-        tSec.setText("" +seconds);
-        tMin.setText("" +minutes);
-        tHours.setText("" +hours);
-        
     }
     
+    /**
+     * Used to make sure that at String won't crash the thread.
+     */
     private void convertLabelsToInt(){
             String sec = tSec.getText();
             sec = sec.replaceAll("[^0-9\\s+]", "");

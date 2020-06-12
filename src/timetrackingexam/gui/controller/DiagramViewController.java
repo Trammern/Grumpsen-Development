@@ -78,7 +78,7 @@ public class DiagramViewController implements Initializable
         {
             buildPieChart();
         }
-        if("Linechart".equals(cmbChooseChart.getSelectionModel().getSelectedItem()))
+        if("Barchart".equals(cmbChooseChart.getSelectionModel().getSelectedItem()))
         {
             buildBarChart();
         }
@@ -141,8 +141,6 @@ public class DiagramViewController implements Initializable
     @FXML
     private void handleInterval(ActionEvent event) {
         buildBarChart();
-        
-        
         bc.getData().add(sc.intervalSeries(dateFrom.getValue(), dateTo.getValue()));
     }
 }

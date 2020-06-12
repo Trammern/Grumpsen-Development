@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.util.converter.LocalDateStringConverter;
 import timetrackingexam.be.Project;
 import timetrackingexam.be.Task;
 import timetrackingexam.be.TaskTime;
@@ -131,6 +132,7 @@ public class StatisticsCalculator {
         XYChart.Series intervalSeries = new XYChart.Series<>();
         
         List<XYChart.Data> datas = timeUsedPerDay().getData();
+        int ld3 = Integer.parseInt("20");
         
         for (XYChart.Data data : datas) {
             LocalDate ld = LocalDate.parse(data.getXValue().toString());

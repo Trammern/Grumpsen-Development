@@ -11,47 +11,20 @@ import java.util.concurrent.LinkedBlockingQueue;
  * It will probably have more threads to manage in the future
  * @author math2
  */
-public class Scheduler implements Runnable {
+public class Scheduler{
 
     private final BlockingQueue<TimerRunnable> QUEUE = new LinkedBlockingQueue<>();
 
     private TimerRunnable currentTimer = null;
     private ExecutorService executor = null;
 
-    
-    @Override
-    public void run() {
-    }
-
     /**
      * Starts the current timer
      * @param timer the timer to be startet
      */
     public synchronized void startTimer(TimerRunnable timer) {
-        if (executor == null || executor.isShutdown()) {
-            executor = Executors.newSingleThreadExecutor();
-            executor.submit(this);
-        }
-
-        if (currentTimer == null && QUEUE.isEmpty()) {
             currentTimer = timer;
             currentTimer.start();
-        } else {
-            try {
-                QUEUE.put(currentTimer);
-            } catch (InterruptedException iEx) {
-                if(!timer.isActive()){
-                    executor.shutdownNow();
-                }
-            }
-        }
-    }
-
-    /**
-     * pauses the Thread
-     */
-    public synchronized void pause() {
-        currentTimer.stop();
     }
 
     /**
@@ -61,7 +34,6 @@ public class Scheduler implements Runnable {
         QUEUE.forEach((runnable) -> {
             QUEUE.remove(runnable);
         });
-            executor.shutdownNow();
             currentTimer.stop();
         
     }

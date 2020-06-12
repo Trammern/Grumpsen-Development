@@ -27,12 +27,10 @@ public class ThreadManager {
             return true;
         }
     }
-    // Pause the timer
-    public void pauseTimer(){
-        scheduler.pause();
-    }
-    // Stops the timer
+    
     public void stopTimer(){
         scheduler.stop();
     }
+    
 }
+
